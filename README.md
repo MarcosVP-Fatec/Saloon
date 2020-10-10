@@ -2,20 +2,21 @@
 
 ## 4º Banco de Dados - Fatec SJC - 2020/2
 
-## Professores:
-    *Giuliano Araujo Bertoti - Padrões de Projetos*  
-    *Emanuel Mineda          - Laboratório de Desenvolvimento 4*
+## Professores:  
+    **Giuliano Araujo Bertoti - Padrões de Projetos**  
+    **Emanuel Mineda          - Laboratório de Desenvolvimento 4**
 
 ---------------------------------------------------------------
 ## Integrantes
-* Marcos Vinicio Pereira
-* Raian Silva Damaceno
-* Gustavo Joshua de Sene
+* **Marcos Vinicio Pereira**
+* **Raian Silva Damaceno**
+* **Gustavo Joshua de Sene**
 
 ---------------------------------------------------------------
 Nome do Projeto : **Saloon**
 
-~ Objetivo do Projets ~  
+## Objetivo do Projeto  
+
     Aluguel de salões e similares  
     O sistema servirá para usuários proprietários de salões de festa
 ou espaços comerciais que são alugados por períodos muito curtos de uso
