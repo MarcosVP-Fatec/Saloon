@@ -14,7 +14,9 @@
 * **Gustavo Joshua de Sene**
 
 ---------------------------------------------------------------
-Nome do Projeto : **Saloon**
+Nome do Projeto : **Saloon**     ![Saloon](https://github.com/MarcosVP-Fatec/Saloon/blob/master/src/main/resources/images/saloon_porta1.png?raw=true)  
+
+
 
 ## Objetivo do Projeto  
 
@@ -30,3 +32,5 @@ Veja neste diretório o modelo conceitual deste projeto. (Clique aqui())
 > Na verdade não há"  (Renato Russo)
 
 # Modelo Conceitual do Projeto
+![Modelo Conceitual do Projeto Saloon](https://github.com/MarcosVP-Fatec/Saloon/blob/master/SaloonConceitual.png?raw=true)
+
