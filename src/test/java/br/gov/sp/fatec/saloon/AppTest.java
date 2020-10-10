@@ -1,4 +1,4 @@
-package br.gov.sp.fatec;
+package br.gov.sp.fatec.saloon;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
