@@ -1,13 +1,14 @@
-package br.gov.sp.fatec;
+package br.gov.sp.fatec.saloon;
 
 /**
- * Hello world!
+ * @App Saloon
  *
  */
-public class App 
-{
+public class App {
+
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
     }
+    
 }
