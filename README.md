@@ -24,8 +24,7 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
 
 Veja neste diretório o modelo conceitual deste projeto. (Clique aqui())
 
-> "É preciso amar as pessoas
-> Como se não houvesse amanhã
-> Por que se você parar pra pensar
-> Na verdade não há"
-> Renato Russo
+> "É preciso amar as pessoas  
+> Como se não houvesse amanhã  
+> Por que se você parar pra pensar  
+> Na verdade não há"  (Renato Russo)
