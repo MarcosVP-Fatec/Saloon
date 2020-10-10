@@ -8,6 +8,7 @@ use saloon;
 create user 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
+
 -- USUARIO
 create table usu_usuario (
     usu_id              bigint unsigned primary key auto_increment,
