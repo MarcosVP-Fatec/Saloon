@@ -14,8 +14,9 @@
 * **Gustavo Joshua de Sene**
 
 ---------------------------------------------------------------
-Nome do Projeto : **Saloon**     
-!(https://github.com/MarcosVP-Fatec/Saloon/blob/master/src/main/resources/images/saloon_porta1.png)
+Nome do Projeto : **Saloon**     !(https://github.com/MarcosVP-Fatec/Saloon/blob/master/src/main/resources/images/saloon_porta1.png?raw=true)  
+
+
 
 ## Objetivo do Projeto  
 
