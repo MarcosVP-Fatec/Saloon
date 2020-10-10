@@ -23,3 +23,9 @@ ou espaços comerciais que são alugados por períodos muito curtos de uso
 conforme as necessidades dos clientes.  
 
 Veja neste diretório o modelo conceitual deste projeto. (Clique aqui())
+
+> "É preciso amar as pessoas
+> Como se não houvesse amanhã
+> Por que se você parar pra pensar
+> Na verdade não há"
+> Renato Russo
