@@ -32,3 +32,5 @@ Veja neste diretório o modelo conceitual deste projeto. (Clique aqui())
 > Na verdade não há"  (Renato Russo)
 
 # Modelo Conceitual do Projeto
+![Modelo Conceitual do Projeto Saloon](https://github.com/MarcosVP-Fatec/Saloon/blob/master/SaloonConceitual.png?raw=true)
+
