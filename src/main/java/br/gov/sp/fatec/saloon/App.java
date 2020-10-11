@@ -3,7 +3,7 @@ package br.gov.sp.fatec.saloon;
 /**
  * @App Saloon
  *
- * Uarr a expressão abaixo para executar pelo maven
+ * Usar a expressão abaixo para executar pelo maven
  * mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.saloon.App"
  * 
  */
