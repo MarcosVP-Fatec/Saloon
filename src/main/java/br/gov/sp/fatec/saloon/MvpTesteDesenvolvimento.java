@@ -1,5 +1,10 @@
 package br.gov.sp.fatec.saloon;
 
+import java.text.ParseException;
+
+import javax.persistence.EntityManager;
+
+import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
 
 /**
@@ -12,20 +17,21 @@ import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
  */
 
 import br.gov.sp.fatec.saloon.model.tool.Texto;
-import br.gov.sp.fatec.saloon.model.tool.Validador;
 
 public class MvpTesteDesenvolvimento {
 
     static int LARGURA = 150;
 
-    public static void run() {
-        System.out.println(Texto.concatenarChar('A','B','C','D'));
+    EntityManager em = PersistenceManager.getInstance().getEntityManager();
+
+    public static void run() throws ParseException {
+
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
-        System.out.println(Texto.strZero("123",10));
-        System.out.println(Texto.strZero(123,10));
-        System.out.println( Validador.dvCpf("99999999999") );
-        System.out.println(Texto.right( "testamenteiro",5)+"#");
-        System.out.println(Texto.padR("preenchido à direita ", LARGURA,'.'));
+        System.out.println(""); 
+
+        System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ########################################", LARGURA, '#'));
+        //UsuarioDadosPessoais usuario = new UsuarioDadosPessoais("MVP", "mvp@fatecsjc.sp.gov.br", "pwmvp", "Marcos Vinicio Pereira", Data.toDate("12/04/1969"), "11111111111");
+
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();

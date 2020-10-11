@@ -23,7 +23,7 @@ public class Data {
     }
 
     /**
-     * @apiNote toDate( String sData ) = Função que transforma uma String em data
+     * @apiNote toDates( String sData ) = Função que transforma uma String em data
      * @param sData -> "dd/mm/yyyy"
      * @return Date
      * @throws ParseException
