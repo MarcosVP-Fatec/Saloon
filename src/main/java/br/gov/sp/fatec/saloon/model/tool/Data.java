@@ -1,15 +1,16 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
-import java.text.ParseException;
+/**
+ * @apiNote Biblioteca de funções para tratamento de data
+ * 
+ */
+
+ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-/**
- * @apiNote Biblioteca de funções para tratamento de data
- * 
- */
 public class Data {
 
    /** 
@@ -22,7 +23,7 @@ public class Data {
     }
 
     /**
-     * @apiNote toData( String sData ) = Função que transforma uma String em data
+     * @apiNote toDate( String sData ) = Função que transforma uma String em data
      * @param sData -> "dd/mm/yyyy"
      * @return Date
      * @throws ParseException

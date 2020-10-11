@@ -13,11 +13,21 @@ package br.gov.sp.fatec.saloon.model.tool;
      * @param Int    -> Tamanho que quer que retorne
      * @return String
      */
-    public static String left(String sTexto, int nTam) {
-        return sTexto == null ? "" : sTexto.substring(0, sTexto.length() < nTam ? sTexto.length() : nTam);
+    public static String left(String texto, int nTam) {
+        return texto.substring(0, texto.length() < nTam ? texto.length() : nTam);
     }
 
    /**
+     * @apiNote right( String texto , int nTam ) -> Retorna a parte direita da String
+     * @param String -> Texto
+     * @param Int    -> Tamanho que quer que retorne
+     * @return String
+     */
+    public static String right(String texto, int nTam) {
+        return texto.substring( texto.length() <= nTam ? 0 : texto.length() - nTam );
+    }
+
+    /**
      * @apiNote padC( String texto , int nTam, Character cLetra ) -> Retorna o texto no meio do preenchimento de String
      * @param String -> Texto
      * @param Int    -> Tamanho que quer que retorne
@@ -38,7 +48,7 @@ package br.gov.sp.fatec.saloon.model.tool;
     }
 
    /**
-     * @apiNote padL( String texto , int nTam, Character cLetra ) -> Retorna o texto com preenchimeneto à esquerda do char passado
+     * @apiNote padL( String texto , int nTam, Character cLetra ) -> Retorna o texto com preenchimento à esquerda com o char passado
      * @param String -> Texto
      * @param Int    -> Tamanho que quer que retorne
      * @param cLetra -> Letra que vai preencher os espaços à esquerda. Se omitido usará " "
@@ -50,6 +60,22 @@ package br.gov.sp.fatec.saloon.model.tool;
         if (texto.length() >= nTam ) return texto;
         return replicate(letra,nTam-texto.length()) + texto;
     }
+
+   /**
+     * @apiNote padR( String texto , int nTam, Character cLetra ) -> Retorna o texto com preenchimento à direita com o char passado
+     * oBS.: Esta função corta o texto se ele for maior que o tamanho desejado, pois é feita para impressão e relatórios formatados
+     * @param String -> Texto
+     * @param Int    -> Tamanho que quer que retorne
+     * @param cLetra -> Letra que vai preencher os espaços à esquerda. Se omitido usará " "
+     * @return String
+     */
+    public static String padR( String texto , int nTam )               { return padR( texto, nTam, ' ');}
+    public static String padR( String texto , int nTam , String letra ){ return padR( texto, nTam, letra.charAt(0)); }
+    public static String padR( String texto , int nTam , Character letra ){ 
+        if (texto.length() >= nTam ) texto = Texto.left(texto, nTam);
+        return texto + replicate(letra,nTam - texto.length() ) ;
+    }
+
 
     /**
      * @apiNote sohDigitos( String numero ) = Verifica se uma String contém somente dígitos

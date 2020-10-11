@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.saloon;
 
+import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
+
 /**
  * @App Saloon 
  * @apiNote Teste exclusivo de MARCOS VINICIO PEREIRA
@@ -22,6 +24,11 @@ public class MvpTesteDesenvolvimento {
         System.out.println(Texto.strZero("123",10));
         System.out.println(Texto.strZero(123,10));
         System.out.println( Validador.dvCpf("99999999999") );
+        System.out.println(Texto.right( "testamenteiro",5)+"#");
+        System.out.println(Texto.padR("preenchido à direita ", LARGURA,'.'));
+
+        System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
+        SaidasConsole.printFatecEnd();
 
     }
 
