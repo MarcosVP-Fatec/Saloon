@@ -1,11 +1,11 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
 /**
- * @apiNote Biblioteca de funções para tratamento de texto
+ * @apiNote Biblioteca de funções para tratamento de texto.
  * 
  */
 
- public class Text {
+ public class Texto {
     
    /**
      * @apiNote left( String sTexto , int nTam ) -> Retorna a parte esqueda da String
