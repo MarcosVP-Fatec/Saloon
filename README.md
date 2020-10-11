@@ -14,7 +14,8 @@
 * **Gustavo Joshua de Sene**
 
 ---------------------------------------------------------------
-Nome do Projeto : **Saloon**     ![Saloon](https://github.com/MarcosVP-Fatec/Saloon/blob/master/src/main/resources/images/saloon_porta1.png?raw=true)  
+Nome do Projeto : **Saloon**     
+![Saloon](https://github.com/MarcosVP-Fatec/Saloon/blob/master/src/main/resources/images/saloon_porta_64k.png?raw=true)  
 
 
 
@@ -23,8 +24,6 @@ Nome do Projeto : **Saloon**     ![Saloon](https://github.com/MarcosVP-Fatec/Sal
   **Aluguel de salões e similares**
 
 O sistema servirá para usuários proprietários de salões de festa ou espaços comerciais que são alugados por períodos muito curtos de uso (diário) que necessitam de controle de quais salões estão disponíveis conforme as necessidades dos clientes.  
-
-Veja neste diretório o modelo conceitual deste projeto. (Clique aqui())
 
 > "É preciso amar as pessoas  
 > Como se não houvesse amanhã  
