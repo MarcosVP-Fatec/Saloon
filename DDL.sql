@@ -25,19 +25,17 @@ create table usu_usuario (
     , constraint usu_usuario_apelido_uk unique (usu_apelido)
 );
 
+-- -----------------------------------------------------------------
+-- Cadastra o usuário administrador inicial
+-- -----------------------------------------------------------------
 insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj) 
                  values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111' );
 
 update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
+
 commit;
-
+-- -----------------------------------------------------------------
 /*
--- USUARIO
-create table usu_usuario (
-    
-);
-
-
 -- ALUNO
 create table alu_aluno (
     alu_id              bigint unsigned primary key,
@@ -48,7 +46,6 @@ create table alu_aluno (
         references usu_usuario (usu_id),
     constraint alu_ra_uk unique (alu_ra)
 );
-
 -- PROFESSOR
 create table pro_professor (
     pro_id              bigint unsigned primary key,
