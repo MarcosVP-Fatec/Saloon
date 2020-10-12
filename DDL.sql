@@ -14,28 +14,27 @@ create table usu_usuario (
     , usu_apelido           varchar(30)     not null
     , usu_email             varchar(255)    not null
     , usu_senha             varchar(20)     not null
+    , usu_senha_validade    date
     , usu_pj_ou_pf          varchar(1)     
     , usu_nome              varchar(80)     not null
     , usu_dt_nascimento     date            not null
+    , usu_cpf_cnpj          varchar(14)     not null
     , _inc_usua             bigint          
-    , _inc_data             date            
+    , _inc_data             datetime            
+    , usu_cod_nova_senha    bigint  
     , constraint usu_usuario_apelido_uk unique (usu_apelido)
 );
 
-insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento) 
-                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"F"          ,"Administrador",'1969-04-01');
+insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj) 
+                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111' );
+
+update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 commit;
 
 /*
 -- USUARIO
 create table usu_usuario (
-    , usu_senha_validade    date
-    , usu_pj_ou_pf          varchar(1)      not null
-    , usu_cpf               varchar(14)     not null
-    , usu_cod_nova_senha    bigint  
-    , _inc_usua             bigint          not null
-    , _inc_data             date            not null
-    , constraint usu_usuario_apelido_uk unique (usu_apelido)
+    
 );
 
 

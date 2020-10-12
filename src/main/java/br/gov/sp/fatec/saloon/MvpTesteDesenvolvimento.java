@@ -35,25 +35,13 @@ public class MvpTesteDesenvolvimento {
                                                                ,"mvp@fatec.sp.gov.br"
                                                                ,"pwMVP"
                                                                ,"Marcos Vinicio Pereira"
-                                                               ,Data.toDate("12/04/1969"));
+                                                               ,Data.toDate("12/04/1969")
+                                                               ,"11111111111");
 
         em.getTransaction().begin();
         em.persist(usuario);
         em.getTransaction().commit();
         
-        
-        //UsuarioDadosPessoais usuario = new UsuarioDadosPessoais("MVP", "mvp@fatecsjc.sp.gov.br", "pwmvp", "Marcos Vinicio Pereira", Data.toDate("12/04/1969"), "11111111111");
-
-
-        /*
-        Usuario usuario = new Usuario("MVP", "mvp@fatecsjc.sp.gov.br", "pwmvp");
-        usuario.setNome("Marcos Vinicio Pereira");
-        usuario.setDtNascimento(Data.toDate("12/04/1969"));
-        usuario.setCpf("11111111111");
-        usuario.setPjOuPf('F');
-*/
-
-
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
 

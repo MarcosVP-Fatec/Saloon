@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.tool.Texto;
+import br.gov.sp.fatec.saloon.model.tool.Validador;
 
 @Table(name = "usu_usuario")
 @Entity
@@ -16,6 +17,7 @@ public class UsuarioDadosPessoais extends Usuario {
     
     @Column(name = "usu_nome")              private String  nome;    
     @Column(name = "usu_dt_nascimento")     private Date    dtNascimento;
+    @Column(name = "usu_cpf_cnpj")          private String  cpf;
 
     // Construtores
     public UsuarioDadosPessoais(){}
@@ -23,14 +25,15 @@ public class UsuarioDadosPessoais extends Usuario {
                                , String email
                                , String senha
                                , String nome
-                               , Date date) {
+                               , Date date
+                               , String cpf) {
 
         setApelido(apelido);
         setEmail(email);
         setSenha(senha);
         setNome(nome);
         setDtNascimento(date);
-        //setCpf(cpf);
+        setCpf(cpf);
 
     }
 
@@ -52,27 +55,17 @@ public class UsuarioDadosPessoais extends Usuario {
         this.dtNascimento = dtNascimento;
     }
 
-
-/*
-    @Column(name = "usu_cpf")               private String  cpf;
-    @Column(name = "usu_mudar_senha")       private char    mudarSenha;
-
-
     public String getCpf() {
-        return cpf;
+        return this.cpf;
     }
 
     public void setCpf(String cpf) {
-        this.cpf = cpf;
+        if (Validador.cpf(cpf)) this.cpf = cpf;
     }
 
-    public char getMudarSenha() {
-        return mudarSenha;
-    }
+/*
+    @Column(name = "usu_mudar_senha")       private char    mudarSenha;
 
-    public void setMudarSenha(char mudarSenha) {
-        this.mudarSenha = mudarSenha;
-    }
   */ 
 
 }

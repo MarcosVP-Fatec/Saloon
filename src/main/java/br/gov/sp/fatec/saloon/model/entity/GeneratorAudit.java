@@ -15,7 +15,6 @@ public abstract class GeneratorAudit {
     
     public GeneratorAudit(){
 
-System.out.println(">>>>>>>>>>> USUÁRIO LOGADO : " + UsuarioLogado.getInstance().getId());        
         set_Inc_Usua( UsuarioLogado.getInstance().getId() );
         set_Inc_Data( Data.today() );
 
