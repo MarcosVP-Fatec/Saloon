@@ -21,7 +21,8 @@ public class SaidasConsole {
         System.out.println("    FFF        AAA    AAA     TTT     EEEEEEEEE  CCCCCCCCC");
         System.out.println("    FFF        AAA    AAA     TTT      EEEEEEEE   CCCCCCC ");
         System.out.println("");
-        System.exit(0);
+
+        Sistema.close();
 
     }    
 }

@@ -33,7 +33,7 @@ public class PersistenceManager {
     }
 
     public EntityManagerFactory getEntityManagerFactory() {
-        if (emf == null) emf = Persistence.createEntityManagerFactory("avaliacao"); 
+        if (emf == null) emf = Persistence.createEntityManagerFactory("saloon"); 
         return emf;
     }
 

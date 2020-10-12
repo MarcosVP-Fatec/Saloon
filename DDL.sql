@@ -22,7 +22,7 @@ create table usu_usuario (
     , usu_cod_nova_senha    varchar(6)   
     , _inc_usua             bigint          not null
     , _inc_data             date            not null
-    constraint usu_usuario_apelido_uk unique (usu_apelido)
+    , constraint usu_usuario_apelido_uk unique (usu_apelido)
 );
 
 /*
