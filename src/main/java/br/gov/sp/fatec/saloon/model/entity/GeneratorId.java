@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
  */
 
 @MappedSuperclass
-public class GeneratorId extends GeneratorAudit{
+public class GeneratorId extends GeneratorAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

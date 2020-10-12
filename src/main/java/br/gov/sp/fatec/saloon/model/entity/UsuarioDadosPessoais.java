@@ -3,44 +3,45 @@ package br.gov.sp.fatec.saloon.model.entity;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 @Table(name = "usu_usuario")
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorValue("F")
 public class UsuarioDadosPessoais extends Usuario {
     
-    @Column(name = "usu_nome")              private String  nome;
+    @Column(name = "usu_nome")              private String  nome;    
     @Column(name = "usu_dt_nascimento")     private Date    dtNascimento;
-    @Column(name = "usu_cpf")               private String  cpf;
-    @Column(name = "usu_mudar_senha")       private char    mudarSenha;
 
+    // Construtores
     public UsuarioDadosPessoais(){}
     public UsuarioDadosPessoais( String apelido
                                , String email
                                , String senha
                                , String nome
-                               , Date date
-                               , String cpf) {
+                               , Date date) {
 
         setApelido(apelido);
         setEmail(email);
         setSenha(senha);
         setNome(nome);
         setDtNascimento(date);
-        setCpf(cpf);
+        //setCpf(cpf);
 
     }
 
+
+    // Getters and Setters
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        this.nome = nome;
+        this.nome = Texto.left(nome,80);
     }
 
     public Date getDtNascimento() {
@@ -50,6 +51,12 @@ public class UsuarioDadosPessoais extends Usuario {
     public void setDtNascimento(Date dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
+
+
+/*
+    @Column(name = "usu_cpf")               private String  cpf;
+    @Column(name = "usu_mudar_senha")       private char    mudarSenha;
+
 
     public String getCpf() {
         return cpf;
@@ -66,6 +73,6 @@ public class UsuarioDadosPessoais extends Usuario {
     public void setMudarSenha(char mudarSenha) {
         this.mudarSenha = mudarSenha;
     }
-   
+  */ 
 
 }

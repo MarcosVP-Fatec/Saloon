@@ -8,24 +8,37 @@ use saloon;
 create user 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
-
 -- USUARIO
 create table usu_usuario (
       usu_id                bigint unsigned primary key auto_increment
     , usu_apelido           varchar(30)     not null
     , usu_email             varchar(255)    not null
     , usu_senha             varchar(20)     not null
-    , usu_senha_validade    date
+    , usu_pj_ou_pf          varchar(1)     
     , usu_nome              varchar(80)     not null
     , usu_dt_nascimento     date            not null
+    , _inc_usua             bigint          
+    , _inc_data             date            
+    , constraint usu_usuario_apelido_uk unique (usu_apelido)
+);
+
+insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento) 
+                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"F"          ,"Administrador",'1969-04-01');
+commit;
+
+/*
+-- USUARIO
+create table usu_usuario (
+    , usu_senha_validade    date
+    , usu_pj_ou_pf          varchar(1)      not null
     , usu_cpf               varchar(14)     not null
-    , usu_cod_nova_senha    varchar(6)   
+    , usu_cod_nova_senha    bigint  
     , _inc_usua             bigint          not null
     , _inc_data             date            not null
     , constraint usu_usuario_apelido_uk unique (usu_apelido)
 );
 
-/*
+
 -- ALUNO
 create table alu_aluno (
     alu_id              bigint unsigned primary key,

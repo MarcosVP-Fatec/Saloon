@@ -2,9 +2,12 @@ package br.gov.sp.fatec.saloon.model.entity;
 
 import java.util.Date;
 
+import javax.persistence.MappedSuperclass;
+
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
+@MappedSuperclass
 public abstract class GeneratorAudit {
     
     Long    _inc_usua;    
@@ -12,6 +15,7 @@ public abstract class GeneratorAudit {
     
     public GeneratorAudit(){
 
+System.out.println(">>>>>>>>>>> USUÁRIO LOGADO : " + UsuarioLogado.getInstance().getId());        
         set_Inc_Usua( UsuarioLogado.getInstance().getId() );
         set_Inc_Data( Data.today() );
 
