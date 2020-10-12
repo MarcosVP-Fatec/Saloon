@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @AttributeOverride(name = "id", column=@Column(name="usu_id"))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "usu_pj_ou_pf")
-public class Usuario extends GeneratorId{
+public abstract class Usuario extends GeneratorId{
 
     @Column(name = "usu_apelido")           private String  apelido;
     @Column(name = "usu_email")             private String  email;

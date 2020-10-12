@@ -34,14 +34,15 @@ public class MvpTesteDesenvolvimento {
         System.out.println(""); 
 
         System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ########################################", LARGURA, '#'));
-        UsuarioDadosPessoais usuario = new UsuarioDadosPessoais("MVP"
-                                                               ,"mvp@fatec.sp.gov.br"
-                                                               ,"pwMVP"
-                                                               ,"Marcos Vinicio Pereira"
-                                                               ,Data.toDate("12/04/1969")
-                                                               ,"11111111111");
 
-        UsuarioDadosPessoaisDao
+        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
+        (new UsuarioDadosPessoais("MVP"
+                                 ,"mvp@fatec.sp.gov.br"
+                                 ,"pwMVP"
+                                 ,"Marcos Vinicio Pereira"
+                                 ,Data.toDate("12/04/1969")
+                                 ,"11111111111")
+                                 );
 
         /*
         em.getTransaction().begin();
