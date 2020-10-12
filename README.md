@@ -30,6 +30,7 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
       * JPA/Hibernate  
         - @MappedSuperclass (Campos de auditoria)  
         - @MappedSuperclass (Id)  
+        - @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
       * DAO  
   * Padrão de Projeto Singleton  
     * PersistenceManager  
