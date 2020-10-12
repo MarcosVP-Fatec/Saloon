@@ -6,8 +6,6 @@ import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 
 public interface UsuarioDadosPessoaisDao {
 
-    public void salvarUsuarioDadosPessoaisSemCommit(UsuarioDadosPessoais usuarioDadosPessoais);
-
     public UsuarioDadosPessoais salvarUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais);
 
     public UsuarioDadosPessoais cadastrarUsuarioDadosPessoais(String apelido

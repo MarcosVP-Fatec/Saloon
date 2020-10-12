@@ -12,28 +12,33 @@ public abstract class GeneratorAudit {
     
     Long    _inc_usua;    
     Date    _inc_data;
+    Long    _alt_usua;    
+    Date    _alt_data;
     
+    // CONSTRUTOR
     public GeneratorAudit(){
 
         set_Inc_Usua( UsuarioLogado.getInstance().getId() );
         set_Inc_Data( Data.today() );
+        set_Alt_Usua( UsuarioLogado.getInstance().getId() );
+        set_Alt_Data( Data.today() );
 
     }
 
-    public Long get_Inc_Usua() {
-        return _inc_usua;
-    }
+    // Getters and Setters
+    public Long get_Inc_Usua()              { return _inc_usua;             }
+    public void set_Inc_Usua(Long _inc_usua){ this._inc_usua = _inc_usua;   }
+    public Date get_Inc_Data()              { return _inc_data;             }
+    public void set_Inc_Data(Date _inc_data){ this._inc_data = _inc_data;   }
+    public Long get_Alt_Usua()              { return _alt_usua;             }
+    public void set_Alt_Usua(Long _alt_usua){ this._alt_usua = _alt_usua;   }
+    public Date get_Alt_Data()              { return _alt_data;             }
+    public void set_Alt_Data(Date _alt_data){ this._alt_data = _alt_data;   }
 
-    public void set_Inc_Usua(Long _inc_usua) {
-        this._inc_usua = _inc_usua;
-    }
-
-    public Date get_Inc_Data() {
-        return _inc_data;
-    }
-
-    public void set_Inc_Data(Date _inc_data) {
-        this._inc_data = _inc_data;
+    //Atualização das alterações
+    public static <T> void setAudit( T  t ){
+        ( (GeneratorAudit) t).set_Alt_Usua( UsuarioLogado.getInstance().getId() );
+        ( (GeneratorAudit) t).set_Alt_Data( Data.today() );
     }
 
 }

@@ -23,6 +23,8 @@ create table usu_usuario (
     , usu_cpf_cnpj          varchar(14)     not null
     , _inc_usua             bigint          
     , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
     , usu_cod_nova_senha    bigint  
     , constraint usu_apelido_uk unique (usu_apelido)
     , constraint usu_email_uk unique (usu_email)
@@ -46,8 +48,10 @@ create table pro_proprietario (
     , pro_usu_id          bigint unsigned
     , pro_dt_inicio       datetime
     , pro_dt_limite       date
-    , _inc_usua           varchar(80)
-    , _inc_data           datetime
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
     , constraint pro_usu_id_fk foreign key (pro_usu_id)
          references usu_usuario (usu_id)
 );

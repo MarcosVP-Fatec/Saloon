@@ -17,18 +17,11 @@ public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
     public UsuarioDadosPessoaisDaoJpa()                { this(PersistenceManager.getInstance().getEntityManager());  }
     public UsuarioDadosPessoaisDaoJpa(EntityManager em){ this.em = em; }
 
-
-    @Override
-    public void salvarUsuarioDadosPessoaisSemCommit(UsuarioDadosPessoais usuarioDadosPessoais) {
-        if (usuarioDadosPessoais.getId() == null)   em.persist(usuarioDadosPessoais);
-        else                                        em.merge(usuarioDadosPessoais);
-    }
-
     @Override
     public UsuarioDadosPessoais salvarUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais) {
         try {
             em.getTransaction().begin();
-            salvarUsuarioDadosPessoaisSemCommit(usuarioDadosPessoais);
+            Generico.salvarSemCommit( usuarioDadosPessoais , em );
             em.getTransaction().commit();
         } catch (PersistenceException e) {
             e.printStackTrace();
