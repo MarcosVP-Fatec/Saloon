@@ -81,17 +81,19 @@ public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
     }
 
     @Override
-    public void removerUsuarioDadosPessoais(Long id) {
+    public boolean removerUsuarioDadosPessoais(Long id) {
         UsuarioDadosPessoais usuarioDadosPessoais = buscarUsuarioDadosPessoais(id);
         if (usuarioDadosPessoais.getId() == null) throw new RuntimeException("Usuário não cadastrado => ID " + id + "!");
-        removerUsuarioDadosPessoais(id);
+        removerUsuarioDadosPessoais(usuarioDadosPessoais);
+        return true;
     }
 
     @Override
-    public void removerUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais) {
+    public boolean removerUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais) {
         em.getTransaction().begin();
         em.remove(usuarioDadosPessoais);
         em.getTransaction().commit();
+        return true;
     }
 
 }

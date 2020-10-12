@@ -41,8 +41,17 @@ public class TestUsuario {
     public void testBuscar() throws ParseException {
 
         System.out.println(Texto.padC("TESTE - Buscar Usuário", LARGURA, '+'));
-        UsuarioDadosPessoais usu = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE");
         assertTrue( usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE").getApelido().equals("--TESTE") );
+
+    }
+
+    @Test
+    public void testExcluir() throws ParseException {
+
+        System.out.println(Texto.padC("TESTE - Excluir Usuário", LARGURA, '+'));
+        assertTrue( usuarioDadosPessoaisDao.removerUsuarioDadosPessoais(
+            usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE").getId()
+        ) );
 
     }
 

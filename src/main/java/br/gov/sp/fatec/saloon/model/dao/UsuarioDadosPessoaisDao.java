@@ -23,9 +23,9 @@ public interface UsuarioDadosPessoaisDao {
 
     public UsuarioDadosPessoais buscarUsuarioDadosPessoaisPorEmail(String email);
 
-    public void removerUsuarioDadosPessoais(Long id);
+    public boolean removerUsuarioDadosPessoais(Long id);
 
-    public void removerUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais);
+    public boolean removerUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais);
 }
 
 
