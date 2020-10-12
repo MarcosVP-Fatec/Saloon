@@ -26,8 +26,8 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
 ## Objetos de Estudo aplicados neste projeto
 
   * Padrão de Projeto MVC (Model / View / Controler)  
-  ** MODEL  
-  *** JPA/Hibernate
+    * MODEL  
+      * JPA/Hibernate
 
 
 > "É preciso amar as pessoas  
