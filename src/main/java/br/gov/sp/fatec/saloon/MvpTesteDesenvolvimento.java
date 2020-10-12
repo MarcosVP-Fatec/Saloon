@@ -29,6 +29,7 @@ public class MvpTesteDesenvolvimento {
 
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
+        UsuarioDadosPessoais usuario;
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
@@ -45,11 +46,21 @@ public class MvpTesteDesenvolvimento {
                                  )
         );
 
-        /*
-        em.getTransaction().begin();
-        em.persist(usuario);
-        em.getTransaction().commit();
-        */
+        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
+        (new UsuarioDadosPessoais("RSD"
+                                 ,"rsd@fatec.sp.gov.br"
+                                 ,"pwRSD"
+                                 ,"Raian Silva Damaceno"
+                                 ,Data.toDate("12/04/1995")
+                                 ,"22222222222"
+                                 )
+        );
+
+        
+        // Faz alteração da senha
+        usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("MVP");
+        usuario.setSenha("senhaMVP");
+        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais( usuario );
         
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();

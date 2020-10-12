@@ -24,8 +24,8 @@ create table usu_usuario (
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , usu_cod_nova_senha    bigint  
-    , constraint usu_usuario_apelido_uk unique (usu_apelido)
-    , constraint usu_usuario_email_uk unique (usu_email)
+    , constraint usu_apelido_uk unique (usu_apelido)
+    , constraint usu_email_uk unique (usu_email)
 );
 
 -- ------------------------------------------------------------------------
@@ -37,27 +37,22 @@ insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, u
 update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 
 commit;
+
 -- ------------------------------------------------------------------------
+-- PROPRIETÁRIO 
+-- ------------------------------------------------------------------------
+create table pro_proprietario (
+      pro_id              bigint unsigned primary key
+    , pro_usu_id          bigint unsigned
+    , pro_dt_inicio       datetime
+    , pro_dt_limite       date
+    , _inc_usua           varchar(80)
+    , _inc_data           datetime
+    , constraint pro_usu_id_fk foreign key (pro_usu_id)
+         references usu_usuario (usu_id)
+);
+
 /*
--- ALUNO
-create table alu_aluno (
-    alu_id              bigint unsigned primary key,
-    alu_ra              bigint unsigned not null,
-    _inc_usua           varchar(80),
-    _inc_data           datetime,
-    constraint alu_usu_kf foreign key (alu_id)
-        references usu_usuario (usu_id),
-    constraint alu_ra_uk unique (alu_ra)
-);
--- PROFESSOR
-create table pro_professor (
-    pro_id              bigint unsigned primary key,
-    pro_titulo          varchar(10),
-    _inc_usua           varchar(80),
-    _inc_data           datetime,
-    constraint pro_usu_fk foreign key (pro_id)
-        references usu_usuario (usu_id)
-);
 
 -- TRABALHO
 create table tra_trabalho (

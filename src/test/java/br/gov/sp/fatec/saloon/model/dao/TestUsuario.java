@@ -17,13 +17,14 @@ public class TestUsuario {
 
     EntityManager em = PersistenceManager.getInstance().getEntityManager();
     UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
+    UsuarioDadosPessoais usuario;
 
     static int LARGURA = 150;
 
     @Test
     public void testCadastrar() throws ParseException {
 
-        System.out.println(Texto.padC("TESTE - Cadastrar Usuário", LARGURA, '+'));
+        System.out.println(Texto.padC(" TESTE - Cadastrar Usuário ", LARGURA, '+'));
         assertTrue(
         usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
         (new UsuarioDadosPessoais("--TESTE"
@@ -40,15 +41,27 @@ public class TestUsuario {
     @Test
     public void testBuscar() throws ParseException {
 
-        System.out.println(Texto.padC("TESTE - Buscar Usuário", LARGURA, '+'));
-        assertTrue( usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE").getApelido().equals("--TESTE") );
+        System.out.println(Texto.padC(" TESTE - Buscar Usuário ", LARGURA, '+'));
+        usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE");
+        assertTrue( usuario.getApelido().equals("--TESTE") );
+
+    }
+
+    @Test
+    public void testUpdate() throws ParseException {
+
+        System.out.println(Texto.padC(" TESTE - Update da senha do Usuário ", LARGURA, '+'));
+        usuario.setSenha("NovaSenha");
+        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais(usuario);
+        assertTrue(usuario.getSenha().equals("NovaSenha"));
+        usuario = null;
 
     }
 
     @Test
     public void testExcluir() throws ParseException {
 
-        System.out.println(Texto.padC("TESTE - Excluir Usuário", LARGURA, '+'));
+        System.out.println(Texto.padC(" TESTE - Excluir Usuário ", LARGURA, '+'));
         assertTrue( usuarioDadosPessoaisDao.removerUsuarioDadosPessoais(
             usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE").getId()
         ) );
