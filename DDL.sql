@@ -23,6 +23,7 @@ create table usu_usuario (
     , _inc_data             datetime            
     , usu_cod_nova_senha    bigint  
     , constraint usu_usuario_apelido_uk unique (usu_apelido)
+    , constraint usu_usuario_email_uk unique (usu_email)
 );
 
 -- -----------------------------------------------------------------

@@ -14,6 +14,8 @@ import java.text.ParseException;
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
 import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
@@ -26,6 +28,7 @@ public class MvpTesteDesenvolvimento {
     public static void run() throws ParseException {
 
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
+        UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
@@ -38,9 +41,13 @@ public class MvpTesteDesenvolvimento {
                                                                ,Data.toDate("12/04/1969")
                                                                ,"11111111111");
 
+        UsuarioDadosPessoaisDao
+
+        /*
         em.getTransaction().begin();
         em.persist(usuario);
         em.getTransaction().commit();
+        */
         
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();

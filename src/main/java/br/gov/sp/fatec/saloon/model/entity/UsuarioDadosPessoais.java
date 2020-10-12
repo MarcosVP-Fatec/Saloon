@@ -25,14 +25,14 @@ public class UsuarioDadosPessoais extends Usuario {
                                , String email
                                , String senha
                                , String nome
-                               , Date date
+                               , Date dtNascimento
                                , String cpf) {
 
         setApelido(apelido);
         setEmail(email);
         setSenha(senha);
         setNome(nome);
-        setDtNascimento(date);
+        setDtNascimento(dtNascimento);
         setCpf(cpf);
 
     }
