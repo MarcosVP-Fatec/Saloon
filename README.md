@@ -32,6 +32,7 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
         - @MappedSuperclass (Id)  
         - @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
       * DAO  
+      * GENERICS  
       * TOOL  
         Ferramentas para manipulação de dados.
        

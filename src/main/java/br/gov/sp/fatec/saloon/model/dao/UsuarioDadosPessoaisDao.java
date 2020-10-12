@@ -17,7 +17,7 @@ public interface UsuarioDadosPessoaisDao {
 
     public UsuarioDadosPessoais buscarUsuarioDadosPessoais(Long id);
 
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoais(String apelido);
+    public UsuarioDadosPessoais buscarUsuarioDadosPessoais(String apelido );
 
     public UsuarioDadosPessoais buscarUsuarioDadosPessoaisPorEmail(String email);
 

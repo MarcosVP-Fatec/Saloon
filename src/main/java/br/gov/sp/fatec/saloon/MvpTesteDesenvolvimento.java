@@ -14,8 +14,11 @@ import java.text.ParseException;
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
+import br.gov.sp.fatec.saloon.model.dao.ProprietarioDao;
+import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
+import br.gov.sp.fatec.saloon.model.entity.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
@@ -29,12 +32,14 @@ public class MvpTesteDesenvolvimento {
 
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
+        ProprietarioDao proprietarioDao = new ProprietarioDaoJpa(em);
+
         UsuarioDadosPessoais usuario;
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
 
-        System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ########################################", LARGURA, '#'));
+        System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ISOLADO ########################################", LARGURA, '#'));
 
         usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
         (new UsuarioDadosPessoais("MVP"
@@ -56,11 +61,22 @@ public class MvpTesteDesenvolvimento {
                                  )
         );
 
-        
-        // Faz alteração da senha
+        // Faz alteração da senha em um dos usuários
         usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("MVP");
         usuario.setSenha("senhaMVP");
         usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais( usuario );
+        
+        System.out.println(Texto.padC("######################################## CADASTRO DE PROPRIETARIO ########################################", LARGURA, '#'));
+        
+        proprietarioDao.salvarProprietario
+        (new Proprietario("BETAO"
+                        , "alberto.salas@terra.com.br"
+                        , "psAS"
+                        , "Alberto Salasar"
+                        , Data.toDate("25/06/1970")
+                        , "33333333333")
+            
+        );
         
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();

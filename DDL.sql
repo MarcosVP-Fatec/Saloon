@@ -44,8 +44,7 @@ commit;
 -- PROPRIETÁRIO 
 -- ------------------------------------------------------------------------
 create table pro_proprietario (
-      pro_id              bigint unsigned primary key
-    , pro_usu_id          bigint unsigned
+      pro_usu_id          bigint unsigned
     , pro_dt_inicio       datetime
     , pro_dt_limite       date
     , _inc_usua             bigint          
