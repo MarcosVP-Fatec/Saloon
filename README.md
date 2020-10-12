@@ -27,7 +27,14 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
 
   * Padrão de Projeto MVC (Model / View / Controler)  
     * MODEL  
-      * JPA/Hibernate
+      * JPA/Hibernate  
+        - @MappedSuperclass (Campos de auditoria)  
+        - @MappedSuperclass (Id)  
+      * DAO  
+  * Padrão de Projeto Singleton  
+    * PersistenceManager  
+    * UsuarioLogado  
+  *   
 
 
 > "É preciso amar as pessoas  
