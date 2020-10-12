@@ -41,8 +41,9 @@ public class MvpTesteDesenvolvimento {
                                  ,"pwMVP"
                                  ,"Marcos Vinicio Pereira"
                                  ,Data.toDate("12/04/1969")
-                                 ,"11111111111")
-                                 );
+                                 ,"11111111111"
+                                 )
+        );
 
         /*
         em.getTransaction().begin();

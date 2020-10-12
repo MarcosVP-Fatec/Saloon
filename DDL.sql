@@ -8,7 +8,9 @@ use saloon;
 create user 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
+-- ------------------------------------------------------------------------
 -- USUARIO
+-- ------------------------------------------------------------------------
 create table usu_usuario (
       usu_id                bigint unsigned primary key auto_increment
     , usu_apelido           varchar(30)     not null
@@ -26,16 +28,16 @@ create table usu_usuario (
     , constraint usu_usuario_email_uk unique (usu_email)
 );
 
--- -----------------------------------------------------------------
--- Cadastra o usuário administrador inicial
--- -----------------------------------------------------------------
+-- ------------------------------------------------------------------------
+-- Cadastra o usuário administrador inicial necessário para usar o sistema
+-- ------------------------------------------------------------------------
 insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj) 
                  values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111' );
 
 update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 
 commit;
--- -----------------------------------------------------------------
+-- ------------------------------------------------------------------------
 /*
 -- ALUNO
 create table alu_aluno (

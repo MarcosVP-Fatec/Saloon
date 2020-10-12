@@ -1,3 +1,6 @@
 tasks:
   - init: mysql < DDL.sql
+          clear
+          mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.saloon.App"
+
 image: gitpod/workspace-mysql
