@@ -44,14 +44,29 @@ commit;
 -- PROPRIETARIO 
 -- ------------------------------------------------------------------------
 create table pro_proprietario (
-      pro_usu_id          bigint unsigned
-    , pro_dt_inicio       datetime
-    , pro_dt_limite       date
+      pro_usu_id            bigint unsigned
+    , pro_dt_inicio         datetime
+    , pro_dt_limite         date
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
     , constraint pro_usu_id_fk foreign key (pro_usu_id)
+         references usu_usuario (usu_id)
+);
+
+-- ------------------------------------------------------------------------
+-- PARCEIRO
+-- ------------------------------------------------------------------------
+create table par_parceiro (
+      par_usu_id            bigint unsigned
+    , par_dt_inicio         datetime
+    , par_inativo           bit
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+    , constraint par_usu_id_fk foreign key (par_usu_id)
          references usu_usuario (usu_id)
 );
 

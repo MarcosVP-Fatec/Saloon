@@ -16,10 +16,13 @@ import javax.persistence.EntityManager;
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDao;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.ParceiroDao;
+import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
+import br.gov.sp.fatec.saloon.model.entity.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
@@ -36,7 +39,7 @@ public class MvpTesteDesenvolvimento {
         UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
         AlugavelTipoDao alugavelTipoDao = new AlugavelTipoDaoJpa(em);
         ProprietarioDao proprietarioDao = new ProprietarioDaoJpa(em);
-
+        ParceiroDao parceiroDao = new ParceiroDaoJpa(em);
         UsuarioDadosPessoais usuario;
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
@@ -74,13 +77,35 @@ public class MvpTesteDesenvolvimento {
         proprietarioDao.salvarProprietario
         (new Proprietario("BETAO"
                         , "alberto.salas@terra.com.br"
-                        , "psAS"
+                        , "pwAS"
                         , "Alberto Salasar"
                         , Data.toDate("25/06/1970")
                         , "33333333333")
             
         );
         
+        System.out.println(Texto.padC("######################################## CADASTRO DE PARCEIROS ########################################", LARGURA, '#'));
+        
+        parceiroDao.salvarParceiro
+        (new Parceiro("Festeira"
+                     , "festeira@hotmail.com"
+                     , "pwTF"
+                     , "Tereza Festeira"
+                     , Data.toDate("31/12/1980")
+                     , "55555555555")
+            
+        );
+
+        parceiroDao.salvarParceiro
+        (new Parceiro("SantaMaria"
+                     , "agendamento@santa_maria.com.br"
+                     , "pwBSM"
+                     , "Maria dos Santos"
+                     , Data.toDate("15/05/1972")
+                     , "44444444444")
+            
+        );
+
         System.out.println(Texto.padC("######################################## CADASTRO DE TIPO DE ALUGÁVEL ########################################", LARGURA, '#'));
         alugavelTipoDao.cadastrarAlugavelTipo("Salão de Festas");
         alugavelTipoDao.cadastrarAlugavelTipo("Salão de Palestras");

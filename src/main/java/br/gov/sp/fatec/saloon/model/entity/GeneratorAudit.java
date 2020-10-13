@@ -36,6 +36,11 @@ public abstract class GeneratorAudit {
     public void set_Alt_Data(Date _alt_data){ this._alt_data = _alt_data;   }
 
     //Atualização das alterações
+    public static <T> void setAll( T  t ){
+        ((GeneratorAudit) t).set_Inc_Usua( UsuarioLogado.getInstance().getId() );
+        ((GeneratorAudit) t).set_Inc_Data( Data.today() );
+        GeneratorAudit.setAudit(t);
+    }
     public static <T> void setAudit( T  t ){
         ( (GeneratorAudit) t).set_Alt_Usua( UsuarioLogado.getInstance().getId() );
         ( (GeneratorAudit) t).set_Alt_Data( Data.today() );
