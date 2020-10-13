@@ -33,10 +33,12 @@ public class Alugavel extends GeneratorId {
 
     // CONSTRUTORES
     public Alugavel(){}
-    public Alugavel( String     descr
-                   , String     endereco
-                   , int        capacidade
-                   , BigDecimal valor){
+    public Alugavel( String         descr
+                   , Proprietario   proprietario
+                   , AlugavelTipo   alugavelTipo
+                   , String         endereco
+                   , int            capacidade
+                   , BigDecimal     valor){
 
     }
 

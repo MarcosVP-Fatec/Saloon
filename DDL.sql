@@ -93,8 +93,8 @@ create table alt_alugavel_tipo (
 -- ------------------------------------------------------------------------
 create table alu_alugavel(
       alu_id                bigint unsigned primary key auto_increment
-    , alu_pro_id            bigint unsigned
-    , alu_alt_id            bigint unsigned
+    , alu_pro_id            bigint unsigned not null
+    , alu_alt_id            bigint unsigned not null
     , alu_descr             varchar(50)
     , alu_endereco          varchar(500)
     , alu_capacidade        int unsigned
@@ -103,6 +103,10 @@ create table alu_alugavel(
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
+    , constraint alu_pro_id_fk foreign key (alu_pro_id)
+         references pro_proprietario (pro_usu_id)
+    , constraint alu_alt_id_fk foreign key (alu_alt_id)
+         references alt_alugavel_tipo (alt_id)
 );
 
 /*

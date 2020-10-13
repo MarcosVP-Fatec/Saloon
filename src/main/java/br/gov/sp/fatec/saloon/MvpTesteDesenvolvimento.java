@@ -9,11 +9,15 @@ package br.gov.sp.fatec.saloon;
  * 
  */
 
+import java.math.BigDecimal;
+
 import java.text.ParseException;
 
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
+import br.gov.sp.fatec.saloon.model.dao.AlugavelDao;
+import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDao;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ParceiroDao;
@@ -22,21 +26,25 @@ import br.gov.sp.fatec.saloon.model.dao.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
+import br.gov.sp.fatec.saloon.model.entity.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.entity.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
+import br.gov.sp.fatec.saloon.model.tool.Sistema;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 public class MvpTesteDesenvolvimento {
 
-    static int LARGURA = 150;
+    static int LARGURA = 116;
 
     public static void run() throws ParseException {
 
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
+        AlugavelDao alugavelDao = new AlugavelDaoJpa(em);
         AlugavelTipoDao alugavelTipoDao = new AlugavelTipoDaoJpa(em);
         ProprietarioDao proprietarioDao = new ProprietarioDaoJpa(em);
         ParceiroDao parceiroDao = new ParceiroDaoJpa(em);
@@ -75,7 +83,7 @@ public class MvpTesteDesenvolvimento {
         System.out.println(Texto.padC("######################################## CADASTRO DE PROPRIETARIO ########################################", LARGURA, '#'));
         
         proprietarioDao.salvarProprietario
-        (new Proprietario("BETAO"
+        (new Proprietario("BETÃO"
                         , "alberto.salas@terra.com.br"
                         , "pwAS"
                         , "Alberto Salasar"
@@ -112,6 +120,21 @@ public class MvpTesteDesenvolvimento {
         alugavelTipoDao.cadastrarAlugavelTipo("Salão de Reuniões");
         alugavelTipoDao.cadastrarAlugavelTipo("Sala de Aula");
         alugavelTipoDao.cadastrarAlugavelTipo("Salão de Festas");
+
+        em.clear();
+
+        System.out.println(Texto.padC("######################################## CADASTRO DE ALUGÁVEL ########################################", LARGURA, '#'));
+
+        System.out.println(">>>>> " + proprietarioDao.buscarProprietario("BETÃO").getApelido());
+        System.out.println(">>>>> " + em.find(AlugavelTipo.class,1L).getDescr());
+        System.out.println(">>>>> " + alugavelTipoDao.buscarAlugavelTipo(1L).getDescr());
+
+        alugavelDao.cadastrarAlugavel("Salão Grande"
+                                     ,proprietarioDao.buscarProprietario("BETÃO")
+                                     ,alugavelTipoDao.buscarAlugavelTipo(1L)
+                                     ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
+                                     , 200
+                                     , 600.00 );
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();

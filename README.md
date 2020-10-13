@@ -31,15 +31,18 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
         - @MappedSuperclass (Campos de auditoria)  
         - @MappedSuperclass (Id)  
         - @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-      * DAO  
-      * GENERICS  
       * TOOL  
         Ferramentas para manipulação de dados.
        
   * Padrão de Projeto Singleton  
     * PersistenceManager  
     * UsuarioLogado  
-  *   
+
+  * Padrão de Projetos DAO (Data Access Object)
+    Todas as entidades
+
+  * Padrão de Projetos Generics
+    * Classe GeneratorAudit
 
 
 > "É preciso amar as pessoas  
