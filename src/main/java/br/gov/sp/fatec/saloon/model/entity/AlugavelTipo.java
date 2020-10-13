@@ -16,9 +16,7 @@ public class AlugavelTipo extends GeneratorId {
 
     // CONSTRUTORES
     public AlugavelTipo(){}
-    public AlugavelTipo( String descr ){
-
-    }
+    public AlugavelTipo( String descr ){ setDescr(descr); }
 
     // GETTERS AND SETTERS
     public String getDescr()            {  return descr;                    }

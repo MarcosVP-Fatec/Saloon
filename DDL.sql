@@ -57,6 +57,7 @@ create table pro_proprietario (
 
 -- ------------------------------------------------------------------------
 -- ALUGAVEL_TIPO - Tipo do local que será alugado
+-- ------------------------------------------------------------------------
 -- 1-Salão de Festas
 -- 2-Salão de Palestras
 -- 3-Salão de Reuniões
@@ -71,6 +72,10 @@ create table alt_alugavel_tipo (
     , _alt_usua             bigint          
     , _alt_data             datetime            
 );
+
+-- ------------------------------------------------------------------------
+-- ALUGAVEL - Objeto da locação
+-- ------------------------------------------------------------------------
 
 
 /*

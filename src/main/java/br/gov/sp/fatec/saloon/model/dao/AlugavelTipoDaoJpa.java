@@ -26,7 +26,7 @@ public class AlugavelTipoDaoJpa implements AlugavelTipoDao {
             em.getTransaction().rollback();
             throw new RuntimeException("Erro ao salvar o Tipo do Alugável" + (alugavelTipo.getId()==null ? "!" : " " + alugavelTipo.getDescr() + "!"), e);
         }
-        
+
         return alugavelTipo;
     }
 

@@ -39,8 +39,6 @@ public class MvpTesteDesenvolvimento {
 
         UsuarioDadosPessoais usuario;
 
-        String texto;
-
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
 
@@ -85,10 +83,11 @@ public class MvpTesteDesenvolvimento {
         
         System.out.println(Texto.padC("######################################## CADASTRO DE TIPO DE ALUGÁVEL ########################################", LARGURA, '#'));
         alugavelTipoDao.cadastrarAlugavelTipo("Salão de Festas");
+        alugavelTipoDao.cadastrarAlugavelTipo("Salão de Palestras");
+        alugavelTipoDao.cadastrarAlugavelTipo("Salão de Reuniões");
+        alugavelTipoDao.cadastrarAlugavelTipo("Sala de Aula");
+        alugavelTipoDao.cadastrarAlugavelTipo("Salão de Festas");
 
-
-
-        
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
 
