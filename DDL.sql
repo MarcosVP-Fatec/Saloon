@@ -76,7 +76,19 @@ create table alt_alugavel_tipo (
 -- ------------------------------------------------------------------------
 -- ALUGAVEL - Objeto da locação
 -- ------------------------------------------------------------------------
-
+create table alu_alugavel(
+      alu_id                bigint unsigned primary key auto_increment
+    , alu_pro_id            bigint unsigned
+    , alu_alt_id            bigint unsigned
+    , alu_descr             varchar(50)
+    , alu_endereco          varchar(500)
+    , alu_capacidade        int
+    , alu_valor             decimal(10,2)
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+);
 
 /*
 
