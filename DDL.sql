@@ -82,8 +82,8 @@ create table alu_alugavel(
     , alu_alt_id            bigint unsigned
     , alu_descr             varchar(50)
     , alu_endereco          varchar(500)
-    , alu_capacidade        int
-    , alu_valor             decimal(10,2)
+    , alu_capacidade        int unsigned
+    , alu_valor             decimal(10,2) unsigned
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , _alt_usua             bigint          
