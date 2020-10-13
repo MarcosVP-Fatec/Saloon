@@ -41,7 +41,7 @@ update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 commit;
 
 -- ------------------------------------------------------------------------
--- PROPRIETÁRIO 
+-- PROPRIETARIO 
 -- ------------------------------------------------------------------------
 create table pro_proprietario (
       pro_usu_id          bigint unsigned
@@ -55,20 +55,25 @@ create table pro_proprietario (
          references usu_usuario (usu_id)
 );
 
-/*
-
--- TRABALHO
-create table tra_trabalho (
-    tra_id                  bigint unsigned primary key auto_increment,
-    tra_titulo              varchar(50)     not null,
-    tra_data_hora_entrega   datetime,
-    tra_local_arquivo       varchar(200)    not null,
-    pro_avaliador_id        bigint unsigned,
-    _inc_usua           varchar(80),
-    _inc_data           datetime,
-    constraint tra_pro_fk   foreign key (pro_avaliador_id)
-    references pro_professor (pro_id)
+-- ------------------------------------------------------------------------
+-- ALUGAVEL_TIPO - Tipo do local que será alugado
+-- 1-Salão de Festas
+-- 2-Salão de Palestras
+-- 3-Salão de Reuniões
+-- 4-Sala de Aula
+-- 5-Terreno Vazio
+-- ------------------------------------------------------------------------
+create table alt_alugavel_tipo (
+      alt_id                bigint unsigned primary key auto_increment
+    , alt_descr             varchar(20)     not null
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
 );
+
+
+/*
 
 -- ENTREGA
 -- Não tem atributos próprios

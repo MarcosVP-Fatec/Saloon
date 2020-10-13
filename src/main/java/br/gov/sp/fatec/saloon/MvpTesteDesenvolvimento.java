@@ -14,6 +14,8 @@ import java.text.ParseException;
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
+import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDao;
+import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
@@ -32,9 +34,12 @@ public class MvpTesteDesenvolvimento {
 
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
+        AlugavelTipoDao alugavelTipoDao = new AlugavelTipoDaoJpa(em);
         ProprietarioDao proprietarioDao = new ProprietarioDaoJpa(em);
 
         UsuarioDadosPessoais usuario;
+
+        String texto;
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
@@ -77,6 +82,12 @@ public class MvpTesteDesenvolvimento {
                         , "33333333333")
             
         );
+        
+        System.out.println(Texto.padC("######################################## CADASTRO DE TIPO DE ALUGÁVEL ########################################", LARGURA, '#'));
+        alugavelTipoDao.cadastrarAlugavelTipo("Salão de Festas");
+
+
+
         
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
