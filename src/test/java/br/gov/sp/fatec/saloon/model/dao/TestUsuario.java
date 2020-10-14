@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
+import br.gov.sp.fatec.saloon.model.tool.Padrao;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 public class TestUsuario {
@@ -19,12 +20,10 @@ public class TestUsuario {
     UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
     UsuarioDadosPessoais usuario;
 
-    static int LARGURA = 150;
-
     @Test
     public void testCadastrar() throws ParseException {
 
-        System.out.println(Texto.padC(" TESTE - Cadastrar Usuário ", LARGURA, '+'));
+        System.out.println(Texto.padC(" TESTE - Cadastrar Usuário ", Padrao.larguraTela(), '+'));
         assertTrue(
         usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
         (new UsuarioDadosPessoais("--TESTE"
@@ -41,7 +40,7 @@ public class TestUsuario {
     @Test
     public void testBuscar() throws ParseException {
 
-        System.out.println(Texto.padC(" TESTE - Buscar Usuário ", LARGURA, '+'));
+        System.out.println(Texto.padC(" TESTE - Buscar Usuário ", Padrao.larguraTela(), '+'));
         usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE");
         assertTrue( usuario.getApelido().equals("--TESTE") );
 
@@ -50,7 +49,7 @@ public class TestUsuario {
     @Test
     public void testUpdate() throws ParseException {
 
-        System.out.println(Texto.padC(" TESTE - Update da senha do Usuário ", LARGURA, '+'));
+        System.out.println(Texto.padC(" TESTE - Update da senha do Usuário ", Padrao.larguraTela(), '+'));
         usuario.setSenha("NovaSenha");
         usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais(usuario);
         assertTrue(usuario.getSenha().equals("NovaSenha"));
@@ -61,7 +60,7 @@ public class TestUsuario {
     @Test
     public void testExcluir() throws ParseException {
 
-        System.out.println(Texto.padC(" TESTE - Excluir Usuário ", LARGURA, '+'));
+        System.out.println(Texto.padC(" TESTE - Excluir Usuário ", Padrao.larguraTela(), '+'));
         assertTrue( usuarioDadosPessoaisDao.removerUsuarioDadosPessoais(
             usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE").getId()
         ) );

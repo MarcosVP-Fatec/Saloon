@@ -23,7 +23,7 @@ public class Parceiro extends UsuarioGeral {
                    ,String email
                    ,String senha
                    ,String nome
-                   ,Date dtNascimento
+                   ,Date   dtNascimento
                    ,String cpf){
         super( apelido
               ,email

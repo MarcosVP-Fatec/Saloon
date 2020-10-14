@@ -28,7 +28,6 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
             em.getTransaction().rollback();
             throw new RuntimeException("Erro ao salvar o Proprietário" + (proprietario.getId()==null ? "!" : " " + proprietario.getNome() + "!"), e);
         }
-        
         return proprietario;
     }
 
