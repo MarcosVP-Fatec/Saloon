@@ -109,6 +109,22 @@ create table alu_alugavel(
          references alt_alugavel_tipo (alt_id)
 );
 
+-- ------------------------------------------------------------------------
+-- ALUGAVEL - Objeto da locação
+-- ------------------------------------------------------------------------
+create table cli_cliente (
+      cli_id                bigint unsigned primary key
+    , cli_cpf_cnpj          varchar(14) not null
+    , cli_nome              varchar(80) not null
+    , cli_tel_ddd           varchar(2)   
+    , cli_tel_numero        varchar(10) 
+    , cli_pco_id            bigint unsigned
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+    , constraint cli_cpf_cnpj_uk unique (cli_cpf_cnpj)
+);
 /*
 
 -- ENTREGA

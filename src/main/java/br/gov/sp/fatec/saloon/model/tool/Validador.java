@@ -90,4 +90,26 @@ import java.util.InputMismatchException;
     public static boolean cnpj( String cnpj ){
         return cnpj.length() == 14;
     }
+
+    /**
+     * @apiNote isCpfOrCnpj( String cod )) --> Validação com exception se é CPF ou CNPJ válido
+     * @param cod --> Código CPF de 11 dígitos ou CNPJ de 14 dígitos
+     * @return null
+     */
+    public static void isCpfOrCnpj( String cod ){
+        if ( cod.length() == 11){
+            if ( ! Validador.cpf(cod) ){
+                throw new RuntimeException(">>>> Número inválido de CPF => " + cod);
+            }
+        } else if (cod.length() == 14){
+            if ( ! Validador.cnpj(cod)) {
+                throw new RuntimeException(">>>> Número inválido de CNPJ => " + cod);
+            }
+
+        } else {
+            throw new RuntimeException(">>>> Número inválido de CPF (11 dígitos) ou CNPJ (14 dígitos) => Código passado com " + cod.length() + " dígitos.");
+        }
+
+    }
+
 }
