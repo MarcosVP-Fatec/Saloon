@@ -25,7 +25,7 @@ public class Alugavel extends GeneratorId {
     //A chave estrangeira não se mapeia diretamente
     //x to y => x é da entidade atual.
     //No JoinColumn definir o nome da coluna fk desta entidade.
-    @ManyToOne(fetch = FetchType.LAZY)    //LAZY porque o proprietário tem muitas colunas
+    @ManyToOne(fetch = FetchType.EAGER)    //LAZY porque o proprietário tem muitas colunas
     @JoinColumn(name = "alu_pro_id")  private Proprietario proprietario;
 
     @ManyToOne(fetch = FetchType.EAGER)    //EAGER porque a tabela de tipo contém apenas a descrição
@@ -39,7 +39,13 @@ public class Alugavel extends GeneratorId {
                    , String         endereco
                    , int            capacidade
                    , BigDecimal     valor){
-
+        
+        setDescr(descr);
+        setProprietario(proprietario);
+        setAlugavelTipo(alugavelTipo);
+        setEndereco(endereco);
+        setCapacidade(capacidade);
+        setValor(valor);
     }
 
     // GETTERS AND SETTERS

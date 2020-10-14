@@ -44,12 +44,12 @@ public class AlugavelDaoJpa implements AlugavelDao {
     }
 
     @Override
-    public Alugavel cadastrarAlugavel(String descr
-                                     ,Proprietario proprietario
-                                     ,AlugavelTipo alugavelTipo
-                                     ,String endereco
-                                     ,int capacidade
-                                     ,BigDecimal valor) {
+    public Alugavel cadastrarAlugavel(String        descr
+                                     ,Proprietario  proprietario
+                                     ,AlugavelTipo  alugavelTipo
+                                     ,String        endereco
+                                     ,int           capacidade
+                                     ,BigDecimal    valor) {
 
         return salvarAlugavel(new Alugavel(descr, proprietario, alugavelTipo, endereco, capacidade, valor));
     }

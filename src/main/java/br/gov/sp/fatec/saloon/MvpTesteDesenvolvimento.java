@@ -9,8 +9,6 @@ package br.gov.sp.fatec.saloon;
  * 
  */
 
-import java.math.BigDecimal;
-
 import java.text.ParseException;
 
 import javax.persistence.EntityManager;
@@ -26,19 +24,17 @@ import br.gov.sp.fatec.saloon.model.dao.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
-import br.gov.sp.fatec.saloon.model.entity.Alugavel;
 import br.gov.sp.fatec.saloon.model.entity.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.entity.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
-import br.gov.sp.fatec.saloon.model.tool.Sistema;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 public class MvpTesteDesenvolvimento {
 
-    static int LARGURA = 116;
+    static int LARGURA = 112;
 
     public static void run() throws ParseException {
 
@@ -127,16 +123,23 @@ public class MvpTesteDesenvolvimento {
 
         System.out.println(">>>>> " + proprietarioDao.buscarProprietario("BETÃO").getApelido());
         System.out.println(">>>>> " + em.find(AlugavelTipo.class,1L).getDescr());
-        System.out.println(">>>>> " + alugavelTipoDao.buscarAlugavelTipo(1L).getDescr());
-
-        alugavelDao.cadastrarAlugavel("Salão Grande"
+        System.out.println(">>>>> " + alugavelTipoDao.buscarAlugavelTipo(1L).getDescr() + alugavelTipoDao.buscarAlugavelTipo(1L).getId());
+        
+        alugavelDao.cadastrarAlugavel("Salão Maior"
                                      ,proprietarioDao.buscarProprietario("BETÃO")
                                      ,alugavelTipoDao.buscarAlugavelTipo(1L)
                                      ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
-                                     , 200
+                                     , 150
                                      , 600.00 );
 
-        System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
+        alugavelDao.cadastrarAlugavel("Salão Menor"
+                                     ,proprietarioDao.buscarProprietario("BETÃO")
+                                     ,alugavelTipoDao.buscarAlugavelTipo(1L)
+                                     ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
+                                     , 80
+                                     , 450.00 );
+
+                                     System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
 
     }
