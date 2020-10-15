@@ -46,6 +46,11 @@ public class Cliente extends GeneratorId {
         setTel_ddd(tel_ddd);
         setTel_numero(tel_numero);
     }
+    public Cliente( String   cpf_cnpj
+                  , String   nome){
+        setCpf_cnpj(cpf_cnpj);
+        setNome(nome);
+    }
     
     // GETTERS AND SETTERS
     public String getCpf_cnpj()                 { return cpf_cnpj;                              }

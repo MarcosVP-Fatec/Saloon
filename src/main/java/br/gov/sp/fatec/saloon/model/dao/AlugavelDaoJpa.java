@@ -66,12 +66,9 @@ public class AlugavelDaoJpa implements AlugavelDao {
 
     @Override
     public Alugavel buscarAlugavel(Long id) {
-        /*
-         * String jpql = "select a from Alugavel a where a.id = :id";
-         * TypedQuery<Alugavel> query = em.createQuery(jpql, Alugavel.class);
-         * query.setParameter("id", id); return query.getSingleResult();
-         */
-        return em.find(Alugavel.class, id);
+        String jpql = "select a from Alugavel a where a.id = :id";
+        TypedQuery<Alugavel> query = em.createQuery(jpql, Alugavel.class);
+        return query.setParameter("id", id).getSingleResult(); 
     }
 
     @Override
