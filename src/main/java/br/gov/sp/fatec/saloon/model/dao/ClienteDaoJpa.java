@@ -19,6 +19,10 @@ public class ClienteDaoJpa implements ClienteDao {
 
     @Override
     public Cliente salvarCliente(Cliente cliente) {
+        em.getTransaction().begin();
+        Generico.salvarSemCommit(cliente, em);
+        em.getTransaction().commit();
+/*
         try {
         em.getTransaction().begin();
         Generico.salvarSemCommit(cliente, em);
@@ -27,7 +31,7 @@ public class ClienteDaoJpa implements ClienteDao {
             e.printStackTrace();
             em.getTransaction().rollback();
             throw new RuntimeException("Erro ao salvar o Cliente" + (cliente.getId() == null ? "!" : " " + cliente.getNome() + "!"),e);
-        }
+        }*/
         return cliente;
     }
 
@@ -68,7 +72,14 @@ public class ClienteDaoJpa implements ClienteDao {
     }
 
     @Override
-    public List<Cliente> buscarCliente(String nome) {
+    public Cliente buscarCliente(String cpf) {
+        TypedQuery<Cliente> query = 
+        em.createQuery("select c from Cliente c where c.nome c.cpf_cnpj = :cpf_cnpj",Cliente.class);
+        return query.setParameter("cpf_cnpj", cpf).getSingleResult();
+    }
+
+    @Override
+    public List<Cliente> buscarClientePorNome(String nome) {
         TypedQuery<Cliente> query = 
         em.createQuery("select c from Cliente c where c.nome like '%:nome%'",Cliente.class);
         return query.setParameter("nome", nome).getResultList();

@@ -14,14 +14,14 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.Padrao;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
-public class TestProprietario {
+public class Test003_Proprietario {
 
     EntityManager em = PersistenceManager.getInstance().getEntityManager();
     ProprietarioDao proprietarioDao = new ProprietarioDaoJpa(em);
     Proprietario proprietario;
 
     @Test
-    public void testCadastrar() throws ParseException {
+    public void test003_Cadastrar() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Cadastrar Proprietário ", Padrao.larguraTela(), '+'));
         assertTrue(
@@ -38,7 +38,7 @@ public class TestProprietario {
     }
 
     @Test
-    public void testBuscar() throws ParseException {
+    public void test003_Buscar() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Buscar Proprietário ", Padrao.larguraTela(), '+'));
         proprietario = proprietarioDao.buscarProprietario("--TESTEPROP");
@@ -47,7 +47,7 @@ public class TestProprietario {
     }
 
     @Test
-    public void testUpdate() throws ParseException {
+    public void test003_Update() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Update da senha do Proprietário ", Padrao.larguraTela(), '+'));
         proprietario.setSenha("NovaSenha");
@@ -58,7 +58,7 @@ public class TestProprietario {
     }
 
     @Test
-    public void testExcluir() throws ParseException {
+    public void test003_Excluir() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Excluir Proprietário ", Padrao.larguraTela(), '+'));
         assertTrue( proprietarioDao.removerProprietario(

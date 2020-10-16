@@ -14,7 +14,7 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.Padrao;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
-public class TestUsuario {
+public class Test001_Usuario {
 
     EntityManager em = PersistenceManager.getInstance().getEntityManager();
     UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
@@ -38,7 +38,7 @@ public class TestUsuario {
     }
 
     @Test
-    public void testBuscar() throws ParseException {
+    public void test001_Buscar() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Buscar Usuário ", Padrao.larguraTela(), '+'));
         usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("--TESTE");
@@ -47,7 +47,7 @@ public class TestUsuario {
     }
 
     @Test
-    public void testUpdate() throws ParseException {
+    public void test001_Update() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Update da senha do Usuário ", Padrao.larguraTela(), '+'));
         usuario.setSenha("NovaSenha");
@@ -58,7 +58,7 @@ public class TestUsuario {
     }
 
     @Test
-    public void testExcluir() throws ParseException {
+    public void test001_Excluir() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Excluir Usuário ", Padrao.larguraTela(), '+'));
         assertTrue( usuarioDadosPessoaisDao.removerUsuarioDadosPessoais(

@@ -25,7 +25,9 @@ public interface ClienteDao {
 
     public Cliente buscarCliente(Long id);
 
-    public List<Cliente> buscarCliente(String nome );
+    public Cliente buscarCliente(String cpf );
+
+    public List<Cliente> buscarClientePorNome(String nome );
 
     public Cliente buscarClienteParceiro(Long idParceiro);
 

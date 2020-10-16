@@ -14,14 +14,14 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.Padrao;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
-public class TestParceiro {
+public class Test002_Parceiro {
 
     EntityManager em = PersistenceManager.getInstance().getEntityManager();
     ParceiroDao parceiroDao = new ParceiroDaoJpa(em);
     Parceiro parceiro;
 
     @Test
-    public void testCadastrar() throws ParseException {
+    public void test002_Cadastrar() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Cadastrar Parceiro ", Padrao.larguraTela(), '+'));
         assertTrue(
@@ -38,7 +38,7 @@ public class TestParceiro {
     }
 
     @Test
-    public void testBuscar() throws ParseException {
+    public void test002_Buscar() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Buscar Parceiro ", Padrao.larguraTela(), '+'));
         parceiro = parceiroDao.buscarParceiro("--TESTEPARC");
@@ -47,7 +47,7 @@ public class TestParceiro {
     }
 
     @Test
-    public void testUpdate() throws ParseException {
+    public void test002_Update() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Update da senha do Parceiro ", Padrao.larguraTela(), '+'));
         parceiro.setSenha("NovaSenha");
@@ -58,7 +58,7 @@ public class TestParceiro {
     }
 
     @Test
-    public void testExcluir() throws ParseException {
+    public void test002_Excluir() throws ParseException {
 
         System.out.println(Texto.padC(" TESTE - Excluir Parceiro ", Padrao.larguraTela(), '+'));
         assertTrue( parceiroDao.removerParceiro(

@@ -125,6 +125,15 @@ create table cli_cliente (
     , _alt_data             datetime            
     , constraint cli_cpf_cnpj_uk unique (cli_cpf_cnpj)
 );
+
+create table cnt_contrato_motivo(
+      cnt_id                bigint unsigned primary key
+    , cnt_descr             varchar(30)
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+);
 /*
 
 -- ENTREGA
