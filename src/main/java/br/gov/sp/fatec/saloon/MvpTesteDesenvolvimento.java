@@ -16,21 +16,19 @@ import javax.persistence.EntityManager;
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 
 import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelTipoDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ClienteDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
-
+import br.gov.sp.fatec.saloon.model.dao.interf.stat.AlugavelTipoDao;
+import br.gov.sp.fatec.saloon.model.dao.stat.AlugavelTipoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ClienteDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
-import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
@@ -148,7 +146,7 @@ public class MvpTesteDesenvolvimento {
                                      , 450.00 );
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ########################################", LARGURA, '#'));
-        clienteDao.cadastrarCliente("55555555555", "Cristina Regis Perrerrá","12", "98765431");
+        //clienteDao.cadastrarCliente("55555555555", "Cristina Regis Perrerrá","12", "98765431");
 
 /*                                     
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTE PARCEIRO ########################################", LARGURA, '#'));

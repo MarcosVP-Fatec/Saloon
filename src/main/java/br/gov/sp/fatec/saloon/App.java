@@ -17,7 +17,6 @@ public class App {
     public static void main(String[] args) throws ParseException
     {
         
-        //TODO         
         //Inicia o usuário - Acertar depois
         UsuarioLogado.getInstance(1L);
         

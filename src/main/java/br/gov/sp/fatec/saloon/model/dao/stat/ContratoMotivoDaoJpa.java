@@ -61,7 +61,7 @@ public class ContratoMotivoDaoJpa implements ContratoMotivoDao {
     public boolean removerContratoMotivo(ContratoMotivo contratoMotivo) {
         em.getTransaction().begin();
         em.remove(contratoMotivo);
-        em.getTransaction.commit();
+        em.getTransaction().commit();
         return true;
     }
     
