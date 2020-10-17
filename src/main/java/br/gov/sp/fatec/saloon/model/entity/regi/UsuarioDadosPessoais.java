@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import java.util.Date;
 
@@ -65,10 +65,5 @@ public class UsuarioDadosPessoais extends Usuario {
     public void setCpf(String cpf) {
         if (Validador.cpf(cpf)) this.cpf = cpf;
     }
-
-/*
-    @Column(name = "usu_mudar_senha")       private char    mudarSenha;
-
-  */ 
 
 }

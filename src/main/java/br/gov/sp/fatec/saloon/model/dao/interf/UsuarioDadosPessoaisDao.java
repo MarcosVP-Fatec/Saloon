@@ -1,8 +1,8 @@
-package br.gov.sp.fatec.saloon.model.dao;
+package br.gov.sp.fatec.saloon.model.dao.interf;
 
 import java.util.Date;
 
-import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
+import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 
 public interface UsuarioDadosPessoaisDao {
 

@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.comm;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

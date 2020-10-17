@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import java.util.Date;
 
@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioGeral;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @Table(name = "par_parceiro")

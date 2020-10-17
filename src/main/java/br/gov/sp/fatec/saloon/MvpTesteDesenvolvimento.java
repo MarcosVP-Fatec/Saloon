@@ -14,20 +14,25 @@ import java.text.ParseException;
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.dao.AlugavelDao;
+
+import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelTipoDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
+
 import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDao;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.ParceiroDao;
 import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDao;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
-import br.gov.sp.fatec.saloon.model.entity.AlugavelTipo;
-import br.gov.sp.fatec.saloon.model.entity.Parceiro;
-import br.gov.sp.fatec.saloon.model.entity.Proprietario;
-import br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais;
+
+import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
+
+import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
+import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
+
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
 import br.gov.sp.fatec.saloon.model.tool.Texto;

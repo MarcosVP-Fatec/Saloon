@@ -1,6 +1,6 @@
-package br.gov.sp.fatec.saloon.model.dao;
+package br.gov.sp.fatec.saloon.model.dao.interf;
 
-import br.gov.sp.fatec.saloon.model.entity.AlugavelTipo;
+import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 
 public interface AlugavelTipoDao {
 

@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+
+import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 
 @Table(name = "usu_usuario")
 @Entity

@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import java.util.Date;
 import java.util.Set;

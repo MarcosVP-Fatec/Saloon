@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 import br.gov.sp.fatec.saloon.model.tool.Validador;
 

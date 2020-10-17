@@ -1,9 +1,9 @@
-package br.gov.sp.fatec.saloon.model.dao;
+package br.gov.sp.fatec.saloon.model.dao.interf;
 
 import java.util.List;
 
-import br.gov.sp.fatec.saloon.model.entity.Cliente;
-import br.gov.sp.fatec.saloon.model.entity.Parceiro;
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public interface ClienteDao {
 

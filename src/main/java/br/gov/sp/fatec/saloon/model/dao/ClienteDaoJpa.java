@@ -6,8 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.entity.Cliente;
-import br.gov.sp.fatec.saloon.model.entity.Parceiro;
+import br.gov.sp.fatec.saloon.model.dao.interf.ClienteDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public class ClienteDaoJpa implements ClienteDao {
 

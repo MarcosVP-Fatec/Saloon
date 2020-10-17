@@ -7,7 +7,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.entity.Parceiro;
+import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public class ParceiroDaoJpa implements ParceiroDao {
 

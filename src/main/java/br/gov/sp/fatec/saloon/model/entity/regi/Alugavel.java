@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity;
+package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import java.math.BigDecimal;
 
@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
+import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 @Entity

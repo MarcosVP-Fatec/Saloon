@@ -1,8 +1,8 @@
-package br.gov.sp.fatec.saloon.model.dao;
+package br.gov.sp.fatec.saloon.model.dao.interf;
 
 import java.util.Date;
 
-import br.gov.sp.fatec.saloon.model.entity.Parceiro;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public interface ParceiroDao {
 

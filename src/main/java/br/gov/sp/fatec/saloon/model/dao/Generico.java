@@ -3,8 +3,8 @@ package br.gov.sp.fatec.saloon.model.dao;
 import javax.persistence.EntityManager;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.entity.GeneratorAudit;
-import br.gov.sp.fatec.saloon.model.entity.GeneratorId;
+import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorAudit;
+import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 
 public class Generico extends GeneratorId {
 

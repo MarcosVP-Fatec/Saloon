@@ -1,11 +1,12 @@
-package br.gov.sp.fatec.saloon.model.dao;
+package br.gov.sp.fatec.saloon.model.dao.interf;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import br.gov.sp.fatec.saloon.model.entity.Alugavel;
-import br.gov.sp.fatec.saloon.model.entity.AlugavelTipo;
-import br.gov.sp.fatec.saloon.model.entity.Proprietario;
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+
+import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 
 public interface AlugavelDao {
     

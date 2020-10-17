@@ -7,7 +7,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.entity.Proprietario;
+import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
 public class ProprietarioDaoJpa implements ProprietarioDao {
 

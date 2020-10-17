@@ -7,9 +7,14 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.entity.Alugavel;
-import br.gov.sp.fatec.saloon.model.entity.AlugavelTipo;
-import br.gov.sp.fatec.saloon.model.entity.Proprietario;
+
+import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelDao;
+
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+
+import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
+
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 public class AlugavelDaoJpa implements AlugavelDao {
