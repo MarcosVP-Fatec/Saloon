@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.Generico;
@@ -34,32 +35,34 @@ public class ContratoMotivoDaoJpa implements ContratoMotivoDao {
 
     @Override
     public ContratoMotivo cadastrarContratoMotivo(String descr) {
-        // TODO Auto-generated method stub
-        return null;
+        return salvarContratoMotivo( new ContratoMotivo(descr) );
     }
 
     @Override
     public ContratoMotivo buscarContratoMotivo(Long id) {
-        // TODO Auto-generated method stub
-        return null;
+        TypedQuery<ContratoMotivo> query = 
+        em.createQuery("select c from ContratoMotivo c where c.id = :id", ContratoMotivo.class);
+        return query.setParameter("id", id).getSingleResult();    
     }
 
     @Override
     public List<ContratoMotivo> buscarContratoMotivo(String descr) {
-        // TODO Auto-generated method stub
-        return null;
+        TypedQuery<ContratoMotivo> query = 
+        em.createQuery("select a from AlugavelTipo a where a.descr like :descr", ContratoMotivo.class);
+        return query.setParameter("descr", '%'+descr+'%').getResultList();
     }
 
     @Override
     public boolean removerContratoMotivo(Long id) {
-        // TODO Auto-generated method stub
-        return false;
+        return removerContratoMotivo(buscarContratoMotivo(id));
     }
 
     @Override
     public boolean removerContratoMotivo(ContratoMotivo contratoMotivo) {
-        // TODO Auto-generated method stub
-        return false;
+        em.getTransaction().begin();
+        em.remove(contratoMotivo);
+        em.getTransaction.commit();
+        return true;
     }
     
 }

@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.saloon.model.dao.stat;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -45,11 +47,10 @@ public class AlugavelTipoDaoJpa implements AlugavelTipoDao {
     }
 
     @Override
-    public AlugavelTipo buscarAlugavelTipo(String descr) {
-        String jpql = "select a from AlugavelTipo a where a.descr = :descr";
-        TypedQuery<AlugavelTipo> query = em.createQuery(jpql, AlugavelTipo.class);
-        query.setParameter("descr", descr);
-        return query.getSingleResult();    
+    public List<AlugavelTipo> buscarAlugavelTipo(String descr) {
+        TypedQuery<AlugavelTipo> query = 
+        em.createQuery("select a from AlugavelTipo a where a.descr like :descr", AlugavelTipo.class);
+        return query.setParameter("descr",'%'+descr+'%').getResultList();
     }
 
     @Override

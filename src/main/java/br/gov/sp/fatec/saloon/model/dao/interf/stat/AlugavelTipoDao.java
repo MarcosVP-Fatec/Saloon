@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.saloon.model.dao.interf.stat;
 
+import java.util.List;
+
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 
 public interface AlugavelTipoDao {
@@ -10,7 +12,7 @@ public interface AlugavelTipoDao {
 
     public AlugavelTipo buscarAlugavelTipo(Long id);
 
-    public AlugavelTipo buscarAlugavelTipo(String descr );
+    public List<AlugavelTipo> buscarAlugavelTipo(String descr );
 
     public boolean removerAlugavelTipo(Long id);
 
