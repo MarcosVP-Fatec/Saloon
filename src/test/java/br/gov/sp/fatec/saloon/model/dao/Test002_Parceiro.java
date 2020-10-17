@@ -9,7 +9,8 @@ import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.entity.Parceiro;
+import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.Padrao;
 import br.gov.sp.fatec.saloon.model.tool.Texto;

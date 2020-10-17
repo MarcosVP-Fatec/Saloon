@@ -17,18 +17,20 @@ import br.gov.sp.fatec.saloon.model.PersistenceManager;
 
 import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelTipoDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.ClienteDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
 
 import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelTipoDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.ClienteDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
-
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
@@ -50,6 +52,7 @@ public class MvpTesteDesenvolvimento {
         ProprietarioDao proprietarioDao = new ProprietarioDaoJpa(em);
         ParceiroDao parceiroDao = new ParceiroDaoJpa(em);
         UsuarioDadosPessoais usuario;
+        ClienteDao clienteDao = new ClienteDaoJpa(em);
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
@@ -144,7 +147,34 @@ public class MvpTesteDesenvolvimento {
                                      , 80
                                      , 450.00 );
 
-                                     System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
+        System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ########################################", LARGURA, '#'));
+        clienteDao.cadastrarCliente("55555555555", "Cristina Regis Perrerrá","12", "98765431");
+
+/*                                     
+        System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTE PARCEIRO ########################################", LARGURA, '#'));
+        Parceiro parceiro = parceiroDao.cadastrarParceiro("TESTE_PARC2"                         //apelido
+                                                         ,"testeparceirotempoario@hotmail.com"  //email
+                                                         ,"pwTP"                                //senha
+                                                         ,"Parceiro Temporário"                 //nome
+                                                         ,Data.toDate("15/05/1972")             //dtNascimento
+                                                         ,"77777777777"                         //
+                                                         ,Data.today());
+
+        
+        Cliente cliente = clienteDao.cadastrarCliente(parceiro.getCpf(), parceiro.getNome(), "12", "998765432", parceiro);
+        System.out.println(">>>>> Cliente ID  " + cliente.getId() );*/
+/*
+        System.out.println(">>>>> REMOVENDO PARCEIRO " );
+        parceiroDao.removerParceiro(
+            parceiroDao.buscarParceiro("TESTE_PARC2").getId());
+        //System.out.println(">>>>> Parceiro " + parceiroDao.buscarParceiro("TESTE_PARC2").getId());
+*/
+
+
+
+
+
+        System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
 
     }

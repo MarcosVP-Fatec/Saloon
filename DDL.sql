@@ -113,7 +113,7 @@ create table alu_alugavel(
 -- ALUGAVEL - Objeto da locação
 -- ------------------------------------------------------------------------
 create table cli_cliente (
-      cli_id                bigint unsigned primary key
+      cli_id                bigint unsigned primary key auto_increment
     , cli_cpf_cnpj          varchar(14) not null
     , cli_nome              varchar(80) not null
     , cli_tel_ddd           varchar(2)   

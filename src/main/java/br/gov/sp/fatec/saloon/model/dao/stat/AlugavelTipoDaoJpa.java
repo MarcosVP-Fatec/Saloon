@@ -1,11 +1,12 @@
-package br.gov.sp.fatec.saloon.model.dao;
+package br.gov.sp.fatec.saloon.model.dao.stat;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
-import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelTipoDao;
+import br.gov.sp.fatec.saloon.model.dao.Generico;
+import br.gov.sp.fatec.saloon.model.dao.interf.stat.AlugavelTipoDao;
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 
 public class AlugavelTipoDaoJpa implements AlugavelTipoDao {

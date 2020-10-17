@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.dao.interf;
+package br.gov.sp.fatec.saloon.model.dao.interf.stat;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 
