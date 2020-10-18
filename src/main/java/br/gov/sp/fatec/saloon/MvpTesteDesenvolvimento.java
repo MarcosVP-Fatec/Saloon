@@ -227,6 +227,17 @@ public class MvpTesteDesenvolvimento {
                                      , new BigDecimal(100.00)
                                      , contratoMotivo);
 
+        cliente = clienteDao.buscarCliente("44444444444");
+        alugavel = alugavelDao.buscarAlugavel(2L);
+        contratoDao.cadastrarContrato( cliente
+                                     , alugavel
+                                     , Data.toDate("15/11/2020")
+                                     , new BigDecimal(150)
+                                     , contratoMotivo
+                                     , "Mariazinha"
+                                     , 10
+                                     , mesAnoDao.buscarMesAno("11"));
+
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
