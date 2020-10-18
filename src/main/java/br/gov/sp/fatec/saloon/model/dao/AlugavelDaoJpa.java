@@ -22,13 +22,8 @@ public class AlugavelDaoJpa implements AlugavelDao {
     private EntityManager em;
 
     // CONSTRUTORES
-    public AlugavelDaoJpa() {
-        this(PersistenceManager.getInstance().getEntityManager());
-    }
-
-    public AlugavelDaoJpa(EntityManager em) {
-        this.em = em;
-    }
+    public AlugavelDaoJpa()                 { this(PersistenceManager.getInstance().getEntityManager());}
+    public AlugavelDaoJpa(EntityManager em) { this.em = em;                                             }
 
     @Override
     public Alugavel salvarAlugavel(Alugavel alugavel) {

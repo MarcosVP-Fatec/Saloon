@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.entity.regi;       
+package br.gov.sp.fatec.saloon.model.entity.laun;       
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -9,9 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
 import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
@@ -27,12 +30,14 @@ public class Contrato extends GeneratorId {
     @Column(name = "ctt_festejo_nomes")         private String      festejoNomes;   //4000
     @Column(name = "ctt_festejo_dia")           private int         festejoDia;     //2
 
-
     //A chave estrangeira não se mapeia diretamente
     //x to y => x é da entidade atual.
     //No JoinColumn definir o nome da coluna fk desta entidade.
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ctt_cli_id")            private Cliente     cliente;      
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ctt_alu_id")            private Alugavel    alugavel;      
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ctt_festejo_mes_id")    private MesAno      festejoMes;
@@ -43,10 +48,12 @@ public class Contrato extends GeneratorId {
     // CONSTRUTORES
     public Contrato(){}
     public Contrato( Cliente        cliente
+                   , Alugavel       alugavel
                    , Date           data     
                    , BigDecimal     reservaPaga
                    , ContratoMotivo contratoMotivo){
 
+        setAlugavel(alugavel);
         setCliente(cliente);
         setData(data);                    
         setReservaPaga(reservaPaga);
@@ -54,6 +61,7 @@ public class Contrato extends GeneratorId {
 
     }
     public Contrato( Cliente        cliente
+                   , Alugavel       alugavel
                    , Date           data      
                    , BigDecimal     reservaPaga
                    , ContratoMotivo contratoMotivo
@@ -61,7 +69,7 @@ public class Contrato extends GeneratorId {
                    , int            festejoDia
                    , MesAno         festejoMes){
 
-        this(cliente, data, reservaPaga, contratoMotivo);
+        this(cliente, alugavel, data, reservaPaga, contratoMotivo);
         setFestejoNomes(festejoNomes);
         setfestejoDia(festejoDia);
         setFestejoMes(festejoMes);
@@ -81,7 +89,9 @@ public class Contrato extends GeneratorId {
     public void setFestejoMes(MesAno festejoMes)        { this.festejoMes = festejoMes;     }
     public ContratoMotivo getContratoMotivo()           { return contratoMotivo;            }
     public void setContratoMotivo(ContratoMotivo contratoMotivo) { this.contratoMotivo = contratoMotivo;    }
-    public Cliente getCliente()                         { return cliente;                 }
-    public void setCliente(Cliente cliente)             { this.cliente = cliente;       }
+    public Cliente getCliente()                         { return cliente;                   }
+    public void setCliente(Cliente cliente)             { this.cliente = cliente;           }
+    public Alugavel getAlugavel()                       { return alugavel;                  }
+    public void setAlugavel(Alugavel alugavel)          { this.alugavel = alugavel;         }
     
 }

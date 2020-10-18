@@ -150,6 +150,7 @@ create table mes_ano (
 create table ctt_contrato (
       ctt_id                bigint unsigned primary key auto_increment
     , ctt_cli_id            bigint unsigned not null
+    , ctt_alu_id            bigint unsigned not null
     , ctt_data              date            not null
     , ctt_reserva_paga      decimal(10,2)   not null
     , ctt_ctm_id            bigint unsigned not null
@@ -162,6 +163,8 @@ create table ctt_contrato (
     , _alt_data             datetime            
     , constraint ctt_ctm_id_fk foreign key (ctt_ctm_id) 
         references ctm_contrato_motivo (ctm_id)
+    , constraint ctt_alu_id_fk foreign key (ctt_alu_id)    
+        references alu_alugavel (alu_id)
     , constraint ctt_festejo_mes_id_fk foreign key (ctt_festejo_mes_id)
         references mes_ano (mes_id)
 );
@@ -175,30 +178,3 @@ create table pxc_parceiro_x_cliente (
     , constraint pxc_cli_id_fk foreign key (pxc_cli_id) 
         references cli_cliente (cli_id)
 );
-
-create table alc_alugavel_contratado (
-      alc_alu_id            bigint unsigned
-    , alc_ctt_id            bigint unsigned
-    , primary key alc_alugavel_contratado_pk (alc_alu_id, alc_ctt_id)
-    , constraint alc_alu_id_fk foreign key (alc_alu_id)
-        references alu_alugavel (alu_id) 
-    , constraint alc_ctt_id_fk foreign key (alc_ctt_id)
-        references ctt_contrato (ctt_id)    
-)
-
-/*
-
--- ENTREGA
--- Não tem atributos próprios
-create table ent_entrega (
-    alu_id bigint unsigned,
-    tra_id bigint unsigned,
-    _inc_usua           varchar(80),
-    _inc_data           datetime,
-    primary key (alu_id, tra_id),
-    constraint ent_alu_fk foreign key (alu_id)
-        references alu_aluno (alu_id),
-    constraint ent_tra_fk foreign key (tra_id)
-        references tra_trabalho (tra_id)
-);
-*/

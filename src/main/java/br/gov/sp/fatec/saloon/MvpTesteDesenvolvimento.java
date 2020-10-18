@@ -1,5 +1,7 @@
 package br.gov.sp.fatec.saloon;
 
+import java.math.BigDecimal;
+
 /**
  * @App Saloon 
  * @apiNote Teste exclusivo de MARCOS VINICIO PEREIRA
@@ -21,9 +23,11 @@ import br.gov.sp.fatec.saloon.model.dao.interf.ClienteDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.laun.ContratoDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.stat.AlugavelTipoDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.stat.ContratoMotivoDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.stat.MesAnoDao;
+import br.gov.sp.fatec.saloon.model.dao.laun.ContratoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.stat.AlugavelTipoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.stat.ContratoMotivoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.stat.MesAnoDaoJpa;
@@ -34,7 +38,9 @@ import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
+import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
 import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
 import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
@@ -59,6 +65,8 @@ public class MvpTesteDesenvolvimento {
         UsuarioDadosPessoais usuario;
         ClienteDao clienteDao = new ClienteDaoJpa(em);
         ContratoMotivoDao contratoMotivoDao = new ContratoMotivoDaoJpa(em);
+        ContratoDao contratoDao = new ContratoDaoJpa(em);
+        
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
@@ -208,8 +216,16 @@ public class MvpTesteDesenvolvimento {
         mesAno.setDescr("Dezembro");
         mesAnoDao.salvarMesAno(mesAno);
 
-        
+        System.out.println(Texto.padC("######################################## CLIENTE FAZ UM CONTRATO ########################################", LARGURA, '#'));
+        Cliente cliente = clienteDao.buscarCliente("55555555555");
+        Alugavel alugavel = alugavelDao.buscarAlugavel(1L);
+        ContratoMotivo contratoMotivo = contratoMotivoDao.buscarContratoMotivo(1L);
 
+        contratoDao.cadastrarContrato( cliente
+                                     , alugavel
+                                     , Data.toDate("25/12/2020")
+                                     , new BigDecimal(100.00)
+                                     , contratoMotivo);
 
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));

@@ -14,6 +14,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
+import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 import br.gov.sp.fatec.saloon.model.tool.Validador;
 
@@ -91,7 +92,5 @@ public class Cliente extends GeneratorId {
     public void setContratosDoCliente(Set<Contrato> contratosDoCliente) {
         this.contratosDoCliente = contratosDoCliente;
     }
-
-    
 
 }

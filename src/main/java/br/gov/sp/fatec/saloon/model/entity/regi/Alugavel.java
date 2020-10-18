@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
@@ -8,15 +9,19 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
+import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 @Entity
 @Table(name = "alu_alugavel")
 @AttributeOverride(name = "id", column=@Column(name="alu_id"))
+@PrimaryKeyJoinColumn(name = "alu_id")
 public class Alugavel extends GeneratorId {
 
     @Column(name = "alu_descr")                             private String      descr;       //50
@@ -33,17 +38,10 @@ public class Alugavel extends GeneratorId {
     @ManyToOne(fetch = FetchType.EAGER)    //EAGER porque a tabela de tipo contém apenas a descrição
     @JoinColumn(name = "alu_alt_id")  private AlugavelTipo alugavelTipo;
 
-    //Um Alugável pode ter vários contratos e um contrato só pode ter um alugável
-    //Ao inves de informar qual coluna vai me ajudar a buscar os alunos eu tenho
-    //que falar qual a tabela
-    //joinColuns define quais as colunas desta classe Trabalho são referenciadas na tabela de ligação
-    //inverseJoinColumn define quais colunas da outra tabela (Aluno) são referenciadas na tabela de ligação
-    //@ManyToMany(fetch = FetchType.EAGER)
-    //@JoinTable(name = "ent_entrega",
-    //           joinColumns = {@JoinColumn(name = "tra_id") },
-    //           inverseJoinColumns = {@JoinColumn(name = "alu_id")})
-    //private Set<Aluno> alunos;
-    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "alugavel")
+    private Set<Contrato> contratosDeAluguel;
+
+
     // CONSTRUTORES
     public Alugavel(){}
     public Alugavel( String         descr
