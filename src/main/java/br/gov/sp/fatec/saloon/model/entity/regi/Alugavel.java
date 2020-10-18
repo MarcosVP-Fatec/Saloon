@@ -27,12 +27,23 @@ public class Alugavel extends GeneratorId {
     //A chave estrangeira não se mapeia diretamente
     //x to y => x é da entidade atual.
     //No JoinColumn definir o nome da coluna fk desta entidade.
-    @ManyToOne(fetch = FetchType.EAGER)    //LAZY porque o proprietário tem muitas colunas
+    @ManyToOne(fetch = FetchType.EAGER)    
     @JoinColumn(name = "alu_pro_id")  private Proprietario proprietario;
 
     @ManyToOne(fetch = FetchType.EAGER)    //EAGER porque a tabela de tipo contém apenas a descrição
     @JoinColumn(name = "alu_alt_id")  private AlugavelTipo alugavelTipo;
 
+    //Um Alugável pode ter vários contratos e um contrato só pode ter um alugável
+    //Ao inves de informar qual coluna vai me ajudar a buscar os alunos eu tenho
+    //que falar qual a tabela
+    //joinColuns define quais as colunas desta classe Trabalho são referenciadas na tabela de ligação
+    //inverseJoinColumn define quais colunas da outra tabela (Aluno) são referenciadas na tabela de ligação
+    //@ManyToMany(fetch = FetchType.EAGER)
+    //@JoinTable(name = "ent_entrega",
+    //           joinColumns = {@JoinColumn(name = "tra_id") },
+    //           inverseJoinColumns = {@JoinColumn(name = "alu_id")})
+    //private Set<Aluno> alunos;
+    
     // CONSTRUTORES
     public Alugavel(){}
     public Alugavel( String         descr

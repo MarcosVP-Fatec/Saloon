@@ -75,7 +75,7 @@ public class ClienteDaoJpa implements ClienteDao {
     @Override
     public Cliente buscarCliente(String cpf) {
         TypedQuery<Cliente> query = 
-        em.createQuery("select c from Cliente c where c.nome c.cpf_cnpj = :cpf_cnpj",Cliente.class);
+        em.createQuery("select c from Cliente c where c.cpf_cnpj = :cpf_cnpj",Cliente.class);
         return query.setParameter("cpf_cnpj", cpf).getSingleResult();
     }
 

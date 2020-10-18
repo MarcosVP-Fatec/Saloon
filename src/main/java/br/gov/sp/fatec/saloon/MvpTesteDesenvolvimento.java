@@ -10,6 +10,7 @@ package br.gov.sp.fatec.saloon;
  */
 
 import java.text.ParseException;
+import java.util.HashSet;
 
 import javax.persistence.EntityManager;
 
@@ -21,7 +22,11 @@ import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
 import br.gov.sp.fatec.saloon.model.dao.interf.stat.AlugavelTipoDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.stat.ContratoMotivoDao;
+import br.gov.sp.fatec.saloon.model.dao.interf.stat.MesAnoDao;
 import br.gov.sp.fatec.saloon.model.dao.stat.AlugavelTipoDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.stat.ContratoMotivoDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.stat.MesAnoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ClienteDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
@@ -29,6 +34,8 @@ import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
+import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
@@ -51,6 +58,7 @@ public class MvpTesteDesenvolvimento {
         ParceiroDao parceiroDao = new ParceiroDaoJpa(em);
         UsuarioDadosPessoais usuario;
         ClienteDao clienteDao = new ClienteDaoJpa(em);
+        ContratoMotivoDao contratoMotivoDao = new ContratoMotivoDaoJpa(em);
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
@@ -146,29 +154,61 @@ public class MvpTesteDesenvolvimento {
                                      , 450.00 );
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ########################################", LARGURA, '#'));
-        //clienteDao.cadastrarCliente("55555555555", "Cristina Regis Perrerrá","12", "98765431");
 
-/*                                     
+        clienteDao.cadastrarCliente("55555555555", "Cristina Regis Perrerrá","12", "98765431");
+        clienteDao.cadastrarCliente("44444444444", "Maria das Dores"        ,"12", "98765422");
+        clienteDao.cadastrarCliente("66666666666", "João José"              ,"11", "98865411");
+        clienteDao.cadastrarCliente("99999999999", "Anacleto Beneditino"    ,"12", "98777777");
+
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTE PARCEIRO ########################################", LARGURA, '#'));
-        Parceiro parceiro = parceiroDao.cadastrarParceiro("TESTE_PARC2"                         //apelido
-                                                         ,"testeparceirotempoario@hotmail.com"  //email
-                                                         ,"pwTP"                                //senha
-                                                         ,"Parceiro Temporário"                 //nome
+        Parceiro parceiro = parceiroDao.cadastrarParceiro("BIFECASSIA"                          //apelido
+                                                         ,"bifecassia@hotmail.com"              //email
+                                                         ,"pwBC"                                //senha
+                                                         ,"Bufe da Cássia"                      //nome
                                                          ,Data.toDate("15/05/1972")             //dtNascimento
                                                          ,"77777777777"                         //
                                                          ,Data.today());
 
+        clienteDao.cadastrarCliente( parceiro.getCpf()          //cpf_cnpj
+                                   , parceiro.getNome()         //nome
+                                   , "12"                       //tel_ddd
+                                   , "987654321"                //tel_numero
+                                   , parceiro);
+
+        System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ATENDIDOS POR UM PARCEIRO ########################################", LARGURA, '#'));
+
+        parceiro = parceiroDao.buscarParceiro("BIFECASSIA");
+        parceiro.setClientes(new HashSet<Cliente>());
+        parceiro.getClientes().add( clienteDao.buscarCliente("44444444444") );
+        parceiro.getClientes().add( clienteDao.buscarCliente("99999999999") );
+
+        System.out.println(Texto.padC("######################################## MOTIVOS DOS CONTRATOS ########################################", LARGURA, '#'));
+        contratoMotivoDao.cadastrarContratoMotivo("Aniversário");
+        contratoMotivoDao.cadastrarContratoMotivo("Bodas");
+        contratoMotivoDao.cadastrarContratoMotivo("Casamento");
+        contratoMotivoDao.cadastrarContratoMotivo("Confraternização");
+        contratoMotivoDao.cadastrarContratoMotivo("Encontro de Amigos(as)");
+
+        System.out.println(Texto.padC("######################################## CADASTRO DE MESES DO ANO ########################################", LARGURA, '#'));
+        MesAnoDao mesAnoDao = new MesAnoDaoJpa(em);
+        mesAnoDao.cadastrarMesAno("01", "Janeiro");
+        mesAnoDao.cadastrarMesAno("02", "Fevereiro");
+        mesAnoDao.cadastrarMesAno("03", "Março");
+        mesAnoDao.cadastrarMesAno("04", "Abril");
+        mesAnoDao.cadastrarMesAno("05", "Maio");
+        mesAnoDao.cadastrarMesAno("06", "Junho");
+        mesAnoDao.cadastrarMesAno("07", "Julho");
+        mesAnoDao.cadastrarMesAno("08", "Agosto");
+        mesAnoDao.cadastrarMesAno("09", "Setembro");
+        mesAnoDao.cadastrarMesAno("10", "Outubro");
+        mesAnoDao.cadastrarMesAno("11", "Novembro");
+        mesAnoDao.cadastrarMesAno("12", "DEZEMBRO");
+
+        MesAno mesAno = mesAnoDao.buscarMesAno("12");
+        mesAno.setDescr("Dezembro");
+        mesAnoDao.salvarMesAno(mesAno);
+
         
-        Cliente cliente = clienteDao.cadastrarCliente(parceiro.getCpf(), parceiro.getNome(), "12", "998765432", parceiro);
-        System.out.println(">>>>> Cliente ID  " + cliente.getId() );*/
-/*
-        System.out.println(">>>>> REMOVENDO PARCEIRO " );
-        parceiroDao.removerParceiro(
-            parceiroDao.buscarParceiro("TESTE_PARC2").getId());
-        //System.out.println(">>>>> Parceiro " + parceiroDao.buscarParceiro("TESTE_PARC2").getId());
-*/
-
-
 
 
 
