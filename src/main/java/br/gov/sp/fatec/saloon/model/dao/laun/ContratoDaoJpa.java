@@ -88,12 +88,16 @@ public class ContratoDaoJpa implements ContratoDao {
 
     @Override
     public List<Contrato> buscarContrato(Alugavel alugavel, Cliente cliente) {
-        String jpql = "select c from Contrato c " +
-                      "      inner join c.cliente d " +
+        String jpql = "select c from Contrato      c " +
+                      "      inner join c.cliente  d " +
                       "      inner join c.alugavel a " +
-                      " where d.cpf_cnpj = :cpf_cnpj and a.alugavel.id = :id order by c.data";
+                      " where d.cpf_cnpj = :cpf_cnpj " +
+                      "   and a.id       = :id       " +
+                      " order by c.data              ";
         TypedQuery<Contrato> query = em.createQuery(jpql, Contrato.class);
-        return query.setParameter("cpf_cnpj", cliente.getCpf_cnpj()).getResultList();
+        query.setParameter("cpf_cnpj", cliente.getCpf_cnpj());
+        query.setParameter("id", alugavel.getId());
+        return query.getResultList();
     }
 
     @Override

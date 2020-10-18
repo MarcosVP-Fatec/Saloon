@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 
 import java.text.ParseException;
 import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
@@ -40,6 +41,7 @@ import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
 import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
+import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
 import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
 import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
@@ -227,8 +229,16 @@ public class MvpTesteDesenvolvimento {
                                      , new BigDecimal(100.00)
                                      , contratoMotivo);
 
-        cliente = clienteDao.buscarCliente("44444444444");
         alugavel = alugavelDao.buscarAlugavel(2L);
+        contratoDao.cadastrarContrato( cliente
+                                     , alugavel
+                                     , Data.toDate("10/01/2021")
+                                     , new BigDecimal(100.00)
+                                     , contratoMotivo
+                                     , "Joãozinho"
+                                     , 5
+                                     , mesAnoDao.buscarMesAno("01"));
+
         contratoDao.cadastrarContrato( cliente
                                      , alugavel
                                      , Data.toDate("15/11/2020")
@@ -238,6 +248,13 @@ public class MvpTesteDesenvolvimento {
                                      , 10
                                      , mesAnoDao.buscarMesAno("11"));
 
+        System.out.println(Texto.padC("######################################## CONTRATOS DE UM DETERNIMADO CLIENTE E DETERMINADO ALUGAVEL ########################################", LARGURA, '#'));
+
+        List<Contrato> contratos = contratoDao.buscarContrato(alugavel, cliente);
+        System.out.println("Contratos do Cliente " + cliente.getNome() + " que alugou o " + alugavel.getDescr());
+        for (Contrato ctr : contratos) {
+            System.out.println("Data : " + ctr.getData().toGMTString() + " " );
+        }
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
