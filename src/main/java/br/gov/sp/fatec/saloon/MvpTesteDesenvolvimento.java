@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  */
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
 
@@ -253,7 +254,7 @@ public class MvpTesteDesenvolvimento {
         List<Contrato> contratos = contratoDao.buscarContrato(alugavel, cliente);
         System.out.println("Contratos do Cliente " + cliente.getNome() + " que alugou o " + alugavel.getDescr());
         for (Contrato ctr : contratos) {
-            System.out.println("Data : " + ctr.getData().toGMTString() + " " );
+            System.out.println("Data : " + (new SimpleDateFormat("dd.MM.yyyy").format(ctr.getData())) + " " );
         }
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
