@@ -4,6 +4,7 @@
 
 ## Professores:  
 
+   **Emanuel Mineda Carneiro** - *Laboratório de Desenvolvimento de Banco de Dados IV* 
    **Giuliano Araujo Bertoti** - *Padrões de Projetos*  
 
 ---------------------------------------------------------------
