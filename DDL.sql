@@ -1,7 +1,3 @@
--- Exclui tudo para recriar
-drop schema if exists saloon;
-drop user if exists 'saloonsys'@'localhost';
-
 -- cria schema e usuário
 create schema saloon;
 use saloon;
