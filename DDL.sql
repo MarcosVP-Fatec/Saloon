@@ -1,7 +1,7 @@
 -- cria schema e usuário
-create schema saloon;
+create schema if not exists saloon;
 use saloon;
-create user 'saloonsys'@'localhost' identified by 'M@triz';
+create user if not exists 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
 -- ------------------------------------------------------------------------
