@@ -3,5 +3,44 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- MAPEAMENTO CLASSES -->
+        <!-- MAIN -->
+                <servlet>
+                    <servlet-name>mainServlet</servlet-name>
+                    <servlet-class>br.gov.sp.fatec.saloon.controller.MainController</servlet-class>
+                </servlet>
+
+        <!-- PROPRIETARIO-->    
+                <servlet>
+                    <servlet-name>proprietarioServlet</servlet-name>
+                    <servlet-class>br.gov.sp.fatec.saloon.controller.entity.regi.ProprietarioController</servlet-class>
+                </servlet>
+
+        <!-- USUÁRIO DADOS PESSOAIS -->
+                <servlet>
+                    <servlet-name>usuarioDadosPessoaisServlet</servlet-name>
+                    <servlet-class>br.gov.sp.fatec.saloon.controller.entity.regi.UsuarioDadosPessoaisController</servlet-class>
+                </servlet>
+
+        <!-- ============================================================================================================ -->
+        <!-- MAPEAMENTO URL -->
+        <!-- MAIN -->
+                <servlet-mapping>
+                    <servlet-name>mainServlet</servlet-name>
+                    <url-pattern>/</url-pattern> <!-- Por responder dentro do / deletamos o index.jsp -->
+                </servlet-mapping>
+
+        <!-- PROPRIETÁRIO-->        
+                <servlet-mapping>
+                    <servlet-name>proprietarioServlet</servlet-name>
+                    <url-pattern>/proprietario</url-pattern>
+                </servlet-mapping>
+
+        <!-- USUÁRIO DADOS PESSOAIS -->
+                <servlet-mapping>
+                    <servlet-name>usuarioDadosPessoaisServlet</servlet-name>
+                    <url-pattern>/usuariodadospessoais</url-pattern>
+                </servlet-mapping>
 </web-app>

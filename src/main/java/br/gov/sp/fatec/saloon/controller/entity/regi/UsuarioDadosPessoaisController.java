@@ -10,16 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
-import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
+import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 
 /**
- * Controler da entidade Proprietário
- * Este proprietário também adiciona um usuário.
+ * Controler da entidade UsuarioGeral (Todos os dados da tabela de usuário)
  */
-public class ProprietarioController extends HttpServlet {
+public class UsuarioDadosPessoaisController extends HttpServlet {
 
-    private static final long serialVersionUID = 3511119533886767378L;
+    private static final long serialVersionUID = 3526619276860718040L;
 
     /**
      * doGet 1) Recupera o parâmetro id do request 2) Recupera a entidade deste id
@@ -31,12 +30,12 @@ public class ProprietarioController extends HttpServlet {
         // Recupera o parâmetro id (de proprietario?id=<valor>)
         Long id = Long.valueOf(req.getParameter("id"));
 
-        // Busca o proprietário com o id
-        Proprietario proprietario = new ProprietarioDaoJpa().buscarProprietario(id);
+        // Busca o usuario com o id
+        UsuarioDadosPessoais usuario = new UsuarioDadosPessoaisDaoJpa().buscarUsuarioDadosPessoais(id);
 
         // Usamos o Jackson para transformar o objeto em um JSON (String)
         ObjectMapper mapper = new ObjectMapper();
-        String proprietarioJson = mapper.writeValueAsString(proprietario);
+        String usuarioDadosPessoaisJson = mapper.writeValueAsString(usuario);
 
         // Formatação da Resposta
         resp.setContentType("application/json");
@@ -44,7 +43,7 @@ public class ProprietarioController extends HttpServlet {
         resp.setStatus(200);
 
         PrintWriter out = resp.getWriter();
-        out.print(proprietarioJson);
+        out.print(usuarioDadosPessoaisJson);
         out.flush();
 
     }
@@ -62,27 +61,27 @@ public class ProprietarioController extends HttpServlet {
         
         // Recuperamos o corpo da requisição e transformamos o JSON em objeto
         ObjectMapper mapper = new ObjectMapper();
-        Proprietario proprietario = mapper.readValue(req.getReader(), Proprietario.class);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> req.getReader()");
+        UsuarioDadosPessoais usuario = mapper.readValue(req.getReader(), UsuarioDadosPessoais.class);
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> UsuarioDadosPessoais -> req.getReader()");
         System.out.println(req.getReader());
 
         // Salvamos no Banco de Dados
-        new ProprietarioDaoJpa().salvarProprietario(proprietario);
+        new UsuarioDadosPessoaisDaoJpa().salvarUsuarioDadosPessoais(usuario);
 
         // Retornamos o registro gerado formatando a resposta
-        String proprietarioJson = mapper.writeValueAsString(proprietario);
+        String usuarioDadosPessoaisJson = mapper.writeValueAsString(usuario);
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         // O código 201 requer que retornemos um header de Location
-        resp.setStatus(201);
-        String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id=" 
-            + proprietario.getId();
+        resp.setStatus(201); //CREATED
+        String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/usuariodadospessoais?id=" 
+            + usuario.getId();
         System.out.println(">>>>>> LOCATION: " + location);    
 
         resp. setHeader("Location", location);
         PrintWriter out = resp.getWriter();
-        out.print(proprietarioJson);
+        out.print(usuarioDadosPessoaisJson);
         out.flush();
     }
-
+    
 }

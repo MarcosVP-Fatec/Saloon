@@ -10,6 +10,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @Table(name = "pro_proprietario")
@@ -24,6 +26,7 @@ public class Proprietario extends UsuarioGeral {
     //O Hibernate não trabalha bem com List
     //LAZY porque não quero carregar todos os Alugaveis do proprietário
     //
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
     private Set<Alugavel> alugaveis;
 
