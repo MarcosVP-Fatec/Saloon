@@ -1,6 +1,6 @@
 ports:
 - port: 8080
 tasks:
-  - init: mysql < DDL.sql
+  - init: mysql < Reset.sql
     command: mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.saloon.App"
 image: gitpod/workspace-mysql
