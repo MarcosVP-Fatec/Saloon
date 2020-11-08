@@ -3,7 +3,6 @@ package br.gov.sp.fatec.saloon.model.dao;
 import java.util.Date;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
@@ -21,6 +20,10 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
 
     @Override
     public Proprietario salvarProprietario(Proprietario proprietario) {
+            em.getTransaction().begin();
+            Generico.salvarSemCommit( proprietario , em );
+            em.getTransaction().commit();
+/*
         try {
             em.getTransaction().begin();
             Generico.salvarSemCommit( proprietario , em );
@@ -29,7 +32,7 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
             e.printStackTrace();
             em.getTransaction().rollback();
             throw new RuntimeException("Erro ao salvar o Proprietário" + (proprietario.getId()==null ? "!" : " " + proprietario.getNome() + "!"), e);
-        }
+        }*/
         return proprietario;
     }
 
