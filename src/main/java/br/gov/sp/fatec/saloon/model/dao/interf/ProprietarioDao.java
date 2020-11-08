@@ -16,6 +16,13 @@ public interface ProprietarioDao {
                                              ,String cpf
                                              ,Date dtInicio);
 
+    public Proprietario cadastrarProprietario(String apelido
+                                             ,String email
+                                             ,String senha
+                                             ,String nome
+                                             ,Date dtNascimento
+                                             ,String cpf);
+
     public Proprietario buscarProprietario(Long id);
 
     public Proprietario buscarProprietario(String apelido );

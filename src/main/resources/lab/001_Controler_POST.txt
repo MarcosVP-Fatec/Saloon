@@ -1,9 +1,0 @@
-        proprietarioDao.salvarProprietario
-        (new Proprietario("BETÃO"
-                        , "alberto.salas@terra.com.br"
-                        , "pwAS"
-                        , "Alberto Salasar"
-                        , Data.toDate("25/06/1970")
-                        , "33333333333")
-            
-        );

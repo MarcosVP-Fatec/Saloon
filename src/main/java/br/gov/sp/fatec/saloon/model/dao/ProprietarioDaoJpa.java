@@ -9,6 +9,7 @@ import javax.persistence.TypedQuery;
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+import br.gov.sp.fatec.saloon.model.tool.Data;
 
 public class ProprietarioDaoJpa implements ProprietarioDao {
 
@@ -50,6 +51,23 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
         prop.setDtInicio( dtInicio );                                                
 
         return salvarProprietario( prop );
+    }
+
+    @Override
+    public Proprietario cadastrarProprietario(String apelido
+                                            , String email
+                                            , String senha
+                                            , String nome
+                                            , Date dtNascimento
+                                            , String cpf) {
+
+        return cadastrarProprietario( apelido
+                                    , email
+                                    , senha
+                                    , nome
+                                    , dtNascimento
+                                    , cpf
+                                    , Data.today());
     }
 
     @Override
