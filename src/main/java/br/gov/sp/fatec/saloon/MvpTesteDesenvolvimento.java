@@ -76,25 +76,29 @@ public class MvpTesteDesenvolvimento {
 
         System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ISOLADO ########################################", LARGURA, '#'));
 
-        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
-        (new UsuarioDadosPessoais("MVP"
-                                 ,"mvp@fatec.sp.gov.br"
-                                 ,"pwMVP"
-                                 ,"Marcos Vinicio Pereira"
-                                 ,Data.toDate("12/04/1969")
-                                 ,"11111111111"
-                                 )
-        );
+        if (!usuarioDadosPessoaisDao.existe("MVP")) {
+            usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
+            (new UsuarioDadosPessoais("MVP"
+                                    ,"mvp@fatec.sp.gov.br"
+                                    ,"pwMVP"
+                                    ,"Marcos Vinicio Pereira"
+                                    ,Data.toDate("12/04/1969")
+                                    ,"11111111111"
+                                    )
+            );
+        } 
 
-        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
-        (new UsuarioDadosPessoais("RSD"
-                                 ,"rsd@fatec.sp.gov.br"
-                                 ,"pwRSD"
-                                 ,"Raian Silva Damaceno"
-                                 ,Data.toDate("12/04/1995")
-                                 ,"22222222222"
-                                 )
-        );
+        if (!usuarioDadosPessoaisDao.existe("RSD")) {
+            usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
+            (new UsuarioDadosPessoais("RSD"
+                                    ,"rsd@fatec.sp.gov.br"
+                                    ,"pwRSD"
+                                    ,"Raian Silva Damaceno"
+                                    ,Data.toDate("12/04/1995")
+                                    ,"22222222222"
+                                    )
+            );
+        }
 
         // Faz alteração da senha em um dos usuários
         usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("MVP");

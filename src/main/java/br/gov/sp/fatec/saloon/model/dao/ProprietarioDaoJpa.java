@@ -75,26 +75,44 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
 
     @Override
     public Proprietario buscarProprietario(Long id) {
+        Proprietario retorno;
         String jpql = "select p from Proprietario p where p.id = :id";
         TypedQuery<Proprietario> query = em.createQuery(jpql, Proprietario.class);
         query.setParameter("id", id);
-        return query.getSingleResult();    
+        try {
+            retorno = query.getSingleResult();    
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
     public Proprietario buscarProprietario(String apelido) {
+        Proprietario retorno;
         String jpql = "select p from Proprietario p where p.apelido = :apelido";
         TypedQuery<Proprietario> query = em.createQuery(jpql, Proprietario.class);
         query.setParameter("apelido", apelido);
-        return query.getSingleResult();    
+        try {
+            retorno = query.getSingleResult();    
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
     public Proprietario buscarProprietarioPorEmail(String email) {
+        Proprietario retorno;
         String jpql = "select p from Proprietario p  where p.email = :email";
         TypedQuery<Proprietario> query = em.createQuery(jpql, Proprietario.class);
         query.setParameter("email", email);
-        return query.getSingleResult();    
+        try {
+            retorno = query.getSingleResult();    
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
@@ -111,6 +129,21 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
         em.remove(proprietario);
         em.getTransaction().commit();
         return true;
+    }
+
+    @Override
+    public boolean existe(Long id) {
+        return buscarProprietario(id) != null;
+    }
+
+    @Override
+    public boolean existe(String apelido) {
+        return buscarProprietario(apelido) != null;
+    }
+
+    @Override
+    public boolean existeEmail(String email) {
+        return buscarProprietarioPorEmail(email) != null;
     }
     
 }

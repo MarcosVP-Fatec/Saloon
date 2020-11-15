@@ -99,5 +99,20 @@ public class ParceiroDaoJpa implements ParceiroDao {
         em.getTransaction().commit();
         return true;
     }
+
+    @Override
+    public boolean existe(Long id) {
+        return buscarParceiro(id) != null;
+    }
+
+    @Override
+    public boolean existe(String apelido) {
+        return buscarParceiro(apelido) != null;
+    }
+
+    @Override
+    public boolean existeEmail(String email) {
+        return buscarParceiroPorEmail(email) != null;
+    }
     
 }

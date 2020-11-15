@@ -35,4 +35,8 @@ public interface ClienteDao {
 
     public boolean removerCliente(Cliente cliente);
     
+    public boolean existe(Long id);
+
+    public boolean existe(String cpf );
+
 }

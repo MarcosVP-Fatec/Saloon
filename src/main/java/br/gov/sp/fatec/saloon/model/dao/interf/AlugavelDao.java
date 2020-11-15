@@ -33,9 +33,10 @@ public interface AlugavelDao {
     public void consoleAlugavelPorProprietario(String apelidoProprietario);
     public void consoleAlugavelPorProprietario(Proprietario proprietario);
 
-
     public boolean removerAlugavel(Long id);
 
     public boolean removerAlugavel(Alugavel alugavel);
+
+    public boolean existe(Long id);
 
 }

@@ -68,15 +68,26 @@ public class ClienteDaoJpa implements ClienteDao {
 
     @Override
     public Cliente buscarCliente(Long id) {
+        Cliente retorno;
         TypedQuery<Cliente> query = em.createQuery("select c from Cliente c where c.id = :id", Cliente.class);
-        return query.setParameter("id", id).getSingleResult(); 
+        try {
+            retorno = query.setParameter("id", id).getSingleResult(); 
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
     public Cliente buscarCliente(String cpf) {
-        TypedQuery<Cliente> query = 
-        em.createQuery("select c from Cliente c where c.cpf_cnpj = :cpf_cnpj",Cliente.class);
-        return query.setParameter("cpf_cnpj", cpf).getSingleResult();
+        Cliente retorno;
+        TypedQuery<Cliente> query = em.createQuery("select c from Cliente c where c.cpf_cnpj = :cpf_cnpj",Cliente.class);
+        try {
+            retorno = query.setParameter("cpf_cnpj", cpf).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
@@ -107,6 +118,16 @@ public class ClienteDaoJpa implements ClienteDao {
         em.remove(cliente);
         em.getTransaction().rollback();        
         return true;
+    }
+
+    @Override
+    public boolean existe(Long id) {
+        return buscarCliente(id) != null;
+    }
+
+    @Override
+    public boolean existe(String cpf) {
+        return buscarCliente(cpf) != null;
     }
 
 }

@@ -66,9 +66,15 @@ public class AlugavelDaoJpa implements AlugavelDao {
 
     @Override
     public Alugavel buscarAlugavel(Long id) {
+        Alugavel retorno;
         String jpql = "select a from Alugavel a where a.id = :id";
         TypedQuery<Alugavel> query = em.createQuery(jpql, Alugavel.class);
-        return query.setParameter("id", id).getSingleResult(); 
+        try {
+            retorno = query.setParameter("id", id).getSingleResult(); 
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
@@ -105,6 +111,11 @@ public class AlugavelDaoJpa implements AlugavelDao {
         System.out.println(Texto.padC(" LOG ALUGAVEL POR PROPRIETÁRIO ", 100,"#"));
         List<Alugavel> alugavel = buscarAlugavel(proprietario.getApelido());
         alugavel.forEach(a -> System.out.println(a.getDescr() + " capacidade " + a.getCapacidade() + " valor " + a.getValor()));
+    }
+
+    @Override
+    public boolean existe(Long id) {
+        return buscarAlugavel(id) != null;
     }
     
 }

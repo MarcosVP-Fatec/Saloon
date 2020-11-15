@@ -52,26 +52,44 @@ public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
 
     @Override
     public UsuarioDadosPessoais buscarUsuarioDadosPessoais(Long id) {
+        UsuarioDadosPessoais retorno;
         String jpql = "select u from UsuarioDadosPessoais u where u.id = :id";
         TypedQuery<UsuarioDadosPessoais> query = em.createQuery(jpql, UsuarioDadosPessoais.class);
         query.setParameter("id", id);
-        return query.getSingleResult();    
+        try {
+            retorno = query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;    
     }
 
     @Override
     public UsuarioDadosPessoais buscarUsuarioDadosPessoais(String apelido) {
+        UsuarioDadosPessoais retorno;
         String jpql = "select u from UsuarioDadosPessoais u where u.apelido = :apelido";
         TypedQuery<UsuarioDadosPessoais> query = em.createQuery(jpql, UsuarioDadosPessoais.class);
-        query.setParameter("apelido", apelido);
-        return query.getSingleResult();    
+        query.setParameter("apelido", apelido);    
+        try {
+            retorno = query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
     public UsuarioDadosPessoais buscarUsuarioDadosPessoaisPorEmail(String email) {
+        UsuarioDadosPessoais retorno;
         String jpql = "select u from UsuarioDadosPessoais u where u.email = :email";
         TypedQuery<UsuarioDadosPessoais> query = em.createQuery(jpql, UsuarioDadosPessoais.class);
         query.setParameter("email", email);
-        return query.getSingleResult();    
+        try {
+            retorno = query.getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
@@ -88,6 +106,21 @@ public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
         em.remove(usuarioDadosPessoais);
         em.getTransaction().commit();
         return true;
+    }
+
+    @Override
+    public boolean existe(Long id) {
+        return buscarUsuarioDadosPessoais(id) != null;
+    }
+
+    @Override
+    public boolean existe(String apelido) {
+        return buscarUsuarioDadosPessoais( apelido ) != null;
+    }
+
+    @Override
+    public boolean existeEmail(String email) {
+        return buscarUsuarioDadosPessoaisPorEmail(email) != null;
     }
 
 }

@@ -33,4 +33,10 @@ public interface ProprietarioDao {
 
     public boolean removerProprietario(Proprietario proprietario);
     
+    public boolean existe(Long id);
+
+    public boolean existe(String apelido );
+
+    public boolean existeEmail(String email);
+
 }

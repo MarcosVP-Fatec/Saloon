@@ -26,6 +26,11 @@ public interface ParceiroDao {
 
     public boolean removerParceiro(Parceiro parceiro);
     
+    public boolean existe(Long id);
+
+    public boolean existe(String apelido );
+
+    public boolean existeEmail(String email);
     
 }
 
