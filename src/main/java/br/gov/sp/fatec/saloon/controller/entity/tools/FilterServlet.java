@@ -36,7 +36,7 @@ public class FilterServlet implements Filter {
 
         // Todo código aqui é executado no retorno
         resp.addHeader("Out", ">>>>>>>>>>>>>>>>>>>>>> Eu passei pelo filtro na saída!");    //Console
-        this.context.log("Resposta enviada!");                                              //Console
+        this.context.log("[FILTER SERVLET] >>>>>>> Resposta enviada!");                     //Console
     }
 
     @Override

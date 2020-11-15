@@ -11,15 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
 /**
- * Controler da entidade Proprietário
- * Este proprietário também adiciona um usuário.
+ * Controler da entidade Proprietário Este proprietário também adiciona um
+ * usuário.
  */
 public class ProprietarioController extends HttpServlet {
 
     private static final long serialVersionUID = 3511119533886767378L;
+    private int numeroStatus = 200;
 
     /**
      * doGet 1) Recupera o parâmetro id do request 2) Recupera a entidade deste id
@@ -27,7 +29,7 @@ public class ProprietarioController extends HttpServlet {
      * resposta 5) Retorna
      */
     @Override
-    protected void doGet( HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Recupera o parâmetro id (de proprietario?id=<valor>)
         Long id = Long.valueOf(req.getParameter("id"));
 
@@ -41,7 +43,7 @@ public class ProprietarioController extends HttpServlet {
         // Formatação da Resposta
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.setStatus(200);
+        resp.setStatus(numeroStatus); // 200 para o GET e 204 para o PUT
 
         PrintWriter out = resp.getWriter();
         out.print(proprietarioJson);
@@ -52,14 +54,13 @@ public class ProprietarioController extends HttpServlet {
     /**
      * doPost
      * 
-     * 1) Recupera o corpo da requisição e transforma o JSON em objeto
-     * 2) Salva no banco de dados
-     * 3) Retorna o registro gerado formatando a resposta
-     * 4) O código 201 requer que retorneos um header de Location
+     * 1) Recupera o corpo da requisição e transforma o JSON em objeto 2) Salva no
+     * banco de dados 3) Retorna o registro gerado formatando a resposta 4) O código
+     * 201 requer que retorneos um header de Location
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         // Recuperamos o corpo da requisição e transformamos o JSON em objeto
         ObjectMapper mapper = new ObjectMapper();
         Proprietario proprietario = mapper.readValue(req.getReader(), Proprietario.class);
@@ -75,13 +76,53 @@ public class ProprietarioController extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
         // O código 201 requer que retornemos um header de Location
         resp.setStatus(201);
-        String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id=" 
-            + proprietario.getId();
-        System.out.println(">>>>>> LOCATION: " + location);    
+        String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id="
+                + proprietario.getId();
+        System.out.println(">>>>>> LOCATION: " + location);
 
-        resp. setHeader("Location", location);
+        resp.setHeader("Location", location);
         PrintWriter out = resp.getWriter();
         out.print(proprietarioJson);
+        out.flush();
+    }
+
+    /**
+     * doPut
+     */
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        this.numeroStatus = 204;
+        doGet(req, resp);
+        this.numeroStatus = 200;
+    }
+
+    /**
+     * doDelete
+     */
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        // Recupera o parâmetro id (de proprietario?id=<valor>)
+        Long id = Long.valueOf(req.getParameter("id"));
+
+        // Busca o proprietário com o id
+        ProprietarioDao proprietarioDao = new ProprietarioDaoJpa();
+        Proprietario proprietario = proprietarioDao.buscarProprietario(id);
+
+        if (proprietario != null) {
+
+            try {
+
+                proprietarioDao.removerProprietario(proprietario);
+                resp.setStatus(204); // Formatação da Resposta 
+
+            } catch (Exception e) {
+                resp.setStatus(404); // Formatação da Resposta quando ocorreu uma falha
+            }
+
+        }
+
+        PrintWriter out = resp.getWriter();
         out.flush();
     }
 
