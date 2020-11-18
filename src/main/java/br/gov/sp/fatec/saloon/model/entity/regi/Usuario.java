@@ -20,6 +20,7 @@ public abstract class Usuario extends GeneratorId{
     @Column(name = "usu_apelido")           private String  apelido;
     @Column(name = "usu_email")             private String  email;
     @Column(name = "usu_senha")             private String  senha;
+    @Column(name = "usu_administrador")     private String  administrador;
 
     // CONSTRUTORES
     public Usuario(){}
@@ -33,11 +34,13 @@ public abstract class Usuario extends GeneratorId{
     }
 
     // GETTERS AND SETTERS
-    public String getApelido()              { return apelido;           }
-    public void setApelido(String apelido)  { this.apelido = apelido;   }
-    public String getEmail()                { return email;             }
-    public void setEmail(String email)      { this.email = email;       }
-    public String getSenha()                { return senha;             }
-    public void setSenha(String senha)      { this.senha = senha;       }
+    public String getApelido()                          { return apelido;                    }
+    public void setApelido(String apelido)              { this.apelido = apelido;            }
+    public String getEmail()                            { return email;                      }
+    public void setEmail(String email)                  { this.email = email;                }
+    public String getSenha()                            { return senha;                      }
+    public void setSenha(String senha)                  { this.senha = senha;                }
+    public String getAdministrador()                    { return administrador;              }
+    public void setAdministrador(String administrador)  { this.administrador = administrador;}
 
 }

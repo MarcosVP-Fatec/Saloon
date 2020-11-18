@@ -29,6 +29,16 @@ public class UsuarioDadosPessoais extends Usuario {
                                , String senha
                                , String nome
                                , Date dtNascimento
+                               , String cpf
+                               , String administrador) {
+           this(apelido, email, senha, nome, dtNascimento, cpf);
+           setAdministrador(administrador);                        
+    }
+    public UsuarioDadosPessoais( String apelido
+                               , String email
+                               , String senha
+                               , String nome
+                               , Date dtNascimento
                                , String cpf) {
 
         setApelido(apelido);

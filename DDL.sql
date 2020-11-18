@@ -17,6 +17,7 @@ create table usu_usuario (
     , usu_nome              varchar(80)     not null
     , usu_dt_nascimento     date            not null
     , usu_cpf_cnpj          varchar(14)     not null
+    , usu_administrador     varchar(1)
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , _alt_usua             bigint          
@@ -29,8 +30,8 @@ create table usu_usuario (
 -- ------------------------------------------------------------------------
 -- Cadastra o usuário administrador inicial necessário para usar o sistema
 -- ------------------------------------------------------------------------
-insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj) 
-                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111' );
+insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj,usu_administrador) 
+                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111','S' );
 
 update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 
