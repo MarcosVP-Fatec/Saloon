@@ -31,7 +31,10 @@ public class Proprietario extends UsuarioGeral {
     private Set<Alugavel> alugaveis;
 
     // CONSTRUTORES
-    public Proprietario(){ setDtInicio(); }
+    public Proprietario(){ 
+        setDtInicio();
+        setUsuarioNivel(2L);
+    }
     public Proprietario(String apelido
                        ,String email
                        ,String senha

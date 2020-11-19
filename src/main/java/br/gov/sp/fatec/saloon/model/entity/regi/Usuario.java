@@ -36,13 +36,13 @@ public abstract class Usuario extends GeneratorId{
     }
 
     // GETTERS AND SETTERS
-    public String getApelido()                          { return apelido;                    }
-    public void setApelido(String apelido)              { this.apelido = apelido;            }
-    public String getEmail()                            { return email;                      }
-    public void setEmail(String email)                  { this.email = email;                }
-    public String getSenha()                            { return senha;                      }
-    public void setSenha(String senha)                  { this.senha = senha;                }
-    public Long getUsuarioNivel(   )                    { return usuarioNivel;               }
-    public void setUsuarioNivel(Long usuarioNivel)      { this.usuarioNivel = usuarioNivel;  }
+    public String getApelido()                          { return apelido;                       }
+    public void setApelido(String apelido)              { this.apelido = apelido.toUpperCase(); }
+    public String getEmail()                            { return email;                         }
+    public void setEmail(String email)                  { this.email = email;                   }
+    public String getSenha()                            { return senha;                         }
+    public void setSenha(String senha)                  { this.senha = senha;                   }
+    public Long getUsuarioNivel(   )                    { return usuarioNivel;                  }
+    public void setUsuarioNivel(Long usuarioNivel)      { this.usuarioNivel = usuarioNivel;     }
 
 }

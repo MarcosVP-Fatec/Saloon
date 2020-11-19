@@ -1,6 +1,6 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
-import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
+import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 
 public class UsuarioLogado {
     
@@ -9,7 +9,7 @@ public class UsuarioLogado {
 
     //Atributos que serão instanciados
     //protected Long id;
-    protected Usuario usuario;
+    protected UsuarioDadosPessoais usuario;
 
     /**
      * O construtor é privado, portanto esta classe não pode ser instanciada
@@ -27,7 +27,7 @@ public class UsuarioLogado {
         return instance;
     }
 
-    public static void logar( Usuario usuario ) {
+    public static void logar( UsuarioDadosPessoais usuario ) {
         if (getInstance().usuario == null ) getInstance().usuario = usuario; 
     }
 
@@ -43,4 +43,8 @@ public class UsuarioLogado {
         return getInstance().usuario.getId();
     }
 
+    public static UsuarioDadosPessoais getUsuarioLogado(){
+        if (getInstance().usuario == null) return null;
+        return getInstance().usuario;
+    }
 }

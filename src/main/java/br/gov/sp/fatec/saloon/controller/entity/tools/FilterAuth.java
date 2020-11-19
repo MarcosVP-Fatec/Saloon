@@ -16,17 +16,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
-import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
+import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
 public class FilterAuth implements Filter {
 
-    private ServletContext context;
-    private Usuario usuario;
-    private String username = "admin";
-    private String password = "password_dificil";
-    private String realm = "PROTECTED";
+    private ServletContext          context;
+    private UsuarioDadosPessoais    usuario;
+    private String                  username = "admin";
+    private String                  password = "password_dificil";
+    private String                  realm = "PROTECTED";
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -101,7 +101,7 @@ public class FilterAuth implements Filter {
                     // ###########################################################################
                     usuario = new UsuarioDadosPessoaisDaoJpa().buscarUsuarioDadosPessoais(_username);
                     if (usuario == null) {
-                        this.context.log("[AUTH] Usuário ou senha não cadastrados = " + credentials);
+                        this.context.log("[AUTH] Usuário não cadastrados = " + credentials);
                         unauthorized(response); // Este comando exige nova digitação do login.
                         return;
                     }
@@ -113,8 +113,8 @@ public class FilterAuth implements Filter {
                     // Se nao bate com configuração retorna erro
                     // ---------------------------------------------------------------
                     if (!username.equals(_username) || !password.equals(_password)) {
-                        unauthorized(response, "Usuário ou senha não cadastrados!");
-                        this.context.log("[AUTH] Usuário ou senha não cadastrados = " + credentials);
+                        unauthorized(response, "Usuário ou senha inválidos!");
+                        this.context.log("[AUTH] Usuário ou senha inválidos = " + credentials);
                         return;
                     }
 

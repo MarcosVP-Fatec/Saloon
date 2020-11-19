@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
 /**
  * Controler da entidade Proprietário Este proprietário também adiciona um
@@ -91,6 +92,18 @@ public class ProprietarioController extends HttpServlet {
      */
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        
+        //#####################################################################
+        // Se o usuário não for admim não pode alterar
+        //#####################################################################
+        if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
+           resp.setStatus(401); //UNAUTHORIZED
+           PrintWriter out = resp.getWriter();
+           out.print("O usuario nao tem privilegios de administrador para executar esta alteracao!");
+           out.flush();
+           return;     
+        }
+        
         this.numeroStatus = 204;
         doGet(req, resp);
         this.numeroStatus = 200;
@@ -101,6 +114,17 @@ public class ProprietarioController extends HttpServlet {
      */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //#####################################################################
+        // Se o usuário não for admim não pode excluir
+        //#####################################################################
+        if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
+           resp.setStatus(401); //UNAUTHORIZED
+           PrintWriter out = resp.getWriter();
+           out.print("O usuario nao tem privilegios de administrador para executar esta exclusao!");
+           out.flush();
+           return;     
+        }
 
         // Recupera o parâmetro id (de proprietario?id=<valor>)
         Long id = Long.valueOf(req.getParameter("id"));
