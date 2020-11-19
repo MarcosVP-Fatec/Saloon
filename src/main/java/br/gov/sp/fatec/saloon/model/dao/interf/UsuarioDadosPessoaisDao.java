@@ -8,8 +8,13 @@ public interface UsuarioDadosPessoaisDao {
 
     public UsuarioDadosPessoais salvarUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais);
 
-    public UsuarioDadosPessoais cadastrarUsuarioDadosPessoais(String apelido, String email, String senha, String nome,
-            Date dtNascimento, String cpf);
+    public UsuarioDadosPessoais cadastrarUsuarioDadosPessoais(String apelido
+                                                            , String email
+                                                            , String senha
+                                                            , String nome
+                                                            , Date   dtNascimento
+                                                            , String cpf
+                                                            , Long   nivelUsuario);
 
     public UsuarioDadosPessoais buscarUsuarioDadosPessoais(Long id);
 

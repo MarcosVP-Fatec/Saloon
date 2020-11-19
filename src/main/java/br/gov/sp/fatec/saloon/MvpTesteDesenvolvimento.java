@@ -84,7 +84,7 @@ public class MvpTesteDesenvolvimento {
                                     ,"Marcos Vinicio Pereira"
                                     ,Data.toDate("12/04/1969")
                                     ,"11111111111"
-                                    )
+                                    ,1L)
             );
         } 
 
@@ -96,7 +96,7 @@ public class MvpTesteDesenvolvimento {
                                     ,"Raian Silva Damaceno"
                                     ,Data.toDate("12/04/1995")
                                     ,"22222222222"
-                                    )
+                                    ,1L)
             );
         }
 

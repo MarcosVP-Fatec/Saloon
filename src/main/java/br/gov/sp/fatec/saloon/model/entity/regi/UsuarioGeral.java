@@ -27,14 +27,17 @@ public abstract class UsuarioGeral extends GeneratorId {
     @Column(name = "usu_dt_nascimento")     private Date    dtNascimento;
     @Column(name = "usu_cpf_cnpj")          private String  cpf;
 
+    @Column(name = "usu_nivel")             private Long    usuarioNivel;
+
     // Construtores
     public UsuarioGeral(){}
     public UsuarioGeral( String apelido
                        , String email
                        , String senha
                        , String nome
-                       , Date dtNascimento
-                       , String cpf) {
+                       , Date   dtNascimento
+                       , String cpf
+                       , Long   usuarioNivel) {
 
         setApelido(apelido);
         setEmail(email);
@@ -42,6 +45,7 @@ public abstract class UsuarioGeral extends GeneratorId {
         setNome(nome);
         setDtNascimento(dtNascimento);
         setCpf(cpf);
+        setUsuarioNivel(usuarioNivel);
 
     }
 
@@ -59,5 +63,7 @@ public abstract class UsuarioGeral extends GeneratorId {
     public void setDtNascimento(Date dtNascimento)  { this.dtNascimento = dtNascimento;         }
     public String getCpf()                          { return this.cpf;                          }
     public void setCpf(String cpf)                  { if (Validador.cpf(cpf)) this.cpf = cpf;   }
+    public Long getUsuarioNivel()                   { return usuarioNivel;                      }
+    public void setUsuarioNivel(Long usuarioNivel)  { this.usuarioNivel = usuarioNivel;         }
 
 }

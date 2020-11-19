@@ -43,7 +43,8 @@ public class Proprietario extends UsuarioGeral {
               ,senha
               ,nome
               ,dtNascimento
-              ,cpf);
+              ,cpf
+              ,2L);
 
         setDtInicio();
     }
@@ -51,16 +52,17 @@ public class Proprietario extends UsuarioGeral {
                        ,String email
                        ,String senha
                        ,String nome
-                       ,Date dtNascimento
+                       ,Date   dtNascimento
                        ,String cpf
-                       ,Date dtInicio){
+                       ,Date   dtInicio){
 
         super( apelido
               ,email
               ,senha
               ,nome
               ,dtNascimento
-              ,cpf);
+              ,cpf
+              ,2L);
 
         setDtInicio(dtInicio);
 

@@ -47,7 +47,8 @@ public class Parceiro extends UsuarioGeral {
               ,senha
               ,nome
               ,dtNascimento
-              ,cpf);
+              ,cpf
+              ,3L);
 
         setDtInicio();
     }

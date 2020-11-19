@@ -38,15 +38,17 @@ public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
                                                              ,String email
                                                              ,String senha
                                                              ,String nome
-                                                             ,Date dtNascimento
-                                                             ,String cpf) {
+                                                             ,Date   dtNascimento
+                                                             ,String cpf
+                                                             ,Long   nivelUsuario) {
 
         return salvarUsuarioDadosPessoais( new UsuarioDadosPessoais(apelido
                                                                    , email
                                                                    , senha
                                                                    , nome
                                                                    , dtNascimento
-                                                                   , cpf) );
+                                                                   , cpf
+                                                                   , nivelUsuario) );
 
     }
 

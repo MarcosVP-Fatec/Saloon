@@ -28,28 +28,17 @@ public class UsuarioDadosPessoais extends Usuario {
                                , String email
                                , String senha
                                , String nome
-                               , Date dtNascimento
+                               , Date   dtNascimento
                                , String cpf
-                               , String administrador) {
-           this(apelido, email, senha, nome, dtNascimento, cpf);
-           setAdministrador(administrador);                        
-    }
-    public UsuarioDadosPessoais( String apelido
-                               , String email
-                               , String senha
-                               , String nome
-                               , Date dtNascimento
-                               , String cpf) {
+                               , Long   nivelUsuario) {
 
-        setApelido(apelido);
-        setEmail(email);
-        setSenha(senha);
+        super(apelido, email, senha, nivelUsuario);
         setNome(nome);
         setDtNascimento(dtNascimento);
         setCpf(cpf);
+        setUsuarioNivel(nivelUsuario);
 
     }
-
 
     // Getters and Setters
     public String getNome() {
