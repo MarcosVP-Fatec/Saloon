@@ -1,12 +1,15 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
+import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
+
 public class UsuarioLogado {
     
     // Instanciamos a classe dentro dela mesma
-    private static UsuarioLogado usuario;
+    private static UsuarioLogado instance;
 
     //Atributos que serão instanciados
-    protected Long id;
+    //protected Long id;
+    protected Usuario usuario;
 
     /**
      * O construtor é privado, portanto esta classe não pode ser instanciada
@@ -19,25 +22,25 @@ public class UsuarioLogado {
      * e coloca na variável instance.
      * @return instance
      */
-    public static UsuarioLogado getInstance( Long id ) {
-        if (usuario == null) usuario = new UsuarioLogado();
-        usuario.setId(id);
-        return usuario;
-    }
-
     public static UsuarioLogado getInstance() {
-        if (usuario == null) usuario = new UsuarioLogado();
-        return usuario;
+        if (instance == null) instance = new UsuarioLogado();
+        return instance;
     }
 
-    public Long getId() {
-        return this.id;
+    public static void logar( Usuario usuario ) {
+        if (getInstance().usuario == null ) getInstance().usuario = usuario; 
     }
 
-    public void setId( Long id ) {
-        if (this.getId() == null && id != 0){
-            this.id = id;
-        }
+    public static boolean isUsuarioLogado(){
+        return getInstance().usuario != null; 
+    }
+    public static void logOff(){
+        getInstance().usuario = null;
+    }
+
+    public static Long getUsuarioLogadoId(){
+        if (getInstance().usuario == null) return null;
+        return getInstance().usuario.getId();
     }
 
 }

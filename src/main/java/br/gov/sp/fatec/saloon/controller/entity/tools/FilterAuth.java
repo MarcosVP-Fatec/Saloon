@@ -15,20 +15,28 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
+import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
+import br.gov.sp.fatec.saloon.model.tool.Data;
+import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
+
 public class FilterAuth implements Filter {
 
     private ServletContext context;
+    private Usuario usuario;
     private String username = "admin";
     private String password = "password_dificil";
-    private String realm    = "PROTECTED";
+    private String realm = "PROTECTED";
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
 
-        this.context.log("[AUTH] Filtro de autenticação acessado!");
+        this.context.log("[AUTH] Filtro de autenticação acessado (1) às " + Data.time());
         HttpServletRequest request = (HttpServletRequest) req;
+        this.context.log("[AUTH] Filtro de autenticação acessado (2) às " + Data.time());
         HttpServletResponse response = (HttpServletResponse) res;
+        this.context.log("[AUTH] Filtro de autenticação acessado (3) às " + Data.time());
 
         this.context.log(request.toString());
 
@@ -37,6 +45,7 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null) {
+            this.context.log("[AUTH] Filtro de autenticação acessado (Falta Authorization) às " + Data.time());
             unauthorized(response);
             return;
         }
@@ -46,6 +55,7 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         StringTokenizer st = new StringTokenizer(authHeader);
         if (!st.hasMoreTokens()) {
+            this.context.log("[AUTH] Filtro de autenticação acessado (Token não informado) às " + Data.time());
             unauthorized(response);
             return;
         }
@@ -55,10 +65,12 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         String basic = st.nextToken(); // Basic sopadeletrinhas
         if (!basic.equalsIgnoreCase("Basic")) {
+            this.context.log("[AUTH] Filtro de autenticação acessado (Token sem Basic) às " + Data.time());
             unauthorized(response);
             return;
         }
 
+        this.context.log("[AUTH] Extrair as credenciais às " + Data.time());
         // ---------------------------------------------------------------
         // Extrai as credenciais (Base64)
         // ---------------------------------------------------------------
@@ -71,7 +83,7 @@ public class FilterAuth implements Filter {
             // Separa as credenciais em usuário e senha
             // ---------------------------------------------------------------
             Integer posicaoDoDoisPontos = credentials.indexOf(":"); // Localiza o : na string
-            
+
             if (posicaoDoDoisPontos != -1) {
 
                 this.context.log("[AUTH] Entrou no -1");
@@ -79,21 +91,42 @@ public class FilterAuth implements Filter {
                 String _username = credentials.substring(0, posicaoDoDoisPontos).trim();
                 String _password = credentials.substring(posicaoDoDoisPontos + 1).trim(); // Depois dos dois pontos.
 
-                // ---------------------------------------------------------------
-                // Se nao bate com configuração retorna erro
-                // ---------------------------------------------------------------
-                if (!username.equals(_username) || !password.equals(_password)) {
-                    unauthorized(response, "Usuário ou senha não cadastrados!");
-                    this.context.log("[AUTH] Usuário ou senha não cadastrados = " + credentials);
-                    return;
-                }
+                this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password + " x "
+                        + username + ":" + password);
 
-                this.context.log("[AUTH] Usuário e senha autorizados");
+                if (!UsuarioLogado.isUsuarioLogado()) {
+
+                    // ###########################################################################
+                    // Busca o usuário informado no BANCO DE DADOS
+                    // ###########################################################################
+                    usuario = new UsuarioDadosPessoaisDaoJpa().buscarUsuarioDadosPessoais(_username);
+                    if (usuario == null) {
+                        this.context.log("[AUTH] Usuário ou senha não cadastrados = " + credentials);
+                        unauthorized(response); // Este comando exige nova digitação do login.
+                        return;
+                    }
+
+                    username = _username;
+                    password = usuario.getSenha();
+
+                    // ---------------------------------------------------------------
+                    // Se nao bate com configuração retorna erro
+                    // ---------------------------------------------------------------
+                    if (!username.equals(_username) || !password.equals(_password)) {
+                        unauthorized(response, "Usuário ou senha não cadastrados!");
+                        this.context.log("[AUTH] Usuário ou senha não cadastrados = " + credentials);
+                        return;
+                    }
+
+                    UsuarioLogado.logar(usuario);
+                    this.context.log("[AUTH] Usuário e senha autorizados");
+                }
 
                 // ---------------------------------------------------------------
                 // Prossegue com a requisicao
                 // ---------------------------------------------------------------
                 chain.doFilter(req, res);
+                this.context.log("[AUTH] doFilter enviado às " + Data.time());
 
             } else {
 

@@ -24,7 +24,7 @@
         </init-param>
         <init-param>
             <param-name>password</param-name>
-            <param-value>admin</param-value>
+            <param-value>tres</param-value>
         </init-param>
         <init-param>
             <param-name>realm</param-name>

@@ -5,6 +5,26 @@ create user if not exists 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
 -- ------------------------------------------------------------------------
+-- NÍVEL DE USUARIO
+-- 1-Administrador
+-- 2-Proprietário
+-- 3-Parceiro
+-- 4-Cliente
+-- ------------------------------------------------------------------------
+create table niv_usuario(
+      niv_id                bigint unsigned primary key auto_increment
+    , niv_descr             varchar(15)     not null
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+);
+insert into niv_usuario (niv_descr) values ('Administrador');
+insert into niv_usuario (niv_descr) values ('Proprietário');
+insert into niv_usuario (niv_descr) values ('Parceiro');
+insert into niv_usuario (niv_descr) values ('Cliente');
+
+-- ------------------------------------------------------------------------
 -- USUARIO
 -- ------------------------------------------------------------------------
 create table usu_usuario (
@@ -17,7 +37,7 @@ create table usu_usuario (
     , usu_nome              varchar(80)     not null
     , usu_dt_nascimento     date            not null
     , usu_cpf_cnpj          varchar(14)     not null
-    , usu_administrador     varchar(1)
+    , usu_nivel             bigint unsigned not null
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , _alt_usua             bigint          
@@ -25,13 +45,15 @@ create table usu_usuario (
     , usu_cod_nova_senha    bigint  
     , constraint usu_apelido_uk unique (usu_apelido)
     , constraint usu_email_uk unique (usu_email)
+    , constraint usu_nivel_pk foreign key (usu_nivel)
+        references niv_usuario (niv_id)
 );
 
 -- ------------------------------------------------------------------------
 -- Cadastra o usuário administrador inicial necessário para usar o sistema
 -- ------------------------------------------------------------------------
-insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj,usu_administrador) 
-                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111','S' );
+insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj,usu_nivel) 
+                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111',1 );
 
 update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 

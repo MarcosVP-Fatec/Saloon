@@ -2,8 +2,6 @@ package br.gov.sp.fatec.saloon;
 
 import java.text.ParseException;
 
-import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
-
 /**
  * @App Saloon
  *
@@ -18,8 +16,7 @@ public class App {
     {
         
         //Inicia o usuário - Acertar depois
-        UsuarioLogado.getInstance(1L);
-        
+       
         MvpTesteDesenvolvimento.run();
     }
     

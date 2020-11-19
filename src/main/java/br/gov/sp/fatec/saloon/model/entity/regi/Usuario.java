@@ -20,7 +20,7 @@ public abstract class Usuario extends GeneratorId{
     @Column(name = "usu_apelido")           private String  apelido;
     @Column(name = "usu_email")             private String  email;
     @Column(name = "usu_senha")             private String  senha;
-    @Column(name = "usu_administrador")     private String  administrador;
+    @Column(name = "usu_administrador")     private boolean administrador;
 
     // CONSTRUTORES
     public Usuario(){}
@@ -40,7 +40,7 @@ public abstract class Usuario extends GeneratorId{
     public void setEmail(String email)                  { this.email = email;                }
     public String getSenha()                            { return senha;                      }
     public void setSenha(String senha)                  { this.senha = senha;                }
-    public String getAdministrador()                    { return administrador;              }
-    public void setAdministrador(String administrador)  { this.administrador = administrador;}
+    public boolean getAdministrador()                   { return administrador;              }
+    public void setAdministrador(String administrador)  { this.administrador = administrador.equals("S");}
 
 }
