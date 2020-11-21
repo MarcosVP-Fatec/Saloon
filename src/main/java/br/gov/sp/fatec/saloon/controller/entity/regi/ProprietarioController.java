@@ -65,7 +65,7 @@ public class ProprietarioController extends HttpServlet {
         // Recuperamos o corpo da requisição e transformamos o JSON em objeto
         ObjectMapper mapper = new ObjectMapper();
         Proprietario proprietario = mapper.readValue(req.getReader(), Proprietario.class);
-        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>> req.getReader()");
+        System.out.println("[PROPRIETARIO] >>>> req.getReader()");
         System.out.println(req.getReader());
 
         // Salvamos no Banco de Dados
@@ -79,7 +79,7 @@ public class ProprietarioController extends HttpServlet {
         resp.setStatus(201);
         String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id="
                 + proprietario.getId();
-        System.out.println(">>>>>> LOCATION: " + location);
+        System.out.println("[PROPRIETARIO] >>>> LOCATION: " + location);
 
         resp.setHeader("Location", location);
         PrintWriter out = resp.getWriter();
@@ -99,13 +99,13 @@ public class ProprietarioController extends HttpServlet {
         if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
-           out.print("O usuario nao tem privilegios de administrador para executar esta alteracao!");
+           out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta alteracao!");
            out.flush();
            return;     
         }
         
         this.numeroStatus = 204;
-        doGet(req, resp);
+        doPost(req, resp);
         this.numeroStatus = 200;
     }
 
@@ -121,7 +121,7 @@ public class ProprietarioController extends HttpServlet {
         if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
-           out.print("O usuario nao tem privilegios de administrador para executar esta exclusao!");
+           out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta exclusao!");
            out.flush();
            return;     
         }
