@@ -141,13 +141,8 @@ public class ProprietarioController extends HttpServlet {
 
             try {
 
-                //resp.getWriter().flush();
-
                 proprietarioDao.removerProprietario(proprietario);
                 resp.setStatus(204); // Formatação da Resposta 
-                PrintWriter out = resp.getWriter();
-                out.print("[PROPRIETARIO] Exclusao bem sucedida");
-                out.flush();
 
             } catch (Exception e) {
 
