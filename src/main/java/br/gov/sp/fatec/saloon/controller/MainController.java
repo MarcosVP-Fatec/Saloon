@@ -22,7 +22,8 @@ public class MainController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        resp.getWriter().print("<h1>" + UsuarioLogado.getUsuarioLogado().getNome()+", seja bem vindo ao Saloon !!!</h1><br><br><h2>Agora são " + Data.time()
+        resp.getWriter().print("<h1>" + UsuarioLogado.getUsuarioLogado().getNome()+", seja bem vindo ao Saloon !!!</h1><br><br><h2>Agora são " + Data.time() ); /*Isso coloca o texto no corpo da resposta*/
+/*        resp.getWriter().print("<h1>" + UsuarioLogado.getUsuarioLogado().getNome()+", seja bem vindo ao Saloon !!!</h1><br><br><h2>Agora são " + Data.time()
                                +"</h2><img src='/resources/images/saloon_porta_269.png' alt='Saloon' width='500' height='600'>"); /*Isso coloca o texto no corpo da resposta*/
 /*        resp.getWriter().print("<h1>" + resp.getHeader("Usuario")+", seja bem vindo ao Saloon !!!</h1><br><br><h2>Agora são " + Data.time()
                                +"</h2><img src='/resources/images/saloon_porta_269.png' alt='Saloon' width='500' height='600'>"); /*Isso coloca o texto no corpo da resposta*/
