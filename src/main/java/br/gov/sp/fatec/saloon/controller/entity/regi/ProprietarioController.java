@@ -103,7 +103,7 @@ public class ProprietarioController extends HttpServlet {
         if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
-           out.print("[PROPRIETARIO] O usuario nao tem privilégios de administrador para executar esta alteração!");
+           out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta ALTERACAO!");
            out.flush();
            return;     
         }
@@ -125,10 +125,10 @@ public class ProprietarioController extends HttpServlet {
         if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
-           out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta exclusao!");
+           out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta EXCLUSAO!");
            out.flush();
            return;     
-        }
+        } 
 
         // Recupera o parâmetro id (de proprietario?id=<valor>)
         Long id = Long.valueOf(req.getParameter("id"));
@@ -141,17 +141,21 @@ public class ProprietarioController extends HttpServlet {
 
             try {
 
+                //resp.getWriter().flush();
+
                 proprietarioDao.removerProprietario(proprietario);
                 resp.setStatus(204); // Formatação da Resposta 
+                PrintWriter out = resp.getWriter();
+                out.print("[PROPRIETARIO] Exclusao bem sucedida");
+                out.flush();
 
             } catch (Exception e) {
+
                 resp.setStatus(404); // Formatação da Resposta quando ocorreu uma falha
             }
 
         }
 
-        PrintWriter out = resp.getWriter();
-        out.flush();
     }
 
 }

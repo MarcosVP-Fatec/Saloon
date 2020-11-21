@@ -36,7 +36,7 @@ public class FilterServlet implements Filter {
         param_chain.doFilter(param_req, param_res);
 
         // Todo código aqui é executado no retorno
-        resp.addHeader("Out", ">>>>>>>>>>>>>>>>>>>>>> Eu passei pelo filtro na saída!");    //Console
+        //resp.addHeader("Out", ">>>>>>>>>>>>>>>>>>>>>> Eu passei pelo filtro na saída!");    //Console
         this.context.log("[FILTER SERVLET] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); //Console
         this.context.log("[FILTER SERVLET] >>>>>>> Resposta enviada às " + Data.time());                                                    //Console
         this.context.log("[FILTER SERVLET] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); //Console
