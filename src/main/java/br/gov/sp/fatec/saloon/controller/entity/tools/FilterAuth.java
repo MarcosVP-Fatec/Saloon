@@ -94,7 +94,7 @@ public class FilterAuth implements Filter {
                 this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password + " x "
                         + username + ":" + password);
 
-                if (!UsuarioLogado.isUsuarioLogado()) {
+                if (!UsuarioLogado.isUsuarioLogado() || !UsuarioLogado.getUsuarioLogado().getApelido().equals(_username)) {
 
                     // ###########################################################################
                     // Busca o usuário informado no BANCO DE DADOS
@@ -118,6 +118,7 @@ public class FilterAuth implements Filter {
                         return;
                     }
 
+                    UsuarioLogado.logOff();
                     UsuarioLogado.logar(usuario);
                     this.context.log("[AUTH] Usuário e senha autorizados");
                 }
