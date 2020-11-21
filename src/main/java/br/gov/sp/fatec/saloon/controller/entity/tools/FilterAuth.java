@@ -136,10 +136,12 @@ public class FilterAuth implements Filter {
     //private void unAuthorized( ServletResponse res                  ) throws IOException { unAuthorized(res, ""); }
     private void unAuthorized( ServletResponse res, String mensagem ) throws IOException {
         HttpServletResponse resposta = (HttpServletResponse) res;
+        mensagem = "# Falha às " + Data.time() + " # " + mensagem;
         resposta.setCharacterEncoding("UTF-8");
         resposta.setHeader("WWW-Authenticate", "Basic realm=\"" + realm + "\"");
-        this.context.log( "[AUTH] # Falha às " + Data.time() + " # " + mensagem );
+        this.context.log( "[AUTH] " + mensagem );
         resposta.sendError(401, mensagem);
+
     }
 
 }

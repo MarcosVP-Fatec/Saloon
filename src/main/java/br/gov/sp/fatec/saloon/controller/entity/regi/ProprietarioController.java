@@ -103,7 +103,7 @@ public class ProprietarioController extends HttpServlet {
         if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
-           out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta alteracao!");
+           out.print("[PROPRIETARIO] O usuario nao tem privilégios de administrador para executar esta alteração!");
            out.flush();
            return;     
         }

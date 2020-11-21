@@ -22,7 +22,7 @@ public class FilterServlet implements Filter {
             throws IOException, ServletException {
 
         this.context.log(">>>>>>>>>>>>>>>>>>>>>> Filtro acessado !"); //Console
-        this.context.log(param_req.toString());                             //Console
+        this.context.log(param_req.toString());                       //Console
         
         // Todo código aqui é executado antes da requisição chegar ao destino
         // Passa a requisição adiante
