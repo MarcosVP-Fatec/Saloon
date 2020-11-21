@@ -32,7 +32,6 @@ public class FilterServlet implements Filter {
         // * da minha resposta nem da minha requisição
         HttpServletResponse resp = (HttpServletResponse) param_res;                         //Console
         resp.addHeader("In", ">>>>>>>>>>>>>>>>>>>>>> Eu passei pelo filtro na entrada!");   //Console
-        resp.addHeader("Usuario", "Mitces Valacae");                                        //Console
         
         param_chain.doFilter(param_req, param_res);
 

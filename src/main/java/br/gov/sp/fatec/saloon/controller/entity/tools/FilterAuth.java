@@ -31,11 +31,9 @@ public class FilterAuth implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
 
-        this.context.log("[AUTH] Filtro de autenticação acessado (1) às " + Data.time());
+        this.context.log("[AUTH] Filtro de autenticação acessado às " + Data.time());
         HttpServletRequest request = (HttpServletRequest) req;
-        this.context.log("[AUTH] Filtro de autenticação acessado (2) às " + Data.time());
-        HttpServletResponse response = (HttpServletResponse) res;
-        this.context.log("[AUTH] Filtro de autenticação acessado (3) às " + Data.time());
+        //HttpServletResponse response = (HttpServletResponse) res;
 
         this.context.log(request.toString());
 
@@ -44,8 +42,7 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         String authHeader = request.getHeader("Authorization");
         if (authHeader == null) {
-            this.context.log("[AUTH] Filtro de autenticação acessado (Falta Authorization) às " + Data.time());
-            unauthorized(response);
+            unAuthorized(res,"Falta Authorization");
             return;
         }
         // ---------------------------------------------------------------
@@ -54,8 +51,7 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         StringTokenizer st = new StringTokenizer(authHeader);
         if (!st.hasMoreTokens()) {
-            this.context.log("[AUTH] Filtro de autenticação acessado (Token não informado) às " + Data.time());
-            unauthorized(response);
+            unAuthorized(res,"Token não informado");
             return;
         }
 
@@ -64,8 +60,7 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         String basic = st.nextToken(); // Basic sopadeletrinhas
         if (!basic.equalsIgnoreCase("Basic")) {
-            this.context.log("[AUTH] Filtro de autenticação acessado (Token sem Basic) às " + Data.time());
-            unauthorized(response);
+            unAuthorized(res,"Token sem Basic");
             return;
         }
 
@@ -75,6 +70,7 @@ public class FilterAuth implements Filter {
         // ---------------------------------------------------------------
         try {
 
+            //Decodifica a credencial
             String credentials = new String(Base64.getDecoder().decode(st.nextToken()));
             this.context.log("[AUTH] Credenciais: " + credentials);
 
@@ -93,11 +89,8 @@ public class FilterAuth implements Filter {
                 this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password );
 
                 if ( !UsuarioLogado.isUsuarioLogado( _username , _password ) ) {
-
-                    unauthorized(response, "Usuário ou senha inválidos!");
-                    this.context.log("[AUTH] Usuário ou senha inválidos = " + credentials);
+                    unAuthorized(res, "Usuário ou senha inválidos => " + credentials);
                     return;
-                    
                 }
 
                 this.context.log("[AUTH] Usuário e senha autorizados");
@@ -110,7 +103,7 @@ public class FilterAuth implements Filter {
 
             } else {
 
-                unauthorized(response, "Token de autenticação inválido!");
+                unAuthorized(res, "Token de autenticação inválido!");
 
             }
 
@@ -140,13 +133,13 @@ public class FilterAuth implements Filter {
         */
     }
 
-    private void unauthorized(HttpServletResponse response, String message) throws IOException {
-        response.setHeader("WWW-Authenticate", "Basic realm=\"" + realm + "\"");
-        response.sendError(401, message);
-    }
-
-    private void unauthorized(HttpServletResponse response) throws IOException {
-        unauthorized(response, "Unauthorized");
+    //private void unAuthorized( ServletResponse res                  ) throws IOException { unAuthorized(res, ""); }
+    private void unAuthorized( ServletResponse res, String mensagem ) throws IOException {
+        HttpServletResponse resposta = (HttpServletResponse) res;
+        resposta.setCharacterEncoding("UTF-8");
+        resposta.setHeader("WWW-Authenticate", "Basic realm=\"" + realm + "\"");
+        this.context.log( "[AUTH] # Falha às " + Data.time() + " # " + mensagem );
+        resposta.sendError(401, mensagem);
     }
 
 }
