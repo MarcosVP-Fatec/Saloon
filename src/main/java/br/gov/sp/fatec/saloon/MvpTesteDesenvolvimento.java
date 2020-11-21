@@ -104,7 +104,7 @@ public class MvpTesteDesenvolvimento {
         // Faz alteração da senha em um dos usuários
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("MVP");
-        usuario.setSenha("senhaMVP3");
+        usuario.setSenha("senhaMVP");
         usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais( usuario );
         
         System.out.println(Texto.padC("######################################## CADASTRO DE PROPRIETARIO ########################################", LARGURA, '#'));
