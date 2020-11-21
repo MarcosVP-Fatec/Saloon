@@ -44,7 +44,7 @@ public class ProprietarioController extends HttpServlet {
         // Formatação da Resposta
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
-        resp.setStatus(numeroStatus); // 200 para o GET e 204 para o PUT
+        resp.setStatus(200); // 200 para o GET e 204 para o PUT
 
         PrintWriter out = resp.getWriter();
         out.print(proprietarioJson);
@@ -76,7 +76,7 @@ public class ProprietarioController extends HttpServlet {
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         // O código 201 requer que retornemos um header de Location
-        resp.setStatus(201);
+        resp.setStatus(numeroStatus);
         String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id="
                 + proprietario.getId();
         System.out.println("[PROPRIETARIO] >>>> LOCATION: " + location);
@@ -106,7 +106,7 @@ public class ProprietarioController extends HttpServlet {
         
         this.numeroStatus = 204;
         doPost(req, resp);
-        this.numeroStatus = 200;
+        this.numeroStatus = 201;
     }
 
     /**
