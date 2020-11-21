@@ -11,6 +11,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+import br.gov.sp.fatec.saloon.model.tool.Data;
+
 public class FilterServlet implements Filter {
     
     private ServletContext context; //Console
@@ -36,7 +38,9 @@ public class FilterServlet implements Filter {
 
         // Todo código aqui é executado no retorno
         resp.addHeader("Out", ">>>>>>>>>>>>>>>>>>>>>> Eu passei pelo filtro na saída!");    //Console
-        this.context.log("[FILTER SERVLET] >>>>>>> Resposta enviada!");                     //Console
+        this.context.log("[FILTER SERVLET] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); //Console
+        this.context.log("[FILTER SERVLET] >>>>>>> Resposta enviada às " + Data.time());                                                    //Console
+        this.context.log("[FILTER SERVLET] @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"); //Console
     }
 
     @Override

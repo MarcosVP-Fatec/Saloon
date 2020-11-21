@@ -9,7 +9,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import br.gov.sp.fatec.saloon.model.tool.Texto;
 import br.gov.sp.fatec.saloon.model.tool.Validador;
 
 @Table(name = "usu_usuario")
@@ -18,7 +17,6 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class UsuarioDadosPessoais extends Usuario {
     
-    @Column(name = "usu_nome")              private String  nome;    
     @Column(name = "usu_dt_nascimento")     private Date    dtNascimento;
     @Column(name = "usu_cpf_cnpj")          private String  cpf;
 
@@ -32,8 +30,7 @@ public class UsuarioDadosPessoais extends Usuario {
                                , String cpf
                                , Long   nivelUsuario) {
 
-        super(apelido, email, senha, nivelUsuario);
-        setNome(nome);
+        super(apelido, nome, email, senha, nivelUsuario);
         setDtNascimento(dtNascimento);
         setCpf(cpf);
         setUsuarioNivel(nivelUsuario);
@@ -41,28 +38,9 @@ public class UsuarioDadosPessoais extends Usuario {
     }
 
     // Getters and Setters
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = Texto.left(nome,80);
-    }
-
-    public Date getDtNascimento() {
-        return dtNascimento;
-    }
-
-    public void setDtNascimento(Date dtNascimento) {
-        this.dtNascimento = dtNascimento;
-    }
-
-    public String getCpf() {
-        return this.cpf;
-    }
-
-    public void setCpf(String cpf) {
-        if (Validador.cpf(cpf)) this.cpf = cpf;
-    }
+    public Date getDtNascimento()                   { return dtNascimento;                   }
+    public void setDtNascimento(Date dtNascimento)  { this.dtNascimento = dtNascimento;      }
+    public String getCpf()                          { return this.cpf;                       }
+    public void setCpf(String cpf)                  { if (Validador.cpf(cpf)) this.cpf = cpf;}
 
 }

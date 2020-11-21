@@ -15,15 +15,12 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
-import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
 public class FilterAuth implements Filter {
 
     private ServletContext          context;
-    private UsuarioDadosPessoais    usuario;
     private String                  username = "admin";
     private String                  password = "password_dificil";
     private String                  realm = "PROTECTED";
@@ -94,34 +91,14 @@ public class FilterAuth implements Filter {
                 this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password + " x "
                         + username + ":" + password);
 
-                if (!UsuarioLogado.isUsuarioLogado() || !UsuarioLogado.getUsuarioLogado().getApelido().equals(_username)) {
+                if ( !UsuarioLogado.isUsuarioLogado(_username,_password) ) {
 
-                    // ###########################################################################
-                    // Busca o usuário informado no BANCO DE DADOS
-                    // ###########################################################################
-                    usuario = new UsuarioDadosPessoaisDaoJpa().buscarUsuarioDadosPessoais(_username);
-                    if (usuario == null) {
-                        this.context.log("[AUTH] Usuário não cadastrados = " + credentials);
-                        unauthorized(response); // Este comando exige nova digitação do login.
-                        return;
-                    }
-
-                    username = _username;
-                    password = usuario.getSenha();
-
-                    // ---------------------------------------------------------------
-                    // Se nao bate com configuração retorna erro
-                    // ---------------------------------------------------------------
-                    if (!username.equals(_username) || !password.equals(_password)) {
-                        unauthorized(response, "Usuário ou senha inválidos!");
-                        this.context.log("[AUTH] Usuário ou senha inválidos = " + credentials);
-                        return;
-                    }
-
-                    UsuarioLogado.logOff();
-                    UsuarioLogado.logar(usuario);
-                    this.context.log("[AUTH] Usuário e senha autorizados");
+                    unauthorized(response, "Usuário ou senha inválidos!");
+                    this.context.log("[AUTH] Usuário ou senha inválidos = " + credentials);
+                    return;
                 }
+
+                this.context.log("[AUTH] Usuário e senha autorizados");
 
                 // ---------------------------------------------------------------
                 // Prossegue com a requisicao

@@ -22,7 +22,7 @@ import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 public class ProprietarioController extends HttpServlet {
 
     private static final long serialVersionUID = 3511119533886767378L;
-    private int numeroStatus = 200;
+    private int numeroStatus = 201;
 
     /**
      * doGet 1) Recupera o parâmetro id do request 2) Recupera a entidade deste id
@@ -71,20 +71,24 @@ public class ProprietarioController extends HttpServlet {
         // Salvamos no Banco de Dados
         new ProprietarioDaoJpa().salvarProprietario(proprietario);
 
-        // Retornamos o registro gerado formatando a resposta
-        String proprietarioJson = mapper.writeValueAsString(proprietario);
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        // O código 201 requer que retornemos um header de Location
-        resp.setStatus(numeroStatus);
-        String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id="
-                + proprietario.getId();
-        System.out.println("[PROPRIETARIO] >>>> LOCATION: " + location);
+        // Retornamos o registro gerado formatando a resposta se o retorno for 200 ou 201. Se for 204 não formata resposta
+        if (numeroStatus != 204){
 
-        resp.setHeader("Location", location);
-        PrintWriter out = resp.getWriter();
-        out.print(proprietarioJson);
-        out.flush();
+            String proprietarioJson = mapper.writeValueAsString(proprietario);
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            // O código 201 ou 200 requer que retornemos um header de Location
+            resp.setStatus(numeroStatus);
+            String location = req.getServerName() + ":" + req.getServerPort() + req.getContextPath() + "/proprietario?id="
+                    + proprietario.getId();
+            System.out.println("[PROPRIETARIO] >>>> LOCATION: " + location);
+
+            resp.setHeader("Location", location);
+            PrintWriter out = resp.getWriter();
+            out.print(proprietarioJson);
+            out.flush();
+
+        }
     }
 
     /**
@@ -104,7 +108,7 @@ public class ProprietarioController extends HttpServlet {
            return;     
         }
         
-        this.numeroStatus = 204;
+        this.numeroStatus = 200;
         doPost(req, resp);
         this.numeroStatus = 201;
     }

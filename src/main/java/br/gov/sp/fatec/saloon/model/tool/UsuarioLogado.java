@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
-import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDaoJpa;
+import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 
 public class UsuarioLogado {
     
@@ -9,7 +10,7 @@ public class UsuarioLogado {
 
     //Atributos que serão instanciados
     //protected Long id;
-    protected UsuarioDadosPessoais usuario;
+    protected Usuario usuario;
 
     /**
      * O construtor é privado, portanto esta classe não pode ser instanciada
@@ -27,15 +28,31 @@ public class UsuarioLogado {
         return instance;
     }
 
-    public static void logar( UsuarioDadosPessoais usuario ) {
-        if (getInstance().usuario == null ) getInstance().usuario = usuario; 
+    public static void logar( Usuario usuario ) {
+        getInstance().usuario = usuario; 
     }
 
-    public static boolean isUsuarioLogado(){
-        return getInstance().usuario != null; 
+    public static boolean isUsuarioLogado( String userName, String userPW){
+        
+        if ( getInstance().usuario == null ) {
+            return false; 
+        } else if (   getUsuarioLogado() != null 
+                   && getUsuarioLogado().getApelido().equals(userName)
+                   && getUsuarioLogado().getSenha().equals(userPW) ){
+            return true;
+        }
+
+        Usuario usuario = new UsuarioDaoJpa().buscar(userName);
+        if (usuario == null || !usuario.getApelido().equals(userName) || !usuario.getSenha().equals(userPW)) return logOff();
+
+        logar(usuario);
+        return true;
+        
     }
-    public static void logOff(){
+
+    public static boolean logOff(){
         getInstance().usuario = null;
+        return false;
     }
 
     public static Long getUsuarioLogadoId(){
@@ -43,8 +60,7 @@ public class UsuarioLogado {
         return getInstance().usuario.getId();
     }
 
-    public static UsuarioDadosPessoais getUsuarioLogado(){
-        if (getInstance().usuario == null) return null;
+    public static Usuario getUsuarioLogado(){
         return getInstance().usuario;
     }
 }
