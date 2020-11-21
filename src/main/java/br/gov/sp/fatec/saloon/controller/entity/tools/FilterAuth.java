@@ -21,9 +21,11 @@ import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 public class FilterAuth implements Filter {
 
     private ServletContext          context;
+    private String                  realm = "PROTECTED";
+    /*
     private String                  username = "admin";
     private String                  password = "password_dificil";
-    private String                  realm = "PROTECTED";
+    */
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
@@ -83,19 +85,19 @@ public class FilterAuth implements Filter {
 
             if (posicaoDoDoisPontos != -1) {
 
-                this.context.log("[AUTH] Entrou no -1");
+                this.context.log("[AUTH] Credencial com dois Token (Ok)");
 
                 String _username = credentials.substring(0, posicaoDoDoisPontos).trim();
                 String _password = credentials.substring(posicaoDoDoisPontos + 1).trim(); // Depois dos dois pontos.
 
-                this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password + " x "
-                        + username + ":" + password);
+                this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password );
 
-                if ( !UsuarioLogado.isUsuarioLogado(_username,_password) ) {
+                if ( !UsuarioLogado.isUsuarioLogado( _username , _password ) ) {
 
                     unauthorized(response, "Usuário ou senha inválidos!");
                     this.context.log("[AUTH] Usuário ou senha inválidos = " + credentials);
                     return;
+                    
                 }
 
                 this.context.log("[AUTH] Usuário e senha autorizados");
@@ -126,6 +128,8 @@ public class FilterAuth implements Filter {
     @Override
     public void init(FilterConfig config) throws ServletException {
         this.context = config.getServletContext();
+        
+        /* Parâmetros do web.xml
         this.context.log("Filtro inicializado!");
         this.username = config.getInitParameter("username");
         this.password = config.getInitParameter("password");
@@ -133,6 +137,7 @@ public class FilterAuth implements Filter {
         if (paramRealm != null && paramRealm.length() > 0) {
             this.realm = paramRealm;
         }
+        */
     }
 
     private void unauthorized(HttpServletResponse response, String message) throws IOException {

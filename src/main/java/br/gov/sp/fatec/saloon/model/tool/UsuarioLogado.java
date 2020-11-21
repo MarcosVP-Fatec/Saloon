@@ -34,12 +34,12 @@ public class UsuarioLogado {
 
     public static boolean isUsuarioLogado( String userName, String userPW){
         
-        if ( getInstance().usuario == null ) {
-            return false; 
-        } else if (   getUsuarioLogado() != null 
-                   && getUsuarioLogado().getApelido().equals(userName)
-                   && getUsuarioLogado().getSenha().equals(userPW) ){
+        if (   getUsuarioLogado() != null 
+            && getUsuarioLogado().getApelido().equals(userName)
+            && getUsuarioLogado().getSenha().equals(userPW) ){
+
             return true;
+            
         }
 
         Usuario usuario = new UsuarioDaoJpa().buscar(userName);
@@ -47,7 +47,7 @@ public class UsuarioLogado {
 
         logar(usuario);
         return true;
-        
+
     }
 
     public static boolean logOff(){
