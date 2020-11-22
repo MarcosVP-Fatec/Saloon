@@ -1,7 +1,7 @@
 ports:
 - port: 8080
 tasks:
-  - init: mvn clean package
   - init: mysql < Reset.sql
-  - init: mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.saloon.App"
+    command: mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.saloon.App"
+  - command: mvn clean package
 image: gitpod/workspace-mysql
