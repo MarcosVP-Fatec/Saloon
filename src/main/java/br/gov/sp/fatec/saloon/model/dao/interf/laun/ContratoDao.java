@@ -12,31 +12,31 @@ import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
 
 public interface ContratoDao {
 
-    public Contrato salvarContrato(Contrato contrato);
+    public Contrato salvar(Contrato contrato);
 
-    public Contrato cadastrarContrato( Cliente        cliente
-                                     , Alugavel       alugavel
-                                     , Date           data      
-                                     , BigDecimal     reservaPaga
-                                     , ContratoMotivo contratoMotivo);
+    public Contrato cadastrar( Cliente        cliente
+                             , Alugavel       alugavel
+                             , Date           data      
+                             , BigDecimal     reservaPaga
+                             , ContratoMotivo contratoMotivo);
 
-                                     public Contrato cadastrarContrato( Cliente        cliente
-                                     , Alugavel       alugavel
-                                     , Date           data      
-                                     , BigDecimal     reservaPaga
-                                     , ContratoMotivo contratoMotivo
-                                     , String         festejoNomes
-                                     , int            festejoDia
-                                     , MesAno         festejoMes);
+    public Contrato cadastrar( Cliente        cliente
+                             , Alugavel       alugavel
+                             , Date           data      
+                             , BigDecimal     reservaPaga
+                             , ContratoMotivo contratoMotivo
+                             , String         festejoNomes
+                             , int            festejoDia
+                             , MesAno         festejoMes);
 
-    public Contrato buscarContrato(Long id);
+    public Contrato buscar(Long id);
 
-    public List<Contrato> buscarContratosDoCliente(Cliente cliente);
+    public List<Contrato> buscar(Cliente cliente);
 
-    public List<Contrato> buscarContrato(Alugavel alugavel, Cliente cliente);
+    public List<Contrato> buscar(Alugavel alugavel, Cliente cliente);
 
-    public boolean removerContrato(Long id);
+    public boolean remover(Long id);
 
-    public boolean removerContrato(Contrato contrato);
+    public boolean remover(Contrato contrato);
 
 }

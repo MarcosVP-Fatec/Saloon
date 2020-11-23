@@ -11,6 +11,7 @@
         <class>br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais</class>
         <class>br.gov.sp.fatec.saloon.model.entity.UsuarioGeral</class>
         <class>br.gov.sp.fatec.saloon.model.entity.UsuarioNivel</class>
+        <class>br.gov.sp.fatec.saloon.model.entity.Parametro</class>
         <class>br.gov.sp.fatec.saloon.model.entity.Parceiro</class>
         <class>br.gov.sp.fatec.saloon.model.entity.Proprietario</class>
         <class>br.gov.sp.fatec.saloon.model.entity.Alugavel</class>

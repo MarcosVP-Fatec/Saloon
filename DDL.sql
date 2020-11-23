@@ -197,3 +197,19 @@ create table pxc_parceiro_x_cliente (
     , constraint pxc_cli_id_fk foreign key (pxc_cli_id) 
         references cli_cliente (cli_id)
 );
+
+create table par_parametro (
+      par_id                bigint unsigned primary key auto_increment
+    , par_cod               varchar(30)    not null
+    , par_descr             varchar(100)
+    , par_tipo              char(1)        not null -- int, String, Date
+    , par_val_num           double
+    , par_val_str           varchar(4000)
+    , par_val_dat           Date
+    , par_val_bol           boolean
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+    , constraint par_cod_uk unique (par_cod) 
+);

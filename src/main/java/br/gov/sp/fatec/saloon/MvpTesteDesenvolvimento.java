@@ -35,6 +35,7 @@ import br.gov.sp.fatec.saloon.model.dao.stat.ContratoMotivoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.stat.MesAnoDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ClienteDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.ParametroDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
@@ -69,10 +70,13 @@ public class MvpTesteDesenvolvimento {
         ClienteDao clienteDao = new ClienteDaoJpa(em);
         ContratoMotivoDao contratoMotivoDao = new ContratoMotivoDaoJpa(em);
         ContratoDao contratoDao = new ContratoDaoJpa(em);
-        
+        ParametroDaoJpa parametroDao = new ParametroDaoJpa(em);
 
         System.out.println(Texto.padC("######################################## INÍCIO ########################################", LARGURA, '#'));
         System.out.println(""); 
+
+        System.out.println(Texto.padC("######################################## CADASTRO DE PARÃMETROS ########################################", LARGURA, '#'));
+        parametroDao.cadastrar("PRODUCAO", "Identifica que a aplicação está rodando em modo de produção", false);
 
         System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ISOLADO ########################################", LARGURA, '#'));
 
@@ -230,34 +234,34 @@ public class MvpTesteDesenvolvimento {
         Alugavel alugavel = alugavelDao.buscarAlugavel(1L);
         ContratoMotivo contratoMotivo = contratoMotivoDao.buscarContratoMotivo(1L);
 
-        contratoDao.cadastrarContrato( cliente
-                                     , alugavel
-                                     , Data.toDate("25/12/2020")
-                                     , new BigDecimal(100.00)
-                                     , contratoMotivo);
+        contratoDao.cadastrar( cliente
+                             , alugavel
+                             , Data.toDate("25/12/2020")
+                             , new BigDecimal(100.00)
+                             , contratoMotivo);
 
         alugavel = alugavelDao.buscarAlugavel(2L);
-        contratoDao.cadastrarContrato( cliente
-                                     , alugavel
-                                     , Data.toDate("10/01/2021")
-                                     , new BigDecimal(100.00)
-                                     , contratoMotivo
-                                     , "Joãozinho"
-                                     , 5
-                                     , mesAnoDao.buscarMesAno("01"));
+        contratoDao.cadastrar( cliente
+                             , alugavel
+                             , Data.toDate("10/01/2021")
+                             , new BigDecimal(100.00)
+                             , contratoMotivo
+                             , "Joãozinho"
+                             , 5
+                             , mesAnoDao.buscarMesAno("01"));
 
-        contratoDao.cadastrarContrato( cliente
-                                     , alugavel
-                                     , Data.toDate("15/11/2020")
-                                     , new BigDecimal(150)
-                                     , contratoMotivo
-                                     , "Mariazinha"
-                                     , 10
-                                     , mesAnoDao.buscarMesAno("11"));
+        contratoDao.cadastrar( cliente
+                             , alugavel
+                             , Data.toDate("15/11/2020")
+                             , new BigDecimal(150)
+                             , contratoMotivo
+                             , "Mariazinha"
+                             , 10
+                             , mesAnoDao.buscarMesAno("11"));
 
         System.out.println(Texto.padC("######################################## CONTRATOS DE UM DETERNIMADO CLIENTE E DETERMINADO ALUGAVEL ########################################", LARGURA, '#'));
 
-        List<Contrato> contratos = contratoDao.buscarContrato(alugavel, cliente);
+        List<Contrato> contratos = contratoDao.buscar(alugavel, cliente);
         System.out.println("Contratos do Cliente " + cliente.getNome() + " que alugou o " + alugavel.getDescr());
         for (Contrato ctr : contratos) {
             System.out.println("Data : " + (new SimpleDateFormat("dd.MM.yyyy").format(ctr.getData())) + " " );

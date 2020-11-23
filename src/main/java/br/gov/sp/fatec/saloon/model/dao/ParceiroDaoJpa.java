@@ -23,13 +23,6 @@ public class ParceiroDaoJpa implements ParceiroDao {
         try {
             em.getTransaction().begin();
             Generico.salvarSemCommit( parceiro , em );
-            /*
-            Query query = em.createQuery("update Parceiro set _inc_usua = :usua, _inc_data = :data where par_usu_id = :id",Parceiro.class);
-            query.setParameter("usua",UsuarioLogado.getInstance().getId());
-            query.setParameter("data",Data.today());
-            query.setParameter("id",parceiro.getId());
-            query.executeUpdate();            
-            */
             em.getTransaction().commit();
         } catch (PersistenceException e) {
             e.printStackTrace();
