@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
@@ -11,6 +12,7 @@ import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelDao;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
@@ -26,78 +28,82 @@ public class AlugavelDaoJpa implements AlugavelDao {
     public AlugavelDaoJpa(EntityManager em) { this.em = em;                                             }
 
     @Override
-    public Alugavel salvarAlugavel(Alugavel alugavel) {
+    public Alugavel salvar(Alugavel alugavel) {
+        if (Parametro.lerLogico("PARAMETRO")) {
+            try {
+                em.getTransaction().begin();
+                Generico.salvarSemCommit(alugavel, em);
+                em.getTransaction().commit();
+            } catch (PersistenceException e) {
+                e.printStackTrace();
+                em.getTransaction().rollback();
+                throw new RuntimeException("Erro ao salvar o Alugável"
+                        + (alugavel.getId() == null ? "!" : " " + alugavel.getDescr() + "!"), e);
+            }
+        } else {
             em.getTransaction().begin();
             Generico.salvarSemCommit(alugavel, em);
             em.getTransaction().commit();
-        /*    
-        try {
-            em.getTransaction().begin();
-            Generico.salvarSemCommit(alugavel, em);
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-            throw new RuntimeException("Erro ao salvar o Alugável" + (alugavel.getId() == null ? "!" : " " + alugavel.getDescr() + "!"),e);
-        }*/
+        }
         return alugavel;
     }
 
     @Override
-    public Alugavel cadastrarAlugavel(String        descr
-                                     ,Proprietario  proprietario
-                                     ,AlugavelTipo  alugavelTipo
-                                     ,String        endereco
-                                     ,int           capacidade
-                                     ,BigDecimal    valor) {
+    public Alugavel cadastrar(String        descr
+                             ,Proprietario  proprietario
+                             ,AlugavelTipo  alugavelTipo
+                             ,String        endereco
+                             ,int           capacidade
+                             ,BigDecimal    valor) {
 
-        return salvarAlugavel(new Alugavel(descr, proprietario, alugavelTipo, endereco, capacidade, valor));
+        return salvar(new Alugavel(descr, proprietario, alugavelTipo, endereco, capacidade, valor));
     }
 
-    public Alugavel cadastrarAlugavel(String descr
-                                     ,Proprietario proprietario
-                                     ,AlugavelTipo alugavelTipo
-                                     ,String endereco
-                                     ,int capacidade
-                                     ,double valor) {
+    public Alugavel cadastrar(String descr
+                             ,Proprietario proprietario
+                             ,AlugavelTipo alugavelTipo
+                             ,String endereco
+                             ,int capacidade
+                             ,double valor) {
 
-        return cadastrarAlugavel(descr, proprietario, alugavelTipo, endereco, capacidade, new BigDecimal(valor));
+        return cadastrar(descr, proprietario, alugavelTipo, endereco, capacidade, new BigDecimal(valor));
     }
 
     @Override
-    public Alugavel buscarAlugavel(Long id) {
-        Alugavel retorno;
-        String jpql = "select a from Alugavel a where a.id = :id";
-        TypedQuery<Alugavel> query = em.createQuery(jpql, Alugavel.class);
+    public Alugavel buscar(Long id) {
+        TypedQuery<Alugavel> query = em.createQuery("select a from Alugavel a where a.id = :id", Alugavel.class);
         try {
-            retorno = query.setParameter("id", id).getSingleResult(); 
+            return query.setParameter("id", id).getSingleResult(); 
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
-    public List<Alugavel> buscarAlugavel(String apelidoProprietario) {
+    public List<Alugavel> buscar(String apelidoProprietario) {
         String jpql = "select a from Alugavel a inner join a.proprietario p where p.apelido = :apelidoProprietario";
         TypedQuery<Alugavel> query = em.createQuery(jpql, Alugavel.class);
         return query.setParameter("apelidoProprietario", apelidoProprietario).getResultList();
     }
 
     @Override
-    public boolean removerAlugavel(Long id) {
-        Alugavel alugavel = buscarAlugavel(id);
+    public boolean remover(Long id) {
+        Alugavel alugavel = buscar(id);
         if (alugavel.getId() == null) throw new RuntimeException("Alugável não cadastrado => ID " + id + "!");
-        removerAlugavel(alugavel);
-        return true;
+        return remover(alugavel);
     }
 
     @Override
-    public boolean removerAlugavel(Alugavel alugavel) {
-        em.getTransaction().begin();
-        em.remove(alugavel);
-        em.getTransaction().commit();
-        return true;
+    public boolean remover(Alugavel alugavel) {
+        try {
+            em.getTransaction().begin();
+            em.remove(alugavel);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
@@ -109,13 +115,13 @@ public class AlugavelDaoJpa implements AlugavelDao {
     @Override
     public void consoleAlugavelPorProprietario(Proprietario proprietario) {
         System.out.println(Texto.padC(" LOG ALUGAVEL POR PROPRIETÁRIO ", 100,"#"));
-        List<Alugavel> alugavel = buscarAlugavel(proprietario.getApelido());
+        List<Alugavel> alugavel = buscar(proprietario.getApelido());
         alugavel.forEach(a -> System.out.println(a.getDescr() + " capacidade " + a.getCapacidade() + " valor " + a.getValor()));
     }
 
     @Override
     public boolean existe(Long id) {
-        return buscarAlugavel(id) != null;
+        return buscar(id) != null;
     }
     
 }

@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.interf.ClienteDao;
 import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public class ClienteDaoJpa implements ClienteDao {
@@ -19,55 +20,59 @@ public class ClienteDaoJpa implements ClienteDao {
     public ClienteDaoJpa(EntityManager em) {this.em = em;}
 
     @Override
-    public Cliente salvarCliente(Cliente cliente) {
-        em.getTransaction().begin();
-        Generico.salvarSemCommit(cliente, em);
-        em.getTransaction().commit();
-/*
-        try {
-        em.getTransaction().begin();
-        Generico.salvarSemCommit(cliente, em);
-        em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-            throw new RuntimeException("Erro ao salvar o Cliente" + (cliente.getId() == null ? "!" : " " + cliente.getNome() + "!"),e);
-        }*/
+    public Cliente salvar(Cliente cliente) {
+        if (Parametro.lerLogico("PARAMETRO")) {
+            try {
+                em.getTransaction().begin();
+                Generico.salvarSemCommit(cliente, em);
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                em.getTransaction().rollback();
+                throw new RuntimeException(
+                        "Erro ao salvar o Cliente" + (cliente.getId() == null ? "!" : " " + cliente.getNome() + "!"),
+                        e);
+            }
+        } else {
+            em.getTransaction().begin();
+            Generico.salvarSemCommit(cliente, em);
+            em.getTransaction().commit();
+        }
         return cliente;
     }
 
     @Override
-    public Cliente cadastrarCliente( String cpf_cnpj
-                                   , String nome
-                                   , String tel_ddd
-                                   , String tel_numero
-                                   , Parceiro parceiro) {
+    public Cliente cadastrar( String cpf_cnpj
+                            , String nome
+                            , String tel_ddd
+                            , String tel_numero
+                            , Parceiro parceiro) {
 
-        return salvarCliente(new Cliente(cpf_cnpj
-                                        ,nome
-                                        ,tel_ddd
-                                        ,tel_numero
-                                        ,parceiro));
+        return salvar(new Cliente(cpf_cnpj
+                                 ,nome
+                                 ,tel_ddd
+                                 ,tel_numero
+                                 ,parceiro));
     }
 
     @Override
-    public Cliente cadastrarCliente( String cpf_cnpj
-                                   , String nome
-                                   , String tel_ddd
-                                   , String tel_numero) {
-        return salvarCliente(new Cliente(cpf_cnpj
-                                        ,nome
-                                        ,tel_ddd
-                                        ,tel_numero));
+    public Cliente cadastrar( String cpf_cnpj
+                            , String nome
+                            , String tel_ddd
+                            , String tel_numero) {
+        return salvar(new Cliente(cpf_cnpj
+                                 ,nome
+                                 ,tel_ddd
+                                 ,tel_numero));
     }
 
     @Override
-    public Cliente cadastrarCliente(String cpf_cnpj, String nome) {
-        return salvarCliente(new Cliente(cpf_cnpj, nome));
+    public Cliente cadastrar(String cpf_cnpj, String nome) {
+        return salvar(new Cliente(cpf_cnpj, nome));
     }
 
     @Override
-    public Cliente buscarCliente(Long id) {
+    public Cliente buscar(Long id) {
         Cliente retorno;
         TypedQuery<Cliente> query = em.createQuery("select c from Cliente c where c.id = :id", Cliente.class);
         try {
@@ -79,55 +84,64 @@ public class ClienteDaoJpa implements ClienteDao {
     }
 
     @Override
-    public Cliente buscarCliente(String cpf) {
-        Cliente retorno;
+    public Cliente buscar(String cpf) {
         TypedQuery<Cliente> query = em.createQuery("select c from Cliente c where c.cpf_cnpj = :cpf_cnpj",Cliente.class);
         try {
-            retorno = query.setParameter("cpf_cnpj", cpf).getSingleResult();
+            return query.setParameter("cpf_cnpj", cpf).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
-    public List<Cliente> buscarClientePorNome(String nome) {
+    public List<Cliente> buscarPorNome(String nome) {
         TypedQuery<Cliente> query = 
         em.createQuery("select c from Cliente c where c.nome like '%:nome%'",Cliente.class);
-        return query.setParameter("nome", nome).getResultList();
+        try {
+            return query.setParameter("nome", nome).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
-    public Cliente buscarClienteParceiro(Long idParceiro) {
-        String jpql = "select c from Cliente c inner join c.parceiro p where p.id = :idParceiro";
-        TypedQuery<Cliente> query = em.createQuery(jpql, Cliente.class);
-        return query.setParameter("idParceiro", idParceiro).getSingleResult();
+    public Cliente buscarParceiro(Long idParceiro) {
+        TypedQuery<Cliente> query = em.createQuery("select c from Cliente c inner join c.parceiro p where p.id = :idParceiro", Cliente.class);
+        try {
+            return query.setParameter("idParceiro", idParceiro).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     @Override
-    public boolean removerCliente(Long id) {
-        Cliente cliente = buscarCliente(id);
+    public boolean remover(Long id) {
+        Cliente cliente = buscar(id);
         if (cliente.getId() == null) throw new RuntimeException("Cliente não cadastrado => ID " + id + "!");
-        removerCliente(cliente);
-        return true;
+        return remover(cliente);
     }
 
     @Override
-    public boolean removerCliente(Cliente cliente) {
-        em.getTransaction().begin();
-        em.remove(cliente);
-        em.getTransaction().rollback();        
-        return true;
+    public boolean remover(Cliente cliente) {
+        try {
+            em.getTransaction().begin();
+            em.remove(cliente);
+            em.getTransaction().commit();        
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();        
+            return false;
+        }
     }
 
     @Override
     public boolean existe(Long id) {
-        return buscarCliente(id) != null;
+        return buscar(id) != null;
     }
 
     @Override
     public boolean existe(String cpf) {
-        return buscarCliente(cpf) != null;
+        return buscar(cpf) != null;
     }
 
 }

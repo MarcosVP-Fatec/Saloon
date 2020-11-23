@@ -10,32 +10,32 @@ import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 
 public interface AlugavelDao {
     
-    public Alugavel salvarAlugavel(Alugavel alugavel);
+    public Alugavel salvar(Alugavel alugavel);
 
-    public Alugavel cadastrarAlugavel(String descr
-                                     ,Proprietario proprietario
-                                     ,AlugavelTipo alugavelTipo
-                                     ,String endereco
-                                     ,int capacidade
-                                     ,double valor);
+    public Alugavel cadastrar(String descr
+                             ,Proprietario proprietario
+                             ,AlugavelTipo alugavelTipo
+                             ,String endereco
+                             ,int capacidade
+                             ,double valor);
 
-    public Alugavel cadastrarAlugavel(String descr
-                                     ,Proprietario proprietario
-                                     ,AlugavelTipo alugavelTipo
-                                     ,String endereco
-                                     ,int capacidade
-                                     ,BigDecimal valor);
+    public Alugavel cadastrar(String descr
+                             ,Proprietario proprietario
+                             ,AlugavelTipo alugavelTipo
+                             ,String endereco
+                             ,int capacidade
+                             ,BigDecimal valor);
 
-    public Alugavel buscarAlugavel(Long id);
+    public Alugavel buscar(Long id);
 
-    public List<Alugavel> buscarAlugavel(String apelidoProprietario );
+    public List<Alugavel> buscar(String apelidoProprietario );
 
     public void consoleAlugavelPorProprietario(String apelidoProprietario);
     public void consoleAlugavelPorProprietario(Proprietario proprietario);
 
-    public boolean removerAlugavel(Long id);
+    public boolean remover(Long id);
 
-    public boolean removerAlugavel(Alugavel alugavel);
+    public boolean remover(Alugavel alugavel);
 
     public boolean existe(Long id);
 

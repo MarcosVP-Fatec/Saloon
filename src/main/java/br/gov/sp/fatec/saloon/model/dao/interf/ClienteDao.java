@@ -7,33 +7,33 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public interface ClienteDao {
 
-    public Cliente salvarCliente(Cliente cliente);
+    public Cliente salvar(Cliente cliente);
 
-    public Cliente cadastrarCliente( String   cpf_cnpj
-                                   , String   nome
-                                   , String   tel_ddd
-                                   , String   tel_numero
-                                   , Parceiro parceiro);
+    public Cliente cadastrar( String   cpf_cnpj
+                            , String   nome
+                            , String   tel_ddd
+                            , String   tel_numero
+                            , Parceiro parceiro);
 
-    public Cliente cadastrarCliente( String   cpf_cnpj
-                                   , String   nome
-                                   , String   tel_ddd
-                                   , String   tel_numero);
+    public Cliente cadastrar( String   cpf_cnpj
+                            , String   nome
+                            , String   tel_ddd
+                            , String   tel_numero);
 
-    public Cliente cadastrarCliente( String   cpf_cnpj
-                                   , String   nome);
+    public Cliente cadastrar( String   cpf_cnpj
+                            , String   nome);
 
-    public Cliente buscarCliente(Long id);
+    public Cliente buscar(Long id);
 
-    public Cliente buscarCliente(String cpf );
+    public Cliente buscar(String cpf );
 
-    public List<Cliente> buscarClientePorNome(String nome );
+    public List<Cliente> buscarPorNome(String nome );
 
-    public Cliente buscarClienteParceiro(Long idParceiro);
+    public Cliente buscarParceiro(Long idParceiro);
 
-    public boolean removerCliente(Long id);
+    public boolean remover(Long id);
 
-    public boolean removerCliente(Cliente cliente);
+    public boolean remover(Cliente cliente);
     
     public boolean existe(Long id);
 

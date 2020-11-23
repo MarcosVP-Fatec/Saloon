@@ -4,12 +4,12 @@ import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
 
 public interface MesAnoDao {
 
-    public MesAno salvarMesAno(MesAno mesAno);
+    public MesAno salvar(MesAno mesAno);
 
-    public MesAno cadastrarMesAno(String id, String descr);
+    public MesAno cadastrar(String id, String descr);
 
-    public MesAno buscarMesAno(Long id);
+    public MesAno buscar(Long id);
     
-    public MesAno buscarMesAno(String mes);
+    public MesAno buscar(String mes);
     
 }

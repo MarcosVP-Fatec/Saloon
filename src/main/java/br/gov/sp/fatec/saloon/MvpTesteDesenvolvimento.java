@@ -160,26 +160,26 @@ public class MvpTesteDesenvolvimento {
         System.out.println(">>>>> " + em.find(AlugavelTipo.class,1L).getDescr());
         System.out.println(">>>>> " + alugavelTipoDao.buscarAlugavelTipo(1L).getDescr() + alugavelTipoDao.buscarAlugavelTipo(1L).getId());
         
-        alugavelDao.cadastrarAlugavel("Salão Maior"
-                                     ,proprietarioDao.buscarProprietario("BETÃO")
-                                     ,alugavelTipoDao.buscarAlugavelTipo(1L)
-                                     ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
-                                     , 150
-                                     , 600.00 );
+        alugavelDao.cadastrar("Salão Maior"
+                             ,proprietarioDao.buscarProprietario("BETÃO")
+                             ,alugavelTipoDao.buscarAlugavelTipo(1L)
+                             ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
+                             , 150
+                             , 600.00 );
 
-        alugavelDao.cadastrarAlugavel("Salão Menor"
-                                     ,proprietarioDao.buscarProprietario("BETÃO")
-                                     ,alugavelTipoDao.buscarAlugavelTipo(1L)
-                                     ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
-                                     , 80
-                                     , 450.00 );
+        alugavelDao.cadastrar("Salão Menor"
+                             ,proprietarioDao.buscarProprietario("BETÃO")
+                             ,alugavelTipoDao.buscarAlugavelTipo(1L)
+                             ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
+                             , 80
+                             , 450.00 );
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ########################################", LARGURA, '#'));
 
-        clienteDao.cadastrarCliente("55555555555", "Cristina Regis Perrerrá","12", "98765431");
-        clienteDao.cadastrarCliente("44444444444", "Maria das Dores"        ,"12", "98765422");
-        clienteDao.cadastrarCliente("66666666666", "João José"              ,"11", "98865411");
-        clienteDao.cadastrarCliente("99999999999", "Anacleto Beneditino"    ,"12", "98777777");
+        clienteDao.cadastrar("55555555555", "Cristina Regis Perrerrá","12", "98765431");
+        clienteDao.cadastrar("44444444444", "Maria das Dores"        ,"12", "98765422");
+        clienteDao.cadastrar("66666666666", "João José"              ,"11", "98865411");
+        clienteDao.cadastrar("99999999999", "Anacleto Beneditino"    ,"12", "98777777");
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTE PARCEIRO ########################################", LARGURA, '#'));
         Parceiro parceiro = parceiroDao.cadastrarParceiro("BIFECASSIA"                          //apelido
@@ -190,18 +190,18 @@ public class MvpTesteDesenvolvimento {
                                                          ,"77777777777"                         //
                                                          ,Data.today());
 
-        clienteDao.cadastrarCliente( parceiro.getCpf()          //cpf_cnpj
-                                   , parceiro.getNome()         //nome
-                                   , "12"                       //tel_ddd
-                                   , "987654321"                //tel_numero
-                                   , parceiro);
+        clienteDao.cadastrar( parceiro.getCpf()          //cpf_cnpj
+                            , parceiro.getNome()         //nome
+                            , "12"                       //tel_ddd
+                            , "987654321"                //tel_numero
+                            , parceiro);
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ATENDIDOS POR UM PARCEIRO ########################################", LARGURA, '#'));
 
         parceiro = parceiroDao.buscarParceiro("BIFECASSIA");
         parceiro.setClientes(new HashSet<Cliente>());
-        parceiro.getClientes().add( clienteDao.buscarCliente("44444444444") );
-        parceiro.getClientes().add( clienteDao.buscarCliente("99999999999") );
+        parceiro.getClientes().add( clienteDao.buscar("44444444444") );
+        parceiro.getClientes().add( clienteDao.buscar("99999999999") );
 
         System.out.println(Texto.padC("######################################## MOTIVOS DOS CONTRATOS ########################################", LARGURA, '#'));
         contratoMotivoDao.cadastrarContratoMotivo("Aniversário");
@@ -212,26 +212,26 @@ public class MvpTesteDesenvolvimento {
 
         System.out.println(Texto.padC("######################################## CADASTRO DE MESES DO ANO ########################################", LARGURA, '#'));
         MesAnoDao mesAnoDao = new MesAnoDaoJpa(em);
-        mesAnoDao.cadastrarMesAno("01", "Janeiro");
-        mesAnoDao.cadastrarMesAno("02", "Fevereiro");
-        mesAnoDao.cadastrarMesAno("03", "Março");
-        mesAnoDao.cadastrarMesAno("04", "Abril");
-        mesAnoDao.cadastrarMesAno("05", "Maio");
-        mesAnoDao.cadastrarMesAno("06", "Junho");
-        mesAnoDao.cadastrarMesAno("07", "Julho");
-        mesAnoDao.cadastrarMesAno("08", "Agosto");
-        mesAnoDao.cadastrarMesAno("09", "Setembro");
-        mesAnoDao.cadastrarMesAno("10", "Outubro");
-        mesAnoDao.cadastrarMesAno("11", "Novembro");
-        mesAnoDao.cadastrarMesAno("12", "DEZEMBRO");
+        mesAnoDao.cadastrar("01", "Janeiro");
+        mesAnoDao.cadastrar("02", "Fevereiro");
+        mesAnoDao.cadastrar("03", "Março");
+        mesAnoDao.cadastrar("04", "Abril");
+        mesAnoDao.cadastrar("05", "Maio");
+        mesAnoDao.cadastrar("06", "Junho");
+        mesAnoDao.cadastrar("07", "Julho");
+        mesAnoDao.cadastrar("08", "Agosto");
+        mesAnoDao.cadastrar("09", "Setembro");
+        mesAnoDao.cadastrar("10", "Outubro");
+        mesAnoDao.cadastrar("11", "Novembro");
+        mesAnoDao.cadastrar("12", "DEZEMBRO");
 
-        MesAno mesAno = mesAnoDao.buscarMesAno("12");
+        MesAno mesAno = mesAnoDao.buscar("12");
         mesAno.setDescr("Dezembro");
-        mesAnoDao.salvarMesAno(mesAno);
+        mesAnoDao.salvar(mesAno);
 
         System.out.println(Texto.padC("######################################## CLIENTE FAZ UM CONTRATO ########################################", LARGURA, '#'));
-        Cliente cliente = clienteDao.buscarCliente("55555555555");
-        Alugavel alugavel = alugavelDao.buscarAlugavel(1L);
+        Cliente cliente = clienteDao.buscar("55555555555");
+        Alugavel alugavel = alugavelDao.buscar(1L);
         ContratoMotivo contratoMotivo = contratoMotivoDao.buscarContratoMotivo(1L);
 
         contratoDao.cadastrar( cliente
@@ -240,7 +240,7 @@ public class MvpTesteDesenvolvimento {
                              , new BigDecimal(100.00)
                              , contratoMotivo);
 
-        alugavel = alugavelDao.buscarAlugavel(2L);
+        alugavel = alugavelDao.buscar(2L);
         contratoDao.cadastrar( cliente
                              , alugavel
                              , Data.toDate("10/01/2021")
@@ -248,7 +248,7 @@ public class MvpTesteDesenvolvimento {
                              , contratoMotivo
                              , "Joãozinho"
                              , 5
-                             , mesAnoDao.buscarMesAno("01"));
+                             , mesAnoDao.buscar("01"));
 
         contratoDao.cadastrar( cliente
                              , alugavel
@@ -257,7 +257,7 @@ public class MvpTesteDesenvolvimento {
                              , contratoMotivo
                              , "Mariazinha"
                              , 10
-                             , mesAnoDao.buscarMesAno("11"));
+                             , mesAnoDao.buscar("11"));
 
         System.out.println(Texto.padC("######################################## CONTRATOS DE UM DETERNIMADO CLIENTE E DETERMINADO ALUGAVEL ########################################", LARGURA, '#'));
 

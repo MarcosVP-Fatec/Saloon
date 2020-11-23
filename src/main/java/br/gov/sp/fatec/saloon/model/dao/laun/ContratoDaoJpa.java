@@ -112,17 +112,19 @@ public class ContratoDaoJpa implements ContratoDao {
     public boolean remover(Long id) {
         Contrato contrato = buscar(id);
         if (contrato.getId() == null) throw new RuntimeException("contrato não cadastrado => ID " + id + "!");
-        remover(contrato);
-        return true;
+        return remover(contrato);
     }
 
     @Override
     public boolean remover(Contrato contrato) {
-        em.getTransaction().begin();
-        em.remove(contrato);
-        em.getTransaction().commit();
-        return true;
+        try {
+            em.getTransaction().begin();
+            em.remove(contrato);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return false;
+        }
     }
-
-   
 }

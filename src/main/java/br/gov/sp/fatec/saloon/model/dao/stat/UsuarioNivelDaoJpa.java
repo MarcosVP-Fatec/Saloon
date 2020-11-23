@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.Generico;
 import br.gov.sp.fatec.saloon.model.dao.interf.stat.UsuarioNivelDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
 
 public class UsuarioNivelDaoJpa implements UsuarioNivelDao {
@@ -19,14 +20,21 @@ public class UsuarioNivelDaoJpa implements UsuarioNivelDao {
 
     @Override
     public UsuarioNivel salvar(UsuarioNivel usuarioNivel) {
-        try {
+        if (Parametro.lerLogico("PARAMETRO")) {
+            try {
+                em.getTransaction().begin();
+                Generico.salvarSemCommit(usuarioNivel, em);
+                em.getTransaction().commit();
+            } catch (PersistenceException e) {
+                e.printStackTrace();
+                em.getTransaction().rollback();
+                throw new RuntimeException("Erro ao salvar o Nível de Usuário "
+                        + (usuarioNivel.getId() == null ? "!" : " " + usuarioNivel.getDescr() + "!"), e);
+            }
+        } else {
             em.getTransaction().begin();
-            Generico.salvarSemCommit( usuarioNivel , em );
+            Generico.salvarSemCommit(usuarioNivel, em);
             em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-            throw new RuntimeException("Erro ao salvar o Nível de Usuário " + (usuarioNivel.getId()==null ? "!" : " " + usuarioNivel.getDescr() + "!"), e);
         }
         return usuarioNivel;
     }
@@ -40,20 +48,31 @@ public class UsuarioNivelDaoJpa implements UsuarioNivelDao {
     public UsuarioNivel buscar(Long id) {
         TypedQuery<UsuarioNivel> query = 
         em.createQuery("select a from UsuarioNivel a where a.id = :id", UsuarioNivel.class);
-        return query.setParameter("id", id).getSingleResult();    
+        try {
+            return query.setParameter("id", id).getSingleResult();    
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public boolean remover(Long id) {
-        return remover(buscar(id));
+        UsuarioNivel usuarioNivel = buscar(id);
+        if (usuarioNivel.getId() == null) throw new RuntimeException("Nível de usuário não cadastrado => ID " + id + "!");
+        return remover(usuarioNivel);
     }
 
     @Override
     public boolean remover(UsuarioNivel usuarioNivel) {
-        em.getTransaction().begin();
-        em.remove(usuarioNivel);
-        em.getTransaction().commit();
-        return true;
+        try {
+            em.getTransaction().begin();
+            em.remove(usuarioNivel);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return false;
+        }
     }
     
 }
