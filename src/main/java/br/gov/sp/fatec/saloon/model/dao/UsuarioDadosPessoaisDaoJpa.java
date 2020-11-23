@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 
 public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
@@ -19,110 +20,109 @@ public class UsuarioDadosPessoaisDaoJpa implements UsuarioDadosPessoaisDao {
     public UsuarioDadosPessoaisDaoJpa(EntityManager em){ this.em = em; }
 
     @Override
-    public UsuarioDadosPessoais salvarUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais) {
-        try {
+    public UsuarioDadosPessoais salvar(UsuarioDadosPessoais usuarioDadosPessoais) {
+        if (Parametro.lerLogico("PARAMETRO")) {
+            try {
+                em.getTransaction().begin();
+                Generico.salvarSemCommit(usuarioDadosPessoais, em);
+                em.getTransaction().commit();
+            } catch (PersistenceException e) {
+                e.printStackTrace();
+                em.getTransaction().rollback();
+                throw new RuntimeException("Erro ao salvar o Usuário"
+                        + (usuarioDadosPessoais.getId() == null ? "!" : " " + usuarioDadosPessoais.getNome() + "!"), e);
+            }
+        } else {
             em.getTransaction().begin();
-            Generico.salvarSemCommit( usuarioDadosPessoais , em );
+            Generico.salvarSemCommit(usuarioDadosPessoais, em);
             em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-            throw new RuntimeException("Erro ao salvar o Usuário" + (usuarioDadosPessoais.getId()==null ? "!" : " " + usuarioDadosPessoais.getNome() + "!"), e);
         }
-        
+
         return usuarioDadosPessoais;
     }
 
     @Override
-    public UsuarioDadosPessoais cadastrarUsuarioDadosPessoais(String apelido
-                                                             ,String email
-                                                             ,String senha
-                                                             ,String nome
-                                                             ,Date   dtNascimento
-                                                             ,String cpf
-                                                             ,Long   nivelUsuario) {
+    public UsuarioDadosPessoais cadastrar(String apelido
+                                         ,String email
+                                         ,String senha
+                                         ,String nome
+                                         ,Date   dtNascimento
+                                         ,String cpf
+                                         ,Long   nivelUsuario) {
 
-        return salvarUsuarioDadosPessoais( new UsuarioDadosPessoais(apelido
-                                                                   , email
-                                                                   , senha
-                                                                   , nome
-                                                                   , dtNascimento
-                                                                   , cpf
-                                                                   , nivelUsuario) );
+        return salvar( new UsuarioDadosPessoais(apelido
+                                               , email
+                                               , senha
+                                               , nome
+                                               , dtNascimento
+                                               , cpf
+                                               , nivelUsuario) );
 
     }
 
     @Override
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoais(Long id) {
-        UsuarioDadosPessoais retorno;
-        String jpql = "select u from UsuarioDadosPessoais u where u.id = :id";
-        TypedQuery<UsuarioDadosPessoais> query = em.createQuery(jpql, UsuarioDadosPessoais.class);
-        query.setParameter("id", id);
+    public UsuarioDadosPessoais buscar(Long id) {
+        TypedQuery<UsuarioDadosPessoais> query = em.createQuery("select u from UsuarioDadosPessoais u where u.id = :id", UsuarioDadosPessoais.class);
         try {
-            retorno = query.getSingleResult();
+            return query.setParameter("id", id).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;    
     }
 
     @Override
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoais(String apelido) {
-        UsuarioDadosPessoais retorno;
-        String jpql = "select u from UsuarioDadosPessoais u where u.apelido = :apelido";
-        TypedQuery<UsuarioDadosPessoais> query = em.createQuery(jpql, UsuarioDadosPessoais.class);
-        query.setParameter("apelido", apelido);    
+    public UsuarioDadosPessoais buscar(String apelido) {
+        TypedQuery<UsuarioDadosPessoais> query = em.createQuery("select u from UsuarioDadosPessoais u where u.apelido = :apelido", UsuarioDadosPessoais.class);
         try {
-            retorno = query.getSingleResult();
+            return query.setParameter("apelido", apelido).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoaisPorEmail(String email) {
-        UsuarioDadosPessoais retorno;
-        String jpql = "select u from UsuarioDadosPessoais u where u.email = :email";
-        TypedQuery<UsuarioDadosPessoais> query = em.createQuery(jpql, UsuarioDadosPessoais.class);
-        query.setParameter("email", email);
+    public UsuarioDadosPessoais buscarPorEmail(String email) {
+        TypedQuery<UsuarioDadosPessoais> query = em.createQuery("select u from UsuarioDadosPessoais u where u.email = :email", UsuarioDadosPessoais.class);
         try {
-            retorno = query.getSingleResult();
+            return query.setParameter("email", email).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
-    public boolean removerUsuarioDadosPessoais(Long id) {
-        UsuarioDadosPessoais usuarioDadosPessoais = buscarUsuarioDadosPessoais(id);
+    public boolean remover(Long id) {
+        UsuarioDadosPessoais usuarioDadosPessoais = buscar(id);
         if (usuarioDadosPessoais.getId() == null) throw new RuntimeException("Usuário não cadastrado => ID " + id + "!");
-        removerUsuarioDadosPessoais(usuarioDadosPessoais);
-        return true;
+        return remover(usuarioDadosPessoais);
     }
 
     @Override
-    public boolean removerUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais) {
-        em.getTransaction().begin();
-        em.remove(usuarioDadosPessoais);
-        em.getTransaction().commit();
-        return true;
+    public boolean remover(UsuarioDadosPessoais usuarioDadosPessoais) {
+        try {
+            em.getTransaction().begin();
+            em.remove(usuarioDadosPessoais);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            em.getTransaction().rollback();
+            return false;
+        }
     }
 
     @Override
     public boolean existe(Long id) {
-        return buscarUsuarioDadosPessoais(id) != null;
+        return buscar(id) != null;
     }
 
     @Override
     public boolean existe(String apelido) {
-        return buscarUsuarioDadosPessoais( apelido ) != null;
+        return buscar( apelido ) != null;
     }
 
     @Override
-    public boolean existeEmail(String email) {
-        return buscarUsuarioDadosPessoaisPorEmail(email) != null;
+    public boolean existePorEmail(String email) {
+        return buscarPorEmail(email) != null;
     }
 
 }

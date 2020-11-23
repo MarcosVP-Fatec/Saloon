@@ -31,7 +31,7 @@ public class UsuarioDadosPessoaisController extends HttpServlet {
         Long id = Long.valueOf(req.getParameter("id"));
 
         // Busca o usuario com o id
-        UsuarioDadosPessoais usuario = new UsuarioDadosPessoaisDaoJpa().buscarUsuarioDadosPessoais(id);
+        UsuarioDadosPessoais usuario = new UsuarioDadosPessoaisDaoJpa().buscar(id);
 
         // Usamos o Jackson para transformar o objeto em um JSON (String)
         ObjectMapper mapper = new ObjectMapper();
@@ -78,7 +78,7 @@ public class UsuarioDadosPessoaisController extends HttpServlet {
         System.out.println(req.getReader());
 
         // Salvamos no Banco de Dados
-        new UsuarioDadosPessoaisDaoJpa().salvarUsuarioDadosPessoais(usuario);
+        new UsuarioDadosPessoaisDaoJpa().salvar(usuario);
 
         // Retornamos o registro gerado formatando a resposta
         String usuarioDadosPessoaisJson = mapper.writeValueAsString(usuario);

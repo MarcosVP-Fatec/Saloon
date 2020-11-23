@@ -83,7 +83,11 @@ public class AlugavelDaoJpa implements AlugavelDao {
     public List<Alugavel> buscar(String apelidoProprietario) {
         String jpql = "select a from Alugavel a inner join a.proprietario p where p.apelido = :apelidoProprietario";
         TypedQuery<Alugavel> query = em.createQuery(jpql, Alugavel.class);
-        return query.setParameter("apelidoProprietario", apelidoProprietario).getResultList();
+        try {
+            return query.setParameter("apelidoProprietario", apelidoProprietario).getResultList();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

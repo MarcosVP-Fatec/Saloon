@@ -6,30 +6,30 @@ import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
 
 public interface UsuarioDadosPessoaisDao {
 
-    public UsuarioDadosPessoais salvarUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais);
+    public UsuarioDadosPessoais salvar(UsuarioDadosPessoais usuarioDadosPessoais);
 
-    public UsuarioDadosPessoais cadastrarUsuarioDadosPessoais(String apelido
-                                                            , String email
-                                                            , String senha
-                                                            , String nome
-                                                            , Date   dtNascimento
-                                                            , String cpf
-                                                            , Long   nivelUsuario);
+    public UsuarioDadosPessoais cadastrar(String apelido
+                                         , String email
+                                         , String senha
+                                         , String nome
+                                         , Date   dtNascimento
+                                         , String cpf
+                                         , Long   nivelUsuario);
 
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoais(Long id);
+    public UsuarioDadosPessoais buscar(Long id);
 
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoais(String apelido);
+    public UsuarioDadosPessoais buscar(String apelido);
 
-    public UsuarioDadosPessoais buscarUsuarioDadosPessoaisPorEmail(String email);
+    public UsuarioDadosPessoais buscarPorEmail(String email);
 
-    public boolean removerUsuarioDadosPessoais(Long id);
+    public boolean remover(Long id);
 
-    public boolean removerUsuarioDadosPessoais(UsuarioDadosPessoais usuarioDadosPessoais);
+    public boolean remover(UsuarioDadosPessoais usuarioDadosPessoais);
 
     public boolean existe(Long id);
 
     public boolean existe(String apelido);
 
-    public boolean existeEmail(String email);
+    public boolean existePorEmail(String email);
 
 }

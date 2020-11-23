@@ -81,7 +81,7 @@ public class MvpTesteDesenvolvimento {
         System.out.println(Texto.padC("######################################## CADASTRO DE USUÁRIO ISOLADO ########################################", LARGURA, '#'));
 
         if (!usuarioDadosPessoaisDao.existe("MVP")) {
-            usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
+            usuarioDadosPessoaisDao.salvar
             (new UsuarioDadosPessoais("MVP"
                                     ,"mvp@fatec.sp.gov.br"
                                     ,"pwMVP"
@@ -93,7 +93,7 @@ public class MvpTesteDesenvolvimento {
         } 
 
         if (!usuarioDadosPessoaisDao.existe("RSD")) {
-            usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais
+            usuarioDadosPessoaisDao.salvar
             (new UsuarioDadosPessoais("RSD"
                                     ,"rsd@fatec.sp.gov.br"
                                     ,"pwRSD"
@@ -107,9 +107,9 @@ public class MvpTesteDesenvolvimento {
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
         // Faz alteração da senha em um dos usuários
         // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-        usuario = usuarioDadosPessoaisDao.buscarUsuarioDadosPessoais("MVP");
+        usuario = usuarioDadosPessoaisDao.buscar("MVP");
         usuario.setSenha("senhaMVP");
-        usuarioDadosPessoaisDao.salvarUsuarioDadosPessoais( usuario );
+        usuarioDadosPessoaisDao.salvar( usuario );
         
         System.out.println(Texto.padC("######################################## CADASTRO DE PROPRIETARIO ########################################", LARGURA, '#'));
         

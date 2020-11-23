@@ -22,41 +22,32 @@ public class UsuarioDaoJpa implements UsuarioDao {
 
     @Override
     public Usuario buscar(Long id) {
-        Usuario retorno;
-        String jpql = "select u from Usuario u where u.id = :id";
-        TypedQuery<Usuario> query = em.createQuery(jpql, Usuario.class).setParameter("id", id);
+        TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.id = :id", Usuario.class);
         try {
-            retorno = query.getSingleResult();
+            return query.setParameter("id", id).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
     public Usuario buscar(String apelido) {
-        Usuario retorno;
-        TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.apelido = :apelido", Usuario.class)
-                .setParameter("apelido", apelido);
+        TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.apelido = :apelido", Usuario.class);
         try {
-            retorno = query.getSingleResult();
+            return query.setParameter("apelido", apelido).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
     public Usuario buscarPorEmail(String email) {
-        Usuario retorno;
-        TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class)
-                .setParameter("email", email);
+        TypedQuery<Usuario> query = em.createQuery("select u from Usuario u where u.email = :email", Usuario.class);
         try {
-            retorno = query.getSingleResult();
+            return query.setParameter("email", email).getSingleResult();
         } catch (Exception e) {
             return null;
         }
-        return retorno;
     }
 
     @Override
