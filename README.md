@@ -4,7 +4,7 @@
 
 ## Professores:  
 
-   **Giuliano Araujo Bertoti** - *Padrões de Projetos*  
+   **Emanuel Mineda Carneiro** - *Lab 4 Desenvolvimento*  
 
 ---------------------------------------------------------------
 ## Integrantes
