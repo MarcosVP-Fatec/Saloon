@@ -2,9 +2,10 @@
 
 ## 4º Banco de Dados - Fatec SJC - 2020/2
 
-## Professores:  
+## Professor:  
 
-   **Emanuel Mineda Carneiro** - *Lab 4 Desenvolvimento*  
+   
+**Giuliano Araujo Bertoti** - *Padrões de Projetos*  
 
 ---------------------------------------------------------------
 ## Integrantes
