@@ -28,12 +28,17 @@ export default new Vuex.Store({
   state: {
       login_usuario: ''
     , login_senha: ''
+    , login_sucesso: false
   },
   getters: {
+      getUsuario: state => { return state.login_usuario  }
+    , getSenha:   state => { return state.login_senha    }
+    , isLogado:   state => { return state.login_sucesso  }
   },
   mutations: {
       setUsuario(state, valor)      { state.login_usuario = valor;  }
     , setSenha(state, valor)        { state.login_senha = valor;    }
+    , setLogado(state, valor)       { state.login_sucesso = valor;  }
   },
   actions: {
       setNumero2Delay (context, valor) {

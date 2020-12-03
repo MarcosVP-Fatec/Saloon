@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/'
+        path: '/home'
         , name: 'Home'
         , component: Home
     }
@@ -27,6 +27,16 @@ const routes = [
         name: 'Usuario',
         component: () => import('../views/regi/Usuario.vue')
     }
+    , {
+        path: '/',
+        name: 'Logar',
+        component: () => import('../views/Logar.vue')
+    }
+    , {
+        path: '/naologado',
+        name: 'NaoLogado',
+        component: () => import('../views/NaoLogado.vue')
+    }
 
 ]
 
@@ -37,3 +47,4 @@ const router = new VueRouter({
 })
 
 export default router
+

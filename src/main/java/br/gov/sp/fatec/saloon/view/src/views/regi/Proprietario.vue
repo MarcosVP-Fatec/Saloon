@@ -82,8 +82,8 @@ export default {
                 },
                 {
                     auth: {
-                        username: this.usuario,
-                        password: this.senha
+                        username: this.login_usuario,
+                        password: this.login_senha
                     }
                 }
             ).then( res => {
@@ -92,7 +92,6 @@ export default {
                 this.email='';
                 this.senha='';
                 this.nome='';
-                this.dtNascimento='';
                 this.cpf='';
                 this.proprietarios.push(res.data);
             }).catch( error => console.log(error))

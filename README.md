@@ -11,7 +11,6 @@
 ## Integrantes
 * **Marcos Vinicio Pereira**
 * **Raian Silva Damaceno**
-* **Gustavo Joshua de Sene**
 
 ---------------------------------------------------------------
 Nome do Projeto : **Saloon**     
