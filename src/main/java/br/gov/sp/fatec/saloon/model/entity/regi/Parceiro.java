@@ -12,7 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioGeral;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @Table(name = "par_parceiro")
