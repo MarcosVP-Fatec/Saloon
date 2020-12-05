@@ -31,27 +31,21 @@ public class UsuarioController extends HttpServlet{
         
 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ENTREI NO doGET");
 System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ENTREI NO doGET"+req.getParameter("id"));
-        Long id = Long.valueOf(req.getParameter("id"));;
-        String apelido = "";
-        Usuario usuario;
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ID DE USUÁRIO = "+id);
-        if (id > 0){
-            usuario = new UsuarioDaoJpa().buscar(id);
-        } else {
-            apelido = req.getParameter("apelido");
-            usuario = new UsuarioDaoJpa().buscar(apelido);
-        }
+        String apelido = req.getParameter("apelido");
+        Usuario usuario = new UsuarioDaoJpa().buscar(apelido);
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ID DE USUÁRIO = "+usuario.getId());
         
         // Usamos o Jackson para transformar o objeto em um JSON (String)
         ObjectMapper mapper = new ObjectMapper();
         PrintWriter out = resp.getWriter();
         resp.setCharacterEncoding("UTF-8");
 
-        if (usuario != null) {
+        if (usuario.getId() != null) {
 
             String usuarioJson = mapper.writeValueAsString(usuario);
 
             // Formatação da Resposta
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> achei achei achei");
             resp.setContentType("application/json");
             resp.setStatus(200);
 
@@ -60,15 +54,10 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ID DE USUÁRIO = 
         } else {
 
             resp.setContentType("text/xml");
-            resp.setStatus(404);
-            if (id > 0){
-                resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Id de Usuário não encontrado => " + id);
-                out.print(">>>>>>>>>>>>>>>>>>>>>> Id de Usuário não encontrado => " + id);
-            } else {
-                resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
-                out.print(">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
-            }
+            resp.setStatus(401);
 
+            resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Usuário não encontrado => " + apelido);
+            out.print(">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
         }
 
         out.flush();
