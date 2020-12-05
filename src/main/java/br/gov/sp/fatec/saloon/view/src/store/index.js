@@ -33,7 +33,8 @@ export default new Vuex.Store({
   getters: {
       getUsuario:   state => { return state.login_usuario                               }
     , getSenha:     state => { return state.login_senha                                 }
-    , isLogVencido: state => { return Date.now() - state.login_momento > (1800 * 1000)  }
+    , isLogVencido: (state) => { return Date.now() - state.login_momento > (10 * 1000)  } //30 minutos
+    //, isLogVencido: (state) => { return Date.now() - state.login_momento > (1800 * 1000)  } //30 minutos
   },
   mutations: {
       setUsuario(state, valor)      { state.login_usuario = valor;      }

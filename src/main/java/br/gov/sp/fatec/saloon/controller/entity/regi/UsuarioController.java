@@ -19,6 +19,8 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 public class UsuarioController extends HttpServlet{
 
     private static final long serialVersionUID = 7401956926661998026L;
+    //private ServletContext context;
+
 
     /**
      * doGet 1) Recupera o parâmetro id do request 2) Recupera a entidade deste id
@@ -28,15 +30,14 @@ public class UsuarioController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Recupera o parâmetro id (de usuario?id=<valor>)
-        Long id = 0L;
-        String apelido = req.getParameter("apelido");
+        Long id = Long.valueOf(req.getParameter("id"));;
+        String apelido = "";
         Usuario usuario;
-        if (apelido == null){
-            usuario = new UsuarioDaoJpa().buscar(apelido);
-        } else {
-            id = Long.valueOf(req.getParameter("id"));
-            // Busca o usuario com o id
+        if (id > 0){
             usuario = new UsuarioDaoJpa().buscar(id);
+        } else {
+            apelido = req.getParameter("apelido");
+            usuario = new UsuarioDaoJpa().buscar(apelido);
         }
         
         // Usamos o Jackson para transformar o objeto em um JSON (String)
@@ -57,13 +58,13 @@ public class UsuarioController extends HttpServlet{
         } else {
 
             resp.setContentType("text/xml");
-            resp.setStatus(401);
-            if (id==0L){
-                resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
-                out.print(">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
-            } else {
+            resp.setStatus(404);
+            if (id > 0){
                 resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Id de Usuário não encontrado => " + id);
                 out.print(">>>>>>>>>>>>>>>>>>>>>> Id de Usuário não encontrado => " + id);
+            } else {
+                resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
+                out.print(">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
             }
 
         }

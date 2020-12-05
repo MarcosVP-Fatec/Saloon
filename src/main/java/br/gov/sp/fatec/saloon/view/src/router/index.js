@@ -1,6 +1,7 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue          from 'vue'
+import VueRouter    from 'vue-router'
+import Home         from '../views/Home.vue'
+import store        from '../store'
 
 Vue.use(VueRouter)
 
@@ -46,5 +47,26 @@ const router = new VueRouter({
     routes
 })
 
-export default router
+// to = Para onde quero ir
+// from = De onde eu venho
+// next = Função que uso para permitir ou não a navegação
+router.beforeEach( (to, from, next) => {
+    //Aqui faremos a verificação do usuário logado se ele tem premissão ou não de entrar
+    //if (from.name === 'Logar' || from.name === 'Home' || store.state.isLogValido()) {
+    window.alert("to.name = " + to.name + "   |||   from.name = " + from.name + "   |||   isLogVencido = " + (store.getters.isLogVencido?"SIM":"não"));    
+    if ( to.name === 'Home' || to.name === null) {    
+        next()
+    } else if (store.getters.isLogVencido) {
+        window.alert("else if (isLogVencido)= "+store.getters.isLogVencido);
+        if (to.name === 'Logar') {
+            next()
+        } else {
+           next(false) ;
+        }
+    } else {
+        alert("ÚLTIMO ELSE")
+        next()
+    }        
+} )
 
+export default router

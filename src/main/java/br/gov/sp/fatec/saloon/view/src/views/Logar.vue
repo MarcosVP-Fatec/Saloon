@@ -55,11 +55,13 @@ export default {
                         this.sucesso();
                     }).catch(error => {
                         console.log(error);
-                        if (error.response.status === 401){ //Significa que usuári oe senha estão errados
-                            console.log('Usuário ou senha inváidos!');
-                            this.$router.push('/naologado');
+                        if (error.response.status === 401){ //Significa que usuário e senha estão errados
+                            alert('Usuário ou senha inválidos');
+                            this.$router.push('/logar');
                         } else { //Se for qualquer outro erro signfica que usuário e senha passou
                             this.sucesso();
+                            alert('Logar.vue (else) = '+this.$router.to.path);
+                            this.$router.push(this.$router.to.path);
                         }
                     });
                 }
@@ -68,6 +70,8 @@ export default {
                 this.setSenha(this.log_senha);
                 this.setMomento();
                 this.$router.push('/home'); //Necessário criar uma rota proprietario
+                alert("Logar.vue (sucesso) => " + this.$router.axios.to.name);
+                
             }
         }
 }
