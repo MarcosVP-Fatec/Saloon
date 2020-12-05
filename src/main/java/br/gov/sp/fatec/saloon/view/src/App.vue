@@ -5,6 +5,7 @@
         |   <router-link to="/proprietario">Proprietários</router-link>
         |   <router-link to="/usuario">Usuários</router-link>
         |   <router-link to="/about">Sobre o Saloon</router-link>
+        |   <router-link to="/logar">Entrar</router-link>
     </div>
     <router-view/>
   </div>

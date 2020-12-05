@@ -60,6 +60,12 @@
                     <servlet-class>br.gov.sp.fatec.saloon.controller.entity.regi.ProprietarioController</servlet-class>
                 </servlet>
 
+        <!-- USUÁRIO -->
+                <servlet>
+                    <servlet-name>usuarioServlet</servlet-name>
+                    <servlet-class>br.gov.sp.fatec.saloon.controller.entity.regi.UsuarioController</servlet-class>
+                </servlet>
+
         <!-- USUÁRIO DADOS PESSOAIS -->
                 <servlet>
                     <servlet-name>usuarioDadosPessoaisServlet</servlet-name>
@@ -78,6 +84,12 @@
                 <servlet-mapping>
                     <servlet-name>proprietarioServlet</servlet-name>
                     <url-pattern>/proprietario</url-pattern>
+                </servlet-mapping>
+
+        <!-- USUÁRIO -->
+                <servlet-mapping>
+                    <servlet-name>usuarioServlet</servlet-name>
+                    <url-pattern>/usuario</url-pattern>
                 </servlet-mapping>
 
         <!-- USUÁRIO DADOS PESSOAIS -->

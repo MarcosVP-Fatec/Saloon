@@ -27,6 +27,16 @@ const routes = [
         name: 'Usuario',
         component: () => import('../views/regi/Usuario.vue')
     }
+    , {
+        path: '/logar',
+        name: 'Logar',
+        component: () => import('../views/Logar.vue')
+    }
+    , {
+        path: '/naologado',
+        name: 'NaoLogado',
+        component: () => import('../views/NaoLogado.vue')
+    }
 
 ]
 
@@ -37,3 +47,4 @@ const router = new VueRouter({
 })
 
 export default router
+
