@@ -19,8 +19,6 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 public class UsuarioController extends HttpServlet{
 
     private static final long serialVersionUID = 7401956926661998026L;
-    //private ServletContext context;
-
 
     /**
      * doGet 1) Recupera o parâmetro id do request 2) Recupera a entidade deste id
@@ -30,9 +28,13 @@ public class UsuarioController extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Recupera o parâmetro id (de usuario?id=<valor>)
+        
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ENTREI NO doGET");
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ENTREI NO doGET"+req.getParameter("id"));
         Long id = Long.valueOf(req.getParameter("id"));;
         String apelido = "";
         Usuario usuario;
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ID DE USUÁRIO = "+id);
         if (id > 0){
             usuario = new UsuarioDaoJpa().buscar(id);
         } else {
