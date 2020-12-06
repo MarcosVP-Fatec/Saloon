@@ -52,19 +52,21 @@ const router = new VueRouter({
 // next = Função que uso para permitir ou não a navegação
 router.beforeEach( (to, from, next) => {
     //Aqui faremos a verificação do usuário logado se ele tem premissão ou não de entrar
-    //if (from.name === 'Logar' || from.name === 'Home' || store.state.isLogValido()) {
-    window.alert("ROUTER | INDEX.JS to.name = " + to.name + "   |||   from.name = " + from.name + "   |||   isLogVencido = " + (store.getters.isLogVencido?"SIM":"não"));    
-    if ( to.name === 'Home' || to.name === null) {    
+    //window.alert("1 >> ROUTER | INDEX.JS to.name = " + to.name + "   |||   from.name = " + from.name + "   |||   isLogVencido = " + (store.getters.isLogVencido?"SIM":"não"));    
+    if ( to.name === 'Home' || to.name === 'About' ||  to.name === 'Logar' || to.name === null) {    
+        //window.alert("2 >> ROUTER | INDEX.JS next() ");
         next()
     } else if (store.getters.isLogVencido) {
-        window.alert("ROUTER | INDEX.JS else if (isLogVencido)= "+store.getters.isLogVencido);
+        //window.alert("3 >> ROUTER | INDEX.JS else if (isLogVencido)= "+store.getters.isLogVencido);
         if (to.name === 'Logar') {
+            //window.alert("3.SIM >> ROUTER | INDEX.JS else if (isLogVencido)= "+store.getters.isLogVencido);
             next()
         } else {
-           next(false) ;
+            window.alert("Você não está logado !")
+            next(false) ;
         }
     } else {
-        alert("ROUTER | INDEX.JS  ÚLTIMO ELSE")
+        //alert("4 >> ROUTER | INDEX.JS  ÚLTIMO ELSE")
         next()
     }        
 } )
