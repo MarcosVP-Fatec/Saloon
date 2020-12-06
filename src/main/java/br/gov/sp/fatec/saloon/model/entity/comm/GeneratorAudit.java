@@ -5,7 +5,6 @@ import java.util.Date;
 import javax.persistence.MappedSuperclass;
 
 import br.gov.sp.fatec.saloon.model.tool.Data;
-import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
 @MappedSuperclass
 public abstract class GeneratorAudit {
@@ -18,9 +17,9 @@ public abstract class GeneratorAudit {
     // CONSTRUTOR
     public GeneratorAudit(){
 
-        set_Inc_Usua( UsuarioLogado.getUsuarioLogadoId());
+        //set_Inc_Usua( usuario_autenticado );
         set_Inc_Data( Data.today() );
-        set_Alt_Usua( UsuarioLogado.getUsuarioLogadoId() );
+        //set_Alt_Usua( usuario_autenticado  );
         set_Alt_Data( Data.today() );
 
     }
@@ -37,12 +36,12 @@ public abstract class GeneratorAudit {
 
     //Atualização das alterações (Generics)
     public static <T> void setAll( T  t ){
-        ((GeneratorAudit) t).set_Inc_Usua( UsuarioLogado.getUsuarioLogadoId() );
+        //((GeneratorAudit) t).set_Inc_Usua( usuario_autenticado );
         ((GeneratorAudit) t).set_Inc_Data( Data.today() );
         GeneratorAudit.setAudit(t);
     }
     public static <T> void setAudit( T  t ){
-        ( (GeneratorAudit) t).set_Alt_Usua( UsuarioLogado.getUsuarioLogadoId() );
+        //( (GeneratorAudit) t).set_Alt_Usua( usuario_autenticado );
         ( (GeneratorAudit) t).set_Alt_Data( Data.today() );
     }
 

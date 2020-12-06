@@ -65,4 +65,17 @@ public class UsuarioDaoJpa implements UsuarioDao {
         return buscar(email) != null;
     }
 
+    public static boolean autenticar( String userName, String userPW){
+        
+        Usuario usuario = new UsuarioDaoJpa().buscar(userName);
+        return (usuario != null && usuario.getSenha().equals(userPW));
+
+    }
+
+    public static boolean isAdmin( String userName ){
+        
+        Usuario usuario = new UsuarioDaoJpa().buscar(userName);
+        return ( usuario != null ? usuario.getUsuarioNivel() == 1L: false );
+
+    }
 }

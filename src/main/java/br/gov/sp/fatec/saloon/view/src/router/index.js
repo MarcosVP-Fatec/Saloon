@@ -53,18 +53,18 @@ const router = new VueRouter({
 router.beforeEach( (to, from, next) => {
     //Aqui faremos a verificação do usuário logado se ele tem premissão ou não de entrar
     //if (from.name === 'Logar' || from.name === 'Home' || store.state.isLogValido()) {
-    window.alert("to.name = " + to.name + "   |||   from.name = " + from.name + "   |||   isLogVencido = " + (store.getters.isLogVencido?"SIM":"não"));    
+    window.alert("ROUTER | INDEX.JS to.name = " + to.name + "   |||   from.name = " + from.name + "   |||   isLogVencido = " + (store.getters.isLogVencido?"SIM":"não"));    
     if ( to.name === 'Home' || to.name === null) {    
         next()
     } else if (store.getters.isLogVencido) {
-        window.alert("else if (isLogVencido)= "+store.getters.isLogVencido);
+        window.alert("ROUTER | INDEX.JS else if (isLogVencido)= "+store.getters.isLogVencido);
         if (to.name === 'Logar') {
             next()
         } else {
            next(false) ;
         }
     } else {
-        alert("ÚLTIMO ELSE")
+        alert("ROUTER | INDEX.JS  ÚLTIMO ELSE")
         next()
     }        
 } )

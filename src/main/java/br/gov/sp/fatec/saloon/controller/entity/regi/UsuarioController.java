@@ -29,11 +29,8 @@ public class UsuarioController extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Recupera o parâmetro id (de usuario?id=<valor>)
         
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ENTREI NO doGET");
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ENTREI NO doGET"+req.getParameter("id"));
         String apelido = req.getParameter("apelido");
         Usuario usuario = new UsuarioDaoJpa().buscar(apelido);
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ID DE USUÁRIO = "+usuario.getId());
         
         // Usamos o Jackson para transformar o objeto em um JSON (String)
         ObjectMapper mapper = new ObjectMapper();
@@ -45,7 +42,7 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ID DE USUÁRIO = 
             String usuarioJson = mapper.writeValueAsString(usuario);
 
             // Formatação da Resposta
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> achei achei achei");
+System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ACHEI ACHEI ACHEI => ID DE USUÁRIO = " + usuario.getId());
             resp.setContentType("application/json");
             resp.setStatus(200);
 
@@ -65,3 +62,4 @@ System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> achei achei achei
     }
 
 }
+

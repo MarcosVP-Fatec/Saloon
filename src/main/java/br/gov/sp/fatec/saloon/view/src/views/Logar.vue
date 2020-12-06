@@ -46,23 +46,52 @@ export default {
             ])
         ,   login() {
                     axios.get('usuario',
-                             { params:     { id: 1},
+                             { params:     { apelido: this.log_apelido},
                                headers:    { accept: 'application/json'}, //Quero receber um json
                                auth:       { username: this.log_apelido, password: this.log_senha } //Minha autenticação
                             }
                     ).then( res => { //Se deu tudo certo funcionou usuário e senha
+                        console.log('############################ AXIOS SUCCESS');
                         console.log(res);
+                        console.log('############################');
                         this.sucesso();
+
                     }).catch(error => {
-                        console.log(error);
-                        if (error.response.status === 401){ //Significa que usuário e senha estão errados
-                            alert('Usuário ou senha inválidos');
+                        
+                        console.log('############################ AXIOS ERROR');
+
+                        if (error.response){
+
+                            // A solicitação foi feita e o servidor respondeu com um código de status
+                            console.log(error.response.data);
+                            console.log(error.response.status);
+                            console.log(error.response.headers);
+
+                            if (error.response.status === 401){ //Significa que usuário e senha estão errados
+                                alert('Usuário ou senha inválidos');
+                                this.$router.push('/logar');
+                            } else { //Se for qualquer outro erro signfica que usuário e senha passou
+                                this.sucesso();
+                                alert('Logar.vue (else/sucesso) = '+this.$router.to.path);
+                                this.$router.push(this.$router.to.path);
+                            }
+
+                        } else if (error.request) {
+
+                            // A solicitação foi feita, mas nenhuma resposta foi recebida
+                            alert('Erro na solicitação de autenticação! Tente novamente.');
                             this.$router.push('/logar');
-                        } else { //Se for qualquer outro erro signfica que usuário e senha passou
-                            this.sucesso();
-                            alert('Logar.vue (else) = '+this.$router.to.path);
-                            this.$router.push(this.$router.to.path);
+
+                        } else {
+
+                            // Algo aconteceu com a confituração da solicitação que disparou um erro.
+                            alert('Erro na solicitação de autenticação! Tente novamente.');
+                            this.$router.push('/logar');
+
                         }
+                        
+                        console.log(error.config);
+
                     });
                 }
         ,   sucesso() {

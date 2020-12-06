@@ -7,6 +7,7 @@
     <p><img align="center" alt="S A L O O N" src="../../assets/saloon.gif"></P>
 
     <button @click="voltar">Voltar para o início</button>
+
   </div>
 </template>
 

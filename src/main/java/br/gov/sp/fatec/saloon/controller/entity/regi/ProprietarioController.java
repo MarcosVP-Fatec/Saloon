@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
-import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
 /**
  * Controler da entidade Proprietário Este proprietário também adiciona um
@@ -100,8 +100,8 @@ public class ProprietarioController extends HttpServlet {
         //#####################################################################
         // Se o usuário não for admim não pode alterar
         //#####################################################################
-        if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
-           resp.setStatus(401); //UNAUTHORIZED
+        if (!UsuarioDaoJpa.isAdmin(req.getParameter("apelido"))){
+           resp.setStatus(403); //FORBIDDEN
            PrintWriter out = resp.getWriter();
            out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta ALTERACAO!");
            out.flush();
@@ -122,7 +122,7 @@ public class ProprietarioController extends HttpServlet {
         //#####################################################################
         // Se o usuário não for admim não pode excluir
         //#####################################################################
-        if (UsuarioLogado.getUsuarioLogado().getUsuarioNivel() != 1){
+        if (!UsuarioDaoJpa.isAdmin(req.getParameter("apelido"))){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
            out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta EXCLUSAO!");

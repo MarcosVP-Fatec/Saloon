@@ -15,8 +15,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.gov.sp.fatec.saloon.model.dao.UsuarioDaoJpa;
 import br.gov.sp.fatec.saloon.model.tool.Data;
-import br.gov.sp.fatec.saloon.model.tool.UsuarioLogado;
 
 public class FilterAuth implements Filter {
 
@@ -88,7 +88,7 @@ public class FilterAuth implements Filter {
 
                 this.context.log("[AUTH] Usuário e senha informados >>>>>>>>>>>> " + _username + ":" + _password );
 
-                if ( !UsuarioLogado.isUsuarioLogado( _username , _password ) ) {
+                if ( !UsuarioDaoJpa.autenticar( _username , _password ) ) {
                     unAuthorized(res, "Usuário ou senha inválidos => " + credentials);
                     return;
                 }
