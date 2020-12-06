@@ -4,7 +4,6 @@
         não queremos enviar os dados para o back-end nem que recarregue a tela. Este comando vai chamar
         um método de login. -->
   <div>
-    <div v-if="this.isLogVencido">
         <form @submit.prevent="login">
             <h2>Entre com seu usuário e senha</h2>
             <p>
@@ -16,10 +15,6 @@
             <p> {{ log_situacao }}</p>
             <button type="submit" style="height:50px; width:300px; border-radius:25px;">Ok</button>
         </form>
-    </div>
-    <div v-if="!this.isLogVencido">
-        <h1>Você já está logado!</h1>
-    </div>
   </div>
 </template>
 
@@ -42,7 +37,8 @@ export default {
                 'setUsuario', 'setSenha', 'setMomento'
             ]),
             ...mapGetters([
-                'isLogVencido'
+                'isLogVencido',
+                'getUsuario'
             ])
         ,   login() {
                     axios.get('usuario',
@@ -102,5 +98,6 @@ export default {
             }
         }
 }
+
 </script>
 

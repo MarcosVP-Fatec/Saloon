@@ -55,16 +55,10 @@ router.beforeEach( (to, from, next) => {
     //window.alert("1 >> ROUTER | INDEX.JS to.name = " + to.name + "   |||   from.name = " + from.name + "   |||   isLogVencido = " + (store.getters.isLogVencido?"SIM":"não"));    
     if ( to.name === 'Home' || to.name === 'About' ||  to.name === 'Logar' || to.name === null) {    
         //window.alert("2 >> ROUTER | INDEX.JS next() ");
-        next()
+        next();
     } else if (store.getters.isLogVencido) {
-        //window.alert("3 >> ROUTER | INDEX.JS else if (isLogVencido)= "+store.getters.isLogVencido);
-        if (to.name === 'Logar') {
-            //window.alert("3.SIM >> ROUTER | INDEX.JS else if (isLogVencido)= "+store.getters.isLogVencido);
-            next()
-        } else {
-            window.alert("Você não está logado !")
-            next(false) ;
-        }
+        window.alert("Você não está logado !!!");
+        next(false);
     } else {
         //alert("4 >> ROUTER | INDEX.JS  ÚLTIMO ELSE")
         next()

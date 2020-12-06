@@ -4,37 +4,72 @@
             <form @submit.prevent="cadastrar"> 
                 <h2>Proprietário</h2>
                 <p>
-                    <label for="apelido">Apelido: </label>
-                    <input type="text" id = "apelido" required autofocus v-model="apelido">
+                    <label for="id" size=50>Identificador: </label>
+                    <input  type="text"   
+                            id="id" 
+                            size=50
+                            disable=""
+                            placeholder="Tela em modo de Inclusão"
+                            v-model="id"/>
                 </p><p>    
-                    <label for="email">Email: </label>
-                    <input type="email" id = "email" required v-model="email">
+                <p>
+                    <label for="        apelido" size=50>Apelido: </label>
+                    <input  type="text"
+                            id="apelido"
+                            size=50
+                            placeholder="Apelido"
+                            required autofocus v-model="apelido"/>
+                </p><p>    
+                    <label for="email"   size=50>Email: </label>
+                    <input  type="email"
+                            id="email" 
+                            size=50
+                            placeholder="E-mail"
+                            required v-model="email"/>
                 </p><p>
-                    <label for="senha">Senha: </label>
-                    <input type="password" id = "senha" required v-model="senha">
+                    <label for="senha" size=50>Senha: </label>
+                    <input  type="password"
+                            id="senha"
+                            size=50
+                            placeholder="Senha"
+                            required v-model="senha"/>
                 </p><p>
-                    <label for="nome">Nome completo: </label>
-                    <input type="text" id = "nome" required v-model="nome">
+                    <label for="nome" size=50>Nome completo: </label>
+                    <input  type="text"
+                            id="nome"
+                            size=50
+                            placeholder="Nome completo"
+                            required v-model="nome">
                 </p><p>
-                    <label for="dtnascimento">Data de nascimento: </label>
-                    <input type="date" id = "dtnascimento" required v-model="dtnascimento">
+                    <label for="dtnascimento" size=50>Data de nascimento: </label>
+                    <input  type="date"
+                            id="dtnascimento"
+                            required v-model="dtnascimento"/>
                 </p><p>
                     <label for="cpf">CPF: </label>
-                    <input type="text" id = "cpf" required v-model="cpf">
+                    <input  type="text"
+                            id="cpf"
+                            size=50
+                            data-mask="000.000.000-00" data-mask-selectonfocus="true" 
+                            placeholder="C.P.F."
+                            required v-model="cpf"/>
                 </p>
-                <button type="submit">Salvar</button>
+                <button type="submit" style="height:40px; width:300px; border-radius:25px;">Salvar</button>
+                
             </form>
         </div>
 
         <div class="proprietario-tabela">    
-        <table>
+        <table border="1px">
             <thead>
                 <th>Id</th>
-                <th>Nome</th>
+                <th>Login</th>
+                <th>Nome Completo</th>
             </thead>
             <tbody>
                 <tr v-for="prop in proprietarios" :key="prop.id">
                     <td>{{ prop.id              }}</td>
+                    <td>{{ prop.apelido         }}</td>
                     <td>{{ prop.nome            }}</td>
                 </tr>
             </tbody>
@@ -51,13 +86,14 @@ export default {
     name: 'app-proprietario',
     data() {
         return {
-              apelido:      ''
-            , email:        ''
-            , senha:        ''
-            , nome:         ''
-            , dtnascimento: ''
-            , cpf:          ''
-            , proprietarios: []
+                 id: ''
+               , apelido:      ''
+               , email:        ''
+               , senha:        ''
+               , nome:         ''
+               , dtnascimento: ''
+               , cpf:          ''
+               , proprietarios: []
         }
     },
     computed: {
