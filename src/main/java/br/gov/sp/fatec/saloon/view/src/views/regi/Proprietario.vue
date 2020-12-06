@@ -54,7 +54,8 @@
                             placeholder="C.P.F."
                             required v-model="cpf"/>
                 </p>
-                <button type="submit" style="height:40px; width:300px; border-radius:25px;">Salvar</button>
+                <button type="submit" style="height:20px; width:100px; border-radius:25px;">Salvar</button>
+                <button type="submit" style="height:20px; width:100px; border-radius:25px;">Excluir</button>
                 
             </form>
         </div>
@@ -62,15 +63,15 @@
         <div class="proprietario-tabela">    
         <table border="1px">
             <thead>
-                <th>Id</th>
-                <th>Login</th>
-                <th>Nome Completo</th>
+                <th width="050">Cód</th>
+                <th width="100">Login</th>
+                <th width="300">Nome Completo</th>
             </thead>
             <tbody>
                 <tr v-for="prop in proprietarios" :key="prop.id">
-                    <td>{{ prop.id              }}</td>
-                    <td>{{ prop.apelido         }}</td>
-                    <td>{{ prop.nome            }}</td>
+                    <td width="050">{{ prop.id              }}</td>
+                    <td width="100">{{ prop.apelido         }}</td>
+                    <td width="300">{{ prop.nome            }}</td>
                 </tr>
             </tbody>
         </table>
@@ -107,14 +108,65 @@ export default {
             // 1º parâmetro = rota
             // 2º parâmetro = json
             // 3º parãmetro = propriedades= autenticação.
+            if (this.id > 0){ //PUT
+                axios.put('proprietario',
+                    {       id:             this.id
+                        ,   apelido:        this.apelido
+                        ,   email:          this.email
+                        ,   senha:          this.senha
+                        ,   nome:           this.nome
+                        ,   dtNascimento:   this.dtnascimento
+                        ,   cpf:            this.cpf
+                    },
+                    {
+                        auth: {
+                            username: this.login_usuario,
+                            password: this.login_senha
+                        }
+                    }
+                ).then( res => {
+                    console.log(res);
+                    this.apelido='';
+                    this.email='';
+                    this.senha='';
+                    this.nome='';
+                    this.cpf='';
+                    this.proprietarios.push(res.data);
+                }).catch( error => console.log(error));
+            } else {   //POST
+                axios.post('proprietario',
+                    {
+                            apelido:        this.apelido
+                        ,   email:          this.email
+                        ,   senha:          this.senha
+                        ,   nome:           this.nome
+                        ,   dtNascimento:   this.dtnascimento
+                        ,   cpf:            this.cpf
+                    },
+                    {
+                        auth: {
+                            username: this.login_usuario,
+                            password: this.login_senha
+                        }
+                    }
+                ).then( res => {
+                    console.log(res);
+                    this.apelido='';
+                    this.email='';
+                    this.senha='';
+                    this.nome='';
+                    this.cpf='';
+                    this.proprietarios.push(res.data);
+                }).catch( error => console.log(error));
+            }
+        },
+        getProprietarios(){
+            // 1º parâmetro = rota
+            // 2º parâmetro = json
+            // 3º parãmetro = propriedades= autenticação.
             axios.post('proprietario',
                 {
-                        apelido:        this.apelido
-                    ,   email:          this.email
-                    ,   senha:          this.senha
-                    ,   nome:           this.nome
-                    ,   dtNascimento:   this.dtnascimento
-                    ,   cpf:            this.cpf
+                        id: 4
                 },
                 {
                     auth: {
@@ -124,11 +176,8 @@ export default {
                 }
             ).then( res => {
                 console.log(res);
-                this.apelido='';
-                this.email='';
-                this.senha='';
-                this.nome='';
-                this.cpf='';
+                alert("VER RES.DATA");
+                alert(res.data);
                 this.proprietarios.push(res.data);
             }).catch( error => console.log(error))
         }
