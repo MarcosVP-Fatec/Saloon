@@ -4,15 +4,6 @@
             <form @submit.prevent="cadastrar"> 
                 <h2>Proprietário</h2>
                 <p>
-                    <label for="id" size=50>Identificador: </label>
-                    <input  type="text"   
-                            id="id" 
-                            size=50
-                            disable=""
-                            placeholder="Tela em modo de Inclusão"
-                            v-model="id"/>
-                </p><p>    
-                <p>
                     <label for="        apelido" size=50>Apelido: </label>
                     <input  type="text"
                             id="apelido"
@@ -53,24 +44,36 @@
                             data-mask="000.000.000-00" data-mask-selectonfocus="true" 
                             placeholder="C.P.F."
                             required v-model="cpf"/>
+                </p><p>
+                    <label for="id" size=50>Identificador: </label>
+                    <input  type="text"   
+                            id="id" 
+                            size=50
+                            readonly 
+                            placeholder="Tela em modo de Inclusão"
+                            v-model="id"/>
                 </p>
-                <button type="submit" style="height:20px; width:100px; border-radius:25px;">Salvar</button>
-                <button type="submit" style="height:20px; width:100px; border-radius:25px;">Excluir</button>
+
+                <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>
+                <button type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
+                <!-- <button type="submit" style="height:30px; width:120px; border-radius:25px;">Excluir</button> -->
                 
             </form>
         </div>
 
         <div class="proprietario-tabela">    
+        <button type="button" style="height:30px; width:120px; border-radius:25px;" click="atualizarLista">Atualizar Lista</button>
         <table border="1px">
             <thead>
                 <th width="050">Cód</th>
-                <th width="100">Login</th>
+                <th width="150">Login</th>
                 <th width="300">Nome Completo</th>
             </thead>
             <tbody>
-                <tr v-for="prop in proprietarios" :key="prop.id">
+                <tr v-for="prop in proprietarios" :key="prop.id" @dblclick="rowDelete(row,$event)" @click="rowSelect(row,$event)" >
+                    
                     <td width="050">{{ prop.id              }}</td>
-                    <td width="100">{{ prop.apelido         }}</td>
+                    <td width="150">{{ prop.apelido         }}</td>
                     <td width="300">{{ prop.nome            }}</td>
                 </tr>
             </tbody>
@@ -85,8 +88,12 @@ import { mapState } from 'vuex';
 
 export default {
     name: 'app-proprietario',
+    mounted() {
+        this.atualizarLista()
+    },
     data() {
-        return {
+        return { 
+            proprietario: {
                  id: ''
                , apelido:      ''
                , email:        ''
@@ -94,7 +101,8 @@ export default {
                , nome:         ''
                , dtnascimento: ''
                , cpf:          ''
-               , proprietarios: []
+            }
+            , proprietarios: []
         }
     },
     computed: {
@@ -104,6 +112,49 @@ export default {
         ])
     },
     methods: {
+        rowSelect(indice) {
+            alert(this.proprietarios[indice].id);
+            axios.get('proprietario',{ id: this.proprietarios[indice][0]},
+                { auth: { username: this.login_usuario , password: this.login_senha } }
+            ).then( res => {
+                console.log(res);
+                this.proprietarios.push(res.data);
+            }).catch( error => console.log(error));
+        },
+        rowDelete(indice) {
+            alert("EXCLUSÃO");
+            alert(this.proprietarios[indice].id);
+            if (window.confirm("Deseja mesmo excluir este proprietário ??")) {
+                axios.delete('proprietario',{ id: this.proprietarios[indice].id},
+                    { auth: { username: this.login_usuario , password: this.login_senha } }
+                ).then( res => {
+                    console.log(res);
+                    this.proprietarios.splice(indice,1);
+                }).catch( error => console.log(error));
+            }
+        },
+        atualizarLista(){
+                // 1º parâmetro = rota
+                // 2º parâmetro = json
+                // 3º parãmetro = propriedades= autenticação.
+                axios.get('proprietario',
+                    { auth: { username: this.login_usuario , password: this.login_senha } }
+                ).then( res => {
+                    console.log(res);
+                    this.proprietarios = res.data;
+                }).catch( error => console.log(error))
+        },
+        novo(){
+            alert("teste")
+            this.proprietario = {};
+            alert("teste 2")
+            // this.id='';
+            // this.apelido='';
+            // this.email='';
+            // this.senha='';
+            // this.nome='';
+            // this.cpf='';
+        },
         cadastrar() {
             // 1º parâmetro = rota
             // 2º parâmetro = json
@@ -126,11 +177,7 @@ export default {
                     }
                 ).then( res => {
                     console.log(res);
-                    this.apelido='';
-                    this.email='';
-                    this.senha='';
-                    this.nome='';
-                    this.cpf='';
+                    this.id = res.data.id;
                     this.proprietarios.push(res.data);
                 }).catch( error => console.log(error));
             } else {   //POST
@@ -151,38 +198,14 @@ export default {
                     }
                 ).then( res => {
                     console.log(res);
-                    this.apelido='';
-                    this.email='';
-                    this.senha='';
-                    this.nome='';
-                    this.cpf='';
+                    this.id = res.data.id;
                     this.proprietarios.push(res.data);
                 }).catch( error => console.log(error));
             }
-        },
-        getProprietarios(){
-            // 1º parâmetro = rota
-            // 2º parâmetro = json
-            // 3º parãmetro = propriedades= autenticação.
-            axios.post('proprietario',
-                {
-                        id: 4
-                },
-                {
-                    auth: {
-                        username: this.login_usuario,
-                        password: this.login_senha
-                    }
-                }
-            ).then( res => {
-                console.log(res);
-                alert("VER RES.DATA");
-                alert(res.data);
-                this.proprietarios.push(res.data);
-            }).catch( error => console.log(error))
         }
     }
 }
+
 </script>
 
 <style>

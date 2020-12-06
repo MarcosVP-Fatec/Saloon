@@ -1,37 +1,42 @@
 package br.gov.sp.fatec.saloon.model.dao.interf;
 
 import java.util.Date;
+import java.util.List;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
 public interface ProprietarioDao {
 
-    public Proprietario salvarProprietario(Proprietario proprietario);
+    public Proprietario salvar(Proprietario proprietario);
 
-    public Proprietario cadastrarProprietario(String apelido
-                                             ,String email
-                                             ,String senha
-                                             ,String nome
-                                             ,Date dtNascimento
-                                             ,String cpf
-                                             ,Date dtInicio);
+    public Proprietario cadastrar(String apelido
+                                 ,String email
+                                 ,String senha
+                                 ,String nome
+                                 ,Date dtNascimento
+                                 ,String cpf
+                                 ,Date dtInicio);
 
-    public Proprietario cadastrarProprietario(String apelido
-                                             ,String email
-                                             ,String senha
-                                             ,String nome
-                                             ,Date dtNascimento
-                                             ,String cpf);
+    public Proprietario cadastrar(String apelido
+                                 ,String email
+                                 ,String senha
+                                 ,String nome
+                                 ,Date dtNascimento
+                                 ,String cpf);
 
-    public Proprietario buscarProprietario(Long id);
+    public Proprietario buscar(Long id);
 
-    public Proprietario buscarProprietario(String apelido );
+    public Proprietario buscar(String apelido );
 
-    public Proprietario buscarProprietarioPorEmail(String email);
+    public Proprietario buscarPorEmail(String email);
 
-    public boolean removerProprietario(Long id);
+    public List<Proprietario> buscar();
 
-    public boolean removerProprietario(Proprietario proprietario);
+    public boolean remover(Proprietario proprietario);
+
+    public boolean remover(Long id);
+
+    public boolean remover(String apelido);
     
     public boolean existe(Long id);
 

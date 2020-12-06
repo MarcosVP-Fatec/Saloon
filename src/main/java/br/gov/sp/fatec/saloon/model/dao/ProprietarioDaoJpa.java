@@ -1,12 +1,14 @@
 package br.gov.sp.fatec.saloon.model.dao;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 import br.gov.sp.fatec.saloon.model.PersistenceManager;
 import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
+import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
@@ -19,31 +21,36 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
     public ProprietarioDaoJpa(EntityManager em){ this.em = em; }
 
     @Override
-    public Proprietario salvarProprietario(Proprietario proprietario) {
+    public Proprietario salvar(Proprietario proprietario) {
+        if (Parametro.lerLogico("PARAMETRO")) {
+            try {
+                em.getTransaction().begin();
+                Generico.salvarSemCommit( proprietario , em );
+                em.getTransaction().commit();
+            } catch (Exception e) {
+                e.printStackTrace();
+                em.getTransaction().rollback();
+                throw new RuntimeException(
+                        "Erro ao salvar o Proprietário" + (proprietario.getId()==null ? "!" : " " + proprietario.getNome() + "!"),
+                        e);
+            }            
+        } else {
             em.getTransaction().begin();
             Generico.salvarSemCommit( proprietario , em );
             em.getTransaction().commit();
-/*
-        try {
-            em.getTransaction().begin();
-            Generico.salvarSemCommit( proprietario , em );
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-            throw new RuntimeException("Erro ao salvar o Proprietário" + (proprietario.getId()==null ? "!" : " " + proprietario.getNome() + "!"), e);
-        }*/
+        }
+
         return proprietario;
     }
 
     @Override
-    public Proprietario cadastrarProprietario(String apelido
-                                            , String email
-                                            , String senha
-                                            , String nome
-                                            , Date dtNascimento
-                                            , String cpf
-                                            , Date dtInicio) {
+    public Proprietario cadastrar(String apelido
+                                , String email
+                                , String senha
+                                , String nome
+                                , Date dtNascimento
+                                , String cpf
+                                , Date dtInicio) {
 
         Proprietario prop = new Proprietario( apelido
                                             , email
@@ -53,28 +60,28 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
                                             , cpf);
         prop.setDtInicio( dtInicio );                                                
 
-        return salvarProprietario( prop );
+        return salvar( prop );
     }
 
     @Override
-    public Proprietario cadastrarProprietario(String apelido
-                                            , String email
-                                            , String senha
-                                            , String nome
-                                            , Date dtNascimento
-                                            , String cpf) {
+    public Proprietario cadastrar(String apelido
+                                , String email
+                                , String senha
+                                , String nome
+                                , Date dtNascimento
+                                , String cpf) {
 
-        return cadastrarProprietario( apelido
-                                    , email
-                                    , senha
-                                    , nome
-                                    , dtNascimento
-                                    , cpf
-                                    , Data.today());
+        return cadastrar( apelido
+                        , email
+                        , senha
+                        , nome
+                        , dtNascimento
+                        , cpf
+                        , Data.today());
     }
 
     @Override
-    public Proprietario buscarProprietario(Long id) {
+    public Proprietario buscar(Long id) {
         Proprietario retorno;
         String jpql = "select p from Proprietario p where p.id = :id";
         TypedQuery<Proprietario> query = em.createQuery(jpql, Proprietario.class);
@@ -88,7 +95,7 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
     }
 
     @Override
-    public Proprietario buscarProprietario(String apelido) {
+    public Proprietario buscar(String apelido) {
         Proprietario retorno;
         String jpql = "select p from Proprietario p where p.apelido = :apelido";
         TypedQuery<Proprietario> query = em.createQuery(jpql, Proprietario.class);
@@ -102,7 +109,7 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
     }
 
     @Override
-    public Proprietario buscarProprietarioPorEmail(String email) {
+    public Proprietario buscarPorEmail(String email) {
         Proprietario retorno;
         String jpql = "select p from Proprietario p  where p.email = :email";
         TypedQuery<Proprietario> query = em.createQuery(jpql, Proprietario.class);
@@ -116,34 +123,50 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
     }
 
     @Override
-    public boolean removerProprietario(Long id) {
-        Proprietario proprietario = buscarProprietario(id);
-        if (proprietario.getId() == null) throw new RuntimeException("Proprietário não cadastrado => ID " + id + "!");
-        removerProprietario(proprietario);
-        return true;
+    public List<Proprietario> buscar() {
+        List<Proprietario> retorno;
+        TypedQuery<Proprietario> query = em.createQuery("select p from Proprietario p", Proprietario.class);
+        try {
+            retorno = query.getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+        return retorno;
     }
 
     @Override
-    public boolean removerProprietario(Proprietario proprietario) {
-        em.getTransaction().begin();
-        em.remove(proprietario);
-        em.getTransaction().commit();
-        return true;
+    public boolean remover(Proprietario proprietario) {
+        try {
+            em.remove(proprietario);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean remover(Long id) {
+        return remover(buscar(id));
+    }
+
+    @Override
+    public boolean remover(String apelido) {
+        return remover(buscar(apelido));
     }
 
     @Override
     public boolean existe(Long id) {
-        return buscarProprietario(id) != null;
+        return buscar(id) != null;
     }
 
     @Override
     public boolean existe(String apelido) {
-        return buscarProprietario(apelido) != null;
+        return buscar(apelido) != null;
     }
 
     @Override
     public boolean existeEmail(String email) {
-        return buscarProprietarioPorEmail(email) != null;
+        return buscarPorEmail(email) != null;
     }
     
 }

@@ -6,9 +6,9 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 
 public interface ParceiroDao {
 
-    public Parceiro salvarParceiro(Parceiro parceiro);
+    public Parceiro salvar(Parceiro parceiro);
 
-    public Parceiro cadastrarParceiro(String apelido
+    public Parceiro cadastrar(String apelido
                                              ,String email
                                              ,String senha
                                              ,String nome
@@ -16,15 +16,15 @@ public interface ParceiroDao {
                                              ,String cpf
                                              ,Date dtInicio);
 
-    public Parceiro buscarParceiro(Long id);
+    public Parceiro buscar(Long id);
 
-    public Parceiro buscarParceiro(String apelido );
+    public Parceiro buscar(String apelido );
 
-    public Parceiro buscarParceiroPorEmail(String email);
+    public Parceiro buscarPorEmail(String email);
 
-    public boolean removerParceiro(Long id);
+    public boolean remover(Parceiro parceiro);
 
-    public boolean removerParceiro(Parceiro parceiro);
+    public boolean remover(Long id);
     
     public boolean existe(Long id);
 

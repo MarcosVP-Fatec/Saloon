@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.controller.entity.regi;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,23 +33,47 @@ public class ProprietarioController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Recupera o parâmetro id (de proprietario?id=<valor>)
-        Long id = Long.valueOf(req.getParameter("id"));
+        if ( req.getParameter("id") != null){
 
-        // Busca o proprietário com o id
-        Proprietario proprietario = new ProprietarioDaoJpa().buscarProprietario(id);
+            Long id = Long.valueOf(req.getParameter("id"));
 
-        // Usamos o Jackson para transformar o objeto em um JSON (String)
-        ObjectMapper mapper = new ObjectMapper();
-        String proprietarioJson = mapper.writeValueAsString(proprietario);
+            // Busca o proprietário com o id
+            Proprietario proprietario = new ProprietarioDaoJpa().buscar(id);
 
-        // Formatação da Resposta
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.setStatus(200); // 200 para o GET e 204 para o PUT
+            // Usamos o Jackson para transformar o objeto em um JSON (String)
+            ObjectMapper mapper = new ObjectMapper();
+            String proprietarioJson = mapper.writeValueAsString(proprietario);
 
-        PrintWriter out = resp.getWriter();
-        out.print(proprietarioJson);
-        out.flush();
+            // Formatação da Resposta
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.setStatus(200); // 200 para o GET e 204 para o PUT
+
+            PrintWriter out = resp.getWriter();
+            out.print(proprietarioJson);
+            out.flush();
+
+        } else {
+
+            System.out.println("ENTREI ONDE ERA PARA ENTRAR"); //PAREI AQUI
+
+            // Busca os proprietários
+            List<Proprietario> proprietarios = new ProprietarioDaoJpa().buscar();
+
+            // Usamos o Jackson para transformar o objeto em um JSON (String)
+            ObjectMapper mapper = new ObjectMapper();
+            String proprietarioJson = mapper.writeValueAsString(proprietarios);
+
+            // Formatação da Resposta
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.setStatus(200); // 200 para o GET e 204 para o PUT
+
+            PrintWriter out = resp.getWriter();
+            out.print(proprietarioJson);
+            out.flush();
+
+        }
 
     }
 
@@ -69,7 +94,7 @@ public class ProprietarioController extends HttpServlet {
         System.out.println(req.getReader());
 
         // Salvamos no Banco de Dados
-        new ProprietarioDaoJpa().salvarProprietario(proprietario);
+        new ProprietarioDaoJpa().salvar(proprietario);
 
         // Retornamos o registro gerado formatando a resposta se o retorno for 200 ou 201. Se for 204 não formata resposta
         if (numeroStatus != 204){
@@ -135,13 +160,13 @@ public class ProprietarioController extends HttpServlet {
 
         // Busca o proprietário com o id
         ProprietarioDao proprietarioDao = new ProprietarioDaoJpa();
-        Proprietario proprietario = proprietarioDao.buscarProprietario(id);
+        Proprietario proprietario = proprietarioDao.buscar(id);
 
         if (proprietario != null) {
 
             try {
 
-                proprietarioDao.removerProprietario(proprietario);
+                proprietarioDao.remover(proprietario);
                 resp.setStatus(204); // Formatação da Resposta 
 
             } catch (Exception e) {

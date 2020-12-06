@@ -113,7 +113,7 @@ public class AlugavelDaoJpa implements AlugavelDao {
     @Override
     public void consoleAlugavelPorProprietario(String apelidoProprietario) {
         consoleAlugavelPorProprietario( em.find(Proprietario.class
-                                      , new ProprietarioDaoJpa().buscarProprietario(apelidoProprietario)));
+                                      , new ProprietarioDaoJpa().buscar(apelidoProprietario)));
     }
 
     @Override

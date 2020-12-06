@@ -113,7 +113,7 @@ public class MvpTesteDesenvolvimento {
         
         System.out.println(Texto.padC("######################################## CADASTRO DE PROPRIETARIO ########################################", LARGURA, '#'));
         
-        proprietarioDao.salvarProprietario
+        proprietarioDao.salvar
         (new Proprietario("BETÃO"
                         , "alberto.salas@terra.com.br"
                         , "pwAS"
@@ -125,7 +125,7 @@ public class MvpTesteDesenvolvimento {
         
         System.out.println(Texto.padC("######################################## CADASTRO DE PARCEIROS ########################################", LARGURA, '#'));
         
-        parceiroDao.salvarParceiro
+        parceiroDao.salvar
         (new Parceiro("Festeira"
                      , "festeira@hotmail.com"
                      , "pwTF"
@@ -135,7 +135,7 @@ public class MvpTesteDesenvolvimento {
             
         );
 
-        parceiroDao.salvarParceiro
+        parceiroDao.salvar
         (new Parceiro("SantaMaria"
                      , "agendamento@santa_maria.com.br"
                      , "pwBSM"
@@ -156,19 +156,19 @@ public class MvpTesteDesenvolvimento {
 
         System.out.println(Texto.padC("######################################## CADASTRO DE ALUGÁVEL ########################################", LARGURA, '#'));
 
-        System.out.println(">>>>> " + proprietarioDao.buscarProprietario("BETÃO").getApelido());
+        System.out.println(">>>>> " + proprietarioDao.buscar("BETÃO").getApelido());
         System.out.println(">>>>> " + em.find(AlugavelTipo.class,1L).getDescr());
         System.out.println(">>>>> " + alugavelTipoDao.buscarAlugavelTipo(1L).getDescr() + alugavelTipoDao.buscarAlugavelTipo(1L).getId());
         
         alugavelDao.cadastrar("Salão Maior"
-                             ,proprietarioDao.buscarProprietario("BETÃO")
+                             ,proprietarioDao.buscar("BETÃO")
                              ,alugavelTipoDao.buscarAlugavelTipo(1L)
                              ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
                              , 150
                              , 600.00 );
 
         alugavelDao.cadastrar("Salão Menor"
-                             ,proprietarioDao.buscarProprietario("BETÃO")
+                             ,proprietarioDao.buscar("BETÃO")
                              ,alugavelTipoDao.buscarAlugavelTipo(1L)
                              ,"Rua Ottoboni, 123 - Vila Industrial - São José dos campos"
                              , 80
@@ -182,13 +182,13 @@ public class MvpTesteDesenvolvimento {
         clienteDao.cadastrar("99999999999", "Anacleto Beneditino"    ,"12", "98777777");
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTE PARCEIRO ########################################", LARGURA, '#'));
-        Parceiro parceiro = parceiroDao.cadastrarParceiro("BIFECASSIA"                          //apelido
-                                                         ,"bifecassia@hotmail.com"              //email
-                                                         ,"pwBC"                                //senha
-                                                         ,"Bufe da Cássia"                      //nome
-                                                         ,Data.toDate("15/05/1972")             //dtNascimento
-                                                         ,"77777777777"                         //
-                                                         ,Data.today());
+        Parceiro parceiro = parceiroDao.cadastrar("BIFECASSIA"                          //apelido
+                                                 ,"bifecassia@hotmail.com"              //email
+                                                 ,"pwBC"                                //senha
+                                                 ,"Bufe da Cássia"                      //nome
+                                                 ,Data.toDate("15/05/1972")             //dtNascimento
+                                                 ,"77777777777"                         //
+                                                 ,Data.today());
 
         clienteDao.cadastrar( parceiro.getCpf()          //cpf_cnpj
                             , parceiro.getNome()         //nome
@@ -198,7 +198,7 @@ public class MvpTesteDesenvolvimento {
 
         System.out.println(Texto.padC("######################################## CADASTRO DE CLIENTES ATENDIDOS POR UM PARCEIRO ########################################", LARGURA, '#'));
 
-        parceiro = parceiroDao.buscarParceiro("BIFECASSIA");
+        parceiro = parceiroDao.buscar("BIFECASSIA");
         parceiro.setClientes(new HashSet<Cliente>());
         parceiro.getClientes().add( clienteDao.buscar("44444444444") );
         parceiro.getClientes().add( clienteDao.buscar("99999999999") );
