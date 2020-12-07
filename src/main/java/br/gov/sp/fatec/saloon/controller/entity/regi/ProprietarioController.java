@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.DatatypeConverter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -125,7 +126,7 @@ public class ProprietarioController extends HttpServlet {
         //#####################################################################
         // Se o usuário não for admim não pode alterar
         //#####################################################################
-        if (!UsuarioDaoJpa.isAdmin(req.getParameter("apelido"))){
+        if (!UsuarioDaoJpa.isAdmin( usuarioAutenticado(req) )){
            resp.setStatus(403); //FORBIDDEN
            PrintWriter out = resp.getWriter();
            out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta ALTERACAO!");
@@ -147,7 +148,7 @@ public class ProprietarioController extends HttpServlet {
         //#####################################################################
         // Se o usuário não for admim não pode excluir
         //#####################################################################
-        if (!UsuarioDaoJpa.isAdmin(req.getParameter("apelido"))){
+        if (!UsuarioDaoJpa.isAdmin( usuarioAutenticado(req) )){
            resp.setStatus(401); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
            out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta EXCLUSAO!");
@@ -178,4 +179,21 @@ public class ProprietarioController extends HttpServlet {
 
     }
 
+    public static String usuarioAutenticado( HttpServletRequest req ){
+        String ID = "";
+        String authorization = req.getHeader("Authorization");
+        if (authorization != null && authorization.startsWith("Basic")) {
+            //byte[] message = authorization.substring("Basic".length()).trim().getBytes();
+            String credentials = authorization.substring("Basic".length()).trim();
+            byte[] decoded = DatatypeConverter.parseBase64Binary(credentials);
+            String decodedString = new String(decoded);
+            String[] actualCredentials = decodedString.split(":");
+            ID = actualCredentials[0];
+            //String Password = actualCredentials[1];
+        }
+        return ID;
+    }
+
 }
+
+

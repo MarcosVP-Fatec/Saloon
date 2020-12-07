@@ -22,16 +22,13 @@ public class FilterAuth implements Filter {
 
     private ServletContext          context;
     private String                  realm = "PROTECTED";
-    /*
-    private String                  username = "admin";
-    private String                  password = "password_dificil";
-    */
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
 
         this.context.log("[AUTH] Filtro de autenticação acessado às " + Data.time());
+
         HttpServletRequest request = (HttpServletRequest) req;
         //HttpServletResponse response = (HttpServletResponse) res;
 
@@ -143,5 +140,5 @@ public class FilterAuth implements Filter {
         resposta.sendError(401, mensagem);
 
     }
-
+ 
 }

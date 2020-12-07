@@ -42,17 +42,14 @@ public class UsuarioController extends HttpServlet{
             String usuarioJson = mapper.writeValueAsString(usuario);
 
             // Formatação da Resposta
-System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ACHEI ACHEI ACHEI => ID DE USUÁRIO = " + usuario.getId());
             resp.setContentType("application/json");
             resp.setStatus(200);
-
             out.print(usuarioJson);
 
         } else {
 
             resp.setContentType("text/xml");
             resp.setStatus(401);
-
             resp.addHeader("Erro", ">>>>>>>>>>>>>>>>>>>>>> Usuário não encontrado => " + apelido);
             out.print(">>>>>>>>>>>>>>>>>>>>>> Apelido de Usuário não encontrado => " + apelido);
         }
