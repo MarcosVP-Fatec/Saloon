@@ -1,6 +1,11 @@
 <template>
     <div class="proprietario">
         <div id="proprierario_cabec">
+            <ul>
+                <li v-for="(erro, index) of erros" :key="index">
+                    Campo <b>{{ erro.field }}</b> - {{ erro.defaultMessage }}
+                </li>
+            </ul>
             <form @submit.prevent="cadastrar"> 
                 <h2>Proprietário</h2>
                 <p>
@@ -56,7 +61,6 @@
 
                 <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>
                 <button type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
-                <!-- <button type="submit" style="height:30px; width:120px; border-radius:25px;">Excluir</button> -->
                 
             </form>
         </div>
@@ -76,8 +80,8 @@
                     <td width="150">{{ prop.apelido         }}</td>
                     <td width="300">{{ prop.nome            }}</td>
                     <td>
-                        <button @click="editar(prop)" class="btn_editar"> <i>editar</i> </button>
-                        <button class="btn_excluir"><i>excluir</i></button>
+                        <button @click="editar(prop)"  class="btn_editar"> <i>editar</i> </button>
+                        <button @click="excluir(prop)" class="btn_excluir"><i>excluir</i></button>
                     </td>
                 </tr>
             </tbody>
@@ -107,6 +111,7 @@ export default {
                             , cpf:          ''
                             }
             , proprietarios: []
+            , erros: []
         }
     },
     computed: {
@@ -125,13 +130,17 @@ export default {
                 ).then( res => {
                     console.log(res);
                     this.proprietarios = res.data;
-                }).catch( error => console.log(error))
+                }).catch( error => {
+                    this.erros = error.response.data.errors;
+                })
         },
         novo(){
             this.proprietario = {};
+            this.erros = [];
             this.focoNoPrimeiroCampo();
         },
         editar(proprietario){
+            this.erros = [];
             this.proprietario = proprietario;
             if (proprietario.dtNascimento){
                 this.proprietario.dtNascimento = new Date(proprietario.dtNascimento).toJSON().substring(0,10);
@@ -140,6 +149,23 @@ export default {
             }
             this.focoNoPrimeiroCampo();
         },
+        excluir(proprietario){
+            this.erros = [];
+            if (proprietario.id){
+                if (confirm("Deseja mesmo excluir o proprietário " + proprietario.nome + " ?")){
+                    axios.delete('proprietario?id=' +  proprietario.id
+                                ,{ auth: { username: this.login_usuario , password: this.login_senha } }
+                    ).then( res => {
+                        console.log(res);
+                        this.atualizarLista();
+                        alert("Proprierário excluído!");
+                    })
+                }
+                this.novo()
+            } else {
+                alert("Nenhum registro foi excluído!");
+            }
+        },
         focoNoPrimeiroCampo(){
             document.getElementById("apelido").focus(); 
         },
@@ -147,8 +173,9 @@ export default {
             // 1º parâmetro = rota
             // 2º parâmetro = json
             // 3º parãmetro = propriedades= autenticação.
+            this.erros = [];
             if (this.proprietario.id){ //PUT
-                axios.put('proprietario',
+            /*
                     {       id:             this.proprietario.id
                         ,   apelido:        this.proprietario.apelido
                         ,   email:          this.proprietario.email
@@ -156,13 +183,9 @@ export default {
                         ,   nome:           this.proprietario.nome
                         ,   dtNascimento:   this.proprietario.dtNascimento
                         ,   cpf:            this.proprietario.cpf
-                    },
-                    {
-                        auth: {
-                            username: this.login_usuario,
-                            password: this.login_senha
-                        }
-                    }
+                    },*/
+                axios.put('proprietario',this.proprietario,
+                    { auth: { username: this.login_usuario , password: this.login_senha } }
                 ).then( res => {
                     console.log(res);
                     this.proprietario.id = res.data.id;
@@ -178,12 +201,7 @@ export default {
                         ,   dtNascimento:   this.dtNascimento
                         ,   cpf:            this.cpf
                     },
-                    {
-                        auth: {
-                            username: this.login_usuario,
-                            password: this.login_senha
-                        }
-                    }
+                    { auth: { username: this.login_usuario , password: this.login_senha } }
                 ).then( res => {
                     console.log(res);
                     this.proprietario.id = res.data.id;

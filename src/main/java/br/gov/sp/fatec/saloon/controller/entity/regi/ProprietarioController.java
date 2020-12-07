@@ -56,8 +56,6 @@ public class ProprietarioController extends HttpServlet {
 
         } else {
 
-            System.out.println("ENTREI ONDE ERA PARA ENTRAR"); //PAREI AQUI
-
             // Busca os proprietários
             List<Proprietario> proprietarios = new ProprietarioDaoJpa().buscar();
 
@@ -149,7 +147,7 @@ public class ProprietarioController extends HttpServlet {
         // Se o usuário não for admim não pode excluir
         //#####################################################################
         if (!UsuarioDaoJpa.isAdmin( usuarioAutenticado(req) )){
-           resp.setStatus(401); //UNAUTHORIZED
+           resp.setStatus(403); //UNAUTHORIZED
            PrintWriter out = resp.getWriter();
            out.print("[PROPRIETARIO] O usuario nao tem privilegios de administrador para executar esta EXCLUSAO!");
            out.flush();
