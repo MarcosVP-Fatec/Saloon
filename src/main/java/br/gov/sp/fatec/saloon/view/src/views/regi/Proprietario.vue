@@ -158,7 +158,7 @@ export default {
                     ).then( res => {
                         console.log(res);
                         this.atualizarLista();
-                        alert("Proprierário excluído!");
+                        //alert("Proprierário excluído!");
                     })
                 }
                 this.novo()
