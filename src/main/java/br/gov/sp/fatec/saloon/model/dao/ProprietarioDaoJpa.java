@@ -137,7 +137,9 @@ public class ProprietarioDaoJpa implements ProprietarioDao {
     @Override
     public boolean remover(Proprietario proprietario) {
         try {
+            em.getTransaction().begin();
             em.remove(proprietario);
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;
