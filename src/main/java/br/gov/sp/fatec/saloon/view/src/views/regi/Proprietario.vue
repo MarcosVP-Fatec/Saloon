@@ -153,8 +153,6 @@ export default {
             this.erros = [];
             if (proprietario.id){
                 if (confirm("Deseja mesmo excluir o proprietário " + proprietario.nome + " ?")){
-/*                    axios.delete('proprietario?id=' +  proprietario.id
-                                ,{ auth: { username: this.login_usuario , password: this.login_senha } }*/
                     axios.delete('proprietario'
                                 ,{  params: { id: proprietario.id},
                                     auth: { username: this.login_usuario , password: this.login_senha } }
