@@ -192,15 +192,17 @@ export default {
                     this.novo;
                 }).catch( error => console.log(error));
             } else {   //POST
-                axios.post('proprietario',
-                    {
-                            apelido:        this.apelido
-                        ,   email:          this.email
-                        ,   senha:          this.senha
-                        ,   nome:           this.nome
-                        ,   dtNascimento:   this.dtNascimento
-                        ,   cpf:            this.cpf
-                    },
+                // axios.post('proprietario',
+                //     {
+                //             apelido:        this.apelido
+                //         ,   email:          this.email
+                //         ,   senha:          this.senha
+                //         ,   nome:           this.nome
+                //         ,   dtNascimento:   this.dtNascimento
+                //         ,   cpf:            this.cpf
+                //     },
+                //     { auth: { username: this.login_usuario , password: this.login_senha } }
+                axios.post('proprietario',this.proprietario,
                     { auth: { username: this.login_usuario , password: this.login_senha } }
                 ).then( res => {
                     console.log(res);
