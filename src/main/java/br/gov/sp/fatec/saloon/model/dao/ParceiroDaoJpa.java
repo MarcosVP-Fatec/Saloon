@@ -88,7 +88,9 @@ public class ParceiroDaoJpa implements ParceiroDao {
     @Override
     public boolean remover(Parceiro parceiro) {
         try {
+            em.getTransaction().begin();
             em.remove(parceiro);
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;

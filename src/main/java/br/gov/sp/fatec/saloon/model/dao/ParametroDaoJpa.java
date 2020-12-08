@@ -55,7 +55,9 @@ public class ParametroDaoJpa implements ParametroDao {
     @Override
     public boolean remover(Parametro parametro) {
         try {
+            em.getTransaction().begin();
             em.remove(parametro);
+            em.getTransaction().commit();
             return true;
         } catch (Exception e) {
             return false;

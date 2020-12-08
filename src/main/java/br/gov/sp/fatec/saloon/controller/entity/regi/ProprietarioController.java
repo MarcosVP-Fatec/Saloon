@@ -142,9 +142,6 @@ public class ProprietarioController extends HttpServlet {
      */
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-System.out.println("#######################################################");
-System.out.println("#######################################################");
-System.out.println("################## ENTROU NO doDelete");
 
         //#####################################################################
         // Se o usuário não for admim não pode excluir
@@ -159,26 +156,17 @@ System.out.println("################## ENTROU NO doDelete");
 
         // Recupera o parâmetro id (de proprietario?id=<valor>)
         Long id = Long.valueOf(req.getParameter("id"));
-System.out.println("#######################################################");
-System.out.println("#######################################################");
-System.out.println("################## PEGOU O ID = " + id);
 
         // Busca o proprietário com o id
         ProprietarioDao proprietarioDao = new ProprietarioDaoJpa();
         Proprietario proprietario = proprietarioDao.buscar(id);
 
         if (proprietario != null) {
-System.out.println("#######################################################");
-System.out.println("#######################################################");
-System.out.println("################## PEGOU O ID = " + id + " != NULL");
 
             try {
 
                 //proprietarioDao.remover(proprietario);
                 proprietarioDao.remover(id);
-System.out.println("#######################################################");
-System.out.println("#######################################################");
-System.out.println("################## PEGOU O ID = " + id + " APÓS REMOÇÃO");
                 resp.setStatus(204); // Formatação da Resposta 
 
             } catch (Exception e) {
@@ -187,9 +175,6 @@ System.out.println("################## PEGOU O ID = " + id + " APÓS REMOÇÃO")
             }
 
         }
-System.out.println("#######################################################");
-System.out.println("#######################################################");
-System.out.println("################## PEGOU O ID = " + id + " SAÍDA");
 
     }
 
@@ -209,5 +194,3 @@ System.out.println("################## PEGOU O ID = " + id + " SAÍDA");
     }
 
 }
-
-
