@@ -6,8 +6,6 @@
 
 **Emanuel Mineda Carneiro** - *Laboratório IV de Desenvolvimento*   
 
-**Giuliano Araujo Bertoti** - *Padrões de Projetos*  
-
 ---------------------------------------------------------------
 ## Integrantes
 * **Marcos Vinicio Pereira**

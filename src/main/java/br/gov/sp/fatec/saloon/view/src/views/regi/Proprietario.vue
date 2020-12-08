@@ -153,8 +153,11 @@ export default {
             this.erros = [];
             if (proprietario.id){
                 if (confirm("Deseja mesmo excluir o proprietário " + proprietario.nome + " ?")){
-                    axios.delete('proprietario?id=' +  proprietario.id
-                                ,{ auth: { username: this.login_usuario , password: this.login_senha } }
+/*                    axios.delete('proprietario?id=' +  proprietario.id
+                                ,{ auth: { username: this.login_usuario , password: this.login_senha } }*/
+                    axios.delete('proprietario'
+                                ,{  params: { id: proprietario.id},
+                                    auth: { username: this.login_usuario , password: this.login_senha } }
                     ).then( res => {
                         console.log(res);
                         this.atualizarLista();
@@ -175,15 +178,6 @@ export default {
             // 3º parãmetro = propriedades= autenticação.
             this.erros = [];
             if (this.proprietario.id){ //PUT
-            /*
-                    {       id:             this.proprietario.id
-                        ,   apelido:        this.proprietario.apelido
-                        ,   email:          this.proprietario.email
-                        ,   senha:          this.proprietario.senha
-                        ,   nome:           this.proprietario.nome
-                        ,   dtNascimento:   this.proprietario.dtNascimento
-                        ,   cpf:            this.proprietario.cpf
-                    },*/
                 axios.put('proprietario',this.proprietario,
                     { auth: { username: this.login_usuario , password: this.login_senha } }
                 ).then( res => {
@@ -192,16 +186,6 @@ export default {
                     this.novo;
                 }).catch( error => console.log(error));
             } else {   //POST
-                // axios.post('proprietario',
-                //     {
-                //             apelido:        this.apelido
-                //         ,   email:          this.email
-                //         ,   senha:          this.senha
-                //         ,   nome:           this.nome
-                //         ,   dtNascimento:   this.dtNascimento
-                //         ,   cpf:            this.cpf
-                //     },
-                //     { auth: { username: this.login_usuario , password: this.login_senha } }
                 axios.post('proprietario',this.proprietario,
                     { auth: { username: this.login_usuario , password: this.login_senha } }
                 ).then( res => {
