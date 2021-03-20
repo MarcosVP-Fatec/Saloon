@@ -11,12 +11,13 @@ import br.gov.sp.fatec.saloon.model.tool.Texto;
 /**
  * @apiNote Entidade UsuarioNivel
  *          Esta tabela é estática e não será cadastrada por usuário comum
- *          Os dados aqui contidos acompanham a programação
+ *          Os dados aqui contidos acompanham a programação por isso não há geração automática do id.
  * @version 1.1 - Spring-boot
  * 
  */
 @Entity
 @Table(name = "niv_usuario")
+//@PrimaryKeyJoinColumn(name = "niv_id")
 public class UsuarioNivel extends GeneratorAudit {
 
     @Id
@@ -26,7 +27,6 @@ public class UsuarioNivel extends GeneratorAudit {
     @Column(name = "niv_descr")
     private String descr;
 
-/*
     @Column(name = "niv_adm")
     private boolean administrador;
 
@@ -38,14 +38,14 @@ public class UsuarioNivel extends GeneratorAudit {
 
     @Column(name = "niv_cli")
     private boolean cliente;
-*/
+
     // GETTERS AND SETTERS
     
     public Long getId()                                 { return this.id;                       }
     public void setId(Long id)                          { this.id = id;                         }
     public String getDescr()                            { return this.descr;                    }
     public void setDescr(String descr)                  { this.descr = Texto.left(descr, 30);   }
-/*
+
     public boolean getAdministrador()                   { return this.administrador;            }
     public void setAdministrador(boolean administrador) { this.administrador = administrador;   }
 
@@ -57,5 +57,5 @@ public class UsuarioNivel extends GeneratorAudit {
 
     public boolean getCliente()                         { return this.cliente;                  }
     public void setCliente(boolean cliente)             { this.cliente = cliente;               }
-*/
+
 }

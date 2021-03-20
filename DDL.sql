@@ -4,6 +4,31 @@ use saloon;
 create user if not exists 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
+create table mes_ano (
+      mes_id                bigint unsigned primary key auto_increment
+    , mes_numero            varchar(2) not null
+    , mes_descr             varchar(9) not null
+    , _inc_usua             bigint          
+    , _inc_data             datetime            
+    , _alt_usua             bigint          
+    , _alt_data             datetime            
+    , constraint mes_numero_uk unique (mes_numero)
+    , constraint mes_descr_uk unique (mes_descr)
+);
+
+insert into mes_ano (mes_numero, mes_descr) values ('01','Janeiro');
+insert into mes_ano (mes_numero, mes_descr) values ('02','Fevereiro');
+insert into mes_ano (mes_numero, mes_descr) values ('03','Março');
+insert into mes_ano (mes_numero, mes_descr) values ('04','Abril');
+insert into mes_ano (mes_numero, mes_descr) values ('05','Maio');
+insert into mes_ano (mes_numero, mes_descr) values ('06','Junho');
+insert into mes_ano (mes_numero, mes_descr) values ('07','Julho');
+insert into mes_ano (mes_numero, mes_descr) values ('08','Agosto');
+insert into mes_ano (mes_numero, mes_descr) values ('09','Setembro');
+insert into mes_ano (mes_numero, mes_descr) values ('10','Outubro');
+insert into mes_ano (mes_numero, mes_descr) values ('11','Novembro');
+insert into mes_ano (mes_numero, mes_descr) values ('12','Dezembro');
+
 -- ------------------------------------------------------------------------
 -- NÍVEL DE USUARIO
 -- 1-Administrador
@@ -11,39 +36,25 @@ grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 -- 3-Parceiro
 -- 4-Cliente
 -- ------------------------------------------------------------------------
--- create table niv_usuario(
---       niv_id                bigint unsigned primary key 
---     , niv_descr             varchar(20)     not null
---     , niv_adm               boolean         not null
---     , niv_prop              boolean         not null
---     , niv_parc              boolean         not null
---     , niv_cli               boolean         not null
---     , _inc_usua             bigint          
---     , _inc_data             datetime            
---     , _alt_usua             bigint          
---     , _alt_data             datetime            
--- );
-
--- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (1,'Administrador',1,0,0,0);
--- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (2,'Proprietário',0,1,0,0);
--- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (3,'Parceiro',0,0,1,0);
--- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (4,'Cliente',0,0,0,1);
--- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (5,'Parceiro/Cliente',0,0,1,1);
-
 create table niv_usuario(
       niv_id                bigint unsigned primary key 
     , niv_descr             varchar(20)     not null
+    , niv_adm               boolean         not null
+    , niv_prop              boolean         not null
+    , niv_parc              boolean         not null
+    , niv_cli               boolean         not null
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
+    , constraint niv_descr_uk unique (niv_descr)
 );
 
-insert into niv_usuario (niv_id,niv_descr) values (1,'Administrador');
-insert into niv_usuario (niv_id,niv_descr) values (2,'Proprietário');
-insert into niv_usuario (niv_id,niv_descr) values (3,'Parceiro');
-insert into niv_usuario (niv_id,niv_descr) values (4,'Cliente');
-insert into niv_usuario (niv_id,niv_descr) values (5,'Parceiro/Cliente');
+insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (1,'Administrador'   ,1,0,0,0);
+insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (2,'Proprietário'    ,0,1,0,0);
+insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (3,'Parceiro'        ,0,0,1,0);
+insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (4,'Cliente'         ,0,0,0,1);
+insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (5,'Parceiro/Cliente',0,0,1,1);
 
 -- ------------------------------------------------------------------------
 -- USUARIO
@@ -173,18 +184,6 @@ create table ctm_contrato_motivo (
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
-);
-
-create table mes_ano (
-      mes_id                bigint unsigned primary key auto_increment
-    , mes_numero            varchar(2) not null
-    , mes_descr             varchar(9) not null
-    , _inc_usua             bigint          
-    , _inc_data             datetime            
-    , _alt_usua             bigint          
-    , _alt_data             datetime            
-    , constraint mes_numero_uk unique (mes_numero)
-    , constraint mes_descr_uk unique (mes_descr)
 );
 
 create table ctt_contrato (
