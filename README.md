@@ -1,6 +1,9 @@
-# Saloon
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/MarcosVP-Fatec/spring-boot-app) 
+    Para rodar utilize: mvn spring-boot:run
 
-## 4º Banco de Dados - Fatec SJC - 2020/2
+# Saloon 
+
+## 5º Banco de Dados - Fatec SJC - 2021/1
 
 ## Professor:  
 
@@ -23,7 +26,9 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
 
 ## Objetos de Estudo aplicados neste projeto
 
-  * Padrão de Projeto MVC (Model / View / Controler)  
+  * Spring-boot
+
+  * Padrão de Projeto MVC (Model / Service / View / Controler)  
     * MODEL  
       * JPA/Hibernate  
         - @MappedSuperclass (Campos de auditoria)  
