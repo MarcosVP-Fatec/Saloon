@@ -1,5 +1,8 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,29 +11,34 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.repository.ContratoMotivoRepository;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 @Transactional
 @Rollback
-public class ContratoMotivo_Testes {
+public class ContratoMotivo_Tests {
 
     @Autowired
     private ContratoMotivoRepository contratoMotivoRepo;
 
-  	@Test
-	void testeContratoMotivoSalvar() {
+    @Test
+    public void testContratoMotivoSalvar(){
         this.criaContratoMotivo();
         assertNotNull(contratoMotivoRepo.findByDescr("#TESTE_MOTIVO").getId());
     }
 
   	@Test
-	void testeContratoMotivoAlterar() {
+	public void testeContratoMotivoAlterar() {
         ContratoMotivo ctr = this.criaContratoMotivo();
         ctr.setDescr("#TESTE2_MOTIVO");
         contratoMotivoRepo.save(ctr);
-        //assertNotNull(contratoMotivoRepo.findByDescr("#TESTE2_MOTIVO").getId());
-        assertTrue(1==2);
+        assertNotNull(contratoMotivoRepo.findByDescr("#TESTE2_MOTIVO").getId());
+    }
+
+  	@Test
+	public void testeContratoMotivoExcluir() {
+        ContratoMotivo ctr = this.criaContratoMotivo();
+        contratoMotivoRepo.save(ctr);
+        contratoMotivoRepo.delete(ctr);
+        assertNull(contratoMotivoRepo.findByDescr("#TESTE_MOTIVO"));
     }
 
     /*
@@ -41,5 +49,5 @@ public class ContratoMotivo_Testes {
         ctr.setDescr("#TESTE_MOTIVO");
         return contratoMotivoRepo.save(ctr);
     }
-        
+
 }

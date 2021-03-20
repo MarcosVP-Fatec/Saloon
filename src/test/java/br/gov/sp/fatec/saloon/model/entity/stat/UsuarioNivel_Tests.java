@@ -1,7 +1,9 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,8 +29,7 @@ public class UsuarioNivel_Tests {
   	@Test
 	void testeUsuarioNivelDelete() {
         usuarioNivelRepo.delete(usuarioNivelRepo.save(criaUsuarioNivel()));
-        //assertFalse(usuarioNivelRepo.existsById(99999L));
-        assertFalse(false);
+        assertFalse(usuarioNivelRepo.existsById(99999L));
     }
 
     /*
