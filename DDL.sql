@@ -11,18 +11,39 @@ grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 -- 3-Parceiro
 -- 4-Cliente
 -- ------------------------------------------------------------------------
+-- create table niv_usuario(
+--       niv_id                bigint unsigned primary key 
+--     , niv_descr             varchar(20)     not null
+--     , niv_adm               boolean         not null
+--     , niv_prop              boolean         not null
+--     , niv_parc              boolean         not null
+--     , niv_cli               boolean         not null
+--     , _inc_usua             bigint          
+--     , _inc_data             datetime            
+--     , _alt_usua             bigint          
+--     , _alt_data             datetime            
+-- );
+
+-- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (1,'Administrador',1,0,0,0);
+-- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (2,'Proprietário',0,1,0,0);
+-- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (3,'Parceiro',0,0,1,0);
+-- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (4,'Cliente',0,0,0,1);
+-- insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (5,'Parceiro/Cliente',0,0,1,1);
+
 create table niv_usuario(
-      niv_id                bigint unsigned primary key auto_increment
-    , niv_descr             varchar(15)     not null
+      niv_id                bigint unsigned primary key 
+    , niv_descr             varchar(20)     not null
     , _inc_usua             bigint          
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
 );
-insert into niv_usuario (niv_descr) values ('Administrador');
-insert into niv_usuario (niv_descr) values ('Proprietário');
-insert into niv_usuario (niv_descr) values ('Parceiro');
-insert into niv_usuario (niv_descr) values ('Cliente');
+
+insert into niv_usuario (niv_id,niv_descr) values (1,'Administrador');
+insert into niv_usuario (niv_id,niv_descr) values (2,'Proprietário');
+insert into niv_usuario (niv_id,niv_descr) values (3,'Parceiro');
+insert into niv_usuario (niv_id,niv_descr) values (4,'Cliente');
+insert into niv_usuario (niv_id,niv_descr) values (5,'Parceiro/Cliente');
 
 -- ------------------------------------------------------------------------
 -- USUARIO
