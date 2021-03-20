@@ -14,10 +14,8 @@ public class App {
 
     public static void main(String[] args) throws ParseException
     {
-        
         //Inicia o usuário - Acertar depois
-       
-        MvpTesteDesenvolvimento.run();
+        //MvpTesteDesenvolvimento.run();
     }
     
 }

@@ -1,6 +1,5 @@
 package br.gov.sp.fatec.saloon;
 
-import java.math.BigDecimal;
 
 /**
  * @App Saloon 
@@ -10,6 +9,9 @@ import java.math.BigDecimal;
  * mvn exec:java -Dexec.mainClass="br.gov.sp.fatec.saloon.App"
  * 
  */
+
+ /*
+import java.math.BigDecimal;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -273,3 +275,4 @@ public class MvpTesteDesenvolvimento {
     }
 
 }
+*/

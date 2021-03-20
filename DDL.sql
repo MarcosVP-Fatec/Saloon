@@ -184,7 +184,15 @@ create table ctm_contrato_motivo (
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
+    , constraint ctm_descr_uk unique (ctm_descr)
 );
+
+insert into ctm_contrato_motivo (ctm_descr) values ("Aniversário");
+insert into ctm_contrato_motivo (ctm_descr) values ("Bodas");
+insert into ctm_contrato_motivo (ctm_descr) values ("Casamento");
+insert into ctm_contrato_motivo (ctm_descr) values ("Confraternização");
+insert into ctm_contrato_motivo (ctm_descr) values ("Encontro de Amigos(as)");
+insert into ctm_contrato_motivo (ctm_descr) values ("Outros");
 
 create table ctt_contrato (
       ctt_id                bigint unsigned primary key auto_increment
