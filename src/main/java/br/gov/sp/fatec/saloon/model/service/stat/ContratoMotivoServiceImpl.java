@@ -1,11 +1,13 @@
 package br.gov.sp.fatec.saloon.model.service.stat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 
+@Service("ContratoMotivoService")
 public class ContratoMotivoServiceImpl implements ContratoMotivoService {
 
     @Autowired
