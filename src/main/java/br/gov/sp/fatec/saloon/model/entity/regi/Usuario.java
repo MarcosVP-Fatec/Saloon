@@ -1,8 +1,9 @@
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
+import java.util.Date;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -10,12 +11,18 @@ import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
+import br.gov.sp.fatec.saloon.model.tool.Validador;
 
+/**
+ * @apiNote Entidade Usuario
+ *
+ * @version 1.1 - Spring-boot
+ * 
+ */
 @Table(name = "usu_usuario")
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column=@Column(name="usu_id"))
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "usu_pj_ou_pf")
 public class Usuario extends GeneratorId{
 
     @Column(name = "usu_apelido")           private String  apelido;
@@ -24,31 +31,53 @@ public class Usuario extends GeneratorId{
     @Column(name = "usu_senha")             private String  senha;
     @Column(name = "usu_nivel")             private Long    usuarioNivel;
 
+    @Column(name = "usu_dt_nascimento")     private Date    dtNascimento;
+    @Column(name = "usu_cpf_cnpj")          private String  cpf;
+
+
+    
     // CONSTRUTORES
     public Usuario(){}
     public Usuario( String apelido
-                  , String nome
                   , String email
                   , String senha
-                  , Long   usuarioNivel){
+                  , String nome
+                  , Date   dtNascimento
+                  , String cpf
+                  , Long   usuarioNivel) {
 
         setApelido(apelido);
-        setNome(nome);
         setEmail(email);
         setSenha(senha);
+        setNome(nome);
+        setDtNascimento(dtNascimento);
+        setCpf(cpf);
         setUsuarioNivel(usuarioNivel);
+
     }
 
+
     // GETTERS AND SETTERS
-    public String getApelido()                          { return apelido;                       }
-    public void setApelido(String apelido)              { this.apelido = apelido.toUpperCase(); }
-    public String getNome()                             { return nome;                          }
-    public void setNome(String nome)                    { this.nome = Texto.left(nome,80);      }
-    public String getEmail()                            { return email;                         }
-    public void setEmail(String email)                  { this.email = email;                   }
-    public String getSenha()                            { return senha;                         }
-    public void setSenha(String senha)                  { this.senha = senha;                   }
-    public Long getUsuarioNivel(   )                    { return usuarioNivel;                  }
-    public void setUsuarioNivel(Long usuarioNivel)      { this.usuarioNivel = usuarioNivel;     }
+    public String getApelido()                          { return this.apelido;                      }
+    public void setApelido(String apelido)              { this.apelido = apelido.toUpperCase();     }
+
+    public String getNome()                             { return this.nome;                         }
+    public void setNome(String nome)                    { this.nome = Texto.left(nome,80);          }
+
+    public String getEmail()                            { return this.email;                        }
+    public void setEmail(String email)                  { this.email = email;                       }
+
+    public String getSenha()                            { return this.senha;                        }
+    public void setSenha(String senha)                  { this.senha = senha;                       }
+
+    public Long getUsuarioNivel()                       { return this.usuarioNivel;                 }
+    public void setUsuarioNivel(Long usuarioNivel)      { this.usuarioNivel = usuarioNivel;         }
+
+    public Date getDtNascimento()                       { return dtNascimento;                      }
+    public void setDtNascimento(Date dtNascimento)      { this.dtNascimento = dtNascimento;         }
+
+    public String getCpf()                              { return this.cpf;                          }
+    public void setCpf(String cpf)                      { if (Validador.cpf(cpf)) this.cpf = cpf;   }
 
 }
+

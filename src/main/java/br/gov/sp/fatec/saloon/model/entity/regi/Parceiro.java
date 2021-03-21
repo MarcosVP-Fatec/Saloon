@@ -17,7 +17,7 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 @Table(name = "par_parceiro")
 @Entity
 @PrimaryKeyJoinColumn(name = "par_usu_id")
-public class Parceiro extends UsuarioGeral {
+public class Parceiro extends Usuario {
 
     @Column(name = "par_dt_inicio")             private Date    dtInicio;
     @Column(name = "par_inativo")               private boolean inativo;

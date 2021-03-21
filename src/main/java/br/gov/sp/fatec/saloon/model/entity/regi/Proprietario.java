@@ -17,7 +17,7 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 @Table(name = "pro_proprietario")
 @Entity
 @PrimaryKeyJoinColumn(name = "pro_usu_id")
-public class Proprietario extends UsuarioGeral {
+public class Proprietario extends Usuario {
     
     @Column(name = "pro_dt_inicio")             private Date dtInicio;
     @Column(name = "pro_dt_limite")             private Date dtLimite;
