@@ -14,6 +14,12 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
+/**
+ * @apiNote Entidade AlugavelTipo
+ *          Esta tabela será de cadastro exclusivo por administradores, mas os dados não são parte da programação
+ * @version 1.1 - Spring-boot
+ * 
+ */
 @Entity
 @Table(name = "alt_alugavel_tipo")
 @AttributeOverride(name = "id", column=@Column(name="alt_id"))
@@ -29,9 +35,6 @@ public class AlugavelTipo extends GeneratorId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "alugavelTipo")
     private Set<Alugavel> alugaveisDoProprietario;
 
-    // CONSTRUTORES
-    public AlugavelTipo(){}
-    public AlugavelTipo( String descr ){ setDescr(descr); }
 
     // GETTERS AND SETTERS
     public String getDescr()                         {  return descr;                    }

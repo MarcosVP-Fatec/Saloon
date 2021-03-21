@@ -1,9 +1,14 @@
+-- ------------------------------------------------------------------------
 -- cria schema e usuário
+-- ------------------------------------------------------------------------
 create schema if not exists saloon;
 use saloon;
 create user if not exists 'saloonsys'@'localhost' identified by 'M@triz';
 grant select, insert, delete, update on saloon.* to saloonsys@'localhost';
 
+-- ------------------------------------------------------------------------
+-- MES_ANO
+-- ------------------------------------------------------------------------
 create table mes_ano (
       mes_id                bigint unsigned primary key auto_increment
     , mes_numero            varchar(2) not null
@@ -15,19 +20,6 @@ create table mes_ano (
     , constraint mes_numero_uk unique (mes_numero)
     , constraint mes_descr_uk unique (mes_descr)
 );
-
-insert into mes_ano (mes_numero, mes_descr) values ('01','Janeiro');
-insert into mes_ano (mes_numero, mes_descr) values ('02','Fevereiro');
-insert into mes_ano (mes_numero, mes_descr) values ('03','Março');
-insert into mes_ano (mes_numero, mes_descr) values ('04','Abril');
-insert into mes_ano (mes_numero, mes_descr) values ('05','Maio');
-insert into mes_ano (mes_numero, mes_descr) values ('06','Junho');
-insert into mes_ano (mes_numero, mes_descr) values ('07','Julho');
-insert into mes_ano (mes_numero, mes_descr) values ('08','Agosto');
-insert into mes_ano (mes_numero, mes_descr) values ('09','Setembro');
-insert into mes_ano (mes_numero, mes_descr) values ('10','Outubro');
-insert into mes_ano (mes_numero, mes_descr) values ('11','Novembro');
-insert into mes_ano (mes_numero, mes_descr) values ('12','Dezembro');
 
 -- ------------------------------------------------------------------------
 -- NÍVEL DE USUARIO
@@ -49,12 +41,6 @@ create table niv_usuario(
     , _alt_data             datetime            
     , constraint niv_descr_uk unique (niv_descr)
 );
-
-insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (1,'Administrador'   ,1,0,0,0);
-insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (2,'Proprietário'    ,0,1,0,0);
-insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (3,'Parceiro'        ,0,0,1,0);
-insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (4,'Cliente'         ,0,0,0,1);
-insert into niv_usuario (niv_id,niv_descr,niv_adm,niv_prop,niv_parc,niv_cli) values (5,'Parceiro/Cliente',0,0,1,1);
 
 -- ------------------------------------------------------------------------
 -- USUARIO
@@ -80,16 +66,6 @@ create table usu_usuario (
     , constraint usu_nivel_pk foreign key (usu_nivel)
         references niv_usuario (niv_id)
 );
-
--- ------------------------------------------------------------------------
--- Cadastra o usuário administrador inicial necessário para usar o sistema
--- ------------------------------------------------------------------------
-insert into usu_usuario (usu_apelido, usu_email                   , usu_senha, usu_pj_ou_pf,usu_nome       ,usu_dt_nascimento,usu_cpf_cnpj,usu_nivel) 
-                 values ("ADM"      ,"administrator@saloon.com.br","pwADM"   ,"J"          ,"Administrador",'1969-04-01'     ,'11111111111111',1 );
-
-update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
-
-commit;
 
 -- ------------------------------------------------------------------------
 -- PROPRIETARIO 
@@ -186,13 +162,6 @@ create table ctm_contrato_motivo (
     , _alt_data             datetime            
     , constraint ctm_descr_uk unique (ctm_descr)
 );
-
-insert into ctm_contrato_motivo (ctm_descr) values ("Aniversário");
-insert into ctm_contrato_motivo (ctm_descr) values ("Bodas");
-insert into ctm_contrato_motivo (ctm_descr) values ("Casamento");
-insert into ctm_contrato_motivo (ctm_descr) values ("Confraternização");
-insert into ctm_contrato_motivo (ctm_descr) values ("Encontro de Amigos(as)");
-insert into ctm_contrato_motivo (ctm_descr) values ("Outros");
 
 create table ctt_contrato (
       ctt_id                bigint unsigned primary key auto_increment
