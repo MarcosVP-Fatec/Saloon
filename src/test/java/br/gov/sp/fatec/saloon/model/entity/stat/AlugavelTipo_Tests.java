@@ -1,7 +1,7 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,25 +18,26 @@ public class AlugavelTipo_Tests {
     
     @Autowired
     private AlugavelTipoRepository alugavelTipoRepo;
-/*
+
    	@Test
 	public void testeAluvagelTipoSave() {
         alugavelTipoRepo.save(criaAlugavelTipo());
-        assertNotNull(alugavelTipoRepo.findByDescr("TESTE_TIPO_ALUGAVEL"));
+        assertTrue(alugavelTipoRepo.existsByDescr("#TESTE_TIPO_ALUGÁVEL"));
     }
 
     @Test
 	public void testeAluvagelTipoDelete() {
-        alugavelTipoRepo.delete(alugavelTipoRepo.save(criaAlugavelTipo()));
-        assertFalse(alugavelTipoRepo.existsByDescr("TESTE_TIPO_ALUGAVEL"));
+        alugavelTipoRepo.delete(criaAlugavelTipo());
+        assertFalse(alugavelTipoRepo.existsByDescr("#TESTE_TIPO_ALUGÁVEL"));
     }
-*/
+
     /*
      * Método padrão de criação de uma entidade completa para testes.
      */
     private AlugavelTipo criaAlugavelTipo(){
         AlugavelTipo alugavelTipo = new AlugavelTipo();
-        alugavelTipo.setDescr("#TESTE_TIPO_ALUGAVEL");
+        alugavelTipo.setDescr("#TESTE_TIPO_ALUGÁVEL");
+        alugavelTipoRepo.save(alugavelTipo);
         return alugavelTipo;
     }
 
