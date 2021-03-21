@@ -35,7 +35,7 @@ public class Usuario extends GeneratorId{
     @Column(name = "usu_cpf_cnpj")          private String  cpf;
 
 
-    
+    /*
     // CONSTRUTORES
     public Usuario(){}
     public Usuario( String apelido
@@ -55,7 +55,7 @@ public class Usuario extends GeneratorId{
         setUsuarioNivel(usuarioNivel);
 
     }
-
+*/
 
     // GETTERS AND SETTERS
     public String getApelido()                          { return this.apelido;                      }

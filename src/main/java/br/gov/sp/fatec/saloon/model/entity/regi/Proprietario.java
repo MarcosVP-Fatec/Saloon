@@ -12,6 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivelEnum;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @Table(name = "pro_proprietario")
@@ -41,16 +42,22 @@ public class Proprietario extends Usuario {
                        ,String nome
                        ,Date   dtNascimento
                        ,String cpf){
-        super( apelido
-              ,email
-              ,senha
-              ,nome
-              ,dtNascimento
-              ,cpf
-              ,2L);
 
-        setDtInicio();
+        setApelido(apelido);                        
+        setEmail(email);
+        setSenha(senha);
+        setNome(nome);
+        setDtNascimento(dtNascimento);
+        setCpf(cpf);
+        setUsuarioNivel(UsuarioNivelEnum.PROPRIETARIO);
+
+
+        
+        //setUsuarioNivel( UsuarioNivelEnum.PROPRIETARIO.get() );
+        //setDtInicio();
     }
+    
+/*
     public Proprietario(String apelido
                        ,String email
                        ,String senha
@@ -70,7 +77,7 @@ public class Proprietario extends Usuario {
         setDtInicio(dtInicio);
 
     }
-
+*/
     // Getters and Setters
     public Date getDtInicio()                        { return this.dtInicio;          }
     public void setDtInicio()                        { this.dtInicio = Data.today();  }
