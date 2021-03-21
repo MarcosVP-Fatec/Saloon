@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.repository;
+package br.gov.sp.fatec.saloon.model.repository.stat;
 
 import java.util.List;
 
@@ -41,6 +41,20 @@ public interface ContratoMotivoRepository extends JpaRepository<ContratoMotivo, 
      */
     public List<ContratoMotivo> findByDescrContainsIgnoreCase(String descr);
     
+    /**
+     * @apiNote existsByDescr() Pesquisa por Descr (Exato)
+     * @param descr
+     * @return boolean
+     */
+    public boolean existsByDescr(String descr);
+
+    /**
+     * @apiNote Lista total de Motivos de Contrato
+     * @return List<ContratoMotivo>
+     */
+    @Query("select c from ContratoMotivo c order by c.id")
+     public List<ContratoMotivo> listaCompleta();
+
 }
 
 

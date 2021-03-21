@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.repository;
+package br.gov.sp.fatec.saloon.model.repository.stat;
 
 import java.util.List;
 import java.util.Optional;

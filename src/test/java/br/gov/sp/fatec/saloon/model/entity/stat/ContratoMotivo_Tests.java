@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.model.entity.stat;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.sp.fatec.saloon.model.repository.ContratoMotivoRepository;
+import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 
 @SpringBootTest
 @Transactional
@@ -41,6 +42,11 @@ public class ContratoMotivo_Tests {
         assertNull(contratoMotivoRepo.findByDescr("#TESTE_MOTIVO"));
     }
 
+  	@Test
+	public void testeDeContratoMotivoLista() {
+        assertTrue(contratoMotivoRepo.listaCompleta().size() > 0);
+    }
+
     /*
      * Método padrão de criação de uma entidade completa para testes.
      */
@@ -49,5 +55,6 @@ public class ContratoMotivo_Tests {
         ctr.setDescr("#TESTE_MOTIVO");
         return contratoMotivoRepo.save(ctr);
     }
+
 
 }

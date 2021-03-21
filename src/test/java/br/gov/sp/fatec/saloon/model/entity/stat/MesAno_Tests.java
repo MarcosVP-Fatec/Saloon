@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.sp.fatec.saloon.model.repository.MesAnoRepository;
+import br.gov.sp.fatec.saloon.model.repository.stat.MesAnoRepository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
