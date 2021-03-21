@@ -6,8 +6,8 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -41,14 +41,13 @@ public class Parceiro extends Usuario {
                    ,String nome
                    ,Date   dtNascimento
                    ,String cpf){
-        super( apelido
-              ,email
-              ,senha
-              ,nome
-              ,dtNascimento
-              ,cpf
-              ,3L);
-
+        
+        setApelido(apelido);
+        setEmail(email);
+        setSenha(senha);
+        setDtNascimento(dtNascimento);
+        setCpf(cpf);
+        setUsuarioNivel(3L);
         setDtInicio();
     }
 

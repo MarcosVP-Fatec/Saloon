@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivelEnum;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @Table(name = "pro_proprietario")
@@ -49,12 +48,8 @@ public class Proprietario extends Usuario {
         setNome(nome);
         setDtNascimento(dtNascimento);
         setCpf(cpf);
-        setUsuarioNivel(UsuarioNivelEnum.PROPRIETARIO);
-
-
-        
-        //setUsuarioNivel( UsuarioNivelEnum.PROPRIETARIO.get() );
-        //setDtInicio();
+        setUsuarioNivel(2L);
+        setDtInicio();
     }
     
 /*
