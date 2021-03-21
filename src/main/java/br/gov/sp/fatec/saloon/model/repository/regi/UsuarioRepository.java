@@ -29,27 +29,31 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     public Usuario buscarPorId(Long id);
 
     /**
-     * @apiNote findByDescr(String) Pesquisa por Descr (Exato)
-     * @param descr (Strinc)
+     * @apiNote findByApelido(String) Pesquisa por apelido (Exato)
+     * @param apelido (Strinc)
      * @return Usuario
      */
-    public Usuario findByDescr(String descr);
+    public Usuario findByApelido(String apelido);
 
     /**
-     * @apiNote findByDescrContainsIgnoreCase(String) - Pesquisa por Descrição que contém
-     * @param descr (String)
+     * @apiNote findByNomeContainsIgnoreCase(String) - Pesquisa por nome (parcial)
+     * @param nome (String)
      * @return List<Usuario>
      */
-    public List<Usuario> findByDescrContainsIgnoreCase(String descr);
+    public List<Usuario> findByNomeContainsIgnoreCase(String nome);
 
     /**
-     * @apiNote existsByDescr(String) - Pesquisa se existe por descrição exata
-     * @param descr (String)
+     * @apiNote findByCpfContainsIgnoreCase(String) - Pesquisa por nome (parcial)
+     * @param cpf (String)
+     * @return List<Usuario>
+     */
+    public List<Usuario> findByCpfContainsIgnoreCase(String cpf);
+
+    /**
+     * @apiNote existsByApelido(String) - Pesquisa se existe por apelido exata
+     * @param apelido (String)
      * @return boolean
      */
-    public boolean existsByDescr(String descr);
-
-
-
+    public boolean existsByApelido(String descr);
     
 }
