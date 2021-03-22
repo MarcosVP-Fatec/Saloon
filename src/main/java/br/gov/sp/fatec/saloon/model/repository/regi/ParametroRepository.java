@@ -1,5 +1,8 @@
 package br.gov.sp.fatec.saloon.model.repository.regi;
 
+import java.util.Date;
+import java.util.Set;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -55,7 +58,7 @@ public interface ParametroRepository extends JpaRepository<Parametro, Long>{
      * @return Date
      */
     @Query("select p.data from Parametro p where p.cod = ?1")
-    public String parametroData(String cod);
+    public Date parametroData(String cod);
 
     /**
      * @apiNote parametroLogico(String) Buscar por Cod
@@ -64,4 +67,11 @@ public interface ParametroRepository extends JpaRepository<Parametro, Long>{
      */
      @Query("select p.logico from Parametro p where p.cod = ?1")
      public boolean parametroLogico(String cod);
+
+   /**
+     * @apiNote findByDescrContainsIgnoreCase(String) Buscar por descrição
+     * @param descr (String)
+     * @return Set<Parametro>
+     */
+     public Set<Parametro> findByDescricaoContainsIgnoreCase(String descricao);
 }
