@@ -33,24 +33,6 @@ public class Parceiro extends Usuario {
                inverseJoinColumns = {@JoinColumn(name = "pxc_cli_id")})
     private Set<Cliente> clientes;
 
-    // CONSTRUTORES
-    public Parceiro(){ setDtInicio(); }
-    public Parceiro(String apelido
-                   ,String email
-                   ,String senha
-                   ,String nome
-                   ,Date   dtNascimento
-                   ,String cpf){
-        
-        setApelido(apelido);
-        setEmail(email);
-        setSenha(senha);
-        setDtNascimento(dtNascimento);
-        setCpf(cpf);
-        //setUsuarioNivel(3L);
-        setDtInicio();
-    }
-
     // GETTERS AND SETTERS
     public Date getDtInicio()              { return this.dtInicio;           }
     public void setDtInicio()              { this.dtInicio = Data.today();   }

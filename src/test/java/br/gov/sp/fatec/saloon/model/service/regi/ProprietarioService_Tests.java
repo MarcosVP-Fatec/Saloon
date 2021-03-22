@@ -48,6 +48,7 @@ public class ProprietarioService_Tests {
         Proprietario prop = proprietarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
         proprietarioServiceRepo.alt(prop.getId(), APELIDO_1, "#teste@teste.com.br", "ps123", NOME_2, dtNascimento, "99999999999");
         proprietarioRepo.flush();
+        assertTrue(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
         assertEquals(NOME_2, prop.getNome());
     }    
 
