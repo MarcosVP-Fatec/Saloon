@@ -22,17 +22,22 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     @Override
     @Transactional
     public Proprietario inc(String apelido, String email, String senha, String nome, Date dtNascimento, String cpf) {
-        if (proprietarioRepo.existsByApelido(apelido)) return proprietarioRepo.findByApelido(apelido);
+        if (proprietarioRepo.existsByApelido(apelido)){
+            return proprietarioRepo.findByApelido(apelido);
+        } 
+        
         Proprietario proprietario = new Proprietario();
+
         proprietario.setApelido(apelido);
         proprietario.setEmail(email);
         proprietario.setSenha(senha);
         proprietario.setNome(nome);
         proprietario.setDtNascimento(dtNascimento);
         proprietario.setCpf(cpf);
-        //proprietario.setUsuarioNivel(nivelRepo.buscarPorId(2L));
+        proprietario.setUsuarioNivel(nivelRepo.buscarPorId(2L));
 
         return proprietarioRepo.save(proprietario);
+
     }
 
     @Override

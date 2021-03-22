@@ -25,33 +25,11 @@ public class Proprietario extends Usuario {
     //Usar o Set poque não pode repetir o trabalho
     //O Hibernate não trabalha bem com List
     //LAZY porque não quero carregar todos os Alugaveis do proprietário
-    //
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
     private Set<Alugavel> alugaveis;
 
-    // CONSTRUTORES
-    public Proprietario(){ 
-        setDtInicio();
-        //setUsuarioNivel(2L);
-    }
-    public Proprietario(String apelido
-                       ,String email
-                       ,String senha
-                       ,String nome
-                       ,Date   dtNascimento
-                       ,String cpf){
-
-        setApelido(apelido);                        
-        setEmail(email);
-        setSenha(senha);
-        setNome(nome);
-        setDtNascimento(dtNascimento);
-        setCpf(cpf);
-        //setUsuarioNivel(2L);
-        setDtInicio();
-    }
-    
     // Getters and Setters
     public Date getDtInicio()                        { return this.dtInicio;          }
     public void setDtInicio()                        { this.dtInicio = Data.today();  }

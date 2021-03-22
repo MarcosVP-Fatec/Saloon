@@ -13,6 +13,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
+import br.gov.sp.fatec.saloon.model.service.regi.ProprietarioService;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @SpringBootTest
@@ -21,11 +22,18 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 public class Proprietario_Tests {
 
     @Autowired
-    private ProprietarioRepository proprietarioRepo;
+    private ProprietarioRepository  proprietarioRepo;
 
-    final String APELIDO_1 = "#TESTE_PROPRIETARIO_1";
-    final String NOME_1 = "#TESTE_PROP_NOME_1";
-    final String NOME_2 = "#TESTE_PROP_NOME_2";
+    @Autowired
+    private ProprietarioService     proprietarioServiceRepo;
+
+    public Proprietario_Tests() throws ParseException {}
+
+    final String    APELIDO_1   = "#TESTE_PROPRIETARIO_1";
+    final String    NOME_1      = "#TESTE_1_NOME_PROPRIETÁRIO";
+    final String    NOME_2      = "#TESTE_2_NOME_PROPRIETÁRIO";
+    final Date      DTNASC_1    = Data.toDate("12/04/1969");
+    final String    EMAIL_1     = "#teste_1_proprietário@saloon.br";
 
     @Test
     void testeProprietarioIncluir() throws ParseException {
@@ -36,9 +44,10 @@ public class Proprietario_Tests {
     @Test
     void testeProprietarioAlterar() throws ParseException {
         Proprietario prop = proprietarioRepo.save(this.criaProprietario());
+        assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
+        assertFalse(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
         prop.setNome(NOME_2);
         proprietarioRepo.save(prop);
-        assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
         assertTrue(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
     }
 
@@ -51,21 +60,8 @@ public class Proprietario_Tests {
     /*
      * Método padrão de criação de uma entidade completa para testes.
      */
-    private Proprietario criaProprietario() throws ParseException {
-        
-        Proprietario proprietario = new Proprietario();
-        
-        Date dtNascimento = Data.toDate("12/04/1969");
-
-        proprietario.setApelido(APELIDO_1);
-        proprietario.setEmail("#teste@teste.com.br");
-        proprietario.setSenha("pw123");
-        proprietario.setNome(NOME_1);
-        proprietario.setDtNascimento(dtNascimento);
-        proprietario.setCpf("99999999999");
-        proprietario.setUsuarioNivel(2L);
-
-        return proprietarioRepo.save(proprietario);
+    private Proprietario criaProprietario() {
+        return proprietarioServiceRepo.inc(APELIDO_1, EMAIL_1, "pw234", NOME_1, DTNASC_1, "99999999999");
     }
 
 }
