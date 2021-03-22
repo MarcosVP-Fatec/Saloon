@@ -18,7 +18,7 @@ public class Parametro extends GeneratorId{
     @Column(name="par_cod")         private String  cod;         //100
     @Column(name="par_descr")       private String  descricao;   //20
     @Column(name="par_tipo")        private char    tipo;        //1 - Int, String, Date, Numero
-    @Column(name="par_val_num")     private Double  numero;
+    @Column(name="par_val_num")     private double  numero;
     @Column(name="par_val_str")     private String  str;
     @Column(name="par_val_dat")     private Date    data;
     @Column(name="par_val_bol")     private boolean logico;
