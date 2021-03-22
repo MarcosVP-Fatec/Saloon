@@ -47,7 +47,7 @@ public class Parceiro extends Usuario {
         setSenha(senha);
         setDtNascimento(dtNascimento);
         setCpf(cpf);
-        setUsuarioNivel(3L);
+        //setUsuarioNivel(3L);
         setDtInicio();
     }
 

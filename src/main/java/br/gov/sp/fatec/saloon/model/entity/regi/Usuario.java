@@ -7,9 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
+import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 import br.gov.sp.fatec.saloon.model.tool.Validador;
 
@@ -25,37 +27,15 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
 @AttributeOverride(name = "id", column=@Column(name="usu_id"))
 public class Usuario extends GeneratorId{
 
-    @Column(name = "usu_apelido")           private String  apelido;
-    @Column(name = "usu_nome")              private String  nome;    
-    @Column(name = "usu_email")             private String  email;
-    @Column(name = "usu_senha")             private String  senha;
-    @Column(name = "usu_nivel")             private Long    usuarioNivel;
+    @Column(name = "usu_apelido")           private String       apelido;
+    @Column(name = "usu_nome")              private String       nome;    
+    @Column(name = "usu_email")             private String       email;
+    @Column(name = "usu_senha")             private String       senha;
 
-    @Column(name = "usu_dt_nascimento")     private Date    dtNascimento;
-    @Column(name = "usu_cpf_cnpj")          private String  cpf;
+    @Column(name = "usu_dt_nascimento")     private Date         dtNascimento;
+    @Column(name = "usu_cpf_cnpj")          private String       cpf;
 
-
-    /*
-    // CONSTRUTORES
-    public Usuario(){}
-    public Usuario( String apelido
-                  , String email
-                  , String senha
-                  , String nome
-                  , Date   dtNascimento
-                  , String cpf
-                  , Long   usuarioNivel) {
-
-        setApelido(apelido);
-        setEmail(email);
-        setSenha(senha);
-        setNome(nome);
-        setDtNascimento(dtNascimento);
-        setCpf(cpf);
-        setUsuarioNivel(usuarioNivel);
-
-    }
-*/
+    @ManyToOne()                            private UsuarioNivel usuarioNivel;
 
     // GETTERS AND SETTERS
     public String getApelido()                          { return this.apelido;                      }
@@ -70,14 +50,16 @@ public class Usuario extends GeneratorId{
     public String getSenha()                            { return this.senha;                        }
     public void setSenha(String senha)                  { this.senha = senha;                       }
 
-    public Long getUsuarioNivel()                       { return this.usuarioNivel;                 }
-    public void setUsuarioNivel(Long usuarioNivel)      { this.usuarioNivel = usuarioNivel;         }
-
     public Date getDtNascimento()                       { return dtNascimento;                      }
     public void setDtNascimento(Date dtNascimento)      { this.dtNascimento = dtNascimento;         }
 
     public String getCpf()                              { return this.cpf;                          }
     public void setCpf(String cpf)                      { if (Validador.cpf(cpf)) this.cpf = cpf;   }
+
+    public UsuarioNivel getUsuarioNivel()               { return this.usuarioNivel;                 }
+    public void setUsuarioNivel(UsuarioNivel usuarioNivel) {this.usuarioNivel = usuarioNivel;       }
+
+    
 
 }
 

@@ -33,7 +33,7 @@ public class Proprietario extends Usuario {
     // CONSTRUTORES
     public Proprietario(){ 
         setDtInicio();
-        setUsuarioNivel(2L);
+        //setUsuarioNivel(2L);
     }
     public Proprietario(String apelido
                        ,String email
@@ -48,31 +48,10 @@ public class Proprietario extends Usuario {
         setNome(nome);
         setDtNascimento(dtNascimento);
         setCpf(cpf);
-        setUsuarioNivel(2L);
+        //setUsuarioNivel(2L);
         setDtInicio();
     }
     
-/*
-    public Proprietario(String apelido
-                       ,String email
-                       ,String senha
-                       ,String nome
-                       ,Date   dtNascimento
-                       ,String cpf
-                       ,Date   dtInicio){
-
-        super( apelido
-              ,email
-              ,senha
-              ,nome
-              ,dtNascimento
-              ,cpf
-              ,2L);
-
-        setDtInicio(dtInicio);
-
-    }
-*/
     // Getters and Setters
     public Date getDtInicio()                        { return this.dtInicio;          }
     public void setDtInicio()                        { this.dtInicio = Data.today();  }

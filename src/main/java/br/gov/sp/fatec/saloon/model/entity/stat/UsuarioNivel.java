@@ -1,11 +1,17 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorAudit;
+import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 /**
@@ -38,6 +44,10 @@ public class UsuarioNivel extends GeneratorAudit {
 
     @Column(name = "niv_cli")
     private boolean cliente;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioNivel")
+    @JoinColumn(name = "usu_nivel")
+    private Set<Usuario> usuarios;
 
     // GETTERS AND SETTERS
     

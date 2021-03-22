@@ -28,7 +28,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setNome(nome);
         usuario.setDtNascimento(dtNascimento);
         usuario.setCpf(cpf);
-        usuario.setUsuarioNivel(usuarioNivel);
+        //usuario.setUsuarioNivel(usuarioNivel);
         return usuarioRepo.save(usuario);
     }
 
@@ -47,7 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setNome(nome);
         usuario.setDtNascimento(dtNascimento);
         usuario.setCpf(cpf);
-        usuario.setUsuarioNivel(usuarioNivel);
+        //usuario.setUsuarioNivel(usuarioNivel);
         return usuarioRepo.save(usuario);
     }
 
