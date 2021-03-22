@@ -5,8 +5,10 @@ import java.util.Date;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -35,7 +37,8 @@ public class Usuario extends GeneratorId{
     @Column(name = "usu_dt_nascimento")     private Date         dtNascimento;
     @Column(name = "usu_cpf_cnpj")          private String       cpf;
 
-    @ManyToOne()                            private UsuarioNivel usuarioNivel;
+    @ManyToOne(fetch = FetchType.LAZY)      
+    @JoinColumn(name = "usu_nivel")         private UsuarioNivel usuarioNivel;
 
     // GETTERS AND SETTERS
     public String getApelido()                          { return this.apelido;                      }

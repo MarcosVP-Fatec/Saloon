@@ -47,9 +47,8 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
         usuarioNivel.setProprietario(proprietario);
         usuarioNivel.setParceiro(parceiro);
         usuarioNivel.setCliente(cliente);
-        usuarioNivelRepo.save(usuarioNivel);
 
-        return usuarioNivel;
+        return usuarioNivelRepo.save(usuarioNivel);
 
     }
 

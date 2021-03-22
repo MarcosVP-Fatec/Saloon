@@ -46,7 +46,6 @@ public class UsuarioNivel extends GeneratorAudit {
     private boolean cliente;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuarioNivel")
-    @JoinColumn(name = "usu_nivel")
     private Set<Usuario> usuarios;
 
     // GETTERS AND SETTERS
@@ -67,5 +66,8 @@ public class UsuarioNivel extends GeneratorAudit {
 
     public boolean getCliente()                         { return this.cliente;                  }
     public void setCliente(boolean cliente)             { this.cliente = cliente;               }
+
+    public Set<Usuario> getUsuarios()                   { return this.usuarios;                 }
+    public void setUsuarios(Set<Usuario> usuarios)      { this.usuarios = usuarios;             }
 
 }

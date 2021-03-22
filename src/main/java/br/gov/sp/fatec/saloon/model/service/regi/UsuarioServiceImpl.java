@@ -8,12 +8,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 import br.gov.sp.fatec.saloon.model.repository.regi.UsuarioRepository;
+import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 
 @Service("UsuarioService")
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepo;
+
+    @Autowired
+    private UsuarioNivelRepository nivelRepo;
 
     @Override
     @Transactional
@@ -28,10 +32,9 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setNome(nome);
         usuario.setDtNascimento(dtNascimento);
         usuario.setCpf(cpf);
-        //usuario.setUsuarioNivel(usuarioNivel);
+        usuario.setUsuarioNivel(nivelRepo.buscarPorId(usuarioNivel));
         return usuarioRepo.save(usuario);
     }
-
 
     @Override
     @Transactional
@@ -47,7 +50,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setNome(nome);
         usuario.setDtNascimento(dtNascimento);
         usuario.setCpf(cpf);
-        //usuario.setUsuarioNivel(usuarioNivel);
+        usuario.setUsuarioNivel(nivelRepo.buscarPorId(usuarioNivel));
         return usuarioRepo.save(usuario);
     }
 
