@@ -21,6 +21,7 @@ public class ClienteDaoJpa implements ClienteDao {
 
     @Override
     public Cliente salvar(Cliente cliente) {
+        /*
         if (Parametro.lerLogico("PARAMETRO")) {
             try {
                 em.getTransaction().begin();
@@ -38,6 +39,7 @@ public class ClienteDaoJpa implements ClienteDao {
             Generico.salvarSemCommit(cliente, em);
             em.getTransaction().commit();
         }
+        */
         return cliente;
     }
 

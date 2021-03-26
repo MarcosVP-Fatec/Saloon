@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import br.gov.sp.fatec.saloon.model.dao.ParametroDaoJpa;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 
 @Entity
@@ -24,6 +23,7 @@ public class Parametro extends GeneratorId{
     @Column(name="par_val_bol")     private boolean logico;
 
     // CONSTRUTORES
+    /*
     public Parametro(){}
     private Parametro( String cod
                      , String descricao
@@ -69,7 +69,7 @@ public class Parametro extends GeneratorId{
            this(cod, descricao, 'L');
            setLogico(logico);
     }
-
+*/
     public String getCod()                      { return cod;                   }
     public void setCod(String cod)              { this.cod = cod;               }
     public String getDescricao()                { return descricao;             }
@@ -85,13 +85,15 @@ public class Parametro extends GeneratorId{
     public boolean isLogico()                   { return logico;                }
     public void setLogico(boolean logico)       { this.logico = logico;         }
     
+    /*
     private void setNull(){
         setNumero(null);
         setStr(null);
         setData(null);
         setLogico(false);
     }
-
+*/
+    /*
     public static double lernumero(String cod){
         Parametro parametro = new ParametroDaoJpa().buscar(cod);
         return parametro.getNumero();
@@ -114,4 +116,5 @@ public class Parametro extends GeneratorId{
         if (parametro == null) return false;
         return parametro.isLogico();
     }
+    */
 }

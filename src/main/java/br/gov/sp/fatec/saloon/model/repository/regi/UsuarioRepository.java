@@ -30,7 +30,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
     /**
      * @apiNote findByApelido(String) Pesquisa por apelido (Exato)
-     * @param apelido (Strinc)
+     * @param apelido (String)
      * @return Usuario
      */
     public Usuario findByApelido(String apelido);

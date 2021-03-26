@@ -15,39 +15,38 @@ public class AlugavelTipoServiceImpl implements AlugavelTipoService {
 
     @Override
     @Transactional
-    public AlugavelTipo inc(String descr) {
-        if (alugavelTipoRepo.existsByDescr(descr)) return alugavelTipoRepo.findByDescr(descr);
-        AlugavelTipo tipo = new AlugavelTipo();
-        tipo.setDescr(descr);
-        return alugavelTipoRepo.save(tipo);
-    }
+    public AlugavelTipo persist(Long id, String descr) {
+        
+        AlugavelTipo alugavelTipo;
 
-    @Override
-    @Transactional
-    public AlugavelTipo alt(Long id, String descr) {
-        if (!alugavelTipoRepo.existsById(id)){
-            return null;
+        if (id != null) {
+            if (!alugavelTipoRepo.existsById(id) ){
+                return null;
+            }
+            alugavelTipo = alugavelTipoRepo.buscarPorId(id);
+        } else {
+            alugavelTipo = new AlugavelTipo();
         }
-        AlugavelTipo tipo = alugavelTipoRepo.buscarPorId(id);
-        tipo.setDescr(descr);
-        return alugavelTipoRepo.save(tipo);
+
+        alugavelTipo.setDescr(descr);
+        return alugavelTipoRepo.save(alugavelTipo);
+
     }
 
     @Override
     @Transactional
-    public boolean del(Long id) {
+    public boolean delete(Long id) {
         if (!alugavelTipoRepo.existsById(id))
             return true;
         alugavelTipoRepo.deleteById(id);
         return !alugavelTipoRepo.existsById(id);
     }
 
-
     @Override
-    public boolean del(String descr) {
+    public boolean delete(String descr) {
         if (!alugavelTipoRepo.existsByDescr(descr))
             return true;
-        return this.del(alugavelTipoRepo.findByDescr(descr).getId());
+        return this.delete(alugavelTipoRepo.findByDescr(descr).getId());
     }
     
 }

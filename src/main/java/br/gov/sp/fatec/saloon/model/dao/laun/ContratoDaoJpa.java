@@ -28,6 +28,7 @@ public class ContratoDaoJpa implements ContratoDao {
 
     @Override
     public Contrato salvar(Contrato contrato) {
+        /*
         if (Parametro.lerLogico("PARAMETRO")) {
             try {
                 em.getTransaction().begin();
@@ -44,6 +45,7 @@ public class ContratoDaoJpa implements ContratoDao {
                 Generico.salvarSemCommit(contrato, em);
                 em.getTransaction().commit();
         }
+        */
         return contrato;
     }
 

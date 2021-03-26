@@ -35,7 +35,6 @@ public class AlugavelTipo extends GeneratorId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "alugavelTipo")
     private Set<Alugavel> alugaveisDoProprietario;
 
-
     // GETTERS AND SETTERS
     public String getDescr()                         {  return descr;                    }
     public void setDescr(String descr)               { this.descr = Texto.left(descr,20);}

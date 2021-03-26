@@ -15,33 +15,28 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
 
     @Override
     @Transactional
-    public UsuarioNivel inc(Long id, String descr, boolean administrador, boolean proprietario,
-            boolean parceiro, boolean cliente) {
+    public UsuarioNivel persist( Long id
+                               , String descr
+                               , boolean administrador
+                               , boolean proprietario
+                               , boolean parceiro
+                               , boolean cliente) {
 
-        if (usuarioNivelRepo.existsById(id))
-            return usuarioNivelRepo.buscarPorId(id);
-        if (usuarioNivelRepo.existsByDescr(descr))
-            return usuarioNivelRepo.findByDescr(descr);
+        UsuarioNivel usuarioNivel;
 
-        return this.incAlt(new UsuarioNivel(), id, descr, administrador, proprietario, parceiro, cliente);
-    }
-
-    @Override
-    @Transactional
-    public UsuarioNivel alt(Long id, String descr, boolean administrador, boolean proprietario,
-            boolean parceiro, boolean cliente) {
-
-        if (!usuarioNivelRepo.existsById(id))
+        // Esta entidade não tem o id automático
+        if (id == null) {
             return null;
+        }    
 
-        return this.incAlt(usuarioNivelRepo.buscarPorId(id), id, descr, administrador, proprietario,
-                parceiro, cliente);
-    }
 
-    private UsuarioNivel incAlt(UsuarioNivel usuarioNivel, Long id, String descr, boolean administrador,
-            boolean proprietario, boolean parceiro, boolean cliente) {
+        if (usuarioNivelRepo.existsById(id) ){
+            usuarioNivel = usuarioNivelRepo.buscarPorId(id);
+        } else {
+            usuarioNivel = new UsuarioNivel();
+            usuarioNivel.setId(id);
+        }
 
-        usuarioNivel.setId(id);
         usuarioNivel.setDescr(descr);
         usuarioNivel.setAdministrador(administrador);
         usuarioNivel.setProprietario(proprietario);
@@ -49,12 +44,11 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
         usuarioNivel.setCliente(cliente);
 
         return usuarioNivelRepo.save(usuarioNivel);
-
     }
 
     @Override
     @Transactional
-    public boolean del(Long id) {
+    public boolean delete(Long id) {
         if (!usuarioNivelRepo.existsById(id)){
             return true;
         }
@@ -63,11 +57,17 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
     }
 
     @Override
-    public boolean del(String descr) {
+    public boolean delete(String descr) {
         if (!usuarioNivelRepo.existsByDescr(descr)){
             return true;
         }
-        return this.del(usuarioNivelRepo.findByDescr(descr).getId());
+        return this.delete(usuarioNivelRepo.findByDescr(descr).getId());
     }
 
 }
+
+
+
+
+
+
