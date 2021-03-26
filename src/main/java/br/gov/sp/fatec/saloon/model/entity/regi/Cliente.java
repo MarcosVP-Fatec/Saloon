@@ -45,32 +45,6 @@ public class Cliente extends GeneratorId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Contrato> contratosDoCliente;
 
-    /*
-    // CONSTRUTORES
-    public Cliente(){}
-    public Cliente( String   cpf_cnpj
-                  , String   nome
-                  , String   telDdd
-                  , String   telNumero
-                  , Parceiro parceiro){
-        this(cpf_cnpj,nome,telDdd,telNumero);
-        setParceiro(parceiro);
-    }
-    public Cliente( String   cpf_cnpj
-                  , String   nome
-                  , String   telDdd
-                  , String   telNumero){
-        this(cpf_cnpj,nome);
-        setTelDdd(telDdd);
-        setTelNumero(telNumero);
-    }
-    public Cliente( String   cpf_cnpj
-                  , String   nome){
-        setCpf_cnpj(cpf_cnpj);
-        setNome(nome);
-    }
-    */
-    
     // GETTERS AND SETTERS
     public String getCpf_cnpj()                 { return cpf_cnpj;                              }
     public void setCpf_cnpj(String cpf_cnpj)    { Validador.isCpfOrCnpj(cpf_cnpj);

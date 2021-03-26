@@ -17,12 +17,6 @@ public interface ContratoService {
                            , int        festejoDia
                            , Long       idMes );
 
-    // public Contrato persist( Long       idCliente
-    //                        , Long       idAlugavel
-    //                        , Date       data
-    //                        , BigDecimal reservaPaga
-    //                        , Long       idMotivo);
-
     public boolean delete(Long id);
 
 }

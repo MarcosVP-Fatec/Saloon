@@ -75,6 +75,15 @@ public class Contrato_Tests {
         assertFalse(contratoRepo.existsById(idContrato));
     }
 
+    @Test
+    void listaPorProprietarioEClienteTeste() throws ParseException {
+        Contrato contrato = contratoRepo.save(this.criaContratoTeste());
+        int qtd = contratoRepo.listaPorAlugavelCliente(contrato.getAlugavel().getId(), contrato.getCliente().getId()).size();
+        contratoRepo.delete(contrato);
+        contratoRepo.flush();
+        assertEquals(qtd-1, contratoRepo.listaPorAlugavelCliente(contrato.getAlugavel().getId(), contrato.getCliente().getId()).size());
+    }
+
     /*
      * Função padrão de criação de contrato
      */
