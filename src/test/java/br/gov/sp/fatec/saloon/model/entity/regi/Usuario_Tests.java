@@ -44,7 +44,8 @@ public class Usuario_Tests {
         assertTrue(usuarioRepo.existsByApelido(APELIDO_1));
     }
 
-	void testeUsuarioAlterar() {
+    @Test
+    void testeUsuarioAlterar() {
         Usuario usu = usuarioRepo.save(this.criaUsuario());
         assertFalse(usuarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
         usu.setNome(NOME_2);

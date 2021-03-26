@@ -63,7 +63,6 @@ public class AlugavelServiceImpl implements AlugavelService {
         alugavel.setAlugavelTipo(alugavelTipo);
         alugavel.setEndereco(endereco);
         alugavel.setCapacidade(capacidade);
-        alugavel.setCapacidade(capacidade);
 
         return alugavelRepo.save(alugavel);
         

@@ -41,13 +41,13 @@ public class ProprietarioService_Tests {
     
     @Test
     void testeProprietarioServiceIncluir() {
-        this.criaProprietarioService();
+        this.criaProprietarioTeste();
         assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
     }
 
   	@Test
 	void testeProprietarioServiceAlterar() {
-        Proprietario prop = this.criaProprietarioService();
+        Proprietario prop = this.criaProprietarioTeste();
         proprietarioServiceRepo.persist( prop.getId()
                                        , APELIDO_1
                                        , EMAIL_1
@@ -63,19 +63,19 @@ public class ProprietarioService_Tests {
 
   	@Test
 	void testeProprietarioServiceExcluir() {
-        proprietarioServiceRepo.delete(this.criaProprietarioService().getApelido());
+        proprietarioServiceRepo.delete(this.criaProprietarioTeste().getApelido());
         assertFalse(proprietarioRepo.existsByApelido(APELIDO_1));
     }    
 
-    private Proprietario criaProprietarioService(){
-
+    /*
+    * Método padrão de criação do proprietário para testes 
+    */
+    private Proprietario criaProprietarioTeste(){
         return proprietarioServiceRepo.persist( APELIDO_1
                                               , EMAIL_1
                                               , SENHA_1
                                               , NOME_1
                                               , DTNASC_1
                                               , CPF_1);
-
     }
-
 }

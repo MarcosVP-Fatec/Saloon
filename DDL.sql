@@ -134,6 +134,7 @@ create table alu_alugavel(
          references pro_proprietario (pro_usu_id)
     , constraint alu_alt_id_fk foreign key (alu_alt_id)
          references alt_alugavel_tipo (alt_id)
+    , constraint alu_descr_uk unique (alu_descr)
 );
 
 -- ------------------------------------------------------------------------

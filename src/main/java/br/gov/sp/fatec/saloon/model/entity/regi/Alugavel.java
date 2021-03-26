@@ -41,7 +41,7 @@ public class Alugavel extends GeneratorId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "alugavel")
     private Set<Contrato> contratosDeAluguel;
 
-
+/*
     // CONSTRUTORES
     public Alugavel(){}
     public Alugavel( String         descr
@@ -58,7 +58,7 @@ public class Alugavel extends GeneratorId {
         setCapacidade(capacidade);
         setValor(valor);
     }
-
+*/
     // GETTERS AND SETTERS
     public String getDescr()                                { return descr;                             }
     public void setDescr(String descr)                      { this.descr = Texto.left(descr,50);        }

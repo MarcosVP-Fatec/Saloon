@@ -7,7 +7,7 @@
 
 ## Professor:  
 
-**Emanuel Mineda Carneiro** - *Laboratório IV de Desenvolvimento*   
+**Emanuel Mineda Carneiro** - *Laboratório V de Desenvolvimento*   
 
 ---------------------------------------------------------------
 ## Integrantes

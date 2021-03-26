@@ -14,13 +14,29 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
 public interface AlugavelRepository extends JpaRepository<Alugavel, Long>{
     
     /**
-     * @apiNote Buscar por Id
+     * @apiNote buscarPorId(Long)
      *          Esta opção traz sempre um objeto UsuarioNivel (Diferente do findById)
-     * @param id
+     * @param id (Long)
      * @return Usuario
      */
     @Query("select a from Alugavel a where a.id = ?1")
     public Alugavel buscarPorId(Long id);
+
+    /**
+     * @apiNote findByDescr(String)
+     *          Pesquisa por descrição do alugavel
+     * @param descr (String)
+     * @return Usuario
+     */
+    public Alugavel findByDescr(String descr);
+
+    /**
+     * @apiNote existsByDescr(String)
+     *          Pesquisa por descrição do alugavel
+     * @param descr (String)
+     * @return Usuario
+     */
+    public boolean existsByDescr(String descr);
 
     /**
      * @apiNote findByProprietarioUsuarioApelido(String) Pesquisa por apelido do usuáro (Exato)
@@ -28,6 +44,10 @@ public interface AlugavelRepository extends JpaRepository<Alugavel, Long>{
      * @return Alugavel
      */
     public Alugavel findByProprietarioApelido(String apelido);
+    @Query("select a from Alugavel a inner join a.proprietario p where p.apelido = ?1")
+    public Set<Alugavel> listaPorProprietarioApelido(String apelido);
+    @Query("select a from Alugavel a inner join a.proprietario p where p.id = ?1")
+    public Set<Alugavel> listaPorProprietarioId(Long idProprietario);
 
     /**
      * @apiNote findByProprietarioUsuarioNomeContainsIgnoreCase(String) - Pesquisa por nome do proprietário (parcial)
@@ -51,5 +71,4 @@ public interface AlugavelRepository extends JpaRepository<Alugavel, Long>{
     public boolean existsByProprietarioApelido(String descr);
 
 }
-
 

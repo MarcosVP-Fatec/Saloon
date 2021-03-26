@@ -1,3 +1,63 @@
+package br.gov.sp.fatec.saloon.model.service.regi;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
+
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+import br.gov.sp.fatec.saloon.model.repository.regi.AlugavelRepository;
+
+@SpringBootTest
+@Transactional
+@Rollback
+public class AlugavelService_Tests {
+
+    @Autowired
+    private AlugavelRepository alugavelRepo;
+
+    @Autowired
+    private AlugavelService alugavelServiceRepo;
+
+    final String DESCR_1 = "#DESCR_ALUGAVEL_1";
+    final Long TIPO_ALU_1 = 1L;
+    final String ENDERECO_1 = "#ENDEREÇO_ALUGAVEL_1";
+    final int CAPACIDADE_1 = 100;
+    final BigDecimal VALOR_1 = new BigDecimal(500.00);
+
+    @Test
+    void testeAlugavelServiceIncluir() throws ParseException {
+        this.criaAlugavelTeste();
+        assertTrue(alugavelRepo.existsByDescr(DESCR_1));
+    }
+    
+    /*
+     * Método que cria um Alugável para testes
+     */
+    public Alugavel criaAlugavelTeste() throws ParseException {
+        
+        Proprietario proprietario = new ProprietarioService_Tests().criaProprietarioTeste();
+
+        return alugavelServiceRepo.persist( null
+                                          , DESCR_1
+                                          , proprietario.getId()
+                                          , TIPO_ALU_1
+                                          , ENDERECO_1
+                                          , CAPACIDADE_1
+                                          , VALOR_1);
+                                         
+    }
+    
+}
+
+/*
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -79,3 +139,5 @@ public class Proprietario_Tests {
         return proprietario;
     }
 }
+
+*/

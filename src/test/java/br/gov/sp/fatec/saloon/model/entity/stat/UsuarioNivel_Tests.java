@@ -35,7 +35,7 @@ public class UsuarioNivel_Tests {
     /*
      * Método padrão de criação de uma entidade completa para testes.
      */
-    private UsuarioNivel criaUsuarioNivel(){
+    public UsuarioNivel criaUsuarioNivel(){
         UsuarioNivel usuarioNivel = new UsuarioNivel();
         usuarioNivel.setId(99999L); 
         usuarioNivel.setDescr("#TESTE_DE_NIVEL");
