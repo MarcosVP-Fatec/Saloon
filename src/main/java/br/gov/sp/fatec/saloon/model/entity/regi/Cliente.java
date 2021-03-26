@@ -45,7 +45,7 @@ public class Cliente extends GeneratorId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Contrato> contratosDoCliente;
 
-    
+    /*
     // CONSTRUTORES
     public Cliente(){}
     public Cliente( String   cpf_cnpj
@@ -69,6 +69,7 @@ public class Cliente extends GeneratorId {
         setCpf_cnpj(cpf_cnpj);
         setNome(nome);
     }
+    */
     
     // GETTERS AND SETTERS
     public String getCpf_cnpj()                 { return cpf_cnpj;                              }

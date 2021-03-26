@@ -70,5 +70,8 @@ public interface AlugavelRepository extends JpaRepository<Alugavel, Long>{
      */
     public boolean existsByProprietarioApelido(String descr);
 
+    // public List<Alugavel> buscar(String apelidoProprietario) {
+    //     String jpql = "select a from Alugavel a inner join a.proprietario p where p.apelido = :apelidoProprietario";
+
 }
 

@@ -152,6 +152,7 @@ create table cli_cliente (
     , _alt_usua             bigint          
     , _alt_data             datetime            
     , constraint cli_cpf_cnpj_uk unique (cli_cpf_cnpj)
+    , constraint cli_nome_uk unique (cli_nome)
 );
 
 create table ctm_contrato_motivo (
