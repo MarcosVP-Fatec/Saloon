@@ -30,6 +30,11 @@ public interface ContratoRepository extends JpaRepository<Contrato, Long>{
            " order by c.data              ")
     public Set<Contrato> listaPorAlugavelCliente( Long idAlugavel,  Long idCliente);
 
+    @Query("select count(c) from Contrato c")
+    public Long countAll();
+
+    public Set<Contrato> findByFestejoNomesContainsIgnoreCase(String nomes);
+
 }
 
 
