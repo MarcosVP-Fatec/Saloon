@@ -61,6 +61,6 @@ public class Parceiro_Tests {
      * Método padrão de criação de uma entidade completa para testes.
      */
     private Parceiro criaParceiro() {
-        return parceiroServiceRepo.inc(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666");
+        return parceiroServiceRepo.persist(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666");
     }
 }

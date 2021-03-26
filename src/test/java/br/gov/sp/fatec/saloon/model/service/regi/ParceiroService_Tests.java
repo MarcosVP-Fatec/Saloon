@@ -54,13 +54,13 @@ public class ParceiroService_Tests {
 
   	@Test
 	void testeParceiroServiceExcluir() {
-        parceiroServiceRepo.del(parceiroServiceRepo.inc(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666").getId());
+        parceiroServiceRepo.delete(parceiroServiceRepo.persist(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666").getId());
         parceiroRepo.flush();
         assertFalse(parceiroRepo.existsByApelido(APELIDO_1));
     }    
 
     private Parceiro criaParceiro(){
-        return parceiroServiceRepo.inc(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666");
+        return parceiroServiceRepo.persist(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666");
     }
     
 }

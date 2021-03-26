@@ -21,12 +21,24 @@ public class ParceiroServiceImpl implements ParceiroService {
 
     @Override
     @Transactional
-    public Parceiro inc(String apelido, String email, String senha, String nome, Date dtNascimento, String cpf) {
-        if (parceiroRepo.existsByApelido(apelido)){
-            return parceiroRepo.findByApelido(apelido);
-        } 
-        
-        Parceiro parceiro = new Parceiro();
+    public Parceiro persist( Long   id
+                           , String apelido
+                           , String email
+                           , String senha
+                           , String nome
+                           , Date dtNascimento
+                           , String cpf) {
+
+        Parceiro parceiro;
+
+        if (id != null) {
+            if (!parceiroRepo.existsById(id) ){
+                return null;
+            }
+            parceiro = parceiroRepo.buscarPorId(id);
+        } else {
+            parceiro = new Parceiro();
+        }
 
         parceiro.setApelido(apelido);
         parceiro.setEmail(email);
@@ -37,44 +49,40 @@ public class ParceiroServiceImpl implements ParceiroService {
         parceiro.setUsuarioNivel(nivelRepo.buscarPorId(3L));
 
         return parceiroRepo.save(parceiro);
+      
+    }
+
+    @Override
+    public Parceiro persist( String apelido
+                           , String email
+                           , String senha
+                           , String nome
+                           , Date   dtNascimento
+                           , String cpf){
+
+        return this.persist( null
+                           , apelido
+                           , email
+                           , senha
+                           , nome
+                           , dtNascimento
+                           , cpf);
     }
 
     @Override
     @Transactional
-    public Parceiro alt(Long id, String apelido, String email, String senha, String nome, Date dtNascimento,
-            String cpf) {
-    
-        if (!parceiroRepo.existsById(id)){
-            return null;
-        }
-
-        Parceiro parceiro = parceiroRepo.buscarPorId(id);
-
-        parceiro.setApelido(apelido);
-        parceiro.setEmail(email);
-        parceiro.setSenha(senha);
-        parceiro.setNome(nome);
-        parceiro.setDtNascimento(dtNascimento);
-        parceiro.setCpf(cpf);
-
-        return parceiroRepo.save(parceiro);
-    }
-
-    @Override
-    @Transactional
-    public boolean del(Long id) {
+    public boolean delete(Long id) {
         if (!parceiroRepo.existsById(id)){
             return true;
         }
-            
         parceiroRepo.deleteById(id);
         return !parceiroRepo.existsById(id);
     }
 
     @Override
-    public boolean del(String apelido) {
+    public boolean delete(String apelido) {
         if (!parceiroRepo.existsByApelido(apelido))
             return true;
-        return this.del(parceiroRepo.findByApelido(apelido).getId());
+        return this.delete(parceiroRepo.findByApelido(apelido).getId());
     }
 }

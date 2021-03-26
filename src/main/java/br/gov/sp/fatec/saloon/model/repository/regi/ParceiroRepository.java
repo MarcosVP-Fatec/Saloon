@@ -14,7 +14,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 public interface ParceiroRepository extends JpaRepository<Parceiro, Long>{
 
     /**
-     * @apiNote buscarPorId() --> Busca por Id
+     * @apiNote buscarPorId(Long) --> Busca por Id
      *          Esta opção traz sempre um objeto Parceiro (Diferente do findById)
      * @param id (Long)
      * @return Parceiro
