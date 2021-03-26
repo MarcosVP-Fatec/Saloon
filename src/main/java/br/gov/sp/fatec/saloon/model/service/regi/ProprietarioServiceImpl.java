@@ -75,7 +75,6 @@ public class ProprietarioServiceImpl implements ProprietarioService {
         if (!proprietarioRepo.existsById(id)){
             return true;
         }
-            
         proprietarioRepo.deleteById(id);
         return !proprietarioRepo.existsById(id);
     }
