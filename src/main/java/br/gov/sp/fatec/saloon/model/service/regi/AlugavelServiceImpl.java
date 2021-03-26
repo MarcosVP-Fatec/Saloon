@@ -69,6 +69,12 @@ public class AlugavelServiceImpl implements AlugavelService {
     }
 
     @Override
+    public Alugavel persist(String descr, Long idProprietario, Long idAlugavelTipo, String endereco, int capacidade,
+            BigDecimal valor) {
+        return this.persist(null, descr, idProprietario, idAlugavelTipo, endereco, capacidade, valor);
+    }
+
+    @Override
     @Transactional
     public boolean delete(Long id) {
         if (!alugavelRepo.existsById(id)){

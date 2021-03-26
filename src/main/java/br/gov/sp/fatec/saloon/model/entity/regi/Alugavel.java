@@ -10,7 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
@@ -21,7 +20,7 @@ import br.gov.sp.fatec.saloon.model.tool.Texto;
 @Entity
 @Table(name = "alu_alugavel")
 @AttributeOverride(name = "id", column=@Column(name="alu_id"))
-@PrimaryKeyJoinColumn(name = "alu_id")
+//@PrimaryKeyJoinColumn(name = "alu_id")
 public class Alugavel extends GeneratorId {
 
     @Column(name = "alu_descr")                             private String      descr;       //50
@@ -41,24 +40,6 @@ public class Alugavel extends GeneratorId {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "alugavel")
     private Set<Contrato> contratosDeAluguel;
 
-/*
-    // CONSTRUTORES
-    public Alugavel(){}
-    public Alugavel( String         descr
-                   , Proprietario   proprietario
-                   , AlugavelTipo   alugavelTipo
-                   , String         endereco
-                   , int            capacidade
-                   , BigDecimal     valor){
-        
-        setDescr(descr);
-        setProprietario(proprietario);
-        setAlugavelTipo(alugavelTipo);
-        setEndereco(endereco);
-        setCapacidade(capacidade);
-        setValor(valor);
-    }
-*/
     // GETTERS AND SETTERS
     public String getDescr()                                { return descr;                             }
     public void setDescr(String descr)                      { this.descr = Texto.left(descr,50);        }

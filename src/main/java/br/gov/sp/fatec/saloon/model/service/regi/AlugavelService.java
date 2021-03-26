@@ -9,18 +9,29 @@ public interface AlugavelService {
     /**
      * @apiNote persist
      *          Método que inclui ou altera um registro existente
-     * @param id
-     * @param descr
-     * @param idProprietario
-     * @param alugavelTipo
-     * @param endereco
-     * @param capacidade
-     * @param valor
+     * @param id (Long)
+     * @param descr (String)
+     * @param idProprietario (Long)
+     * @param idAlugavelTipo (Long)
+     * @param endereco (String)
+     * @param capacidade (int)
+     * @param valor (BigDecimal)
      * @return
      */
-    public Alugavel persist(Long id, String descr, Long idProprietario, Long idAlugavelTipo,
-                String endereco, int capacidade, BigDecimal valor);
+    public Alugavel persist( Long id
+                           , String descr
+                           , Long idProprietario
+                           , Long idAlugavelTipo
+                           , String endereco
+                           , int capacidade
+                           , BigDecimal valor);
     
+    public Alugavel persist( String descr
+                           , Long idProprietario
+                           , Long idAlugavelTipo
+                           , String endereco
+                           , int capacidade
+                           , BigDecimal valor);
     /**
      * @apiNote delete) --> Exclui um alugável passando o id
      * @param id (Long)
