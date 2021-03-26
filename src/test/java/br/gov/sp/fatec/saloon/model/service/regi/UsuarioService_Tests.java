@@ -30,29 +30,46 @@ public class UsuarioService_Tests {
 
     public UsuarioService_Tests() throws ParseException {}
 
-    final String APELIDO_1 = "#APELIDO_USUÁRIO_1";
-    final String NOME_1 = "#NOME_USUÁRIO_1";
-    final String NOME_2 = "#NOME_USUÁRIO_2";
-    Date dtNascimento = Data.toDate("12/04/1969");
-
+    final String APELIDO_1  = "#APELIDO_USUÁRIO_1";
+    final String NOME_1     = "#NOME_USUÁRIO_1";
+    final String NOME_2     = "#NOME_USUÁRIO_2";
+    final String EMAIL_1    = "#teste1_usuario@saloon.br";
+    final String SENHA_1    = "#SENHA_1";
+    final Date   DTNASC_1   = Data.toDate("12/04/1969");
+    final String CPF_1      = "99999999999";
+    final Long   ID_NIVEL_1 = 3L;
 
     @Test
     void testeUsuarioServiceIncluir()  {
-        usuarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999", 3L);
+        this.criaUsuario();
         assertTrue(usuarioRepo.existsByApelido(APELIDO_1));
     }
 
   	@Test
 	void testeDesenvolvitesteUsuarioServiceAlterar() {
-        Usuario usu = usuarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999", 3L);
-        usuarioServiceRepo.alt(usu.getId(), APELIDO_1, "#teste@teste.com.br", "ps123", NOME_2, dtNascimento, "99999999999", 3L);
+        Usuario usu = this.criaUsuario();
+        usu.setNome(NOME_2);
+        usuarioRepo.save(usu);
         usuarioRepo.flush();
         assertEquals(NOME_2, usu.getNome());
     }    
 
     @Test
-    void testeUsuarioServiceExcluir() throws ParseException {
-        usuarioServiceRepo.del(usuarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999", 3L).getId());
+    void testeUsuarioServiceExcluir() {
+        usuarioServiceRepo.delete(this.criaUsuario().getId());
         assertFalse(usuarioRepo.existsByApelido(APELIDO_1));
+    }
+
+    /*
+     * Função padrão de criação de usuário
+     */
+    private Usuario criaUsuario(){
+        return usuarioServiceRepo.persist( APELIDO_1
+                                         , EMAIL_1
+                                         , SENHA_1
+                                         , NOME_1
+                                         , DTNASC_1
+                                         , CPF_1
+                                         , ID_NIVEL_1);
     }
 }

@@ -21,12 +21,24 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
     @Override
     @Transactional
-    public Proprietario inc(String apelido, String email, String senha, String nome, Date dtNascimento, String cpf) {
-        if (proprietarioRepo.existsByApelido(apelido)){
-            return proprietarioRepo.findByApelido(apelido);
-        } 
-        
-        Proprietario proprietario = new Proprietario();
+    public Proprietario persist( Long   id
+                               , String apelido
+                               , String email
+                               , String senha
+                               , String nome
+                               , Date   dtNascimento
+                               , String cpf) {
+    
+        Proprietario proprietario;
+
+        if (id != null) {
+            if (!proprietarioRepo.existsById(id) ){
+                return null;
+            }
+            proprietario = proprietarioRepo.buscarPorId(id);
+        } else {
+            proprietario = new Proprietario();
+        }
 
         proprietario.setApelido(apelido);
         proprietario.setEmail(email);
@@ -37,33 +49,29 @@ public class ProprietarioServiceImpl implements ProprietarioService {
         proprietario.setUsuarioNivel(nivelRepo.buscarPorId(2L));
 
         return proprietarioRepo.save(proprietario);
-
     }
 
     @Override
-    @Transactional
-    public Proprietario alt(Long id, String apelido, String email, String senha, String nome, Date dtNascimento,
-            String cpf) {
+    public Proprietario persist( String apelido
+                               , String email
+                               , String senha
+                               , String nome
+                               , Date   dtNascimento
+                               , String cpf){
+
+        return this.persist( null
+                           , apelido
+                           , email
+                           , senha
+                           , nome
+                           , dtNascimento
+                           , cpf);
     
-        if (!proprietarioRepo.existsById(id)){
-            return null;
-        }
-
-        Proprietario proprietario = proprietarioRepo.buscarPorId(id);
-
-        proprietario.setApelido(apelido);
-        proprietario.setEmail(email);
-        proprietario.setSenha(senha);
-        proprietario.setNome(nome);
-        proprietario.setDtNascimento(dtNascimento);
-        proprietario.setCpf(cpf);
-
-        return proprietarioRepo.save(proprietario);
     }
 
     @Override
     @Transactional
-    public boolean del(Long id) {
+    public boolean delete(Long id) {
         if (!proprietarioRepo.existsById(id)){
             return true;
         }
@@ -73,10 +81,9 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     }
 
     @Override
-    public boolean del(String apelido) {
+    public boolean delete(String apelido) {
         if (!proprietarioRepo.existsByApelido(apelido))
             return true;
-        return this.del(proprietarioRepo.findByApelido(apelido).getId());
+        return this.delete(proprietarioRepo.findByApelido(apelido).getId());
     }
-
 }

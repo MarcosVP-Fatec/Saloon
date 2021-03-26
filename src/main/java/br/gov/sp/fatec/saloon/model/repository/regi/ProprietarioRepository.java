@@ -14,7 +14,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 public interface ProprietarioRepository extends JpaRepository<Proprietario, Long>{
 
     /**
-     * @apiNote buscarPorId() --> Busca por Id
+     * @apiNote buscarPorId(Long)
      *          Esta opção traz sempre um objeto UsuarioNivel (Diferente do findById)
      * @param id (Long)
      * @return Proprietario
@@ -23,28 +23,32 @@ public interface ProprietarioRepository extends JpaRepository<Proprietario, Long
     public Proprietario buscarPorId(Long id);
 
     /**
-     * @apiNote findByApelido(String) Pesquisa por apelido (Exato)
+     * @apiNote findByApelido(String)
+     *          Pesquisa por apelido (Exato)
      * @param apelido (String)
      * @return Proprietario
      */
     public Proprietario findByApelido(String apelido);
 
     /**
-     * @apiNote findByNomeContainsIgnoreCase(String) - Pesquisa por nome (parcial)
+     * @apiNote findByNomeContainsIgnoreCase(String)
+     *          Pesquisa por nome (parcial)
      * @param nome (String)
      * @return List<Usuario>
      */
     public Set<Proprietario> findByNomeContainsIgnoreCase(String nome);
 
     /**
-     * @apiNote findByCpfContainsIgnoreCase(String) - Pesquisa por nome (parcial)
+     * @apiNote findByCpfContainsIgnoreCase(String)
+     *          Pesquisa por nome (parcial)
      * @param cpf (String)
      * @return List<Proprietario>
      */
     public Set<Proprietario> findByCpfContainsIgnoreCase(String cpf);
 
     /**
-     * @apiNote existsByApelido(String) - Pesquisa se existe por apelido exata
+     * @apiNote existsByApelido(String)
+     *          Pesquisa se existe por apelido exata
      * @param apelido (String)
      * @return boolean
      */

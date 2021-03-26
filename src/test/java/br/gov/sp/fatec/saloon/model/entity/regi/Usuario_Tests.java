@@ -29,13 +29,16 @@ public class Usuario_Tests {
 
     public Usuario_Tests() throws ParseException {}
 
-    final String    APELIDO_1   = "#TESTE_USU_1";
-    final String    EMAIL_1     = "@teste_usuario_1@saloon.br";
-    final String    NOME_1      = "#NOME_1_USUARIO";
-    final String    NOME_2      = "#NOME_2_USUARIO";
-    final Date      DTNASC_1    = Data.toDate("12/04/1969");
+    final String APELIDO_1  = "#APELIDO_USUÁRIO_1";
+    final String NOME_1     = "#NOME_USUÁRIO_1";
+    final String NOME_2     = "#NOME_USUÁRIO_2";
+    final String EMAIL_1    = "#teste1_usuario@saloon.br";
+    final String SENHA_1    = "#SENHA_1";
+    final Date   DTNASC_1   = Data.toDate("12/04/1969");
+    final String CPF_1      = "99999999999";
+    final Long   ID_NIVEL_1 = 2L;
 
-  	@Test
+    @Test
 	void testeUsuarioIncluir() {
         usuarioRepo.save(this.criaUsuario());
         assertTrue(usuarioRepo.existsByApelido(APELIDO_1));
@@ -57,16 +60,15 @@ public class Usuario_Tests {
     }
 
     /*
-     * Método padrão de criação de uma entidade completa para testes.
+     * Função padrão de criação de usuário
      */
     private Usuario criaUsuario(){
-        return usuarioServiceRepo.inc( APELIDO_1
-                                     , EMAIL_1
-                                     , "pw123"
-                                     , NOME_1
-                                     , DTNASC_1
-                                     , "77777777777"
-                                     , 2L);
+        return usuarioServiceRepo.persist( APELIDO_1
+                                         , EMAIL_1
+                                         , SENHA_1
+                                         , NOME_1
+                                         , DTNASC_1
+                                         , CPF_1
+                                         , ID_NIVEL_1);
     }
-
 }
