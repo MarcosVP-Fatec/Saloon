@@ -45,6 +45,7 @@ public class Contrato extends GeneratorId {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "ctt_ctm_id")            private ContratoMotivo contratoMotivo;
 
+    /*
     // CONSTRUTORES
     public Contrato(){}
     public Contrato( Cliente        cliente
@@ -75,7 +76,7 @@ public class Contrato extends GeneratorId {
         setFestejoMes(festejoMes);
 
     }
-
+*/
     // GETTERS AND SETTERS
     public Date getData()                               { return data;                      }
     public void setData(Date data)                      { this.data = data;                 }

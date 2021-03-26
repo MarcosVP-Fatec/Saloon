@@ -20,6 +20,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long>{
 
     public Cliente findByParceiroApelido(String apelido);
 
+    public boolean existsByNome(String nome);
+
     //public Set<Cliente> findByNomeContainsIgnoreCase(String nome);
 
 }
