@@ -61,7 +61,7 @@ public class Proprietario_Tests {
      * Método padrão de criação de uma entidade completa para testes.
      */
     Proprietario criaProprietario() {
-        return proprietarioServiceRepo.inc(APELIDO_1, EMAIL_1, "pw234", NOME_1, DTNASC_1, "99999999999");
+        return proprietarioServiceRepo.persist(APELIDO_1, EMAIL_1, "pw234", NOME_1, DTNASC_1, "99999999999");
     }
 
 }

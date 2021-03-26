@@ -39,14 +39,14 @@ public class ProprietarioService_Tests {
 
     @Test
     void testeProprietarioServiceIncluir() {
-        proprietarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
+        proprietarioServiceRepo.persist(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
         assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
     }
 
   	@Test
 	void testeProprietarioServiceAlterar() {
-        Proprietario prop = proprietarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
-        proprietarioServiceRepo.alt(prop.getId(), APELIDO_1, "#teste@teste.com.br", "ps123", NOME_2, dtNascimento, "99999999999");
+        Proprietario prop = proprietarioServiceRepo.persist(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
+        proprietarioServiceRepo.persist(prop.getId(), APELIDO_1, "#teste@teste.com.br", "ps123", NOME_2, dtNascimento, "99999999999");
         proprietarioRepo.flush();
         assertTrue(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
         assertEquals(NOME_2, prop.getNome());
@@ -54,7 +54,7 @@ public class ProprietarioService_Tests {
 
   	@Test
 	void testeProprietarioServiceExcluir() {
-        proprietarioServiceRepo.del(proprietarioServiceRepo.inc(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999").getId());
+        proprietarioServiceRepo.delete(proprietarioServiceRepo.persist(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999").getId());
         assertFalse(proprietarioRepo.existsByApelido(APELIDO_1));
     }    
 
