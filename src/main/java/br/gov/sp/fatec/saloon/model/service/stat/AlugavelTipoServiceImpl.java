@@ -34,6 +34,10 @@ public class AlugavelTipoServiceImpl implements AlugavelTipoService {
     }
 
     @Override
+    public AlugavelTipo persist(         String descr){
+        return this.persist(null,descr);
+    }
+    @Override
     @Transactional
     public boolean delete(Long id) {
         if (!alugavelTipoRepo.existsById(id))

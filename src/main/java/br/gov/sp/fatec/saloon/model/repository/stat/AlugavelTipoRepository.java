@@ -1,6 +1,6 @@
 package br.gov.sp.fatec.saloon.model.repository.stat;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,37 +20,36 @@ import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 public interface AlugavelTipoRepository extends JpaRepository<AlugavelTipo, Long>{
 
     /**
-     * @apiNote Buscar por Id
+     * @apiNote buscarPorId(Long)
      *          Esta opção traz sempre um objeto UsuarioNivel (Diferente do findById)
-     * @param id
+     * @param id (Long)
      * @return AlugavelTipo
      */
     @Query("select t from AlugavelTipo t where t.id = ?1")
     public AlugavelTipo buscarPorId(Long id);
 
     /**
-     * @apiNote Pesquisa por Descr (Exato)
-     * @param descr
+     * @apiNote findByDescr(String)
+     *          Pesquisa por Descr (Exata)
+     * @param descr (String)
      * @return AlugavelTipo
      */
     public AlugavelTipo findByDescr(String descr);
 
     /**
-     * @apiNote Pesquisa por Descrição que contém
-     * @param descr
-     * @return List<AlugavelTipo>
+     * @apiNote findByDescrContainsIgnoreCase(String)
+     *          Pesquisa por Descrição que contém
+     * @param descr (String)
+     * @return Set<AlugavelTipo>
      */
-    public List<AlugavelTipo> findByDescrContainsIgnoreCase(String descr);
+    public Set<AlugavelTipo> findByDescrContainsIgnoreCase(String descr);
 
     /**
-     * @apiNote Pesquisa se existe por descrição exata
-     * @param descr
+     * @apiNote existsByDescr(String)
+     *          Pesquisa se existe por descrição exata
+     * @param descr (String)
      * @return boolean
      */
     public boolean existsByDescr(String descr);
     
 }
-
-
-
-

@@ -1,6 +1,6 @@
 package br.gov.sp.fatec.saloon.model.repository.stat;
 
-import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -20,26 +20,27 @@ import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
 public interface ContratoMotivoRepository extends JpaRepository<ContratoMotivo, Long>{
 
     /**
-     * @apiNote Pesquisa por Id
-     * @param id
+     * @apiNote buscarPorId(Long)
+     *          Pesquisa por Id
+     * @param id (Long)
      * @return ContratoMotivo
      */
     @Query("select c from ContratoMotivo c where c.id = ?1")
-    public ContratoMotivo buscaPorId(Long id);
+    public ContratoMotivo buscarPorId(Long id);
     
     /**
-     * @apiNote Pesquisa por Descr (Exato)
-     * @param descr
+     * @apiNote findByDescr --> Pesquisa por Descr (Exata)
+     * @param descr (String)
      * @return ContratoMotivo
      */
     public ContratoMotivo findByDescr(String descr);
 
     /**
-     * @apiNote Pesquisa por Descr (Contendo)
-     * @param descr
-     * @return List<ContratoMotivo>
+     * @apiNote findByDescrContainsIgnoreCase --> por Descr (Contendo)
+     * @param descr (String)
+     * @return Set<ContratoMotivo>
      */
-    public List<ContratoMotivo> findByDescrContainsIgnoreCase(String descr);
+    public Set<ContratoMotivo> findByDescrContainsIgnoreCase(String descr);
     
     /**
      * @apiNote existsByDescr() Pesquisa por Descr (Exato)
@@ -50,10 +51,10 @@ public interface ContratoMotivoRepository extends JpaRepository<ContratoMotivo, 
 
     /**
      * @apiNote Lista total de Motivos de Contrato
-     * @return List<ContratoMotivo>
+     * @return Set<ContratoMotivo>
      */
     @Query("select c from ContratoMotivo c order by c.id")
-     public List<ContratoMotivo> listaCompleta();
+     public Set<ContratoMotivo> listaCompleta();
 
 }
 

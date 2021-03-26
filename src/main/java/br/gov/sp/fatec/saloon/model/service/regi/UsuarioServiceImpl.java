@@ -21,29 +21,28 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     @Transactional
-    public Usuario inc(String apelido, String email, String senha, String nome, Date dtNascimento, String cpf,
-            Long usuarioNivel) {
+    public Usuario persist( Long   id
+                          , String apelido
+                          , String email
+                          , String senha
+                          , String nome
+                          , Date   dtNascimento
+                          , String cpf
+                          , Long   usuarioNivel){
+
         if (usuarioRepo.existsByApelido(apelido)) return usuarioRepo.findByApelido(apelido);
-        Usuario usuario = new Usuario();
 
-        usuario.setApelido(apelido);
-        usuario.setEmail(email);
-        usuario.setSenha(senha);
-        usuario.setNome(nome);
-        usuario.setDtNascimento(dtNascimento);
-        usuario.setCpf(cpf);
-        usuario.setUsuarioNivel(nivelRepo.buscarPorId(usuarioNivel));
-        return usuarioRepo.save(usuario);
-    }
+        Usuario usuario;
 
-    @Override
-    @Transactional
-    public Usuario alt(Long id, String apelido, String email, String senha, String nome, Date dtNascimento, String cpf,
-            Long usuarioNivel) {
-        if (!usuarioRepo.existsById(id)){
-            return null;
+        if (id != null) {
+            if (!usuarioRepo.existsById(id) ){
+                return null;
+            }
+            usuario = usuarioRepo.buscarPorId(id);
+        } else {
+            usuario = new Usuario();
         }
-        Usuario usuario = usuarioRepo.buscarPorId(id);
+
         usuario.setApelido(apelido);
         usuario.setEmail(email);
         usuario.setSenha(senha);
@@ -55,8 +54,28 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
+    public Usuario persist( String apelido
+                          , String email
+                          , String senha
+                          , String nome
+                          , Date   dtNascimento
+                          , String cpf
+                          , Long   usuarioNivel){
+
+        return this.persist( null 
+                           , apelido
+                           , email
+                           , senha
+                           , nome
+                           , dtNascimento
+                           , cpf
+                           , usuarioNivel);
+
+    }
+
+    @Override
     @Transactional
-    public boolean del(Long id) {
+    public boolean delete(Long id) {
         if (!usuarioRepo.existsById(id)){
             return true;
         }
@@ -66,10 +85,10 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public boolean del(String apelido) {
+    public boolean delete(String apelido) {
         if (!usuarioRepo.existsByApelido(apelido))
             return true;
-        return this.del(usuarioRepo.findByApelido(apelido).getId());
+        return this.delete(usuarioRepo.findByApelido(apelido).getId());
     }
     
 }

@@ -23,18 +23,21 @@ public class ContratoMotivoService_Tests {
     @Autowired
     private ContratoMotivoService contratoMotivoServiceRepo;
 
+    final String    DESCR_1     =   "#TESTE_CTR_MOTIVO_1";
+    final String    DESCR_2     =   "#TESTE_CTR_MOTIVO_2";
+
     @Test
     public void testeContratoMotivoServiceIncluir(){
-        contratoMotivoServiceRepo.inc("#TESTE_CTR_MOTIVO");
-        assertTrue(contratoMotivoRepo.existsByDescr("#TESTE_CTR_MOTIVO"));
+        contratoMotivoServiceRepo.persist(DESCR_1);
+        assertTrue(contratoMotivoRepo.existsByDescr(DESCR_1));
     }
 
     @Test
     public void testeContratoMotivoServiceAlterar(){
-        ContratoMotivo ctr = contratoMotivoServiceRepo.inc("#TESTE_CTR_MOTIVO");
-        contratoMotivoServiceRepo.alt(ctr.getId(),"#TESTE2_CTR_MOTIVO");
-        assertFalse(contratoMotivoRepo.existsByDescr("#TESTE_CTR_MOTIVO"));
-        assertTrue(contratoMotivoRepo.existsByDescr("#TESTE2_CTR_MOTIVO"));
+        ContratoMotivo ctr = contratoMotivoServiceRepo.persist(DESCR_1);
+        contratoMotivoServiceRepo.persist(ctr.getId(),DESCR_2);
+        assertFalse(contratoMotivoRepo.existsByDescr(DESCR_1));
+        assertTrue(contratoMotivoRepo.existsByDescr(DESCR_2));
     }
 
 }

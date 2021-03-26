@@ -20,9 +20,9 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
     /**
-     * @apiNote Buscar por Id
+     * @apiNote buscarPorId(Long)
      *          Esta opção traz sempre um objeto UsuarioNivel (Diferente do findById)
-     * @param id
+     * @param id (Long)
      * @return Usuario
      */
     @Query("select u from Usuario u where u.id = ?1")

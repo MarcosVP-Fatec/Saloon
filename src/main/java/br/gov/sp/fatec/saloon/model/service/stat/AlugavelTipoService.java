@@ -5,14 +5,16 @@ import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 public interface AlugavelTipoService {
 
     /**
-     * @apiNote persist --> Inclui/Altera um Tipo de Alugável
-     * @param descr
+     * @apiNote persist(Long, String) --> Inclui/Altera um Tipo de Alugável
+     * @param id (Long)
+     * @param descr (String)
      * @return AlugavelTipo
      */
     public AlugavelTipo persist(Long id, String descr);
+    public AlugavelTipo persist(         String descr);
 
     /**
-     * @apiNote delete --> Exclui um Tipo de Alugável
+     * @apiNote delete(Long) --> Exclui um Tipo de Alugável
      * @param id (Long)
      * @return boolean / true se excluiu ou se não existe.
      */

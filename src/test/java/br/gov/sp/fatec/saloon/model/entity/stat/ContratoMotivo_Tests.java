@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,18 +21,25 @@ public class ContratoMotivo_Tests {
     @Autowired
     private ContratoMotivoRepository contratoMotivoRepo;
 
+    final String DESCR_1    =   "#TESTE_CTR_MOT_1";
+    final String DESCR_2    =   "#TESTE_CTR_MOT_2";
+
     @Test
     public void testContratoMotivoSalvar(){
-        this.criaContratoMotivo();
-        assertNotNull(contratoMotivoRepo.findByDescr("#TESTE_MOTIVO").getId());
+        ContratoMotivo ctr = this.criaContratoMotivo();
+        assertNotNull(ctr);
+        assertNotNull(ctr.getId());
+        assertTrue(contratoMotivoRepo.existsByDescr(DESCR_1));
     }
 
   	@Test
 	public void testeContratoMotivoAlterar() {
         ContratoMotivo ctr = this.criaContratoMotivo();
-        ctr.setDescr("#TESTE2_MOTIVO");
+        ctr.setDescr(DESCR_2);
         contratoMotivoRepo.save(ctr);
-        assertNotNull(contratoMotivoRepo.findByDescr("#TESTE2_MOTIVO").getId());
+        assertNotNull(contratoMotivoRepo.findByDescr(DESCR_2).getId());
+        assertFalse(contratoMotivoRepo.existsByDescr(DESCR_1));
+        assertTrue(contratoMotivoRepo.existsByDescr(DESCR_2));
     }
 
   	@Test
@@ -52,7 +60,7 @@ public class ContratoMotivo_Tests {
      */
     private ContratoMotivo criaContratoMotivo(){
         ContratoMotivo ctr = new ContratoMotivo();
-        ctr.setDescr("#TESTE_MOTIVO");
+        ctr.setDescr(DESCR_1);
         return contratoMotivoRepo.save(ctr);
     }
 

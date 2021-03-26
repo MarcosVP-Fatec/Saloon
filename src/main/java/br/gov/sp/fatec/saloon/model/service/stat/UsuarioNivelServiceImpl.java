@@ -29,7 +29,6 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
             return null;
         }    
 
-
         if (usuarioNivelRepo.existsById(id) ){
             usuarioNivel = usuarioNivelRepo.buscarPorId(id);
         } else {
@@ -45,6 +44,11 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
 
         return usuarioNivelRepo.save(usuarioNivel);
     }
+
+    @Override
+    public UsuarioNivel persist(         String descr, boolean administrador, boolean proprietario, boolean parceiro, boolean cliente){
+        return this.persist( null, descr, administrador, proprietario, parceiro, cliente);
+    }                               
 
     @Override
     @Transactional

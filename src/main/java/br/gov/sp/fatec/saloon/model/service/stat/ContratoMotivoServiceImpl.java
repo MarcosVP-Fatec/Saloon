@@ -15,40 +15,45 @@ public class ContratoMotivoServiceImpl implements ContratoMotivoService {
 
     @Override
     @Transactional
-    public ContratoMotivo inc(String descr) {
-        if (contratoMotivoRepo.existsByDescr(descr)) return contratoMotivoRepo.findByDescr(descr);
-        ContratoMotivo ctr = new ContratoMotivo();
-        ctr.setDescr(descr);
-        return contratoMotivoRepo.save(ctr);
+    public ContratoMotivo persist(Long id, String descr) {
+
+        ContratoMotivo contratoMotivo;
+
+        if (id != null) {
+            if (!contratoMotivoRepo.existsById(id) ){
+                return null;
+            }
+            contratoMotivo = contratoMotivoRepo.buscarPorId(id);
+        } else {
+            contratoMotivo = new ContratoMotivo();
+        }
+
+        contratoMotivo.setDescr(descr);
+        return contratoMotivoRepo.save(contratoMotivo);
+
+    }
+    @Override
+    public ContratoMotivo persist(         String descr){
+        return this.persist(null,descr);
     }
 
     @Override
     @Transactional
-    public ContratoMotivo alt(Long id, String descr) {
-        if (!contratoMotivoRepo.existsById(id))
-            return null;
-        
-        ContratoMotivo ctr = contratoMotivoRepo.buscaPorId(id);
-        ctr.setDescr(descr);
-        return contratoMotivoRepo.save(ctr);
-    }
-
-
-    @Override
-    @Transactional
-    public boolean del(Long id) {
-        if (!contratoMotivoRepo.existsById(id))
+    public boolean delete(Long id) {
+        if (!contratoMotivoRepo.existsById(id)){
             return true;
+        }
         contratoMotivoRepo.deleteById(id);
         return !contratoMotivoRepo.existsById(id);
     }
 
     @Override
-    public boolean del(String descr) {
+    public boolean delete(String descr) {
         if (!contratoMotivoRepo.existsByDescr(descr))
             return true;
-        return this.del(contratoMotivoRepo.findByDescr(descr).getId());
+        return this.delete(contratoMotivoRepo.findByDescr(descr).getId());
     }
-    
 }
+
+
 

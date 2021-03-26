@@ -28,22 +28,22 @@ public class AlugavelTipoService_Tests {
 
     @Test
     public void testeAlugavelTipoServiceIncluir(){
-        alugavelTipoServiceRepo.inc(DESCRICAO_1);
+        alugavelTipoServiceRepo.persist(DESCRICAO_1);
         assertTrue(alugavelTipoRepo.existsByDescr(DESCRICAO_1));
     }
 
     @Test
     public void testeAlugavelTipoServiceAlterar(){
-        AlugavelTipo tipo = alugavelTipoServiceRepo.inc(DESCRICAO_1);
-        alugavelTipoServiceRepo.alt(tipo.getId(), DESCRICAO_2);
+        AlugavelTipo tipo = alugavelTipoServiceRepo.persist(DESCRICAO_1);
+        alugavelTipoServiceRepo.persist(tipo.getId(), DESCRICAO_2);
         assertFalse(alugavelTipoRepo.existsByDescr(DESCRICAO_1));
         assertTrue(alugavelTipoRepo.existsByDescr(DESCRICAO_2));
     }
 
     @Test
     public void testeAlugavelTipoServiceExcluir(){
-        alugavelTipoServiceRepo.inc(DESCRICAO_1);
-        alugavelTipoServiceRepo.del(DESCRICAO_1);
+        alugavelTipoServiceRepo.persist(DESCRICAO_1);
+        alugavelTipoServiceRepo.delete(DESCRICAO_1);
         assertFalse(alugavelTipoRepo.existsByDescr(DESCRICAO_1));
     }
 

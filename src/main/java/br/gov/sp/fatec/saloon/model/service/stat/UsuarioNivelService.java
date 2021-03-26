@@ -15,6 +15,7 @@ public interface UsuarioNivelService {
      * @return UsuarioNivel
      */
     public UsuarioNivel persist(Long id, String descr, boolean administrador, boolean proprietario, boolean parceiro, boolean cliente);
+    public UsuarioNivel persist(         String descr, boolean administrador, boolean proprietario, boolean parceiro, boolean cliente);
 
     /**
      * @apiNote delete --> Exclui um nível de usuário passando o id
