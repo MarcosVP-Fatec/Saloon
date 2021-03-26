@@ -21,7 +21,7 @@ public class UsuarioNivelService_Tests {
     @Autowired
     private UsuarioNivelService usuarioNivelServiceRepo;
 
-    final Long   ID_NIVEL   =   9999999L;
+    final Long   ID_NIVEL   = 9999999L;
     final String DESCR_1    = "#TESTE_NIVEL_1";
     final String DESCR_2    = "#TESTE_NIVEL_2";
     
@@ -38,7 +38,6 @@ public class UsuarioNivelService_Tests {
         assertTrue(usuarioNivelRepo.existsById(ID_NIVEL));
     }
 
-    /*  
     @Test
 	void testeUsuarioNivelServiceAlterar() {
         
@@ -58,7 +57,7 @@ public class UsuarioNivelService_Tests {
 
         assertTrue(usuarioNivelRepo.existsByDescr(DESCR_2));
 
-    } */   
+    }
 
 }
 
