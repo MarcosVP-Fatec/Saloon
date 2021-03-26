@@ -34,6 +34,8 @@ public class Proprietario_Tests {
     final String    NOME_2      = "#TESTE_2_NOME_PROPRIETÁRIO";
     final Date      DTNASC_1    = Data.toDate("12/04/1969");
     final String    EMAIL_1     = "#teste_1_proprietário@saloon.br";
+    final String    CPF_1       = "99999999999";
+    final String    SENHA_1     = "#SENHA_PARCEIRO_1";
 
     @Test
     void testeProprietarioIncluir() throws ParseException {
@@ -60,8 +62,13 @@ public class Proprietario_Tests {
     /*
      * Método padrão de criação de uma entidade completa para testes.
      */
-    Proprietario criaProprietario() {
-        return proprietarioServiceRepo.persist(APELIDO_1, EMAIL_1, "pw234", NOME_1, DTNASC_1, "99999999999");
+    private Proprietario criaProprietario() {
+        return proprietarioServiceRepo.persist( APELIDO_1
+                                              , EMAIL_1
+                                              , SENHA_1
+                                              , NOME_1
+                                              , DTNASC_1
+                                              , CPF_1);
     }
 
 }

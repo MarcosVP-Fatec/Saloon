@@ -30,12 +30,14 @@ public class ParceiroService_Tests {
 
     public ParceiroService_Tests() throws ParseException {}
 
-    final String APELIDO_1 = "#APELIDO_USUÁRIO_PARC_1";
-    final String NOME_1    = "#NOME_USUÁRIO_PARC_1";
-    final String NOME_2    = "#NOME_USUÁRIO_PARC_2";
-    final String EMAIL_1   = "#teste_1_parceiro@saloon.br";
-    final Date   DTNASC_1  = Data.toDate("12/04/1969");
-    final Date   DTFINAL   = Data.today();
+    final String    APELIDO_1   = "#TESTE_PARCEIRO_1";
+    final String    NOME_1      = "#TESTE_1_NOME_PARCEIRO";
+    final String    NOME_2      = "#TESTE_2_NOME_PARCEIRO";
+    final Date      DTNASC_1    = Data.toDate("12/04/1969");
+    final Date      DTFINAL     = Data.today();
+    final String    EMAIL_1     = "#teste_1_parceiro@saloon.br";
+    final String    CPF_1       = "66666666666";
+    final String    SENHA_1     = "#SENHA_1_PARCEIRO";
 
     @Test
     void testeParceiroServiceIncluir() {
@@ -54,13 +56,18 @@ public class ParceiroService_Tests {
 
   	@Test
 	void testeParceiroServiceExcluir() {
-        parceiroServiceRepo.delete(parceiroServiceRepo.persist(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666").getId());
+        parceiroServiceRepo.delete(this.criaParceiro().getId());
         parceiroRepo.flush();
         assertFalse(parceiroRepo.existsByApelido(APELIDO_1));
     }    
 
     private Parceiro criaParceiro(){
-        return parceiroServiceRepo.persist(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666");
+        return parceiroServiceRepo.persist( APELIDO_1
+                                          , EMAIL_1
+                                          , SENHA_1
+                                          , NOME_1
+                                          , DTNASC_1
+                                          , CPF_1);
     }
     
 }

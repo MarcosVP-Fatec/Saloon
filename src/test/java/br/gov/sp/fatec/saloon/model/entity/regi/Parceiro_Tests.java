@@ -34,6 +34,8 @@ public class Parceiro_Tests {
     final String    NOME_2      = "#TESTE_2_NOME_PARCEIRO";
     final Date      DTNASC_1    = Data.toDate("12/04/1969");
     final String    EMAIL_1     = "#teste_1_parceiro@saloon.br";
+    final String    CPF_1       = "66666666666";
+    final String    SENHA_1     = "#SENHA_1_PARCEIRO";
 
     @Test
     void testeParceiroIncluir(){
@@ -48,6 +50,7 @@ public class Parceiro_Tests {
         assertFalse(parceiroRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
         parc.setNome(NOME_2);
         parceiroRepo.save(parc);
+        parceiroRepo.flush();
         assertTrue(parceiroRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
     }
 
@@ -61,6 +64,11 @@ public class Parceiro_Tests {
      * Método padrão de criação de uma entidade completa para testes.
      */
     private Parceiro criaParceiro() {
-        return parceiroServiceRepo.persist(APELIDO_1, EMAIL_1, "pw345", NOME_1, DTNASC_1, "66666666666");
+        return parceiroServiceRepo.persist( APELIDO_1
+                                          , EMAIL_1
+                                          , SENHA_1
+                                          , NOME_1
+                                          , DTNASC_1
+                                          , CPF_1);
     }
 }

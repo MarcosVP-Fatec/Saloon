@@ -30,23 +30,32 @@ public class ProprietarioService_Tests {
 
     public ProprietarioService_Tests() throws ParseException {}
 
-    final String APELIDO_1 = "#APELIDO_USUÁRIO_1";
-    final String NOME_1    = "#NOME_USUÁRIO_1";
-    final String NOME_2    = "#NOME_USUÁRIO_2";
-
-    Date dtNascimento = Data.toDate("12/04/1969");
-    Date dtFinal = Data.today();
-
+    final String    APELIDO_1   = "#TESTE_PROPRIETARIO_1";
+    final String    NOME_1      = "#TESTE_1_NOME_PROPRIETÁRIO";
+    final String    NOME_2      = "#TESTE_2_NOME_PROPRIETÁRIO";
+    final Date      DTNASC_1    = Data.toDate("12/04/1969");
+    final Date      DFINAL      = Data.today();
+    final String    EMAIL_1     = "#teste_1_proprietário@saloon.br";
+    final String    CPF_1       = "99999999999";
+    final String    SENHA_1     = "#SENHA_PARCEIRO_1";
+    
     @Test
     void testeProprietarioServiceIncluir() {
-        proprietarioServiceRepo.persist(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
+        this.criaProprietarioService();
         assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
     }
 
   	@Test
 	void testeProprietarioServiceAlterar() {
-        Proprietario prop = proprietarioServiceRepo.persist(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999");
-        proprietarioServiceRepo.persist(prop.getId(), APELIDO_1, "#teste@teste.com.br", "ps123", NOME_2, dtNascimento, "99999999999");
+        Proprietario prop = this.criaProprietarioService();
+        proprietarioServiceRepo.persist( prop.getId()
+                                       , APELIDO_1
+                                       , EMAIL_1
+                                       , SENHA_1
+                                       , NOME_2 // <<<<<<<<<< Campo alterado
+                                       , DTNASC_1
+                                       , CPF_1);
+
         proprietarioRepo.flush();
         assertTrue(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
         assertEquals(NOME_2, prop.getNome());
@@ -54,8 +63,19 @@ public class ProprietarioService_Tests {
 
   	@Test
 	void testeProprietarioServiceExcluir() {
-        proprietarioServiceRepo.delete(proprietarioServiceRepo.persist(APELIDO_1, "#teste@teste.com.br", "ps123", NOME_1, dtNascimento, "99999999999").getId());
+        proprietarioServiceRepo.delete(this.criaProprietarioService().getApelido());
         assertFalse(proprietarioRepo.existsByApelido(APELIDO_1));
     }    
+
+    private Proprietario criaProprietarioService(){
+
+        return proprietarioServiceRepo.persist( APELIDO_1
+                                              , EMAIL_1
+                                              , SENHA_1
+                                              , NOME_1
+                                              , DTNASC_1
+                                              , CPF_1);
+
+    }
 
 }
