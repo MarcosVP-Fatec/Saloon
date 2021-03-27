@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 
 public interface ContratoService {
 
@@ -16,6 +18,10 @@ public interface ContratoService {
                            , String     festejoNomes
                            , int        festejoDia
                            , Long       idMes );
+
+    public Contrato persist( Contrato contrato
+                           , Cliente  Cliente
+                           , Alugavel Alugavel)                           ;
 
     public boolean delete(Long id);
 

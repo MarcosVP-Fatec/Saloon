@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
+import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.repository.laun.ContratoRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.AlugavelRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
@@ -18,36 +20,29 @@ import br.gov.sp.fatec.saloon.model.repository.stat.MesAnoRepository;
 public class ContratoServiceImpl implements ContratoService {
 
     @Autowired
-    private ContratoRepository          contratoRepo;
+    private ContratoRepository contratoRepo;
 
     @Autowired
-    private ClienteRepository           clienteRepo;
+    private ClienteRepository clienteRepo;
 
     @Autowired
-    private AlugavelRepository          alugavelRepo;
+    private AlugavelRepository alugavelRepo;
 
     @Autowired
-    private MesAnoRepository            mesAnoRepo;
+    private MesAnoRepository mesAnoRepo;
 
     @Autowired
-    private ContratoMotivoRepository    contratoMotivoRepo;
+    private ContratoMotivoRepository contratoMotivoRepo;
 
     @Override
     @Transactional
-    public Contrato persist( Long       id
-                           , Long       idCliente
-                           , Long       idAlugavel
-                           , Date       data
-                           , BigDecimal reservaPaga
-                           , Long       idMotivo
-                           , String     festejoNomes
-                           , int        festejoDia
-                           , Long       idMes) {
+    public Contrato persist(Long id, Long idCliente, Long idAlugavel, Date data, BigDecimal reservaPaga, Long idMotivo,
+            String festejoNomes, int festejoDia, Long idMes) {
 
         Contrato contrato;
 
         if (id != null) {
-            if (!contratoRepo.existsById(id) ){
+            if (!contratoRepo.existsById(id)) {
                 return null;
             }
             contrato = contratoRepo.buscarPorId(id);
@@ -70,11 +65,25 @@ public class ContratoServiceImpl implements ContratoService {
     @Override
     @Transactional
     public boolean delete(Long id) {
-        if (!contratoRepo.existsById(id)){
+        if (!contratoRepo.existsById(id)) {
             return true;
         }
         contratoRepo.deleteById(id);
         return !contratoRepo.existsById(id);
+    }
+
+    @Override
+    @Transactional
+    public Contrato persist(Contrato contrato, Cliente cliente, Alugavel alugavel) {
+
+        clienteRepo.save(cliente);
+        alugavelRepo.save(alugavel);
+
+        contrato.setCliente(cliente);
+        contrato.setAlugavel(alugavel);
+        contratoRepo.save(contrato);
+
+        return contrato;
     }
    
 }

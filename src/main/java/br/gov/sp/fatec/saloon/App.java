@@ -2,6 +2,11 @@ package br.gov.sp.fatec.saloon;
 
 import java.text.ParseException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
+import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
+
 /**
  * @App Saloon
  *
@@ -12,10 +17,29 @@ import java.text.ParseException;
 
 public class App {
 
+    @Autowired
+    private ClienteRepository clienteRepo;
+
+
     public static void main(String[] args) throws ParseException
     {
-        //Inicia o usuário - Acertar depois
+
+        System.out.println("---------------------------------");
+        System.out.println("Exemplo controle transacional");
+        System.out.println("---------------------------------");
+
+        Cliente cliente = new Cliente();
+        cliente.setCpf_cnpj("55555555555");
+        cliente.setNome("Joana D'ark");
+        cliente.setTelDdd("12");
+        cliente.setTelNumero("987654321");
+
+        
         //MvpTesteDesenvolvimento.run();
+
+        
+
+
     }
     
 }
