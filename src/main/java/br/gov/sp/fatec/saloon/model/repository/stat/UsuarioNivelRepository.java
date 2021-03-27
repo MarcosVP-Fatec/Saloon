@@ -43,6 +43,8 @@ public interface UsuarioNivelRepository extends JpaRepository<UsuarioNivel, Long
      * @return UsuarioNivel
      */
     public UsuarioNivel findByDescr(String descr);
+    @Query("select u from UsuarioNivel u where u.descr =1")
+    public UsuarioNivel buscarPorDescr(String descr);
 
     /**
      * @apiNote findByDescrContainsIgnoreCase(String)

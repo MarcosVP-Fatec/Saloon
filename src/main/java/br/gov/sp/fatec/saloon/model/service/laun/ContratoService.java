@@ -20,8 +20,8 @@ public interface ContratoService {
                            , Long       idMes );
 
     public Contrato persist( Contrato contrato
-                           , Cliente  Cliente
-                           , Alugavel Alugavel)                           ;
+                           , Cliente  cliente
+                           , Alugavel alugavel);
 
     public boolean delete(Long id);
 

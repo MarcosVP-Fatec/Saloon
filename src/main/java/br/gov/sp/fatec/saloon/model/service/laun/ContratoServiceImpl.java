@@ -13,6 +13,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.repository.laun.ContratoRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.AlugavelRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
+import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.MesAnoRepository;
 
@@ -30,6 +31,9 @@ public class ContratoServiceImpl implements ContratoService {
 
     @Autowired
     private MesAnoRepository mesAnoRepo;
+
+    @Autowired
+    private ProprietarioRepository proprietarioRepo;
 
     @Autowired
     private ContratoMotivoRepository contratoMotivoRepo;
@@ -76,8 +80,26 @@ public class ContratoServiceImpl implements ContratoService {
     @Transactional
     public Contrato persist(Contrato contrato, Cliente cliente, Alugavel alugavel) {
 
-        clienteRepo.save(cliente);
-        alugavelRepo.save(alugavel);
+        if (clienteRepo.existsByNome(cliente.getNome())) {
+            cliente = clienteRepo.findByNome(cliente.getNome());
+        } else {
+            cliente.setId(null);
+            clienteRepo.save(cliente);
+        }
+        
+        if (proprietarioRepo.existsByApelido(alugavel.getProprietario().getApelido())){
+            alugavel.setProprietario( proprietarioRepo.findByApelido(alugavel.getProprietario().getApelido()));
+        } else {
+            alugavel.getProprietario().setId(null);
+            proprietarioRepo.save(alugavel.getProprietario());
+        }
+
+        if (alugavelRepo.existsByDescr(alugavel.getDescr())){
+            alugavel = alugavelRepo.findByDescr(alugavel.getDescr());
+        } else {
+            alugavel.setId(null);
+            alugavelRepo.save(alugavel);
+        }
 
         contrato.setCliente(cliente);
         contrato.setAlugavel(alugavel);
