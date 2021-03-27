@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
+import br.gov.sp.fatec.saloon.service.stat.ContratoMotivoService;
 
 @SpringBootTest
 @Transactional

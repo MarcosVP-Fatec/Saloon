@@ -12,8 +12,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
-import br.gov.sp.fatec.saloon.model.service.regi.ParceiroService;
 import br.gov.sp.fatec.saloon.model.tool.Data;
+import br.gov.sp.fatec.saloon.service.regi.ParceiroService;
 
 @SpringBootTest
 @Transactional

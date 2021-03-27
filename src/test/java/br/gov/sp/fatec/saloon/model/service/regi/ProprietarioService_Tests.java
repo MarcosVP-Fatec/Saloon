@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.tool.Data;
+import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 @SpringBootTest
 @Transactional

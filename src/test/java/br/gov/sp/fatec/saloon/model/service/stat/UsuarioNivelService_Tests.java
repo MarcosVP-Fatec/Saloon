@@ -9,6 +9,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
+import br.gov.sp.fatec.saloon.service.stat.UsuarioNivelService;
 
 @SpringBootTest
 @Transactional

@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.repository.regi.AlugavelRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.AlugavelTipoRepository;
-import br.gov.sp.fatec.saloon.model.service.regi.ProprietarioService;
 import br.gov.sp.fatec.saloon.model.tool.Data;
+import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 @SpringBootTest
 @Transactional
