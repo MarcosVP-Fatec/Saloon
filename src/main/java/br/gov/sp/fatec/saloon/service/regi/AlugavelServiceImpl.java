@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.regi;
+package br.gov.sp.fatec.saloon.service.regi;
 
 import java.math.BigDecimal;
 
@@ -13,7 +13,7 @@ import br.gov.sp.fatec.saloon.model.repository.regi.AlugavelRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.AlugavelTipoRepository;
 
-@Service("AlugavelService")
+@Service("alugavelService")
 public class AlugavelServiceImpl implements AlugavelService {
 
     @Autowired

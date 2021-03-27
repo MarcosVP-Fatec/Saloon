@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.regi;
+package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
 import br.gov.sp.fatec.saloon.model.repository.regi.ParceiroRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 
-@Service("ParceiroService")
+@Service("parceiroService")
 public class ParceiroServiceImpl implements ParceiroService {
     
     @Autowired

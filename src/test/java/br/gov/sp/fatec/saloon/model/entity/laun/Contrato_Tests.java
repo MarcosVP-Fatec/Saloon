@@ -20,9 +20,9 @@ import br.gov.sp.fatec.saloon.model.repository.laun.ContratoRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.MesAnoRepository;
-import br.gov.sp.fatec.saloon.model.service.regi.AlugavelService;
-import br.gov.sp.fatec.saloon.model.service.regi.ProprietarioService;
 import br.gov.sp.fatec.saloon.model.tool.Data;
+import br.gov.sp.fatec.saloon.service.regi.AlugavelService;
+import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 @SpringBootTest
 @Transactional

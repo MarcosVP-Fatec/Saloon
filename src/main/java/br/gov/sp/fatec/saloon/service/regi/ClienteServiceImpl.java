@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.regi;
+package br.gov.sp.fatec.saloon.service.regi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +8,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ParceiroRepository;
 
-@Service("ClienteService")
+@Service("clienteService")
 public class ClienteServiceImpl implements ClienteService {
 
     @Autowired

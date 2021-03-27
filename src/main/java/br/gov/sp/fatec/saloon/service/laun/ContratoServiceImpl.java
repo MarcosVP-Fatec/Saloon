@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.laun;
+package br.gov.sp.fatec.saloon.service.laun;
 
 import java.math.BigDecimal;
 import java.util.Date;

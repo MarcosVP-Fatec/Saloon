@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.stat;
+package br.gov.sp.fatec.saloon.service.stat;
 
 import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
 

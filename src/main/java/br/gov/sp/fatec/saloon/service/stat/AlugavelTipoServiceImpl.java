@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.stat;
+package br.gov.sp.fatec.saloon.service.stat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
 import br.gov.sp.fatec.saloon.model.repository.stat.AlugavelTipoRepository;
 
-@Service("AlugavelTipoService")
+@Service("alugavelTipoService")
 public class AlugavelTipoServiceImpl implements AlugavelTipoService {
 
     @Autowired

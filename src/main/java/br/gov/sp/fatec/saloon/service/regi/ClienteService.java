@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.regi;
+package br.gov.sp.fatec.saloon.service.regi;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
 

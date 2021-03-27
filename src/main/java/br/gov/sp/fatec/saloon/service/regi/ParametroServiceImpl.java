@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.regi;
+package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.repository.regi.ParametroRepository;
 
-@Service("ParametroService")
+@Service("parametroService")
 public class ParametroServiceImpl implements ParametroService {
 
     @Autowired

@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.saloon.model.service.regi;
+package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
 
@@ -10,7 +10,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 
-@Service("ProprietarioService")
+@Service("proprietarioService")
 public class ProprietarioServiceImpl implements ProprietarioService {
 
     @Autowired
