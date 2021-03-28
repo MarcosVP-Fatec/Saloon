@@ -2,15 +2,19 @@ package br.gov.sp.fatec.saloon;
 
 import java.text.ParseException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
+import javax.annotation.ManagedBean;
 
-import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.RequestScope;
+
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
-import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 /**
  * @App Saloon
@@ -21,29 +25,34 @@ import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
  * 
  */
 
- 
+@Component
 public class MvpTesteSpringBoot {
 
-    @Autowired
-    private ProprietarioService proprietarioService;
+    // @Autowired
+    // private ProprietarioService proprietarioService;
 
     @Autowired
     private ProprietarioRepository proprietarioRepo;
 
     static int LARGURA = 100;
 
+    @Bean
     public void run() throws ParseException {
         
         System.out.println(Texto.padC("  INÍCIO TESTE TRANSACIONAL - " + Data.time() + "  ", LARGURA, '#'));
         System.out.println(""); 
 
         //Cria um proprietário para o teste
-        Proprietario proprietario = proprietarioRepo.findByApelido("ADALBERTO");
-        if (proprietario == null) {
-            proprietario = proprietarioService.persist("ADALBERTO", "adalberto@saloon.br", "pwAS", "Adalberto Salas", Data.toDate("01/01/1960"), "11111111111");
+        if (proprietarioRepo==null){
+            System.out.println("É NULL!!!!!\n");
         }
+        
+        // Proprietario proprietario = proprietarioRepo.findByApelido("ADALBERTO");
+        // if (proprietario == null) {
+        //     proprietario = proprietarioService.persist("ADALBERTO", "adalberto@saloon.br", "pwAS", "Adalberto Salas", Data.toDate("01/01/1960"), "11111111111");
+        // }
 
-        System.out.println(proprietario.getNome());
+        // System.out.println(proprietario.getNome());
 
         //Cria um alugável vinculado ao proprietário para o teste
 

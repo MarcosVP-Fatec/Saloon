@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 
@@ -17,6 +18,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
  *          nome); findByNomeContainsIgnoreCase(String nome);
  * 
  */
+@Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
     /**

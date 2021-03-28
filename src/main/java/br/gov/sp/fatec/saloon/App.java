@@ -1,7 +1,5 @@
 package br.gov.sp.fatec.saloon;
 
-import java.text.ParseException;
-
 /**
  * @App Saloon
  *
@@ -12,9 +10,9 @@ import java.text.ParseException;
 
 public class App {
 
-    public static void main(String[] args) throws ParseException
+    public static void main(String[] args) 
     {
-        new MvpTesteSpringBoot().run(); 
+        new NaoInjeta().run(); 
     }
 
 }

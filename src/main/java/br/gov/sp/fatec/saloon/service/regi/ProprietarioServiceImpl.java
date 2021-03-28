@@ -3,6 +3,7 @@ package br.gov.sp.fatec.saloon.service.regi;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,7 @@ import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 
 @Service("proprietarioService")
+@Configurable
 public class ProprietarioServiceImpl implements ProprietarioService {
 
     @Autowired

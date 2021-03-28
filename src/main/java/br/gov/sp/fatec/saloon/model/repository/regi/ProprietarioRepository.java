@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
@@ -11,6 +12,7 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
  * @apiNote Dao da entidade Proprietário
  * 
  */
+@Repository
 public interface ProprietarioRepository extends JpaRepository<Proprietario, Long>{
 
     /**
