@@ -19,8 +19,8 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 @SpringBootTest
-//@Transactional
-//@Rollback
+@Transactional
+@Rollback
 public class ProprietarioService_Tests {
     
     @Autowired
@@ -40,20 +40,19 @@ public class ProprietarioService_Tests {
     final String    CPF_1       = "99999999999";
     final String    SENHA_1     = "#SENHA_PARCEIRO_1";
 
-    @Test
-    void testeTransacao(){
-        System.out.println("####################################################################################");
-        System.out.println("####################################################################################");
-        System.out.println("####################################################################################");
-        System.out.println("####################################################################################");
-        System.out.println("####################################################################################");
-        System.out.println("####################################################################################");
-        this.criaProprietarioTeste();
-        System.out.println();
-        proprietarioRepo.existsByApelido(APELIDO_1);
-        assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
-    }
-/*    
+    // @Test
+    // void testeTransacao(){
+    //     this.criaProprietarioTeste();
+    //     System.out.println("####################################################################################");
+    //     System.out.println("####################################################################################");
+    //     System.out.println("####################################################################################");
+    //     System.out.println("####################################################################################");
+    //     System.out.println("####################################################################################");
+    //     System.out.println("####################################################################################");
+    //     System.out.println("> > > > > > > > > > > > " + proprietarioRepo.existsByApelido(APELIDO_1));
+    //     assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
+    // }
+    
     @Test
     void testeProprietarioServiceIncluir() {
         this.criaProprietarioTeste();
@@ -81,7 +80,7 @@ public class ProprietarioService_Tests {
         proprietarioServiceRepo.delete(this.criaProprietarioTeste().getApelido());
         assertFalse(proprietarioRepo.existsByApelido(APELIDO_1));
     }    
-*/
+
     /*
     * Método padrão de criação do proprietário para testes 
     */

@@ -30,6 +30,11 @@ public class Proprietario extends Usuario {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "proprietario")
     private Set<Alugavel> alugaveis;
 
+    //CONSTRUTORES
+    public Proprietario(){
+        this.setDtInicio(Data.today());
+    }
+
     // Getters and Setters
     public Date getDtInicio()                        { return this.dtInicio;          }
     public void setDtInicio()                        { this.dtInicio = Data.today();  }

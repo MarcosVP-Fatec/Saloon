@@ -3,6 +3,7 @@ package br.gov.sp.fatec.saloon;
 import java.text.ParseException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
@@ -20,7 +21,7 @@ import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
  * 
  */
 
-@Component 
+ 
 public class MvpTesteSpringBoot {
 
     @Autowired
@@ -33,7 +34,7 @@ public class MvpTesteSpringBoot {
 
     public void run() throws ParseException {
         
-        System.out.println(Texto.padC("  INÍCIO TESTE TRANSACIONAL  ", LARGURA, '#'));
+        System.out.println(Texto.padC("  INÍCIO TESTE TRANSACIONAL - " + Data.time() + "  ", LARGURA, '#'));
         System.out.println(""); 
 
         //Cria um proprietário para o teste
