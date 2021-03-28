@@ -16,7 +16,7 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @Table(name = "pro_proprietario")
 @Entity
-@PrimaryKeyJoinColumn(name = "pro_usu_id")
+@PrimaryKeyJoinColumn(name = "pro_usu_id") //Este parâmetro indica que não teremos mapeamento do campo na classe por ser pk aqui e fk de outra entidade.
 public class Proprietario extends Usuario {
     
     @Column(name = "pro_dt_inicio")             private Date dtInicio;

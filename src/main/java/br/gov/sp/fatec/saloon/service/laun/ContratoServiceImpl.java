@@ -107,5 +107,29 @@ public class ContratoServiceImpl implements ContratoService {
 
         return contrato;
     }
-   
+
+    public Contrato novoContrato(String     cliCpf
+                                ,String     cliNome
+                                ,String     cliTelDdd
+                                ,String     cliTelNumero){
+                                // ,String     pro_apelido
+                                // ,String     pro_email
+                                // ,String     pro_senha
+                                // ,Date       pro_nascimento
+                                // ,String     pro_cpf
+                                // ,String     alu_descr
+                                // ,String     alu_endereco
+                                // ,int        alu_capacidade
+                                // ,BigDecimal alu_valor
+                                // ,Date       ctt_data
+                                // ,BigDecimal ctt_reservaPaga ){
+
+        Cliente cliente = new Cliente(null, cliCpf, cliNome, cliTelDdd, cliTelNumero);
+
+        Contrato contrato = new Contrato();
+        
+        return contrato;
+    }   
+
+
 }

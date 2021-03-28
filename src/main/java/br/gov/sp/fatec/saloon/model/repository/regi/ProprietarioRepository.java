@@ -52,12 +52,16 @@ public interface ProprietarioRepository extends JpaRepository<Proprietario, Long
      * @param apelido (String)
      * @return boolean
      */
-    public boolean existsByApelido(String descr);
-    
+    public boolean existsByApelido(String apelido);
+    @Query("select count(p) > 0 from Proprietario p where p.apelido = ?1")
+    public boolean existePorApelido(String apelido);
+
     /**
      * @apiNote findByEmail(String) - Pesquisa se existe por email exato
      * @param email (String)
      * @return boolean
      */
     public Proprietario findByEmailIgnoreCase(String email);
+
+
 }

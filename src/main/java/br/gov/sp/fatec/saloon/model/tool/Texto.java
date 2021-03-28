@@ -2,8 +2,7 @@ package br.gov.sp.fatec.saloon.model.tool;
 
 /**
  * @apiNote Biblioteca de funções para tratamento de texto.
- * 
- */
+  */
 
  public class Texto {
     

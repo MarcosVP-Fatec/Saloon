@@ -24,10 +24,15 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
 @PrimaryKeyJoinColumn(name = "cli_id")  //Faz ligação com o Contrato
 public class Cliente extends GeneratorId {
 
-    @Column(name = "cli_cpf_cnpj")          private String cpf_cnpj;        //14
-    @Column(name = "cli_nome")              private String nome;            //80
-    @Column(name = "cli_tel_ddd")           private String telDdd;          //2
-    @Column(name = "cli_tel_numero")        private String telNumero;       //10
+    @Column(name = "cli_cpf_cnpj"  , length = 14, nullable = false, unique = true ) private String cpf_cnpj;
+    @Column(name = "cli_nome"      , length = 80, nullable = false, unique = true ) private String nome;
+    @Column(name = "cli_tel_ddd"   , length =  2, nullable = true , unique = false) private String telDdd;
+    @Column(name = "cli_tel_numero", length = 10, nullable = true , unique = false) private String telNumero;
+
+    // @Column(name = "cli_cpf_cnpj"  ) private String cpf_cnpj;
+    // @Column(name = "cli_nome"      ) private String nome;
+    // @Column(name = "cli_tel_ddd"   ) private String telDdd;
+    // @Column(name = "cli_tel_numero") private String telNumero;
 
     //A chave estrangeira não se mapeia diretamente
     //x to y => x é da entidade atual.
@@ -44,6 +49,19 @@ public class Cliente extends GeneratorId {
     //LAZY porque não quero carregar todos os Contratos do Cliente
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Contrato> contratosDoCliente;
+
+    // CONSTRUTORES
+    public Cliente(){}
+    public Cliente( Long    id
+                  , String  cpf_cnpj
+                  , String  nome
+                  , String  telDdd
+                  , String  telNumero){
+        this.setId(id);                      
+        this.setCpf_cnpj(cpf_cnpj);
+        this.setTelDdd(telDdd);
+        this.setTelNumero(telNumero);
+    }
 
     // GETTERS AND SETTERS
     public String getCpf_cnpj()                 { return cpf_cnpj;                              }

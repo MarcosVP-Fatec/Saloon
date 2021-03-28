@@ -2,7 +2,6 @@ package br.gov.sp.fatec.saloon.model.tool;
 
 /**
  * @apiNote Biblioteca de funções para tratamento de data
- * 
  */
 
 import java.text.ParseException;
