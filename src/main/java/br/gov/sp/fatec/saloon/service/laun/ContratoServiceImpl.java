@@ -40,8 +40,15 @@ public class ContratoServiceImpl implements ContratoService {
 
     @Override
     @Transactional
-    public Contrato persist(Long id, Long idCliente, Long idAlugavel, Date data, BigDecimal reservaPaga, Long idMotivo,
-            String festejoNomes, int festejoDia, Long idMes) {
+    public Contrato persist( Long       id
+                           , Long       idCliente
+                           , Long       idAlugavel
+                           , Date       data
+                           , BigDecimal reservaPaga
+                           , Long       idMotivo
+                           , String     festejoNomes
+                           , int        festejoDia
+                           , Long       idMes) {
 
         Contrato contrato;
 

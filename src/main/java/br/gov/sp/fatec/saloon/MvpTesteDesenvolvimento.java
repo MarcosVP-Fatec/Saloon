@@ -10,58 +10,14 @@ package br.gov.sp.fatec.saloon;
  * 
  */
 
- /*
-import java.math.BigDecimal;
-
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.HashSet;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-
-import br.gov.sp.fatec.saloon.model.PersistenceManager;
-
-import br.gov.sp.fatec.saloon.model.dao.interf.AlugavelDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.ClienteDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.ParceiroDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.ProprietarioDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.UsuarioDadosPessoaisDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.laun.ContratoDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.stat.AlugavelTipoDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.stat.ContratoMotivoDao;
-import br.gov.sp.fatec.saloon.model.dao.interf.stat.MesAnoDao;
-import br.gov.sp.fatec.saloon.model.dao.laun.ContratoDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.stat.AlugavelTipoDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.stat.ContratoMotivoDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.stat.MesAnoDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.AlugavelDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.ClienteDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.ParametroDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.ParceiroDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.ProprietarioDaoJpa;
-import br.gov.sp.fatec.saloon.model.dao.UsuarioDadosPessoaisDaoJpa;
-
-import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
-import br.gov.sp.fatec.saloon.model.entity.stat.ContratoMotivo;
-import br.gov.sp.fatec.saloon.model.entity.stat.MesAno;
-import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
-import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
-import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
-import br.gov.sp.fatec.saloon.model.entity.regi.Parceiro;
-import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
-import br.gov.sp.fatec.saloon.model.entity.regi.UsuarioDadosPessoais;
-
-import br.gov.sp.fatec.saloon.model.tool.Data;
-import br.gov.sp.fatec.saloon.model.tool.SaidasConsole;
-import br.gov.sp.fatec.saloon.model.tool.Texto;
 
 public class MvpTesteDesenvolvimento {
 
     static int LARGURA = 112;
 
     public static void run() throws ParseException {
-
+/*
         EntityManager em = PersistenceManager.getInstance().getEntityManager();
         UsuarioDadosPessoaisDao usuarioDadosPessoaisDao = new UsuarioDadosPessoaisDaoJpa(em);
         AlugavelDao alugavelDao = new AlugavelDaoJpa(em);
@@ -271,8 +227,7 @@ public class MvpTesteDesenvolvimento {
 
         System.out.println(Texto.padC("######################################## FIM ########################################", LARGURA, '#'));
         SaidasConsole.printFatecEnd();
-
+*/
     }
 
 }
-*/
