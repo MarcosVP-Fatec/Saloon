@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.service.regi;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
@@ -18,7 +19,7 @@ public class ClienteServiceImpl implements ClienteService {
     private ParceiroRepository  parceiroRepo;
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public Cliente persist( Long   id
                           , String cpf_cnpj
                           , String nome

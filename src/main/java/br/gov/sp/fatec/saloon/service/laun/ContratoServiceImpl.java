@@ -5,6 +5,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
@@ -16,6 +17,7 @@ import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.MesAnoRepository;
+import br.gov.sp.fatec.saloon.service.regi.ClienteService;
 
 @Service("ContratoService")
 public class ContratoServiceImpl implements ContratoService {
@@ -25,6 +27,9 @@ public class ContratoServiceImpl implements ContratoService {
 
     @Autowired
     private ClienteRepository clienteRepo;
+
+    @Autowired
+    private ClienteService  clienteService;
 
     @Autowired
     private AlugavelRepository alugavelRepo;
@@ -115,10 +120,11 @@ public class ContratoServiceImpl implements ContratoService {
         return contrato;
     }
 
-    public Contrato novoContrato(String     cliCpf
-                                ,String     cliNome
-                                ,String     cliTelDdd
-                                ,String     cliTelNumero){
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Contrato novoClienteContrato(String     cliCpf
+                                       ,String     cliNome
+                                       ,String     cliTelDdd
+                                       ,String     cliTelNumero){
                                 // ,String     pro_apelido
                                 // ,String     pro_email
                                 // ,String     pro_senha
@@ -131,7 +137,8 @@ public class ContratoServiceImpl implements ContratoService {
                                 // ,Date       ctt_data
                                 // ,BigDecimal ctt_reservaPaga ){
 
-        Cliente cliente = new Cliente(null, cliCpf, cliNome, cliTelDdd, cliTelNumero);
+        //Cliente cliente = new Cliente(null, cliCpf, cliNome, cliTelDdd, cliTelNumero);
+        Cliente cliente = clienteService.persist(cliCpf, cliNome, cliTelDdd, cliTelNumero);
 
         Contrato contrato = new Contrato();
         
