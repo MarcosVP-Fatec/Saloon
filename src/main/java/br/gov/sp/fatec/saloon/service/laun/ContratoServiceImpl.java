@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
 import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
 import br.gov.sp.fatec.saloon.model.entity.regi.Cliente;
+import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.repository.laun.ContratoRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.AlugavelRepository;
 import br.gov.sp.fatec.saloon.model.repository.regi.ClienteRepository;
@@ -19,23 +20,23 @@ import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.MesAnoRepository;
 import br.gov.sp.fatec.saloon.service.regi.ClienteService;
 
-@Service("ContratoService")
+@Service("contratoService")
 public class ContratoServiceImpl implements ContratoService {
 
     @Autowired
-    private ContratoRepository contratoRepo;
+    private ContratoRepository  contratoRepo;
 
     @Autowired
-    private ClienteRepository clienteRepo;
+    private ClienteRepository   clienteRepo;
 
     @Autowired
-    private ClienteService  clienteService;
+    private ClienteService      clienteService;
 
     @Autowired
-    private AlugavelRepository alugavelRepo;
+    private AlugavelRepository  alugavelRepo;
 
     @Autowired
-    private MesAnoRepository mesAnoRepo;
+    private MesAnoRepository    mesAnoRepo;
 
     @Autowired
     private ProprietarioRepository proprietarioRepo;
@@ -44,7 +45,7 @@ public class ContratoServiceImpl implements ContratoService {
     private ContratoMotivoRepository contratoMotivoRepo;
 
     @Override
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     public Contrato persist( Long       id
                            , Long       idCliente
                            , Long       idAlugavel
@@ -89,7 +90,7 @@ public class ContratoServiceImpl implements ContratoService {
     }
 
     @Override
-    @Transactional
+    @Transactional()
     public Contrato persist(Contrato contrato, Cliente cliente, Alugavel alugavel) {
 
         if (clienteRepo.existsByNome(cliente.getNome())) {
@@ -120,29 +121,40 @@ public class ContratoServiceImpl implements ContratoService {
         return contrato;
     }
 
+    @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public Contrato novoClienteContrato(String     cliCpf
-                                       ,String     cliNome
-                                       ,String     cliTelDdd
-                                       ,String     cliTelNumero){
-                                // ,String     pro_apelido
-                                // ,String     pro_email
-                                // ,String     pro_senha
-                                // ,Date       pro_nascimento
-                                // ,String     pro_cpf
-                                // ,String     alu_descr
-                                // ,String     alu_endereco
-                                // ,int        alu_capacidade
-                                // ,BigDecimal alu_valor
-                                // ,Date       ctt_data
-                                // ,BigDecimal ctt_reservaPaga ){
+    public Contrato novoClienteContrato( String         cliCpf
+                                       , String         cliNome
+                                       , String         cliTelDdd
+                                       , String         cliTelNumero
+                                       , Date           cttData
+                                       , BigDecimal     cttReservaPaga
+                                       , String         cttFestejoNomes
+                                       , int            cttFestejoDia
+                                       , Long           cttFestejoMes
+                                       , Long           cttContratoMotivo
+                                       , Proprietario   proprietario 
+                                       , Alugavel       alugavel){
 
-        //Cliente cliente = new Cliente(null, cliCpf, cliNome, cliTelDdd, cliTelNumero);
-        Cliente cliente = clienteService.persist(cliCpf, cliNome, cliTelDdd, cliTelNumero);
+        Cliente cliente = clienteRepo.findByNome(cliNome);
+        if (cliente == null) cliente = clienteService.persist(cliCpf, cliNome, cliTelDdd, cliTelNumero);
 
         Contrato contrato = new Contrato();
-        
+        contrato.setData(cttData);
+        contrato.setReservaPaga(cttReservaPaga);
+        contrato.setFestejoNomes(cttFestejoNomes);
+        contrato.setfestejoDia(cttFestejoDia);
+        contrato.setFestejoMes(mesAnoRepo.buscarPorId(cttFestejoMes));
+        contrato.setContratoMotivo(contratoMotivoRepo.buscarPorId(cttContratoMotivo));
+        contrato.setCliente(cliente);
+        contrato.setAlugavel(alugavel);
+
+        if (cliente.getId() != null){
+            contratoRepo.save(contrato);
+        }
+
         return contrato;
+
     }   
 
 
