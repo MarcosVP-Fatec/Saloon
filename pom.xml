@@ -1,53 +1,68 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-   	<parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.3</version> <!-- 2.3.3.RELEASE -->
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.4.3</version> <!-- 2.3.3.RELEASE -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-    <groupId>br.gov.sp.fatec</groupId>
-    <artifactId>saloon</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>saloon</name>
+	<groupId>br.gov.sp.fatec</groupId>
+	<artifactId>saloon</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>saloon</name>
 	<description>Project for Spring Boot</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-    </properties>
-        
-    <dependencies>
- 
-      <dependency>
+	</properties>
+
+	<dependencies>
+
+		<!-- ==================== JPA  ======================= -->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+        <!-- ==================== WEB  ======================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        <!-- ==================== TEST  ======================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
 
-		<dependency>
+        <!-- ==================== DEV TOOLS  ======================= -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <!-- ==================== XML  ======================= -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
+        <!-- ==================== MYSQL  ======================= -->
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
-    </dependencies>
-  
+	</dependencies>
+
 	<build>
 		<finalName>saloon</finalName>
 		<plugins>
@@ -57,5 +72,5 @@
 			</plugin>
 		</plugins>
 	</build>
-  
+
 </project>

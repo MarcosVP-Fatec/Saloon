@@ -8,6 +8,8 @@ import java.text.ParseException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
 import br.gov.sp.fatec.saloon.model.entity.regi.Alugavel;
@@ -18,8 +20,8 @@ import br.gov.sp.fatec.saloon.service.regi.AlugavelService;
 import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 @SpringBootTest
-// @Transactional
-// @Rollback
+@Transactional
+@Rollback
 public class ContratoService_Test {
 
     @Autowired
