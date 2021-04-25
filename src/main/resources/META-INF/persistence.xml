@@ -6,7 +6,7 @@
     <persistence-unit name="saloon">
 
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-
+        <!-- 
         <class>br.gov.sp.fatec.saloon.model.entity.Usuario</class>
         <class>br.gov.sp.fatec.saloon.model.entity.UsuarioDadosPessoais</class>
         <class>br.gov.sp.fatec.saloon.model.entity.UsuarioGeral</class>
@@ -16,7 +16,7 @@
         <class>br.gov.sp.fatec.saloon.model.entity.Proprietario</class>
         <class>br.gov.sp.fatec.saloon.model.entity.Alugavel</class>
         <class>br.gov.sp.fatec.saloon.model.entity.AlugavelTipo</class>
-
+         -->
         <properties>
             <property name="javax.persistence.jdbc.driver"
                 value="com.mysql.jdbc.Driver" />

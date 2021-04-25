@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
@@ -21,7 +20,7 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
 @Entity
 @Table(name = "cli_cliente")
 @AttributeOverride(name = "id", column = @Column(name = "cli_id"))
-@PrimaryKeyJoinColumn(name = "cli_id")  //Faz ligação com o Contrato
+//@PrimaryKeyJoinColumn(name = "cli_id")  //Faz ligação com o Contrato
 public class Cliente extends GeneratorId {
 
     @Column(name = "cli_cpf_cnpj"  , length = 14, nullable = false, unique = true ) private String cpf_cnpj;

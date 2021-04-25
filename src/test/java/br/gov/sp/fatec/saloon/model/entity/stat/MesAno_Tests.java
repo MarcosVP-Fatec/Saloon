@@ -19,6 +19,21 @@ public class MesAno_Tests {
     
   	@Test
 	void testeMesAnoQtd() {
-        assertTrue( mesAnoRepo.count() == 12L ); 
+        //assertTrue( mesAnoRepo.count() == 12L );
+        assertEquals(12L, mesAnoRepo.count());
     }
+
+  	@Test
+	void testeMesAnoGS() {
+        MesAno mesAno = mesAnoRepo.findById(4L).get();
+        assertEquals("Abril", mesAno.getDescr());
+        assertEquals(4L, mesAno.getId());
+        mesAno.setId(99L);
+        mesAno.setDescr("Inválido");
+        assertEquals("Inválido", mesAno.getDescr());
+        assertEquals(99L, mesAno.getId());
+        mesAno.setNumero("99");
+        assertEquals("99", mesAno.getNumero());
+    }
+
 }

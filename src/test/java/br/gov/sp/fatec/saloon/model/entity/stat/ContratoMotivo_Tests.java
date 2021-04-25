@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -11,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.sp.fatec.saloon.model.entity.tools.Quebra;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 
 @SpringBootTest
@@ -34,11 +34,12 @@ public class ContratoMotivo_Tests {
         assertTrue(contratoMotivoRepo.existsByDescr(DESCR_1));
     }
 
-  	@Test
+    @Test
 	public void testeContratoMotivoAlterar() {
         ContratoMotivo ctr = this.criaContratoMotivo();
         ctr.setDescr(DESCR_2);
-        contratoMotivoRepo.save(ctr);
+        ctr = contratoMotivoRepo.save(ctr);
+        assertEquals(DESCR_2, ctr.getDescr());
         assertNotNull(contratoMotivoRepo.findByDescr(DESCR_2).getId());
         assertFalse(contratoMotivoRepo.existsByDescr(DESCR_1));
         assertTrue(contratoMotivoRepo.existsByDescr(DESCR_2));
