@@ -19,9 +19,6 @@ public class MesAno_Tests {
     
   	@Test
 	void testeMesAnoQtd() {
-
-        assertEquals(12, mesAnoRepo.findAll().size() ); 
-
+        assertTrue( mesAnoRepo.count() == 12L ); 
     }
-
 }

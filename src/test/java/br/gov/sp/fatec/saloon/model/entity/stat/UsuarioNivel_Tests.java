@@ -20,10 +20,10 @@ public class UsuarioNivel_Tests {
     @Autowired
     private UsuarioNivelRepository usuarioNivelRepo;
 
-  	@Test
+    @Test
 	void testeUsuarioNivelSave() {
         usuarioNivelRepo.save(criaUsuarioNivel());
-        assertNotNull(usuarioNivelRepo.findById(99999L));
+        assertNotNull(usuarioNivelRepo.findById(99999L).get().getId());
     }
 
   	@Test

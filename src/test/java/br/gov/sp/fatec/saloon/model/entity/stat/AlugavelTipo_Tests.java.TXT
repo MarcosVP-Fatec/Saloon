@@ -20,13 +20,14 @@ public class AlugavelTipo_Tests {
     private AlugavelTipoRepository alugavelTipoRepo;
 
    	@Test
-	public void testeAluvagelTipoSave() {
+	public void testeAluvagelTipoSalvar() {
+        Quebra.print("Alugavel Tipo SALVAR");
         alugavelTipoRepo.save(criaAlugavelTipo());
         assertTrue(alugavelTipoRepo.existsByDescr("#TESTE_TIPO_ALUGÁVEL"));
     }
 
     @Test
-	public void testeAluvagelTipoDelete() {
+	public void testeAluvagelTipoExcluir() {
         alugavelTipoRepo.delete(criaAlugavelTipo());
         assertFalse(alugavelTipoRepo.existsByDescr("#TESTE_TIPO_ALUGÁVEL"));
     }

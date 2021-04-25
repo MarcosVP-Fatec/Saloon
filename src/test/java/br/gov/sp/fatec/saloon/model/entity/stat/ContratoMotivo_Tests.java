@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.gov.sp.fatec.saloon.model.entity.tools.Quebra;
 import br.gov.sp.fatec.saloon.model.repository.stat.ContratoMotivoRepository;
 
 @SpringBootTest
@@ -26,6 +27,7 @@ public class ContratoMotivo_Tests {
 
     @Test
     public void testContratoMotivoSalvar(){
+
         ContratoMotivo ctr = this.criaContratoMotivo();
         assertNotNull(ctr);
         assertNotNull(ctr.getId());
@@ -50,7 +52,7 @@ public class ContratoMotivo_Tests {
         assertNull(contratoMotivoRepo.findByDescr("#TESTE_MOTIVO"));
     }
 
-  	@Test
+    @Test
 	public void testeDeContratoMotivoLista() {
         assertTrue(contratoMotivoRepo.listaCompleta().size() > 0);
     }
@@ -63,6 +65,5 @@ public class ContratoMotivo_Tests {
         ctr.setDescr(DESCR_1);
         return contratoMotivoRepo.save(ctr);
     }
-
 
 }
