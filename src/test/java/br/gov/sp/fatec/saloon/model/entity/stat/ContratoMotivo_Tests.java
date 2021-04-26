@@ -55,7 +55,10 @@ public class ContratoMotivo_Tests {
 
     @Test
 	public void testeDeContratoMotivoLista() {
-        assertTrue(contratoMotivoRepo.listaCompleta().size() > 0);
+    	Long qtd = contratoMotivoRepo.count();
+    	assertEquals( qtd , contratoMotivoRepo.listaCompleta().size() );
+    	this.criaContratoMotivo();
+    	assertEquals(qtd + 1, contratoMotivoRepo.listaCompleta().size() );
     }
 
     /*

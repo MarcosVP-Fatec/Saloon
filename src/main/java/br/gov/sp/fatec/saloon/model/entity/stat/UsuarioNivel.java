@@ -66,7 +66,8 @@ public class UsuarioNivel extends GeneratorAudit {
     public boolean getCliente()                         { return this.cliente;                  }
     public void setCliente(boolean cliente)             { this.cliente = cliente;               }
 
+    /*
     public Set<Usuario> getUsuarios()                   { return this.usuarios;                 }
     public void setUsuarios(Set<Usuario> usuarios)      { this.usuarios = usuarios;             }
-
+*/
 }

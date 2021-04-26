@@ -1,7 +1,9 @@
 package br.gov.sp.fatec.saloon.model.entity.stat;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
@@ -19,11 +21,23 @@ public class UsuarioNivel_Tests {
 
     @Autowired
     private UsuarioNivelRepository usuarioNivelRepo;
+    
+    final String DESCR_1	=	"#TESTE_DE_NIVEL";
 
     @Test
 	void testeUsuarioNivelSave() {
-        usuarioNivelRepo.save(criaUsuarioNivel());
+    	UsuarioNivel usuarioNivel = usuarioNivelRepo.save(criaUsuarioNivel());
         assertNotNull(usuarioNivelRepo.findById(99999L).get().getId());
+        assertEquals(DESCR_1, usuarioNivel.getDescr());
+        usuarioNivel.setAdministrador(true);
+        usuarioNivel.setProprietario(true);
+        usuarioNivel.setParceiro(true);
+        usuarioNivel.setCliente(true);
+        usuarioNivel = usuarioNivelRepo.save(usuarioNivel);
+        assertTrue(usuarioNivel.getAdministrador());
+        assertTrue(usuarioNivel.getProprietario());
+        assertTrue(usuarioNivel.getParceiro());
+        assertTrue(usuarioNivel.getCliente());
     }
 
   	@Test
@@ -38,7 +52,7 @@ public class UsuarioNivel_Tests {
     public UsuarioNivel criaUsuarioNivel(){
         UsuarioNivel usuarioNivel = new UsuarioNivel();
         usuarioNivel.setId(99999L); 
-        usuarioNivel.setDescr("#TESTE_DE_NIVEL");
+        usuarioNivel.setDescr(DESCR_1);
 
         usuarioNivel.setAdministrador(true);
         usuarioNivel.setParceiro(true);

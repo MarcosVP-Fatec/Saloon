@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import br.gov.sp.fatec.saloon.exception.ValidacaoException;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
@@ -57,7 +58,13 @@ public class Usuario extends GeneratorId{
     public void setDtNascimento(Date dtNascimento)      { this.dtNascimento = dtNascimento;         }
 
     public String getCpf()                              { return this.cpf;                          }
-    public void setCpf(String cpf)                      { if (Validador.cpf(cpf)) this.cpf = cpf;   }
+    public void setCpf(String cpf)                      { 
+    	if (Validador.cpf(cpf)) {
+    		this.cpf = cpf;   
+    	} else {
+    		throw new ValidacaoException("CPF inválido => " + cpf );
+    	}
+  	}
 
     public UsuarioNivel getUsuarioNivel()               { return this.usuarioNivel;                 }
     public void setUsuarioNivel(UsuarioNivel usuarioNivel) {this.usuarioNivel = usuarioNivel;       }
