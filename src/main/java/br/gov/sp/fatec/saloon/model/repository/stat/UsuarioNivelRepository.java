@@ -20,7 +20,22 @@ import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
  */
 public interface UsuarioNivelRepository extends JpaRepository<UsuarioNivel, Long> {
 
-    /**
+	@Query("select u from UsuarioNivel u where u.id = 1" )
+	public UsuarioNivel administrador();
+
+	@Query("select u from UsuarioNivel u where u.id = 2" )
+	public UsuarioNivel proprietario();
+
+	@Query("select u from UsuarioNivel u where u.id = 3" )
+	public UsuarioNivel parceiro();
+	
+	@Query("select u from UsuarioNivel u where u.id = 4" )
+	public UsuarioNivel cliente();
+
+	@Query("select u from UsuarioNivel u where u.id = 5" )
+	public UsuarioNivel parceiroCliente();
+
+	/**
      * @apiNote Pesquisa por Id
      * @param id
      * @return UsuarioNivel

@@ -1,6 +1,9 @@
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
@@ -36,8 +39,17 @@ public class Cliente_Tests {
     @Test
     void testeClienteIncluir() throws ParseException {
         assertFalse(clienteRepo.existsByNome(NOME_1));
-        clienteRepo.save(this.criaClienteTeste());
+        Cliente cliente = clienteRepo.save(this.criaClienteTeste());
+        clienteRepo.flush();
         assertTrue(clienteRepo.existsByNome(NOME_1));
+        assertNotNull(cliente.getId());
+        assertEquals(CPF_1, cliente.getCpf_cnpj());
+        assertEquals(NOME_1, cliente.getNome());
+        assertEquals(TEL_DDD_1, cliente.getTelDdd());
+        assertEquals(TEL_1, cliente.getTelNumero());
+        assertNotNull(cliente.getParceiro());
+        assertNull(cliente.getParceiros());
+        assertNull(cliente.getContratosDoCliente());
     }
 
     @Test
@@ -70,12 +82,9 @@ public class Cliente_Tests {
                                                        , "#NOME_PARCEIRO_CLI"
                                                        , Data.toDate("12/04/1969")
                                                        , "22222222222");
-        Cliente cliente = new Cliente();
+        
+        Cliente cliente = new Cliente(null, CPF_1, NOME_1, TEL_DDD_1, TEL_1);
 
-        cliente.setCpf_cnpj(CPF_1);
-        cliente.setNome(NOME_1);
-        cliente.setTelDdd(TEL_DDD_1);
-        cliente.setTelNumero(TEL_1);
         cliente.setParceiro(parceiro);
 
         return cliente;

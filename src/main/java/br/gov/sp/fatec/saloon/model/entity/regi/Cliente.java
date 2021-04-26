@@ -58,6 +58,7 @@ public class Cliente extends GeneratorId {
                   , String  telNumero){
         this.setId(id);                      
         this.setCpf_cnpj(cpf_cnpj);
+        this.setNome(nome);
         this.setTelDdd(telDdd);
         this.setTelNumero(telNumero);
     }
@@ -75,14 +76,9 @@ public class Cliente extends GeneratorId {
     public Parceiro getParceiro()               { return parceiro;                              }
     public void setParceiro(Parceiro parceiro)  { this.parceiro = parceiro;                     }
     public Set<Parceiro> getParceiros()         { return parceiros;                             }
-    public void setParceiros(Set<Parceiro> parceiros) { this.parceiros = parceiros;             }
 
     public Set<Contrato> getContratosDoCliente() {
         return contratosDoCliente;
-    }
-
-    public void setContratosDoCliente(Set<Contrato> contratosDoCliente) {
-        this.contratosDoCliente = contratosDoCliente;
     }
 
 }

@@ -1,6 +1,8 @@
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
@@ -13,8 +15,8 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.model.repository.regi.ParceiroRepository;
+import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 import br.gov.sp.fatec.saloon.model.tool.Data;
-import br.gov.sp.fatec.saloon.service.regi.ParceiroService;
 
 @SpringBootTest
 @Transactional
@@ -23,9 +25,9 @@ public class Parceiro_Tests {
     
     @Autowired
     private ParceiroRepository      parceiroRepo;
-
+    
     @Autowired
-    private ParceiroService         parceiroServiceRepo;
+    private UsuarioNivelRepository	usuarioNivelRepo;
 
     public Parceiro_Tests() throws ParseException {}
 
@@ -37,10 +39,21 @@ public class Parceiro_Tests {
     final String    CPF_1       = "66666666666";
     final String    SENHA_1     = "#SENHA_1_PARCEIRO";
 
-    @Test
-    void testeParceiroIncluir(){
-        parceiroRepo.save(this.criaParceiro());
+	@Test
+    void testeParceiroIncluir() throws ParseException{
+    	
+    	Parceiro parceiro = parceiroRepo.save(this.criaParceiro());
         assertTrue(parceiroRepo.existsByApelido(APELIDO_1));
+        
+        assertEquals(Data.DtoS(Data.today()), Data.DtoS(parceiro.getDtInicio()));
+        
+        parceiro.setDtInicio(Data.toDate("01/04/2021"));
+        assertEquals(Data.toDate("01/04/2021"), parceiro.getDtInicio());
+        
+        assertFalse(parceiro.isInativo());
+        
+        assertNull(parceiro.getClientes());
+        
     }
 
     @Test
@@ -64,11 +77,10 @@ public class Parceiro_Tests {
      * Método padrão de criação de uma entidade completa para testes.
      */
     private Parceiro criaParceiro() {
-        return parceiroServiceRepo.persist( APELIDO_1
-                                          , EMAIL_1
-                                          , SENHA_1
-                                          , NOME_1
-                                          , DTNASC_1
-                                          , CPF_1);
+    	
+    	Parceiro parceiro = new Parceiro(null, APELIDO_1, EMAIL_1, SENHA_1, NOME_1, DTNASC_1, CPF_1, usuarioNivelRepo.parceiro() );
+    	
+    	return parceiro;
+    	
     }
 }
