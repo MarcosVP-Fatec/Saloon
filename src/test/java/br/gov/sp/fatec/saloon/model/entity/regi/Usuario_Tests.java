@@ -90,14 +90,7 @@ public class Usuario_Tests {
      * Função padrão de criação de usuário
      */
     private Usuario criaUsuario(){
-    	/*
-        return usuarioServiceRepo.persist( APELIDO_1
-                                         , EMAIL_1
-                                         , SENHA_1
-                                         , NOME_1
-                                         , DTNASC_1
-                                         , CPF_1
-                                         , ID_NIVEL_1);*/
+
     	Usuario usuario = new Usuario();
     	usuario.setApelido(APELIDO_1);
     	usuario.setEmail(EMAIL_1);

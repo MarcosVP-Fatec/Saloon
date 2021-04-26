@@ -1,6 +1,8 @@
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
@@ -20,6 +22,7 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 @SpringBootTest
 @Transactional
 @Rollback
+@SuppressWarnings("deprecation")
 public class Proprietario_Tests {
 
     @Autowired
@@ -27,7 +30,7 @@ public class Proprietario_Tests {
 
     @Autowired
     private UsuarioNivelRepository  usuarioNivelRepo;
-
+    
     public Proprietario_Tests() throws ParseException {}
 
     final String    APELIDO_1   = "#TESTE_PROPRIETARIO_1";
@@ -39,20 +42,34 @@ public class Proprietario_Tests {
     final String    CPF_1       = "99999999999";
     final String    SENHA_1     = "#SENHA_PARCEIRO_1";
 
-    @Test
-    void testeProprietarioIncluir() {
-        proprietarioRepo.save(this.criaProprietarioTeste());
+	@Test
+    void testeProprietarioIncluir() throws ParseException {
+    	
+    	Proprietario proprietario = proprietarioRepo.save(this.criaProprietarioTeste());
         assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
+        
+        proprietario.setDtInicio();
+        proprietario.setDtLimite(Data.toDate("31/12/2021"));
+        proprietarioRepo.saveAndFlush((proprietario));
+
+        assertEquals( Data.today().getDate() , proprietario.getDtInicio().getDate() );
+        assertEquals(Data.toDate("31/12/2021"),proprietario.getDtLimite());
+        
+        proprietario.setDtLimite(12);
+        assertEquals(Data.dataSomaDias(Data.today(), 12).getDate(),proprietario.getDtLimite().getDate());
+        
+        assertNull(proprietario.getAlugaveis());
+        
     }
 
     @Test
     void testeProprietarioAlterar() {
         Proprietario prop = proprietarioRepo.save(this.criaProprietarioTeste());
         assertTrue(proprietarioRepo.existsByApelido(APELIDO_1));
-        assertFalse(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
+        assertEquals( 0 , proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size());
         prop.setNome(NOME_2);
-        proprietarioRepo.save(prop);
-        assertTrue(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
+        proprietarioRepo.saveAndFlush(prop);
+        assertEquals(1, proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size());
     }
 
   	@Test

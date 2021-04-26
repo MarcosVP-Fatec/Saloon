@@ -31,6 +31,16 @@ public class Data {
     public static Date toDate(String sData) throws ParseException {
         return new SimpleDateFormat("dd/MM/yyyy").parse(sData);
     }
+    
+    /**
+     * @apiNote DtoS( Date ) = Função que transforma uma Data em string de AAAAMMDD
+     * @param Date
+     * @return String -> "AAAAMMDD"
+     */
+    public static String DtoS(Date data) {
+    	return Texto.strZero(data.getYear(), 4) + Texto.strZero(data.getMonth(), 2) + Texto.strZero(data.getDay(), 2);
+    }
+    
 
     /**
      * @apiNote dataSomaDias( Date data, ind dias) -> Função que soma dias a uma

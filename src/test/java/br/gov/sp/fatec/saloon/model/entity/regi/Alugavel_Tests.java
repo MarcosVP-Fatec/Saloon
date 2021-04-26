@@ -1,8 +1,10 @@
 package br.gov.sp.fatec.saloon.model.entity.regi;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 
 import org.junit.jupiter.api.Test;
@@ -36,18 +38,26 @@ public class Alugavel_Tests {
     final String ENDERECO_1     = "#ENDEREÇO_1_ALUGAVEL";
     final String APELIDO_PROP_1 = "#APELIDO_1_ALUGAVEL";
     final int    CAPACIDADE_1   = 100;
+    final BigDecimal VALOR_1	= new BigDecimal(450.00);
 
     @Test
     void testeAlugavelIncluir() throws ParseException {
-        alugavelRepo.save(this.criaAlugavelTeste());
+    	Alugavel alugavel = alugavelRepo.saveAndFlush(this.criaAlugavelTeste());
         assertTrue(alugavelRepo.existsByDescr(DESCR_1));
+        assertEquals(DESCR_1, alugavel.getDescr());
+        assertEquals(ENDERECO_1, alugavel.getEndereco());
+        assertEquals(CAPACIDADE_1, alugavel.getCapacidade());
+        assertEquals(VALOR_1, alugavel.getValor());
+        assertEquals(alugavelTipoRepo.buscarPorId(1L).getDescr(), alugavel.getAlugavelTipo().getDescr());
+        assertEquals("44444444444", alugavel.getProprietario().getCpf());
+        
     }
 
     @Test
     void testeAlugavelAlterar() throws ParseException {
         
         Alugavel alugavel = alugavelRepo.save(this.criaAlugavelTeste());
-        assertTrue(alugavelRepo.listaPorProprietarioApelido(APELIDO_PROP_1).size() > 0);
+        assertEquals(1, alugavelRepo.listaPorProprietarioApelido(APELIDO_PROP_1).size() );
         alugavel.setDescr(DESCR_2);
         alugavelRepo.save(alugavel);
         alugavelRepo.flush();
@@ -79,6 +89,7 @@ public class Alugavel_Tests {
         alugavel.setAlugavelTipo(alugavelTipo);
         alugavel.setEndereco(ENDERECO_1);
         alugavel.setCapacidade(CAPACIDADE_1);
+        alugavel.setValor(VALOR_1);
     
         return alugavel;
     }

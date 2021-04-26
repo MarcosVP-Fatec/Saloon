@@ -42,7 +42,6 @@ public class Proprietario extends Usuario {
     public Date getDtLimite()                        { return this.dtLimite;          }
     public void setDtLimite(Date dtLimite)           { this.dtLimite = dtLimite;      }
     public void setDtLimite(int dias)                { this.dtLimite = Data.dataSomaDias(Data.today(), dias); }
-    public Set<Alugavel> getAlugaveis()              { return alugaveis;              }
-    public void setAlugaveis(Set<Alugavel> alugaveis){ this.alugaveis = alugaveis;    }
+    public Set<Alugavel> getAlugaveis()               { return this.alugaveis;        }
 
 }
