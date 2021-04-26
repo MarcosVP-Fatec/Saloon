@@ -60,11 +60,10 @@ public class Parceiro_Tests {
     void testeParceiroAlterar(){
         Parceiro parc = parceiroRepo.save(this.criaParceiro());
         assertTrue(parceiroRepo.existsByApelido(APELIDO_1));
-        assertFalse(parceiroRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
+        assertEquals(0, parceiroRepo.findByNomeContainsIgnoreCase(NOME_2).size());
         parc.setNome(NOME_2);
-        parceiroRepo.save(parc);
-        parceiroRepo.flush();
-        assertTrue(parceiroRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
+        parceiroRepo.saveAndFlush(parc);
+        assertEquals(1, parceiroRepo.findByNomeContainsIgnoreCase(NOME_2).size());
     }
 
   	@Test
