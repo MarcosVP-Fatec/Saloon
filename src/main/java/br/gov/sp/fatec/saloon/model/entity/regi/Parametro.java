@@ -23,21 +23,22 @@ public class Parametro extends GeneratorId{
     @Column(name="par_val_bol")     private boolean logico;
 
     // CONSTRUTORES
-    /*
     public Parametro(){}
+    
+    //CONSTRUTOR base dos tipos
     private Parametro( String cod
-                     , String descricao
-                     , char   tipo){
+            	      , String descricao
+                      , char   tipo){
 
-           setNull();
-           setCod(cod); 
-           setDescricao(descricao);            
-           setTipo(tipo);
+    	setCod(cod); 
+    	setDescricao(descricao);            
+    	setTipo(tipo);
     }
+
     //CONSTRUTOR NÚMERO
     public Parametro( String cod
-                    , String descricao
-                    , Double numero){
+                     , String descricao
+                     , Double numero){
            
            this(cod, descricao, 'N');
            setNumero(numero);
@@ -58,7 +59,7 @@ public class Parametro extends GeneratorId{
                     , String texto){
            
            this(cod, descricao, 'C');
-           setStr(str);
+           setStr(texto);
     }
 
     //CONSTRUTOR LÓGICO
@@ -69,7 +70,7 @@ public class Parametro extends GeneratorId{
            this(cod, descricao, 'L');
            setLogico(logico);
     }
-*/
+
     public String getCod()                      { return cod;                   }
     public void setCod(String cod)              { this.cod = cod;               }
     public String getDescricao()                { return descricao;             }
@@ -85,14 +86,7 @@ public class Parametro extends GeneratorId{
     public boolean isLogico()                   { return logico;                }
     public void setLogico(boolean logico)       { this.logico = logico;         }
     
-    /*
-    private void setNull(){
-        setNumero(null);
-        setStr(null);
-        setData(null);
-        setLogico(false);
-    }
-*/
+  
     /*
     public static double lernumero(String cod){
         Parametro parametro = new ParametroDaoJpa().buscar(cod);
