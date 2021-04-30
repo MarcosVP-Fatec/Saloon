@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.model.entity.regi;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
 import java.util.Date;
@@ -226,12 +227,14 @@ public class Parametro_Tests {
     	}
     	parametroService.del(COD_1);
     }
-/*
+
     @Test
 	void testeParametroDelete() {
-        parametroRepo.delete(parametroServiceRepo.inc(COD_1, DESCR_1, false));
+    	parametroService.inc(COD_1, DESCR_1, false);
+        assertTrue(parametroRepo.existsByCod(COD_1));
+    	parametroService.del(COD_1);
         assertFalse(parametroRepo.existsByCod(COD_1));
     }
-    */
+
 
 }
