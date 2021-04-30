@@ -105,13 +105,14 @@ public class ParametroServiceImpl implements ParametroService {
     @Override
     @Transactional
     public Parametro alt(String cod, String descricao, boolean logico) {
-        if (parametroRepo.existsByCod(cod)){
-            throw new RegistroJaExisteException("Tentativa de inclusão de parâmetro que já existe -> " + cod);
+        if (!parametroRepo.existsByCod(cod)){
+            throw new RegistroNaoEncontratoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setDescricao(descricao);
         parametro.setLogico(logico);
         return parametroRepo.saveAndFlush(parametro);
+        
     }
 
     @Override
