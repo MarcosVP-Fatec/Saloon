@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @RestController
-@RequestMapping
 @CrossOrigin
 public class HomeController {
 

@@ -23,7 +23,7 @@ import br.gov.sp.fatec.saloon.service.regi.ParametroService;
 
 @RestController
 @RequestMapping(value = "/parametro")
-//@CrossOrigin
+@CrossOrigin
 public class ParametroController {
 	
 	@Autowired
