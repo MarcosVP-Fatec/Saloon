@@ -26,6 +26,8 @@ public interface ParametroService {
 
     public boolean del(String cod);
     
+    public Parametro buscarPorCod(String cod);
+    
 }
 
     

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.exception.RegistroJaExisteException;
-import br.gov.sp.fatec.saloon.exception.RegistroNaoEncontratoException;
+import br.gov.sp.fatec.saloon.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.saloon.exception.RegistroNaoExcluidoException;
 import br.gov.sp.fatec.saloon.model.entity.regi.Parametro;
 import br.gov.sp.fatec.saloon.model.repository.regi.ParametroRepository;
@@ -34,7 +34,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt(String cod, String descricao, double numero) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontratoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setDescricao(descricao);
@@ -58,7 +58,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt(String cod, String descricao, String texto) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontratoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setDescricao(descricao);
@@ -82,7 +82,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt( String cod, String descricao, Date data) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontratoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setDescricao(descricao);
@@ -106,7 +106,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt(String cod, String descricao, boolean logico) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontratoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setDescricao(descricao);
@@ -134,5 +134,14 @@ public class ParametroServiceImpl implements ParametroService {
         if (!parametroRepo.existsByCod(cod)) return true;
         return this.del(parametroRepo.findByCod(cod).getId());
     }
+
+	@Override
+	public Parametro buscarPorCod(String cod) {
+    	Parametro parametro = parametroRepo.findByCod(cod);
+    	if (parametro == null) {
+    		throw new RegistroNaoEncontradoException("Código de Parâmetro não encontrado: " + cod);
+    	}
+        return parametro;
+	}
     
 }

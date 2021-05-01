@@ -7,12 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 // Esta classe vai atender a uma URL específica
 // Para cada método de requisição http teremos um método aqui
 // Toda classe serializável (que pode ser transformada em texto para transporte) precisa de um 
 // serial version id que é gerado com base nos caracteres do código
+@RestController
+@RequestMapping
+@CrossOrigin
 public class MainController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;

@@ -14,7 +14,7 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.saloon.exception.RegistroJaExisteException;
-import br.gov.sp.fatec.saloon.exception.RegistroNaoEncontratoException;
+import br.gov.sp.fatec.saloon.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.saloon.exception.RegistroNaoExcluidoException;
 import br.gov.sp.fatec.saloon.model.repository.regi.ParametroRepository;
 import br.gov.sp.fatec.saloon.model.tool.Data;
@@ -71,7 +71,7 @@ public class Parametro_Tests {
                 parametroService.del(COD_1);
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
-			} catch (RegistroNaoEncontratoException e) {
+			} catch (RegistroNaoEncontradoException e) {
     			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
 			}
     	}
@@ -117,7 +117,7 @@ public class Parametro_Tests {
                 parametroService.del(COD_1);
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
-			} catch (RegistroNaoEncontratoException e) {
+			} catch (RegistroNaoEncontradoException e) {
     			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
 			}
     	}
@@ -163,7 +163,7 @@ public class Parametro_Tests {
                 parametroService.del(COD_1);
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
-			} catch (RegistroNaoEncontratoException e) {
+			} catch (RegistroNaoEncontradoException e) {
     			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
 			}
     	}
@@ -209,7 +209,7 @@ public class Parametro_Tests {
                 parametroService.del(COD_1);
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
-			} catch (RegistroNaoEncontratoException e) {
+			} catch (RegistroNaoEncontradoException e) {
     			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
 			}
     	}
