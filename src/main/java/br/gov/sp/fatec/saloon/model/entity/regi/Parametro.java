@@ -75,8 +75,6 @@ public class Parametro extends GeneratorId{
     public void setCod(String cod)              { this.cod = cod;               }
     public String getDescricao()                { return descricao;             }
     public void setDescricao(String descricao)  { this.descricao = descricao;   }
-    public char getTipo()                       { return tipo;                  }
-    public void setTipo(char tipo)              { this.tipo = tipo;             }
     public Double getNumero()                   { return numero;                }
     public void setNumero(Double numero)        { this.numero = numero;         }
     public String getStr()                      { return str;                   }
@@ -85,7 +83,27 @@ public class Parametro extends GeneratorId{
     public void setData(Date data)              { this.data = data;             }
     public boolean isLogico()                   { return logico;                }
     public void setLogico(boolean logico)       { this.logico = logico;         }
-    
+    public void setTipo(char tipo)              { this.tipo = tipo;             }
+    public char getTipo()                       { 
+        if (this.tipo!='C' && this.tipo!='N' && this.tipo!='D' && this.tipo!='L'){
+            if ( getStr() != null ){
+                this.tipo = 'C';
+            } else if ( getNumero() != null ){
+                this.tipo = 'N';
+            } else if ( getData() != null ){
+                this.tipo = 'D';
+            } else {
+                this.tipo = 'L';
+            }
+        }
+        return tipo;                  
+    }
+    public void setNull()                       {
+        setNumero(0.0);
+        setStr(null);
+        setData(null);
+        setLogico(false);
+    }
   
     /*
     public static double lernumero(String cod){

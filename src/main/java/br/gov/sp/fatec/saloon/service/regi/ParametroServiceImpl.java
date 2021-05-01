@@ -18,6 +18,42 @@ public class ParametroServiceImpl implements ParametroService {
     @Autowired
     private ParametroRepository     parametroRepo;
 
+    @Override
+    public Parametro inc(Parametro parametro) {
+        String cod = parametro.getCod();
+        String descr = parametro.getDescricao();
+        switch (parametro.getTipo()){
+
+            case 'C':   parametro = this.inc( cod, descr, parametro.getStr() );
+                        break;                                                    
+            case 'N':   parametro = this.inc( cod, descr, parametro.getNumero() );
+                        break;
+            case 'D':   parametro = this.inc( cod, descr, parametro.getData() ) ;
+                        break;                                                    
+            case 'L':   parametro = this.inc( cod, descr, parametro.isLogico() ) ;
+                        break;                                                    
+        }
+        return parametro;
+    }
+
+    @Override
+    public Parametro alt(Parametro parametro) {
+        String cod = parametro.getCod();
+        String descr = parametro.getDescricao();
+        switch (parametro.getTipo()){
+
+            case 'C':   parametro = this.alt( cod, descr, parametro.getStr() );
+                        break;                                                    
+            case 'N':   parametro = this.alt( cod, descr, parametro.getNumero() );
+                        break;
+            case 'D':   parametro = this.alt( cod, descr, parametro.getData() ) ;
+                        break;                                                    
+            case 'L':   parametro = this.alt( cod, descr, parametro.isLogico() ) ;
+                        break;                                                    
+        }
+        return parametro;
+    }
+
     /**
      * Parâmetro Número
      */
@@ -37,6 +73,7 @@ public class ParametroServiceImpl implements ParametroService {
             throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
+        parametro.setNull();
         parametro.setDescricao(descricao);
         parametro.setNumero(numero);
         return parametroRepo.saveAndFlush(parametro);
@@ -61,6 +98,7 @@ public class ParametroServiceImpl implements ParametroService {
             throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
+        parametro.setNull();
         parametro.setDescricao(descricao);
         parametro.setStr(texto);
         return parametroRepo.saveAndFlush(parametro);
@@ -85,6 +123,7 @@ public class ParametroServiceImpl implements ParametroService {
             throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
+        parametro.setNull();
         parametro.setDescricao(descricao);
         parametro.setData(data);
         return parametroRepo.saveAndFlush(parametro);
@@ -109,10 +148,10 @@ public class ParametroServiceImpl implements ParametroService {
             throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
+        parametro.setNull();
         parametro.setDescricao(descricao);
         parametro.setLogico(logico);
         return parametroRepo.saveAndFlush(parametro);
-        
     }
 
     @Override
@@ -143,5 +182,10 @@ public class ParametroServiceImpl implements ParametroService {
     	}
         return parametro;
 	}
-    
+
+    @Override
+    public Parametro buscarPorTipoCod(char tipo, String cod) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
