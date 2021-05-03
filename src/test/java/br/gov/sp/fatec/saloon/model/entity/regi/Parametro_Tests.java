@@ -25,6 +25,9 @@ import br.gov.sp.fatec.saloon.service.regi.ParametroService;
 @Rollback
 public class Parametro_Tests {
 
+	final static String MSG_INC = "Tentativa de inclusão de registro que já existe: ";
+	final static String MSG_ALT = "Tentativa de alteração de registro que não existe: ";
+
     @Autowired
     private ParametroRepository parametroRepo;
     
@@ -53,7 +56,7 @@ public class Parametro_Tests {
                 assertEquals(DESCR_1, parametro.getDescricao());
                 assertEquals('N', parametro.getTipo());
     		} catch (RegistroJaExisteException e) {
-    			assertEquals("Tentativa de inclusão de parâmetro que já existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_INC + COD_1 , e.getMessage() );
 			}
     	}
 
@@ -72,7 +75,7 @@ public class Parametro_Tests {
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
 			} catch (RegistroNaoEncontradoException e) {
-    			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_ALT + COD_1 , e.getMessage() );
 			}
     	}
     	
@@ -102,7 +105,7 @@ public class Parametro_Tests {
                 assertEquals("umdois", parametro.getStr());
                 assertEquals('C', parametro.getTipo());
     		} catch (RegistroJaExisteException e) {
-    			assertEquals("Tentativa de inclusão de parâmetro que já existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_INC + COD_1 , e.getMessage() );
 			}
     	}
 
@@ -118,7 +121,7 @@ public class Parametro_Tests {
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
 			} catch (RegistroNaoEncontradoException e) {
-    			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_ALT + COD_1 , e.getMessage() );
 			}
     	}
     	
@@ -148,7 +151,7 @@ public class Parametro_Tests {
             	assertEquals(DATA_1, parametro.getData());
                 assertEquals('D', parametro.getTipo());
     		} catch (RegistroJaExisteException e) {
-    			assertEquals("Tentativa de inclusão de parâmetro que já existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_INC + COD_1 , e.getMessage() );
 			}
     	}
 
@@ -164,7 +167,7 @@ public class Parametro_Tests {
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
 			} catch (RegistroNaoEncontradoException e) {
-    			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_ALT + COD_1 , e.getMessage() );
 			}
     	}
     	
@@ -194,7 +197,7 @@ public class Parametro_Tests {
                 assertEquals(false, parametro.isLogico());
                 assertEquals('L', parametro.getTipo());
     		} catch (RegistroJaExisteException e) {
-    			assertEquals("Tentativa de inclusão de parâmetro que já existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_INC + COD_1 , e.getMessage() );
 			}
     	}
 
@@ -210,7 +213,7 @@ public class Parametro_Tests {
                 assertFalse(parametroRepo.existsByCod(COD_1));
                 
 			} catch (RegistroNaoEncontradoException e) {
-    			assertEquals("Tentativa de alteração de parâmetro que não existe -> " + COD_1 , e.getMessage() );
+    			assertEquals(MSG_ALT + COD_1 , e.getMessage() );
 			}
     	}
     	
