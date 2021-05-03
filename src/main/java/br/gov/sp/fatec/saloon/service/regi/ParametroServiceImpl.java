@@ -15,6 +15,9 @@ import br.gov.sp.fatec.saloon.model.repository.regi.ParametroRepository;
 @Service("parametroService")
 public class ParametroServiceImpl implements ParametroService {
 
+	final static String MSG_INC = "Tentativa de inclusão de registro que já existe: ";
+	final static String MSG_ALT = "Tentativa de alteração de registro que não existe: ";
+	
     @Autowired
     private ParametroRepository     parametroRepo;
 
@@ -61,7 +64,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro inc(String cod, String descricao, double numero) {
         if (parametroRepo.existsByCod(cod)){
-            throw new RegistroJaExisteException("Tentativa de inclusão de parâmetro que já existe -> " + cod);
+            throw new RegistroJaExisteException(MSG_INC + cod);
         } 
         return parametroRepo.saveAndFlush(new Parametro(cod, descricao, numero));
     }
@@ -70,7 +73,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt(String cod, String descricao, double numero) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException(MSG_ALT + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setNull();
@@ -86,7 +89,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro inc(String cod, String descricao, String texto) {
         if (parametroRepo.existsByCod(cod)){
-            throw new RegistroJaExisteException("Tentativa de inclusão de parâmetro que já existe -> " + cod);
+            throw new RegistroJaExisteException(MSG_INC + cod);
         } 
         return parametroRepo.saveAndFlush(new Parametro(cod, descricao, texto));
     }
@@ -95,7 +98,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt(String cod, String descricao, String texto) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException(MSG_ALT + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setNull();
@@ -111,7 +114,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro inc(String cod, String descricao, Date data) {
         if (parametroRepo.existsByCod(cod)){
-            throw new RegistroJaExisteException("Tentativa de inclusão de parâmetro que já existe -> " + cod);
+            throw new RegistroJaExisteException(MSG_INC + cod);
         } 
         return parametroRepo.saveAndFlush(new Parametro(cod, descricao, data));
     }
@@ -120,7 +123,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt( String cod, String descricao, Date data) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException(MSG_ALT + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setNull();
@@ -136,7 +139,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro inc(String cod, String descricao, boolean logico) {
         if (parametroRepo.existsByCod(cod)){
-            throw new RegistroJaExisteException("Tentativa de inclusão de parâmetro que já existe -> " + cod);
+            throw new RegistroJaExisteException(MSG_INC + cod);
         } 
         return parametroRepo.saveAndFlush(new Parametro(cod, descricao, logico));
     }
@@ -145,7 +148,7 @@ public class ParametroServiceImpl implements ParametroService {
     @Transactional
     public Parametro alt(String cod, String descricao, boolean logico) {
         if (!parametroRepo.existsByCod(cod)){
-            throw new RegistroNaoEncontradoException("Tentativa de alteração de parâmetro que não existe -> " + cod);
+            throw new RegistroNaoEncontradoException(MSG_ALT + cod);
         } 
         Parametro parametro = parametroRepo.findByCod(cod);
         parametro.setNull();
@@ -163,7 +166,7 @@ public class ParametroServiceImpl implements ParametroService {
         try {
         	parametroRepo.deleteById(id);
 		} catch (RegistroNaoExcluidoException e) {
-			throw new RegistroNaoExcluidoException("Tentativa de exclusão de parâmetro mal suscedida -> " + parametroRepo.findById(id).get().getCod());
+			throw new RegistroNaoExcluidoException("Tentativa de exclusão de parâmetro mal suscedida: " + parametroRepo.findById(id).get().getCod());
 		}
         return !parametroRepo.existsById(id);
     }

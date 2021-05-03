@@ -22,7 +22,6 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 @SpringBootTest
 @Transactional
 @Rollback
-@SuppressWarnings("deprecation")
 public class Proprietario_Tests {
 
     @Autowired
@@ -52,11 +51,11 @@ public class Proprietario_Tests {
         proprietario.setDtLimite(Data.toDate("31/12/2021"));
         proprietarioRepo.saveAndFlush((proprietario));
 
-        assertEquals( Data.today().getDate() , proprietario.getDtInicio().getDate() );
+        assertEquals( Data.today() , proprietario.getDtInicio() );
         assertEquals(Data.toDate("31/12/2021"),proprietario.getDtLimite());
         
         proprietario.setDtLimite(12);
-        assertEquals(Data.dataSomaDias(Data.today(), 12).getDate(),proprietario.getDtLimite().getDate());
+        assertEquals(Data.addD(Data.today(), 12),proprietario.getDtLimite());
         
         assertNull(proprietario.getAlugaveis());
         

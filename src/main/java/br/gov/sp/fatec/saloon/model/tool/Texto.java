@@ -1,12 +1,18 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
 /**
+ * @author Marcos Vinicio Pereira
  * @apiNote Biblioteca de funções para tratamento de texto.
-  */
+ * @author Marcos Vinicio Pereira
+ * 
+ */
 
  public class Texto {
     
-   /**
+	// O construtor é privado, portanto esta classe não pode ser instanciada
+    private Texto() { }
+
+    /**
      * @apiNote left( String sTexto , int nTam ) -> Retorna a parte esqueda da String
      * @param String -> Texto
      * @param Int    -> Tamanho que quer que retorne
@@ -47,6 +53,7 @@ package br.gov.sp.fatec.saloon.model.tool;
     }
 
    /**
+     * @author Marcos Vinicio Pereira
      * @apiNote padL( String texto , int nTam, Character cLetra ) -> Retorna o texto com preenchimento à esquerda com o char passado
      * @param String -> Texto
      * @param Int    -> Tamanho que quer que retorne
@@ -61,6 +68,7 @@ package br.gov.sp.fatec.saloon.model.tool;
     }
 
    /**
+     * @author Marcos Vinicio Pereira
      * @apiNote padR( String texto , int nTam, Character cLetra ) -> Retorna o texto com preenchimento à direita com o char passado
      * oBS.: Esta função corta o texto se ele for maior que o tamanho desejado, pois é feita para impressão e relatórios formatados
      * @param String -> Texto
@@ -71,37 +79,12 @@ package br.gov.sp.fatec.saloon.model.tool;
     public static String padR( String texto , int nTam )               { return padR( texto, nTam, ' ');}
     public static String padR( String texto , int nTam , String letra ){ return padR( texto, nTam, letra.charAt(0)); }
     public static String padR( String texto , int nTam , Character letra ){ 
-        if (texto.length() >= nTam ) texto = Texto.left(texto, nTam);
+       if (texto.length() >= nTam ) return Texto.left(texto, nTam);
         return texto + replicate(letra,nTam - texto.length() ) ;
     }
 
-
     /**
-     * @apiNote sohDigitos( String numero ) = Verifica se uma String contém somente dígitos
-     * @param String numeros
-     * @return Boolean
-     */
-    public static boolean sohDigitos( String numero ){
-        String digito;
-        for (int i = 0; i < numero.length(); i++) {
-            digito = numero.substring(i,i+1);
-            if ( !digito.equals("0") &&
-                 !digito.equals("1") && 
-                 !digito.equals("2") && 
-                 !digito.equals("3") && 
-                 !digito.equals("4") && 
-                 !digito.equals("5") && 
-                 !digito.equals("6") && 
-                 !digito.equals("7") && 
-                 !digito.equals("8") && 
-                 !digito.equals("9") ){
-                     return false;
-                 } 
-        }
-        return true;
-    }
-
-    /**
+     * @author Marcos Vinicio Pereira
      * @apiNote concatenaChar( Character... letras ) = Retorna uma String que concatena as char´s passadas
      * @param Character...
      * @return String
@@ -115,6 +98,7 @@ package br.gov.sp.fatec.saloon.model.tool;
     }
 
     /**
+     * @author Marcos Vinicio Pereira
      * @apiNote replicate( String texto, int nQtd ) = Retorna uma String replicada n vêzes 
      * @param String texto
      * @param nQtd
@@ -130,6 +114,7 @@ package br.gov.sp.fatec.saloon.model.tool;
     }
 
    /**
+     * @author Marcos Vinicio Pereira
      * @apiNote strZero( String texto , int nTam ) -> Retorna a string preenchida com zeros à esquerda
      * @param String -> Texto
      * @param Int    -> Tamanho que quer que retorne
@@ -140,7 +125,46 @@ package br.gov.sp.fatec.saloon.model.tool;
         return padL( texto , nTam, '0');
     }
 
-}
+     /**
+	  * @author Marcos Vinicio Pereira
+	  * @apiNote trad( String texto , int nTam ) -> Retorna o texto conforme tradução 
+	  * @param String -> Texto
+	  * @param Int    -> Tamanho que quer que retorne
+	  * @return String
+	  */
+     public static String Trad(String texto) {
+    	 return texto;
+     }
+     
+     /**
+	  * @author Marcos Vinicio Pereira
+	  * @apiNote Verifica se um texto é um dígito 
+	  * @param String ou Char
+	  * @return boolean
+	  */
+     public static boolean isDigit( char digito ) {
+    	 if (   digito == '0' || digito == '1' || digito == '2' || digito == '3' 
+        	 || digito == '4' || digito == '5' || digito == '6' || digito == '7' 
+        	 || digito == '8' || digito == '9') {
+    		 return true;
+    	 }
+    	 return false;
+     }
+
+     /**
+      * @author Marcos Vinicio Pereira
+      * @apiNote sohDigitos( String numero ) = Verifica se uma String contém somente dígitos (0123456789)
+      * @param String 
+      * @return Boolean
+      */
+     public static boolean sohDigitos( String digitos ) {
+     	 for (char digChar : digitos.toCharArray()) {
+		    if (!isDigit(digChar)) return false;
+		 }
+    	 return true;
+     }
+
+ }
 
  
 

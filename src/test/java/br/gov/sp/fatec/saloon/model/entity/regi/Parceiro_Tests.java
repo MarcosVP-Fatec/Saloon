@@ -45,7 +45,7 @@ public class Parceiro_Tests {
     	Parceiro parceiro = parceiroRepo.save(this.criaParceiro());
         assertTrue(parceiroRepo.existsByApelido(APELIDO_1));
         
-        assertEquals(Data.DtoS(Data.today()), Data.DtoS(parceiro.getDtInicio()));
+        assertEquals(Data.dToS(Data.today()), Data.dToS(parceiro.getDtInicio()));
         
         parceiro.setDtInicio(Data.toDate("01/04/2021"));
         assertEquals(Data.toDate("01/04/2021"), parceiro.getDtInicio());

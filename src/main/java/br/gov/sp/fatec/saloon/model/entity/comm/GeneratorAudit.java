@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.model.entity.comm;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 import br.gov.sp.fatec.saloon.model.tool.Data;
@@ -9,10 +10,10 @@ import br.gov.sp.fatec.saloon.model.tool.Data;
 @MappedSuperclass
 public abstract class GeneratorAudit {
     
-    Long    _inc_usua;    
-    Date    _inc_data;
-    Long    _alt_usua;    
-    Date    _alt_data;
+    @Column(insertable = true, updatable = false)   Long    _inc_usua;    
+    @Column(insertable = true, updatable = false)   Date    _inc_data;
+    @Column(insertable = false, updatable = true)   Long    _alt_usua;    
+    @Column(insertable = false, updatable = true)   Date    _alt_data;
     
     // CONSTRUTOR
     public GeneratorAudit(){

@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.saloon.model.tool;
 /**
  * @apiNote Biblioteca de saídas do console
+ * @author Marcos Vinicio Pereira
  * 
  */
 

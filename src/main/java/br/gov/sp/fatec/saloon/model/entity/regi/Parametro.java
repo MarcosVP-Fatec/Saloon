@@ -104,29 +104,5 @@ public class Parametro extends GeneratorId{
         setData(null);
         setLogico(false);
     }
-  
-    /*
-    public static double lernumero(String cod){
-        Parametro parametro = new ParametroDaoJpa().buscar(cod);
-        return parametro.getNumero();
-    }
 
-    public static Date lerData(String cod){
-        Parametro parametro = new ParametroDaoJpa().buscar(cod);
-        if (parametro == null) return null;
-        return parametro.getData();
-    }
-
-    public static String lerString(String cod){
-        Parametro parametro = new ParametroDaoJpa().buscar(cod);
-        if (parametro == null) return null;
-        return parametro.getStr();
-    }
-
-    public static boolean lerLogico(String cod){
-        Parametro parametro = new ParametroDaoJpa().buscar(cod);
-        if (parametro == null) return false;
-        return parametro.isLogico();
-    }
-    */
 }

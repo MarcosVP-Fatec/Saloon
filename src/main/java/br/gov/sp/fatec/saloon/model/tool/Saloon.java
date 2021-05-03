@@ -1,5 +1,11 @@
 package br.gov.sp.fatec.saloon.model.tool;
 
+/**
+ * 
+ * @author Marcos Vinicio Pereira
+ *
+ */
+
 public enum Saloon {
 
       ADMINISTRADOR(1L)

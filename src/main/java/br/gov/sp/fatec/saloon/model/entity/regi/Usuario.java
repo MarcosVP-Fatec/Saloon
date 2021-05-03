@@ -11,10 +11,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.sp.fatec.saloon.exception.ValidacaoException;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
+import br.gov.sp.fatec.saloon.model.repository.regi.UsuarioRepository;
+import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 import br.gov.sp.fatec.saloon.model.tool.Validador;
 
@@ -24,8 +29,8 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
  * @version 1.1 - Spring-boot
  * 
  */
-@Table(name = "usu_usuario")
 @Entity
+@Table(name = "usu_usuario")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AttributeOverride(name = "id", column=@Column(name="usu_id"))
 public class Usuario extends GeneratorId{
@@ -41,6 +46,25 @@ public class Usuario extends GeneratorId{
     @ManyToOne(fetch = FetchType.LAZY)      
     @JoinColumn(name = "usu_nivel")         private UsuarioNivel usuarioNivel;
 
+    // CONSTRUTORES
+    public Usuario(){}
+    public Usuario( String       apelido
+                  , String       email
+                  , String       senha
+                  , String       nome
+                  , Date         dtNascimento
+                  , String       cpf
+                  , UsuarioNivel nivelRepo){
+
+      this.setApelido(apelido);
+      this.setEmail(email);
+      this.setSenha(senha);
+      this.setNome(nome);
+      this.setDtNascimento(dtNascimento);
+      this.setCpf(cpf);
+      this.setUsuarioNivel(nivelRepo);
+
+    }
     // GETTERS AND SETTERS
     public String getApelido()                          { return this.apelido;                      }
     public void setApelido(String apelido)              { this.apelido = apelido.toUpperCase();     }

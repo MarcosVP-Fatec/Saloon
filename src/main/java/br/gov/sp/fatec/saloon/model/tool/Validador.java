@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 
 /**
  * @apiNote Biblioteca de funções para validadores de códigos (CPF, CNPJ, etc.)
+ * @author Marcos Vinicio Pereira
  * 
  */
 
