@@ -65,7 +65,7 @@ public class Usuario_Tests {
         	fail("Uma exceção deveria ser lançada");
 			
 		} catch (ValidacaoException e) {
-			assertEquals("CPF inválido => " + cpf, e.getMessage() );
+			assertEquals("CPF inválido: \"" + cpf + "\"", e.getMessage() );
 		}
         
     }
