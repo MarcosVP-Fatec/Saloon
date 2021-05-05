@@ -6,6 +6,22 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
 public interface ProprietarioService {
 
+    public Proprietario inc(Proprietario proprietario);
+
+    public Proprietario inc( String apelido
+				            , String email
+				            , String senha
+				            , String nome
+				            , Date   dtNascimento
+				            , String cpf);
+
+    public Proprietario alt( String apelido
+				            , String email
+				            , String senha
+				            , String nome
+				            , Date   dtNascimento
+				            , String cpf);
+
     /**
      * @apiNote persist(...)
      *          Inclui/Altera um proprietário passando os seus campos
@@ -33,6 +49,7 @@ public interface ProprietarioService {
                                , String nome
                                , Date   dtNascimento
                                , String cpf);
+
     /**
      * @apiNote delete(Long)
      *          Exclui um proprietário passando o id

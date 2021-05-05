@@ -61,6 +61,7 @@ public class ProprietarioService_Tests {
 
   	@Test
 	void testeProprietarioServiceAlterar() {
+  		int qtd = proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size();
         Proprietario prop = this.criaProprietarioTeste();
         proprietarioServiceRepo.persist( prop.getId()
                                        , APELIDO_1
@@ -71,7 +72,7 @@ public class ProprietarioService_Tests {
                                        , CPF_1);
 
         proprietarioRepo.flush();
-        assertTrue(proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() > 0);
+        assertEquals(qtd+1, proprietarioRepo.findByNomeContainsIgnoreCase(NOME_2).size() );
         assertEquals(NOME_2, prop.getNome());
     }    
 
@@ -79,7 +80,21 @@ public class ProprietarioService_Tests {
 	void testeProprietarioServiceExcluir() {
         proprietarioServiceRepo.delete(this.criaProprietarioTeste().getApelido());
         assertFalse(proprietarioRepo.existsByApelido(APELIDO_1));
-    }    
+    }
+  	
+  	@Test
+  	void testeProprietarioCampos() {
+  		Proprietario prop = this.criaProprietarioTeste();
+  		prop.setDtInicio();
+  		assertEquals(Data.today(), prop.getDtInicio());
+  		prop.setDtInicio(DTNASC_1);
+  		assertEquals(DTNASC_1, prop.getDtInicio());
+  		prop.setDtLimite(DTNASC_1);
+  		assertEquals(DTNASC_1, prop.getDtLimite());
+  		prop.setDtLimite(12);
+  		assertEquals(Data.addD(Data.today(),12), prop.getDtLimite());
+  		
+  	}
 
     /*
     * Método padrão de criação do proprietário para testes 

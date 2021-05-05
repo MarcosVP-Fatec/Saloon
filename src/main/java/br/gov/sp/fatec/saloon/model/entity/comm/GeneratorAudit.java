@@ -5,14 +5,21 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.saloon.controller.View;
 import br.gov.sp.fatec.saloon.model.tool.Data;
 
 @MappedSuperclass
 public abstract class GeneratorAudit {
-    
+
+    @JsonView(View.AuditInc.class)
     @Column(insertable = true, updatable = false)   Long    _inc_usua;    
+    @JsonView(View.AuditInc.class)
     @Column(insertable = true, updatable = false)   Date    _inc_data;
+    @JsonView(View.AuditAlt.class)
     @Column(insertable = false, updatable = true)   Long    _alt_usua;    
+    @JsonView(View.AuditAlt.class)
     @Column(insertable = false, updatable = true)   Date    _alt_data;
     
     // CONSTRUTOR

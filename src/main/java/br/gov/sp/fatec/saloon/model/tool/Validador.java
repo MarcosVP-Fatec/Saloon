@@ -12,18 +12,31 @@ import java.util.InputMismatchException;
 
     /**
      * @apiNote cpf( sCPF ) --> Valida se um CPF é válido
-     * @param sCPF --> Código CPF de 11 dígitos
+     * @param String --> Código CPF de 11 dígitos
      * @return boolean
      */
     public static boolean cpf( String cpf ){
-        return cpf.length() == 11 && Texto.right(cpf,2).equals(dvCpf(cpf));
+    	//Tamanho obrigatório 
+    	if (cpf.length() != 11) {
+    		return false;
+    	}
+    	//Tem que conter somente dígitos
+    	if (!Texto.sohDigitos(cpf)) {
+    		return false;
+    	}
+    	//Verifica o DV
+    	if (!Texto.right(cpf,2).equals(dvCpf(cpf))) {
+    		return false;
+    	}
+        return true;
     }
     
     public static String dvCpf( String cpf ){
 
-        if (cpf.length() == 11){
-           cpf = Texto.left(cpf,9); 
-        }
+        cpf = cpf.trim();
+
+        if (cpf.length() == 11) cpf = Texto.left(cpf,9); 
+
         if (cpf.length() != 9 || !Texto.sohDigitos(cpf) ) return "--";
 
         // considera-se erro cpf's formados por uma sequencia de numeros iguais
@@ -77,8 +90,8 @@ import java.util.InputMismatchException;
             return Texto.concatenarChar(dig10, dig11);
 
         } catch (InputMismatchException erro) {
-
-            return "XX";
+            //throw new InputMismatchException(erro.getMessage());
+            return "xx"; //Retorno que não permitirá a validação do DV.
         }
 
     }
@@ -111,6 +124,18 @@ import java.util.InputMismatchException;
             throw new RuntimeException(">>>> Número inválido de CPF (11 dígitos) ou CNPJ (14 dígitos) => Código passado com " + cod.length() + " dígitos.");
         }
 
+    }
+    
+    /**
+     * @apiNote isEmail --> Validação se o e-mail é válido
+     * @param String --> Código CPF de 11 dígitos ou CNPJ de 14 dígitos
+     * @return boolean
+     */
+    public static boolean isEmail(String email) {
+    	if (!email.contains("@")) {
+    		return false;
+    	}
+    	return true;
     }
 
 }

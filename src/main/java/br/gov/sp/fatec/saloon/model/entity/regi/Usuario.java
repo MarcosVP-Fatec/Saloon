@@ -11,15 +11,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.annotation.JsonView;
 
+import br.gov.sp.fatec.saloon.controller.View;
 import br.gov.sp.fatec.saloon.exception.ValidacaoException;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.entity.stat.UsuarioNivel;
-import br.gov.sp.fatec.saloon.model.repository.regi.UsuarioRepository;
-import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
 import br.gov.sp.fatec.saloon.model.tool.Validador;
 
@@ -35,7 +33,9 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
 @AttributeOverride(name = "id", column=@Column(name="usu_id"))
 public class Usuario extends GeneratorId{
 
+    @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_apelido")           private String       apelido;
+    @JsonView(View.UsuarioProprietario.class)
     @Column(name = "usu_nome")              private String       nome;    
     @Column(name = "usu_email")             private String       email;
     @Column(name = "usu_senha")             private String       senha;
@@ -54,7 +54,7 @@ public class Usuario extends GeneratorId{
                   , String       nome
                   , Date         dtNascimento
                   , String       cpf
-                  , UsuarioNivel nivelRepo){
+                  , UsuarioNivel nivelUsuario){
 
       this.setApelido(apelido);
       this.setEmail(email);
@@ -62,7 +62,7 @@ public class Usuario extends GeneratorId{
       this.setNome(nome);
       this.setDtNascimento(dtNascimento);
       this.setCpf(cpf);
-      this.setUsuarioNivel(nivelRepo);
+      this.setUsuarioNivel(nivelUsuario);
 
     }
     // GETTERS AND SETTERS
@@ -86,14 +86,12 @@ public class Usuario extends GeneratorId{
     	if (Validador.cpf(cpf)) {
     		this.cpf = cpf;   
     	} else {
-    		throw new ValidacaoException("CPF inválido => " + cpf );
+    		throw new ValidacaoException("CPF inválido: \"" + cpf + "\"");
     	}
   	}
 
     public UsuarioNivel getUsuarioNivel()               { return this.usuarioNivel;                 }
     public void setUsuarioNivel(UsuarioNivel usuarioNivel) {this.usuarioNivel = usuarioNivel;       }
-
-    
 
 }
 
