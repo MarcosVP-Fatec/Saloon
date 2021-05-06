@@ -64,4 +64,6 @@ public interface ProprietarioService {
      * @return boolean / true se excluiu ou se não existe.
      */
     public boolean delete(String apelido);
+
+    public Proprietario buscaPorApelido(String apelidoUsuario);
 }

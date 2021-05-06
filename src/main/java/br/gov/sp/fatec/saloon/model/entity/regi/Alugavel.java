@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.saloon.controller.View;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorId;
 import br.gov.sp.fatec.saloon.model.entity.laun.Contrato;
 import br.gov.sp.fatec.saloon.model.entity.stat.AlugavelTipo;
@@ -23,6 +26,7 @@ import br.gov.sp.fatec.saloon.model.tool.Texto;
 //@PrimaryKeyJoinColumn(name = "alu_id")
 public class Alugavel extends GeneratorId {
 
+    @JsonView(View.ProprietarioApelidoUsuario.class)
     @Column(name = "alu_descr")                             private String      descr;       //50
     @Column(name = "alu_endereco")                          private String      endereco;    //500
     @Column(name = "alu_capacidade")                        private int         capacidade; 

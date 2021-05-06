@@ -3,10 +3,13 @@ package br.gov.sp.fatec.saloon.model.repository.regi;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import br.gov.sp.fatec.saloon.controller.View;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
 /**
@@ -16,7 +19,6 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 @Repository
 public interface ProprietarioRepository extends JpaRepository<Proprietario, Long>{
 
-    //@Query("select p, u from Proprietario p join p.id u order by u.nome")
     @Query("select p from Proprietario p")
     public List<Proprietario> buscarProprietarios();
     

@@ -35,8 +35,9 @@ public class Usuario extends GeneratorId{
 
     @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_apelido")           private String       apelido;
-    @JsonView(View.UsuarioProprietario.class)
+    @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_nome")              private String       nome;    
+    @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_email")             private String       email;
     @Column(name = "usu_senha")             private String       senha;
 

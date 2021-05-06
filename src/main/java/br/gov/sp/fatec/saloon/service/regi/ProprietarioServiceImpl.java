@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
 
+import org.aspectj.weaver.ResolvedMemberImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
@@ -111,7 +112,6 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		return persist(apelido, email, senha, nome, dtNascimento, cpf);
 		
 	}
-
 	
     @Override
     @Transactional
@@ -179,5 +179,14 @@ public class ProprietarioServiceImpl implements ProprietarioService {
             return true;
         return this.delete(proprietarioRepo.findByApelido(apelido).getId());
     }
+
+    public Proprietario buscaPorApelido(String apelidoUsuario){
+                Proprietario proprietario = proprietarioRepo.findByApelido(apelidoUsuario);
+        if (proprietario == null || proprietario.getId() == null){
+            throw new RegistroNaoEncontradoException("Proprietário não encontrado (Apelido): \"" + apelidoUsuario + "\"");
+        }    
+        return proprietario;
+    }
+
 
 }
