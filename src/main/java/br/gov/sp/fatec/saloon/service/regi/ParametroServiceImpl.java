@@ -186,9 +186,4 @@ public class ParametroServiceImpl implements ParametroService {
         return parametro;
 	}
 
-    @Override
-    public Parametro buscarPorTipoCod(char tipo, String cod) {
-        // TODO Auto-generated method stub
-        return null;
-    }
 }

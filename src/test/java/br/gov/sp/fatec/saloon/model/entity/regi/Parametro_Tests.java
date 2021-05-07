@@ -86,7 +86,6 @@ public class Parametro_Tests {
 				parametroService.del(COD_1);
 				assertFalse(parametroRepo.existsByCod(COD_1));
 			} catch (RegistroNaoExcluidoException e) {
-				//TODO = Para quando existir uma fk que permita esta validação.
 				assertEquals("Tentativa de exclusão de parâmetro mal suscedida -> " + COD_1 , e.getMessage() );    			
 			}
     	}
@@ -132,7 +131,6 @@ public class Parametro_Tests {
 				parametroService.del(COD_1);
 				assertFalse(parametroRepo.existsByCod(COD_1));
 			} catch (RegistroNaoExcluidoException e) {
-				//TODO = Para quando existir uma fk que permita esta validação.
 				assertEquals("Tentativa de exclusão de parâmetro mal suscedida -> " + COD_1 , e.getMessage() );    			
 			}
     	}
@@ -178,7 +176,6 @@ public class Parametro_Tests {
 				parametroService.del(COD_1);
 				assertFalse(parametroRepo.existsByCod(COD_1));
 			} catch (RegistroNaoExcluidoException e) {
-				//TODO = Para quando existir uma fk que permita esta validação.
 				assertEquals("Tentativa de exclusão de parâmetro mal suscedida -> " + COD_1 , e.getMessage() );    			
 			}
     	}
@@ -224,7 +221,6 @@ public class Parametro_Tests {
 				parametroService.del(COD_1);
 				assertFalse(parametroRepo.existsByCod(COD_1));
 			} catch (RegistroNaoExcluidoException e) {
-				//TODO = Para quando existir uma fk que permita esta validação.
 				assertEquals("Tentativa de exclusão de parâmetro mal suscedida -> " + COD_1 , e.getMessage() );    			
 			}
     	}

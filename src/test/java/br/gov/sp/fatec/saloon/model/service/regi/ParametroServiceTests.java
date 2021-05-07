@@ -362,9 +362,8 @@ public class ParametroServiceTests {
 	
 	@Test
 	void testeParametroBusca() {
-		assertEquals(null, parametroService.buscarPorTipoCod('N', COD_1));
 
-		parametroService.inc(COD_1, DESCR_1, true);
+        parametroService.inc(COD_1, DESCR_1, true);
 		for (String cod : Arrays.asList(COD_1,COD_2)) {
 			try {
 				parametroService.buscarPorCod(cod);

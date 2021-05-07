@@ -45,7 +45,6 @@ public class Data {
     		if (!Data.dToS(data).equals(sData)) throw new DataInvalidaException(sData);
     		return data;
 		} catch (ParseException e) {
-			// TODO: handle exception
 			valid(sData);
 			e.printStackTrace();
 		}

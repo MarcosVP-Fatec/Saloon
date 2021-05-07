@@ -2,7 +2,6 @@ package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
 
-import org.aspectj.weaver.ResolvedMemberImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;

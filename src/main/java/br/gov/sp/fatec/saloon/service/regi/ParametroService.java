@@ -32,8 +32,6 @@ public interface ParametroService {
     
     public Parametro buscarPorCod(String cod);
 
-    public Parametro buscarPorTipoCod(char tipo, String cod);
-    
 }
 
     
