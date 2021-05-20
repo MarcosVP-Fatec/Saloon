@@ -29,7 +29,8 @@ create table mes_ano (
 -- 4-Cliente
 -- ------------------------------------------------------------------------
 create table niv_usuario(
-      niv_id                bigint unsigned primary key 
+      niv_id                bigint unsigned primary key
+    , niv_key               varchar(20)     not null
     , niv_descr             varchar(20)     not null
     , niv_adm               boolean         not null
     , niv_prop              boolean         not null
@@ -39,6 +40,7 @@ create table niv_usuario(
     , _inc_data             datetime            
     , _alt_usua             bigint          
     , _alt_data             datetime            
+    , constraint niv_key_uk   unique (niv_key)
     , constraint niv_descr_uk unique (niv_descr)
 );
 
@@ -49,7 +51,7 @@ create table usu_usuario (
       usu_id                bigint unsigned primary key auto_increment
     , usu_apelido           varchar(30)     not null
     , usu_email             varchar(255)    not null
-    , usu_senha             varchar(20)     not null
+    , usu_senha             varchar(100)    not null
     , usu_senha_validade    date
     , usu_pj_ou_pf          varchar(1)     
     , usu_nome              varchar(80)     not null
