@@ -38,7 +38,7 @@ public class Login {
         return autorizacao;
     }
 
-    public void setAutorizacoes(String autorizacao) {
+    public void setAutorizacao(String autorizacao) {
         this.autorizacao = autorizacao;
     }
 

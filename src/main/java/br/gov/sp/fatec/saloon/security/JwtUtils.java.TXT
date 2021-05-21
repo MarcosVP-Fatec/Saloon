@@ -23,19 +23,14 @@ public class JwtUtils {
    * O certo Ã© pegar uma chave gerada e estar fora do cÃ³digo
    * Usar o Autowired e pegar uma variÃ¡vel de ambiente.
    */
-  private static final String KEY = "spring.jwt.sec.saloon";
+  private static final String KEY = "spring.jwt.sec";
 
   public static String generateToken(Authentication usuario) throws JsonProcessingException {
-
     ObjectMapper mapper = new ObjectMapper();
     Login usuarioSemSenha = new Login();
     usuarioSemSenha.setUsername(usuario.getName());
 
     if (!usuario.getAuthorities().isEmpty()) {
-
-        for (String usuario.getAuthorities() : regra) {
-            
-        }
       usuarioSemSenha.setAutorizacao(usuario.getAuthorities().iterator().next().getAuthority());
     }
 

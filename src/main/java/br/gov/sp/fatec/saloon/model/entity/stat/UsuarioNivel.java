@@ -29,6 +29,9 @@ public class UsuarioNivel extends GeneratorAudit {
     @Column(name = "niv_id")
     private Long id;
 
+    @Column(name = "niv_key")
+    private String key;
+
     @Column(name = "niv_descr")
     private String descr;
 
@@ -65,6 +68,8 @@ public class UsuarioNivel extends GeneratorAudit {
 
     public boolean getCliente()                         { return this.cliente;                  }
     public void setCliente(boolean cliente)             { this.cliente = cliente;               }
+    public String getKey()                              { return this.key;                      }
+    public void setKey(String key)                      { this.key = key;                       }
 
     /*
     public Set<Usuario> getUsuarios()                   { return this.usuarios;                 }

@@ -15,8 +15,9 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
 
     @Override
     @Transactional
-    public UsuarioNivel persist( Long id
-                               , String descr
+    public UsuarioNivel persist( Long    id
+                               , String  key
+                               , String  descr
                                , boolean administrador
                                , boolean proprietario
                                , boolean parceiro
@@ -36,6 +37,7 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
             usuarioNivel.setId(id);
         }
 
+        usuarioNivel.setKey(key);
         usuarioNivel.setDescr(descr);
         usuarioNivel.setAdministrador(administrador);
         usuarioNivel.setProprietario(proprietario);
@@ -46,8 +48,8 @@ public class UsuarioNivelServiceImpl implements UsuarioNivelService{
     }
 
     @Override
-    public UsuarioNivel persist(         String descr, boolean administrador, boolean proprietario, boolean parceiro, boolean cliente){
-        return this.persist( null, descr, administrador, proprietario, parceiro, cliente);
+    public UsuarioNivel persist(         String key, String descr, boolean administrador, boolean proprietario, boolean parceiro, boolean cliente){
+        return this.persist( null, key, descr, administrador, proprietario, parceiro, cliente);
     }                               
 
     @Override

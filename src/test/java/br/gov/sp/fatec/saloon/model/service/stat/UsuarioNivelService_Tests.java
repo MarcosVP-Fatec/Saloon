@@ -22,14 +22,16 @@ public class UsuarioNivelService_Tests {
     @Autowired
     private UsuarioNivelService usuarioNivelServiceRepo;
 
-    final Long   ID_NIVEL   = 9999999L;
-    final String DESCR_1    = "#TESTE_NIVEL_1";
-    final String DESCR_2    = "#TESTE_NIVEL_2";
+    final String KEY_NIVEL1  = "ROLE_ADMIN";
+    final Long   ID_NIVEL    = 9999999L;
+    final String DESCR_1     = "#TESTE_NIVEL_1";
+    final String DESCR_2     = "#TESTE_NIVEL_2";
     
   	@Test
 	void testeUsuarioNivelServiceIncluir() {
         
         usuarioNivelServiceRepo.persist( ID_NIVEL
+                                       , KEY_NIVEL1
                                        , DESCR_1
                                        , true
                                        , false
@@ -43,6 +45,7 @@ public class UsuarioNivelService_Tests {
 	void testeUsuarioNivelServiceAlterar() {
         
         usuarioNivelServiceRepo.persist( ID_NIVEL
+                                       , KEY_NIVEL1
                                        , DESCR_1
                                        , true
                                        , false
@@ -50,6 +53,7 @@ public class UsuarioNivelService_Tests {
                                        , false);
 
         usuarioNivelServiceRepo.persist( ID_NIVEL
+                                       , KEY_NIVEL1
                                        , DESCR_2
                                        , true
                                        , false
