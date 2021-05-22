@@ -35,21 +35,21 @@ commit;
 -- Cadastra o usuário administrador inicial necessário para usar o sistema
 -- ------------------------------------------------------------------------
 insert into usu_usuario ( usu_apelido
-                        , usu_email                   
-                        , usu_senha
-                        , usu_pj_ou_pf
-                        , usu_nome       
-                        , usu_dt_nascimento
-                        , usu_cpf_cnpj
-                        , usu_nivel) 
+                         , usu_email                   
+                         , usu_senha
+                         , usu_pj_ou_pf
+                         , usu_nome       
+                         , usu_dt_nascimento
+                         , usu_cpf_cnpj
+                         , usu_nivel) 
                  values ( "ADMIN"      
-                        , "administrador@saloon.com.br"
-                        , "$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C"   
-                        , "J"          
-                        , "Administrador"
-                        , '1969-04-12'     
-                        , '11111111111111'
-                        , 1 );
+                         , "administrador@saloon.com.br"
+                         , "$2a$10$i3.Z8Yv1Fwl0I5SNjdCGkOTRGQjGvHjh/gMZhdc3e7LIovAklqM6C"   
+                         , "J"          
+                         , "Administrador"
+                         , '1969-04-12'     
+                         , '11111111111111'
+                         , 1 );
 
 update usu_usuario set _inc_usua = 1, _inc_data = now() where usu_id = 1;
 

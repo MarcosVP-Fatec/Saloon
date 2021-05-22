@@ -22,7 +22,7 @@ public class UsuarioNivelService_Tests {
     @Autowired
     private UsuarioNivelService usuarioNivelServiceRepo;
 
-    final String KEY_NIVEL1  = "ROLE_ADMIN";
+    final String KEY_NIVEL1  = "ROLE_#TESTE";
     final Long   ID_NIVEL    = 9999999L;
     final String DESCR_1     = "#TESTE_NIVEL_1";
     final String DESCR_2     = "#TESTE_NIVEL_2";

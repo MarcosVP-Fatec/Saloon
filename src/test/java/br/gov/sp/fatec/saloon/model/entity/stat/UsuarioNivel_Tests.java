@@ -22,6 +22,7 @@ public class UsuarioNivel_Tests {
     @Autowired
     private UsuarioNivelRepository usuarioNivelRepo;
     
+    final String NIVEL_1	=	"ROLE_#TESTE_DE_NIVEL";
     final String DESCR_1	=	"#TESTE_DE_NIVEL";
 
     @Test
@@ -52,6 +53,7 @@ public class UsuarioNivel_Tests {
     public UsuarioNivel criaUsuarioNivel(){
         UsuarioNivel usuarioNivel = new UsuarioNivel();
         usuarioNivel.setId(99999L); 
+        usuarioNivel.setKey(NIVEL_1);
         usuarioNivel.setDescr(DESCR_1);
 
         usuarioNivel.setAdministrador(true);
