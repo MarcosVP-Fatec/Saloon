@@ -7,7 +7,7 @@
 
 ## Professor:  
 
-**Emanuel Mineda Carneiro** - *Laboratório V de Desenvolvimento*   
+**Emanuel Mineda Carneiro** - *Laboratório de Desenvolvimento em Banco de Dados V*   
 
 ---------------------------------------------------------------
 ## Integrantes

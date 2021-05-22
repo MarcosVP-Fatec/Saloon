@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService; // Coloca a classe do SegurancaServiceImpl aqui
-
+/*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Este CSRF Ã© para quando temos o prÃ³prio spring gerando as pÃ¡ginas html (back
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS); // IrÃ¡ usar nova requisiÃ§Ã£o
                                                                                              // com credenciais.
     }
-
+*/
     /**
      * Configurando como o spring faz autenticaÃ§Ã£o (Login) Estou dizendo para o
      * spring que toda vez que for fazer login deverÃ¡ usar o serviÃ§o
