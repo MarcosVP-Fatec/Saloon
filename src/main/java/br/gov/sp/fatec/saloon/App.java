@@ -13,6 +13,7 @@ public class App {
     public static void main(String[] args) 
     {
         //MvpTesteDesenvolvimento.run();
+        System.out.println("oi");
     }
 
 }
