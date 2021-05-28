@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.saloon.controller.View;
 import br.gov.sp.fatec.saloon.model.entity.comm.GeneratorAudit;
 import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 import br.gov.sp.fatec.saloon.model.tool.Texto;
@@ -29,6 +32,8 @@ public class UsuarioNivel extends GeneratorAudit {
     @Column(name = "niv_id")
     private Long id;
 
+    @JsonView({View.UsuarioProprietario.class
+              ,View.UsuariosResumido.class})
     @Column(name = "niv_key")
     private String key;
 

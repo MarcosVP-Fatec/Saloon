@@ -33,9 +33,13 @@ import br.gov.sp.fatec.saloon.model.tool.Validador;
 @AttributeOverride(name = "id", column=@Column(name="usu_id"))
 public class Usuario extends GeneratorId{
 
-    @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
+    @JsonView({View.UsuarioProprietario.class
+              ,View.ProprietarioApelidoUsuario.class
+              ,View.UsuariosResumido.class})
     @Column(name = "usu_apelido")           private String       apelido;
-    @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
+    @JsonView({View.UsuarioProprietario.class
+              ,View.ProprietarioApelidoUsuario.class
+              ,View.UsuariosResumido.class})
     @Column(name = "usu_nome")              private String       nome;    
     @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_email")             private String       email;
@@ -44,7 +48,9 @@ public class Usuario extends GeneratorId{
     @Column(name = "usu_dt_nascimento")     private Date         dtNascimento;
     @Column(name = "usu_cpf_cnpj")          private String       cpf;
 
-    @ManyToOne(fetch = FetchType.LAZY)      
+    @ManyToOne(fetch = FetchType.LAZY) 
+    @JsonView({View.UsuarioProprietario.class
+              ,View.UsuariosResumido.class} )     
     @JoinColumn(name = "usu_nivel")         private UsuarioNivel usuarioNivel;
 
     // CONSTRUTORES

@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -114,6 +115,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 	
     @Override
     @Transactional
+    @PreAuthorize("hasRole('ADMIN')")
     public Proprietario persist( Long   id
                                , String apelido
                                , String email
@@ -145,6 +147,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public Proprietario persist( String apelido
                                , String email
                                , String senha
@@ -164,6 +167,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
     @Override
     @Transactional
+    //@PreAuthorize("hasRole('ADMIN')")
     public boolean delete(Long id) {
         if (!proprietarioRepo.existsById(id)){
             return true;
@@ -173,6 +177,7 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public boolean delete(String apelido) {
         if (!proprietarioRepo.existsByApelido(apelido))
             return true;
@@ -186,6 +191,5 @@ public class ProprietarioServiceImpl implements ProprietarioService {
         }    
         return proprietario;
     }
-
 
 }

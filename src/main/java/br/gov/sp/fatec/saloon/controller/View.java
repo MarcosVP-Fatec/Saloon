@@ -6,6 +6,8 @@ public class View {
 
     public static class AuditAlt{}
 
+    public static class UsuariosResumido{}
+
     public static class UsuarioProprietario extends AuditInc{}
 
     public static class ProprietarioApelidoUsuario extends AuditInc{}

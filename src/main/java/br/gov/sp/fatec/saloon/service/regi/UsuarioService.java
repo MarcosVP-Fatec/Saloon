@@ -48,5 +48,7 @@ public interface UsuarioService {
      * @return boolean / true se excluiu ou se não existe.
      */
     public boolean delete(String apelido);
+
+    public Usuario buscarUsuarioPorId(Long id);
     
 }

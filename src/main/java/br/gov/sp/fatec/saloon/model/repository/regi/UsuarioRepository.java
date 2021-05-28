@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.saloon.model.repository.regi;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,6 +27,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
     @Query("select u from Usuario u where u.id = ?1")
     public Usuario buscarPorId(Long id);
+
+    public Optional<Usuario> findById(Long id);
 
     public Usuario findByApelido(String apelido);
 

@@ -77,4 +77,6 @@ public interface UsuarioNivelRepository extends JpaRepository<UsuarioNivel, Long
      */
     public boolean existsByDescr(String descr);
 
+    public boolean existsByKey(String key);
+
 }

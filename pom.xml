@@ -101,3 +101,5 @@
 	</build>
 
 </project>
+
+<!-- para compilar sem testar usar mvn package -DskipTests-->

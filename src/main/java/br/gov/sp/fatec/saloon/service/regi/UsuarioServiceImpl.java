@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.gov.sp.fatec.saloon.exception.RegistroJaExisteException;
+import br.gov.sp.fatec.saloon.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 import br.gov.sp.fatec.saloon.model.repository.regi.UsuarioRepository;
 import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
@@ -14,10 +16,10 @@ import br.gov.sp.fatec.saloon.model.repository.stat.UsuarioNivelRepository;
 public class UsuarioServiceImpl implements UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepo;
+    private UsuarioRepository       usuarioRepo;
 
     @Autowired
-    private UsuarioNivelRepository nivelRepo;
+    private UsuarioNivelRepository  nivelRepo;
 
     @Override
     @Transactional
@@ -30,17 +32,24 @@ public class UsuarioServiceImpl implements UsuarioService {
                           , String cpf
                           , Long   usuarioNivel){
 
-        if (usuarioRepo.existsByApelido(apelido)) return usuarioRepo.findByApelido(apelido);
-
         Usuario usuario;
 
-        if (id != null) {
-            if (!usuarioRepo.existsById(id) ){
-                return null;
-            }
-            usuario = usuarioRepo.buscarPorId(id);
-        } else {
+        //Se for inclusão de usuário
+        if (id == null){
+            if (usuarioRepo.existsByApelido(apelido.toUpperCase())){
+                throw new RegistroJaExisteException("Usuário já cadastrado: \"" + apelido + "\'");    
+            } 
             usuario = new Usuario();
+        } else {
+            if (!usuarioRepo.existsByApelido(apelido.toUpperCase())){
+                throw new RegistroNaoEncontradoException("Usuário não encontrado: \"" + apelido + "\'");    
+            } 
+            usuario = usuarioRepo.findByApelido(apelido);
+        }
+
+        //Verifica se o nível de usuário existe
+        if (!nivelRepo.existsById(usuarioNivel)){
+            throw new RegistroNaoEncontradoException("Nível de usuário não existe: \"" + usuarioNivel + "\"");
         }
 
         usuario.setApelido(apelido);
@@ -89,6 +98,15 @@ public class UsuarioServiceImpl implements UsuarioService {
         if (!usuarioRepo.existsByApelido(apelido))
             return true;
         return this.delete(usuarioRepo.findByApelido(apelido).getId());
+    }
+
+    @Override
+    public Usuario buscarUsuarioPorId(Long id) {
+        Usuario usuario = usuarioRepo.buscarPorId(id);
+        if (usuario == null){
+            throw new RegistroNaoEncontradoException("Código de usuário não existe: \"" + id + "\"");
+        }
+        return usuario;
     }
     
 }
