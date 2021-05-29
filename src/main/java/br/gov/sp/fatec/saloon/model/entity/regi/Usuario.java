@@ -35,22 +35,30 @@ public class Usuario extends GeneratorId{
 
     @JsonView({View.UsuarioProprietario.class
               ,View.ProprietarioApelidoUsuario.class
-              ,View.UsuariosResumido.class})
+              ,View.UsuariosResumido.class
+              ,View.UsuarioInclusao.class})
     @Column(name = "usu_apelido")           private String       apelido;
     @JsonView({View.UsuarioProprietario.class
               ,View.ProprietarioApelidoUsuario.class
-              ,View.UsuariosResumido.class})
+              ,View.UsuariosResumido.class
+              ,View.UsuarioInclusao.class})
     @Column(name = "usu_nome")              private String       nome;    
-    @JsonView({View.UsuarioProprietario.class,View.ProprietarioApelidoUsuario.class})
+    @JsonView({View.UsuarioProprietario.class
+              ,View.ProprietarioApelidoUsuario.class
+              ,View.UsuarioInclusao.class})
     @Column(name = "usu_email")             private String       email;
     @Column(name = "usu_senha")             private String       senha;
 
+    @JsonView(View.UsuarioInclusao.class)
     @Column(name = "usu_dt_nascimento")     private Date         dtNascimento;
+
+    @JsonView(View.UsuarioInclusao.class)
     @Column(name = "usu_cpf_cnpj")          private String       cpf;
 
     @ManyToOne(fetch = FetchType.LAZY) 
     @JsonView({View.UsuarioProprietario.class
-              ,View.UsuariosResumido.class} )     
+              ,View.UsuariosResumido.class
+              ,View.UsuarioInclusao.class} )    
     @JoinColumn(name = "usu_nivel")         private UsuarioNivel usuarioNivel;
 
     // CONSTRUTORES

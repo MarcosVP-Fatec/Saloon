@@ -1,8 +1,10 @@
 package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -107,6 +109,13 @@ public class UsuarioServiceImpl implements UsuarioService {
             throw new RegistroNaoEncontradoException("Código de usuário não existe: \"" + id + "\"");
         }
         return usuario;
+    }
+
+    @Override
+    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Usuario> buscarTodosOsUsuarios() {
+        return usuarioRepo.findAll();
     }
     
 }

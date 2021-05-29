@@ -35,10 +35,10 @@ public class UsuarioController {
     private UsuarioService      usuarioService;
 
     @GetMapping
-    @PreAuthorize("isAuthenticated()")
     @JsonView(View.UsuariosResumido.class)
     public List<Usuario> listarUsuarios(){
-        return usuarioRepo.findAll();
+        //return usuarioRepo.findAll();
+        return usuarioService.buscarTodosOsUsuarios();
     }
 
     @GetMapping(value = "/{id}")

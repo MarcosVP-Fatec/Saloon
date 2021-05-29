@@ -1,26 +1,29 @@
 package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 
-public interface ProprietarioService {
+public interface ProprietarioService extends UserDetailsService{
 
     public Proprietario inc(Proprietario proprietario);
 
     public Proprietario inc( String apelido
-				            , String email
-				            , String senha
-				            , String nome
-				            , Date   dtNascimento
-				            , String cpf);
+				           , String email
+				           , String senha
+				           , String nome
+				           , Date   dtNascimento
+				           , String cpf);
 
     public Proprietario alt( String apelido
-				            , String email
-				            , String senha
-				            , String nome
-				            , Date   dtNascimento
-				            , String cpf);
+				           , String email
+				           , String senha
+				           , String nome
+				           , Date   dtNascimento
+				           , String cpf);
 
     /**
      * @apiNote persist(...)
@@ -43,13 +46,6 @@ public interface ProprietarioService {
                                , Date   dtNascimento
                                , String cpf);
 
-    public Proprietario persist( String apelido
-                               , String email
-                               , String senha
-                               , String nome
-                               , Date   dtNascimento
-                               , String cpf);
-
     /**
      * @apiNote delete(Long)
      *          Exclui um proprietário passando o id
@@ -65,5 +61,8 @@ public interface ProprietarioService {
      */
     public boolean delete(String apelido);
 
-    public Proprietario buscaPorApelido(String apelidoUsuario);
+    public Proprietario buscarPorApelido(String apelidoUsuario);
+    public Proprietario buscarPorId(Long id);
+    public List<Proprietario> buscarProprietarioTodos();
+    
 }

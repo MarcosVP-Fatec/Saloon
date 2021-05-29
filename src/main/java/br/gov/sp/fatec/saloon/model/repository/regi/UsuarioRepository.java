@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.saloon.model.repository.regi;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,11 +23,14 @@ import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 
-    @Query("select u from Usuario u where u.usuarioNivel = 1")
+    @Query("select u from Usuario u inner join u.usuarioNivel n where n.key = 'ROLE_PROPRIETARIO'")
     public List<Usuario> buscarUsuariosProprietarios();
 
     @Query("select u from Usuario u where u.id = ?1")
     public Usuario buscarPorId(Long id);
+
+    @Query("select n.key from Usuario u inner join u.usuarioNivel n where u.id = ?1")
+    public String[] niveis(Long id);
 
     public Optional<Usuario> findById(Long id);
 

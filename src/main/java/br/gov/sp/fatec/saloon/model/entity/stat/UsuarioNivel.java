@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import br.gov.sp.fatec.saloon.controller.View;
@@ -33,10 +34,12 @@ public class UsuarioNivel extends GeneratorAudit {
     private Long id;
 
     @JsonView({View.UsuarioProprietario.class
-              ,View.UsuariosResumido.class})
+              ,View.UsuariosResumido.class
+              ,View.UsuarioInclusao.class})
     @Column(name = "niv_key")
     private String key;
 
+    @JsonView(View.UsuarioInclusao.class)
     @Column(name = "niv_descr")
     private String descr;
 

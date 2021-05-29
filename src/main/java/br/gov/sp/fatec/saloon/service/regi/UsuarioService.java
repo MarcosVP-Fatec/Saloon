@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
+import java.util.List;
 
 import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 
@@ -50,5 +51,7 @@ public interface UsuarioService {
     public boolean delete(String apelido);
 
     public Usuario buscarUsuarioPorId(Long id);
+
+    public List<Usuario> buscarTodosOsUsuarios();
     
 }

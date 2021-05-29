@@ -100,11 +100,11 @@ public class ProprietarioService_Tests {
     * Método padrão de criação do proprietário para testes 
     */
     private Proprietario criaProprietarioTeste(){
-        return proprietarioServiceRepo.persist( APELIDO_1
-                                              , EMAIL_1
-                                              , SENHA_1
-                                              , NOME_1
-                                              , DTNASC_1
-                                              , CPF_1);
+        return proprietarioServiceRepo.inc( APELIDO_1
+                                          , EMAIL_1
+                                          , SENHA_1
+                                          , NOME_1
+                                          , DTNASC_1
+                                          , CPF_1);
     }
 }

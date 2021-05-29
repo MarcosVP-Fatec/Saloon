@@ -77,12 +77,12 @@ public class Alugavel_Tests {
 
         Alugavel alugavel = new Alugavel();
         AlugavelTipo alugavelTipo = alugavelTipoRepo.buscarPorId(1L);
-        Proprietario proprietario = proprietarioServiceRepo.persist( APELIDO_PROP_1
-                                                                   , "#teste1_proalugavel@saloon.br"
-                                                                   , "123"
-                                                                   , "#TESTE_NOME_PROP_ALUGAVEL"
-                                                                   , Data.toDate("12/04/1969")
-                                                                   , "44444444444");
+        Proprietario proprietario = proprietarioServiceRepo.inc( APELIDO_PROP_1
+                                                               , "#teste1_proalugavel@saloon.br"
+                                                               , "123"
+                                                               , "#TESTE_NOME_PROP_ALUGAVEL"
+                                                               , Data.toDate("12/04/1969")
+                                                               , "44444444444");
 
         alugavel.setDescr(DESCR_1);
         alugavel.setProprietario(proprietario);

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.saloon.controller.View;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
-import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
 import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 
 @RestController
@@ -30,21 +28,24 @@ import br.gov.sp.fatec.saloon.service.regi.ProprietarioService;
 public class ProprietarioController {
 
     @Autowired
-    private ProprietarioRepository proprietarioRepo;
-
-    @Autowired
     private ProprietarioService    proprietarioService;
 
-    @JsonView(View.ProprietarioApelidoUsuario.class)
     @GetMapping
+    @JsonView(View.ProprietarioApelidoUsuario.class)
     public List<Proprietario> buscarProprietarios(){
-        return proprietarioRepo.buscarProprietarios();
+        return proprietarioService.buscarProprietarioTodos();
     }
     
+    @GetMapping(value = "/{id}")
     @JsonView(View.ProprietarioApelidoUsuario.class)
-    @GetMapping(value = "/{apelido}")
+    public Proprietario buscarProprietariosPorId(@PathVariable("id") Long id){
+        return proprietarioService.buscarPorId(id);
+    }
+
+    @JsonView(View.ProprietarioApelidoUsuario.class)
+    @GetMapping(value = "/apelido/{apelido}")
     public Proprietario buscarProprietariosPorCod(@PathVariable("apelido") String apelido){
-        return proprietarioService.buscaPorApelido(apelido);
+        return proprietarioService.buscarPorApelido(apelido);
     }
 
     @PostMapping
@@ -61,6 +62,11 @@ public class ProprietarioController {
     @DeleteMapping(value = "/{id}")
     public void excluirProprietario(@PathVariable("id") Long id){
         proprietarioService.delete(id);
+    }
+
+    @DeleteMapping(value = "/apelido/{apelido}")
+    public void excluirProprietario(@PathVariable(value = "apelido") String apelido){
+        proprietarioService.delete(apelido);
     }
 
 }
