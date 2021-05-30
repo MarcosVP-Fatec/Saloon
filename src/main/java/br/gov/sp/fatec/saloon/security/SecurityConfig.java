@@ -2,6 +2,7 @@ package br.gov.sp.fatec.saloon.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -59,11 +60,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoderBean() {
         return new BCryptPasswordEncoder(); // Outros MD5, SHA -- Vai usar o padrão do spring
     }
-/*
+
+    /**
+     * Este método é para permitir que o AuthenticationManager seja carregado pelo Autowired
+     * dentro da classe LoginController porque o spring não o deixa disponível por padrão.
+     * Este método já existe dentro do WebSecurityConfigurerAdapter desta forma mas não está
+     * anotado com o @Bean
+     */
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-    */
+ 
 }
