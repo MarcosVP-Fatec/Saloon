@@ -16,23 +16,30 @@ import org.springframework.web.filter.GenericFilterBean;
 
 public class JwtAuthenticationFilter extends GenericFilterBean {
 
+    //O chain serve para passar a requisição adiante.
     @Override
     public void doFilter( ServletRequest  request
                         , ServletResponse response
                         , FilterChain     chain) throws IOException, ServletException {
 
         try {
+            
             //Faz um cast do request
             HttpServletRequest servletRequest = (HttpServletRequest) request;
+
             //Com o tipo HttpServletRequest conseguimos pegar os seus dados
             String authorization = servletRequest.getHeader(HttpHeaders.AUTHORIZATION);
+
             if (authorization != null) {
-                //No lucar de Basic xxx o JWT traz Bearer, entÃ£o tiramos isso da autorizaÃ§Ã£o antes de usar 
-                //(Fica sÃ³ o token). O parse valida o token
+                //No lugar de Basic xxx o JWT traz Bearer, então tiramos isso da autorização antes de usar 
+                //(Fica só o token). O parse valida o token e retira dele o objeto authentication
                 Authentication credentials = JwtUtils.parseToken(authorization.replaceAll("Bearer ", ""));
-                //Singleton que nÃ£o pode ser instanciado novamente.
-                //Isso pega a instancia local que o sistema estÃ¡ usando.
-                //Passa o objeto do tipo Authentication que tem o usuÃ¡rio e suas autorizaÃ§Ãµes
+                //Singleton que não pode ser instanciado novamente.
+                //Isso pega a instância local que o sistema está usando.
+                //Passa o objeto do tipo Authentication que tem o usuário e suas autorizaçães
+                //Este método abaixo pega a instância local que o sistema está usando e usa o 
+                //método setAuthentication(e passa o objeto que terá o usuário e autorizações)
+                //Se ocorrer algum erro aqui teremos uma exception 401-Unauthorized
                 SecurityContextHolder.getContext().setAuthentication(credentials);
             }
             chain.doFilter(request, response);

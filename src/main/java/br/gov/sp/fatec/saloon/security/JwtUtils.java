@@ -48,7 +48,7 @@ public class JwtUtils {
   }
 
   /**
-   * Método que abre um token
+   * Método que abre um token para ser usado no filtro.
    */
   public static Authentication parseToken(String token) throws JsonParseException, JsonMappingException, IOException {
     ObjectMapper mapper = new ObjectMapper();
@@ -62,14 +62,14 @@ public class JwtUtils {
     //Abrir o meu userDetail que é do tipo Login e vou transformar de volta na classe Login
     Login usuario = mapper.readValue(credentialsJson, Login.class);
 
-    //Cria os detalhes (Regras)
+    //Cria os detalhes (Regras) para poder pegar o getAuthorities abaixo.
     UserDetails userDetails = User.builder()
                     .username(usuario.getUsuario())
                     .password("qualquercoisa") //Como não tenho senha coloco qualquer coisa
                     .authorities(usuario.getAutorizacao())
                     .build();
 
-    //Gera o token
+    //Gera o token -> Retorna Authentication
     return new UsernamePasswordAuthenticationToken( usuario.getUsuario()
                                                   , usuario.getSenha()
                                                   , userDetails.getAuthorities());

@@ -26,6 +26,7 @@ import br.gov.sp.fatec.saloon.model.tool.Texto;
  */
 @Entity
 @Table(name = "niv_usuario")
+//@JsonIgnoreProperties(ignoreUnknown=true)
 //@PrimaryKeyJoinColumn(name = "niv_id")
 public class UsuarioNivel extends GeneratorAudit {
 
