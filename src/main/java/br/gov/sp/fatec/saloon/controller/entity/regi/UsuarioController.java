@@ -53,7 +53,6 @@ public class UsuarioController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Usuario> cadastrarNovoUsuario(@RequestBody Usuario usuario
                                                        ,UriComponentsBuilder uriComponentsBuilder){
 
