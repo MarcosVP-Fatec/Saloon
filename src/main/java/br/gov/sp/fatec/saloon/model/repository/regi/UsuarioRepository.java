@@ -1,6 +1,5 @@
 package br.gov.sp.fatec.saloon.model.repository.regi;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

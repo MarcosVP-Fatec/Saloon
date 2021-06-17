@@ -2,7 +2,6 @@ package br.gov.sp.fatec.saloon.service.regi;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
