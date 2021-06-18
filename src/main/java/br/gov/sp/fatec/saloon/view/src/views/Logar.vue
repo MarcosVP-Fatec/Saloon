@@ -24,7 +24,7 @@ import { mapMutations } from 'vuex'; //Na store colocar usuário e senha para co
 import { mapGetters   } from 'vuex'; 
 
 export default {
-        name: 'About'
+        name: 'Logar'
     ,   data() {
             return {
                 log_apelido: ''
@@ -34,22 +34,24 @@ export default {
         }
     ,   methods: {
             ...mapMutations([
-                'setUsuario', 'setSenha', 'setMomento'
+                'setUsuario', 'setSenha', 'setToken'
             ]),
             ...mapGetters([
-                'isLogVencido',
-                'getUsuario'
+                'getUsuario', 'getToken'
             ])
         ,   login() {
-                    axios.get('usuario',
-                             { params:     { apelido: this.log_apelido},
-                               headers:    { accept: 'application/json'}, //Quero receber um json
-                               auth:       { username: this.log_apelido, password: this.log_senha } //Minha autenticação
-                            }
-                    ).then( res => { //Se deu tudo certo funcionou usuário e senha
+                    axios.post('/login'
+                              , { usuario: this.log_apelido , senha: this.log_senha }
+                    ).then( response => { //Se deu tudo certo funcionou usuário e senha
 
                         //alert("Entreio no RES"); //PAREI AQUI
-                        console.log(res);
+                        console.log(response);
+                        // console.log(response.status);
+                        // console.log(response.statusText);
+                        // console.log(response.headers);
+                        // console.log(response.config);
+                        // console.log("#### TOKEN ### ");
+                        // console.log(localStorage.getItem('token'));
                         this.sucesso();
 
                     }).catch(error => {
@@ -88,12 +90,16 @@ export default {
                     });
                 }
         ,   sucesso() {
-                this.setUsuario(this.log_apelido);
-                this.setSenha(this.log_senha);
-                this.setMomento();
+
+                //Limpa os campos da tela
                 this.log_apelido = '';
                 this.log_senha = '';
-                this.log_situacao = "L O G A D O";
+                this.log_situacao = "L O G A D O (Redirecionando...)";
+
+                setTimeout(() => {
+                    this.$router.push('/');
+                }, 3000)
+
                 
             }
         }

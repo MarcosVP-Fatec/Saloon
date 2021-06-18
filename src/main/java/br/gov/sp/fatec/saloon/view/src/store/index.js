@@ -28,26 +28,19 @@ export default new Vuex.Store({
   state: {
       login_usuario: ''
     , login_senha: ''
-    , login_momento: 0
+    , login_token: ''
   },
   getters: {
-      getUsuario:   state => { return state.login_usuario                               }
-    , getSenha:     state => { return state.login_senha                                 }
-    , isLogVencido: state => { return Date.now() - state.login_momento > (10 * 1000)  } //30 minutos
-    //, isLogVencido: state => { return Date.now() - state.login_momento > (1800 * 1000)  } //30 minutos
+      getUsuario:   state => { return state.login_usuario   }
+    , getSenha:     state => { return state.login_senha     }
+    , getToken:     state => { return state.login_token     }
   },
   mutations: {
-      setUsuario(state, valor)      { state.login_usuario = valor;      }
-    , setSenha(state, valor)        { state.login_senha = valor;        }
-    , setMomento(state)             { state.login_momento = Date.now(); }
-    , setLogOff(state)              { state.login_momento = 0;          }
+      setUsuario(state, valor)      { state.login_usuario = valor; }
+    , setSenha(state, valor)        { state.login_senha   = valor; }
+    , setToken(state, valor)        { state.login_token   = valor; }
   },
   actions: {
-      setNumero2Delay (context, valor) {
-        setTimeout(() => {
-            context.commit('setNumero2', valor)
-        }, 1000)
-      }
   },
   modules: {
   }

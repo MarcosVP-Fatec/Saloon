@@ -10,7 +10,7 @@
 export default {
         name: 'NaoLogado'
     ,   methods: {
-            voltar() { this.$router.push('/home'); }
+            voltar() { this.$router.push('/logar'); }
         }
 }
 </script>

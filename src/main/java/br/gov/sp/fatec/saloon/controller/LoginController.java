@@ -46,7 +46,7 @@ public class LoginController {
         
         // Não precisamos mais da senha, pois já foi autenticado
         login.setSenha(null); 
-
+        
         login.setToken(JwtUtils.generateToken(auth));
         
         return login;
