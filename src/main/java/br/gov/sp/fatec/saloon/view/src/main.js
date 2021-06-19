@@ -6,18 +6,12 @@ import axios    from 'axios'
 
 //axios.defaults.baseURL = 'localhost://8080-eab15bbd-6b5d-48c7-834b-9f5f0fe0bb02.ws-us03.gitpod.io/'
 //axios.defaults.baseURL = 'http://localhost:8080/saloon/' //Back-end
-axios.defaults.baseURL = 'https://8081-turquoise-wildfowl-zo1jv6en.ws-us09.gitpod.io/saloon/'
-
-// axios.interceptors.request.use( config => {
-//     config.headers.Authorization = 'um token';
-//     return config;
-//   .
-// })
+axios.defaults.baseURL = 'https://8080-amethyst-damselfly-zh9narti.ws-us09.gitpod.io/saloon/'
 
 axios.interceptors.request.use( config => {
-    const token = localStorage.getItem('login_token')
+    const token = store.getters.getToken;
     if (token) {
-      config.headers.Authorization = `Bearer $(token)`
+      config.headers.Authorization = 'Bearer ' + token;
     }
     return config;
 }, (err) => {

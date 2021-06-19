@@ -1,7 +1,7 @@
 import Vue          from 'vue'
 import VueRouter    from 'vue-router'
+import store        from '../store'
 import Home         from '../views/Home.vue'
-//import store        from '../store'
 
 Vue.use(VueRouter)
 
@@ -54,8 +54,7 @@ router.beforeEach( (to, from, next) => {
     //Aqui faremos a verificação do usuário logado se ele tem permissão ou não de entrar
     if ( to.name === 'Home' || to.name === 'About' ||  to.name === 'Logar' || to.name === null) {    
         next();
-    } else if (!localStorage.getItem('login_token')) {
-        window.alert("router.index.js >> " + localStorage.getItem('login_token'));
+    } else if (!store.getters.getToken) {
         next('/logar');
     } else {
         next()

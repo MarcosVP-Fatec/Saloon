@@ -46,30 +46,33 @@ export default {
                               , { usuario: this.log_apelido , senha: this.log_senha }
                     ).then( response => { //Se deu tudo certo funcionou usuário e senha
 
-                        //alert("Entreio no RES"); //PAREI AQUI
-                        console.log(response);
+                        //console.log(response);
                         // console.log(response.status);
                         // console.log(response.statusText);
                         // console.log(response.headers);
                         // console.log(response.config);
-                        // console.log("#### TOKEN ### ");
                         // console.log(localStorage.getItem('token'));
+
+                        this.setUsuario(response.data.usuario);
+                        this.setToken(response.data.token);
+                        this.setSenha(null);
+
                         this.sucesso();
 
                     }).catch( error => {
                         
-                        console.log("###### CATCH ERROR #######");
-                        //console.log(error);
-                        //console.log("#############");
-
+                        this.log_situacao = "Usuário ou senha inválidos !";
+                        setTimeout(() => {
+                            this.log_situacao = "";
+                        }, 3000);
 
                         if (error.response.status === 401){ //Significa que usuário e senha estão errados
                             this.log_situacao = "Usuário ou senha inválidos !";
                             setTimeout(() => {
                                 this.log_situacao = "";
                             }, 3000);
-                        } else { //Se for qualquer outro erro signfica que usuário e senha passou
-                            this.sucesso();
+//                        } else { //Se for qualquer outro erro signfica que usuário e senha passou
+//                            this.sucesso();
                         }
 
                     });
@@ -79,8 +82,15 @@ export default {
                 //Limpa os campos da tela
                 this.log_apelido = '';
                 this.log_senha = '';
-                this.log_situacao = "L O G A D O (Redirecionando...)";
 
+                this.log_situacao = "Usuário logado! Redirecionando..";
+                let t = 1000;
+                for (let i=0; i < 5;i++){
+                    setTimeout(() => {
+                        this.log_situacao = this.log_situacao + ".";
+                    }, t+(i*500));
+                }
+                
                 setTimeout(() => {
                     this.$router.push('/');
                 }, 3000)
