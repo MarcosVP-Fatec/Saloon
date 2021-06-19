@@ -29,7 +29,7 @@ export default {
             return {
                 log_apelido: ''
             ,   log_senha: ''
-            ,   log_situacao: 'Não logado!'
+            ,   log_situacao: ''
             }
         }
     ,   methods: {
@@ -40,7 +40,9 @@ export default {
                 'getUsuario', 'getToken'
             ])
         ,   login() {
-                    axios.post('/login'
+
+                    this.log_situacao = "Autenticando...";
+                    axios.post('login'
                               , { usuario: this.log_apelido , senha: this.log_senha }
                     ).then( response => { //Se deu tudo certo funcionou usuário e senha
 
@@ -54,38 +56,21 @@ export default {
                         // console.log(localStorage.getItem('token'));
                         this.sucesso();
 
-                    }).catch(error => {
+                    }).catch( error => {
                         
-                        console.log(error);
-                        //alert("Entrei no ERROR"); //parei aqui
-                        //alert("error.response.status => " + error.response.status) //parei aqui
+                        console.log("###### CATCH ERROR #######");
+                        //console.log(error);
+                        //console.log("#############");
 
-                        if (error.response){
 
-                            // A solicitação foi feita e o servidor respondeu com um código de status
-                            // console.log(error.response.data);
-                            // console.log(error.response.status);
-                            // console.log(error.response.headers);
-
-                            if (error.response.status === 401){ //Significa que usuário e senha estão errados
-                                alert('Usuário ou senha inválidos !');
-                            } else { //Se for qualquer outro erro signfica que usuário e senha passou
-                                this.sucesso();
-                            }
-
-                        } else if (error.request) {
-
-                            // A solicitação foi feita, mas nenhuma resposta foi recebida
-                            alert('Erro na solicitação de autenticação! Tente novamente.' + error.request.response);
-
-                        } else {
-
-                            // Algo aconteceu com a confituração da solicitação que disparou um erro.
-                            alert('Erro na solicitação de autenticação! Tente novamente.');
-
+                        if (error.response.status === 401){ //Significa que usuário e senha estão errados
+                            this.log_situacao = "Usuário ou senha inválidos !";
+                            setTimeout(() => {
+                                this.log_situacao = "";
+                            }, 3000);
+                        } else { //Se for qualquer outro erro signfica que usuário e senha passou
+                            this.sucesso();
                         }
-                        
-                        console.log(error.config);
 
                     });
                 }
@@ -99,7 +84,6 @@ export default {
                 setTimeout(() => {
                     this.$router.push('/');
                 }, 3000)
-
                 
             }
         }

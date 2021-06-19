@@ -55,7 +55,7 @@ router.beforeEach( (to, from, next) => {
     if ( to.name === 'Home' || to.name === 'About' ||  to.name === 'Logar' || to.name === null) {    
         next();
     } else if (!localStorage.getItem('login_token')) {
-        window.alert(localStorage.getItem('login_token'));
+        window.alert("router.index.js >> " + localStorage.getItem('login_token'));
         next('/logar');
     } else {
         next()
