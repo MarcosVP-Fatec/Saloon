@@ -1,7 +1,9 @@
-import Vue          from 'vue'
-import VueRouter    from 'vue-router'
-import store        from '../store'
-import Home         from '../views/Home.vue'
+import Vue              from 'vue'
+import VueRouter        from 'vue-router'
+import store            from '../store'
+//import { mapMutations } from 'vuex'
+
+import Home             from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -12,16 +14,21 @@ const routes = [
         , component: Home
     }
     , {
+        path: '/proprietario',
+        name: 'Proprietario',
+        component: () => import('../views/regi/Proprietario.vue')
+    }
+    , {
+        path: '/parceiro',
+        name: 'Parceiro',
+        component: () => import('../views/regi/Parceiro.vue')
+    }
+    , {
         path: '/about',
         name: 'About',
         component: function () {
             return import('../views/About.vue')
         }
-    }
-    , {
-        path: '/proprietario',
-        name: 'Proprietario',
-        component: () => import('../views/regi/Proprietario.vue')
     }
     , {
         path: '/usuario',
@@ -52,10 +59,13 @@ const router = new VueRouter({
 // next = Função que uso para permitir ou não a navegação
 router.beforeEach( (to, from, next) => {
     //Aqui faremos a verificação do usuário logado se ele tem permissão ou não de entrar
-    if ( to.name === 'Home' || to.name === 'About' ||  to.name === 'Logar' || to.name === null) {    
+    alert("TO " + store.getters.getFrom+" >>> "+to.name + " ||| ROLE: " + store.getters.getRole); 
+    //this.setLastFrom(to.name);
+    store.commit('setLastFrom',to.name);
+    if ( to.name === 'Home' || to.name === 'Usuario'  || to.name === 'About' ||  to.name === 'Logar' || to.name === null) {    
         next();
     } else if (!store.getters.getToken) {
-        next('/logar');
+        next('logar');
     } else {
         next()
     }        

@@ -22,23 +22,30 @@ const vuexPersist = new VuexPersist({
 //   Quando se chama uma Action se chama dispatch
 
 export default new Vuex.Store({
+  
   plugins: [
     vuexPersist.plugin
   ],  
   state: {
-      login_usuario: ''
-    , login_senha: ''
-    , login_token: ''
+      login_usuario: null
+    , login_senha: null
+    , login_token: null
+    , login_role: null
+    , last_from: null
   },
   getters: {
       getUsuario:   state => { return state.login_usuario   }
     , getSenha:     state => { return state.login_senha     }
     , getToken:     state => { return state.login_token     }
+    , getRole:      state => { return state.login_role      }
+    , getFromn:     state => { return state.last_from       }
   },
   mutations: {
       setUsuario(state, valor)      { state.login_usuario = valor; }
     , setSenha(state, valor)        { state.login_senha   = valor; }
     , setToken(state, valor)        { state.login_token   = valor; }
+    , setRole(state, valor)         { state.login_role    = valor; }
+    , setLastFrom(state, valor)     { state.last_from     = valor; }
   },
   actions: {
   },

@@ -2,7 +2,7 @@
   <div class="home">
     <h1>S A L O O N</h1>
 
-    <h2>O cadastro de clientes está em construção</h2>
+    <h2>O cadastro de parceiros está em construção</h2>
 
     <p><img align="center" alt="S A L O O N" src="../../assets/saloon.gif"></P>
 

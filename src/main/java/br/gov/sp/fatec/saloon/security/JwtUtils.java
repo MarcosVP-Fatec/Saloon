@@ -25,26 +25,27 @@ public class JwtUtils {
    */
   private static final String KEY = "spring.jwt.sec";
 
-  public static String generateToken(Authentication usuario) throws JsonProcessingException {
+  public static Login generateToken(Authentication usuario) throws JsonProcessingException {
     ObjectMapper mapper = new ObjectMapper();
     Login usuarioSemSenha = new Login();
     usuarioSemSenha.setUsuario(usuario.getName());
 
     //Neste projeto uma única autorização já resolve as necessidades
-    if (!usuario.getAuthorities().isEmpty()) {
-      usuarioSemSenha.setAutorizacao(usuario.getAuthorities().iterator().next().getAuthority());
-    }
+    usuarioSemSenha.setAutorizacao(usuario.getAuthorities().iterator().next().getAuthority());
+    //if (usuario.getAuthorities().isEmpty()) {}
 
     String usuarioJson = mapper.writeValueAsString(usuarioSemSenha); //Gera um Json do objeto
     Date agora = new Date();
     Long hora = 1000L * 60L * 60L; // Uma hora em milissegundos
     //Criar o token
-    return Jwts.builder().claim("userDetails", usuarioJson) 
-        .setIssuer("br.gov.sp.fatec")                       //Quem está gerando
-        .setSubject(usuario.getName())                      //Para que se destina (Para este usuário)
-        .setExpiration(new Date(agora.getTime() + hora))    //Daqui até uma hora vai expirar.
-        .signWith(SignatureAlgorithm.HS512, KEY)            //Assino com HS512 + a chave de criptografia local
-        .compact();                                         //Compacta que garar uma string (Token)
+    usuarioSemSenha.setToken(Jwts.builder().claim("userDetails", usuarioJson) 
+                              .setIssuer("br.gov.sp.fatec")                       //Quem está gerando
+                              .setSubject(usuario.getName())                      //Para que se destina (Para este usuário)
+                              .setExpiration(new Date(agora.getTime() + hora))    //Daqui até uma hora vai expirar.
+                              .signWith(SignatureAlgorithm.HS512, KEY)            //Assino com HS512 + a chave de criptografia local
+                              .compact()                                          //Compacta que garar uma string (Token)
+    );
+    return usuarioSemSenha;
   }
 
   /**

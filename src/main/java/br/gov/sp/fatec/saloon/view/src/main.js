@@ -5,8 +5,8 @@ import store    from './store'
 import axios    from 'axios'
 
 //axios.defaults.baseURL = 'localhost://8080-eab15bbd-6b5d-48c7-834b-9f5f0fe0bb02.ws-us03.gitpod.io/'
-//axios.defaults.baseURL = 'http://localhost:8080/saloon/' //Back-end
-axios.defaults.baseURL = 'https://8080-amethyst-damselfly-zh9narti.ws-us09.gitpod.io/saloon/'
+axios.defaults.baseURL = 'http://localhost:8080/saloon/' //Back-end
+//axios.defaults.baseURL = 'https://8080-amethyst-damselfly-zh9narti.ws-us09.gitpod.io/saloon/'
 
 axios.interceptors.request.use( config => {
     const token = store.getters.getToken;
@@ -30,9 +30,9 @@ axios.interceptors.response.use( response => {
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  store,
-  render: function (h) { return h(App) }
+    router
+  , store
+  , render: function (h) { return h(App) }
 }).$mount('#app')
 
 
