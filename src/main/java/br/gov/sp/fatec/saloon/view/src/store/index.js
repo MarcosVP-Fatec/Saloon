@@ -31,21 +31,18 @@ export default new Vuex.Store({
     , login_senha: null
     , login_token: null
     , login_role: null
-    , last_from: null
   },
   getters: {
       getUsuario:   state => { return state.login_usuario   }
     , getSenha:     state => { return state.login_senha     }
     , getToken:     state => { return state.login_token     }
     , getRole:      state => { return state.login_role      }
-    , getFromn:     state => { return state.last_from       }
   },
   mutations: {
       setUsuario(state, valor)      { state.login_usuario = valor; }
     , setSenha(state, valor)        { state.login_senha   = valor; }
     , setToken(state, valor)        { state.login_token   = valor; }
     , setRole(state, valor)         { state.login_role    = valor; }
-    , setLastFrom(state, valor)     { state.last_from     = valor; }
   },
   actions: {
   },

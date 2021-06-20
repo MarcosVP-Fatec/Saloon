@@ -3,11 +3,23 @@
     <div id="nav">
        <router-link to="/"             title="Página principal"               >Home</router-link>
        <span v-if="isAdministrador()" > | </span> 
-       <router-link v-if="isAdministrador()" to="/proprietario" title="Proprietário de salões"         >Proprietários</router-link>
-        |   <router-link to="/parceiro"     title="Cadastro de parceiros (buffets)">Parceiros</router-link>
-        |   <router-link to="/usuario"      title="Cadastro de clientes"           >Clientes</router-link>
-        |   <router-link to="/about"        title="Saiba mais sobre o Saloon"      >Sobre o Saloon</router-link>
-        |   <router-link to="/logar"        title="Faça o seu login"               >Entrar</router-link>
+            <router-link v-if="isAdministrador()" to="/proprietario" title="Proprietário de salões">
+            Proprietários</router-link>
+
+        |   <router-link to="/parceiro"       title="Cadastro de parceiros (buffets)">
+            Parceiros</router-link>
+
+        |   <router-link to="/usuario"        title="Cadastro de clientes">
+            Clientes</router-link>
+
+        |   <router-link to="/about"          title="Saiba mais sobre o Saloon">
+            Sobre o Saloon</router-link>
+
+        |   <router-link v-if="!isLogado()" to="/logar"  title="Faça o seu login">
+            Entrar</router-link>
+            <router-link v-if="isLogado()"  to="/logar"  title="Desconectar">
+            Logout</router-link>
+
     </div>
     <router-view/>
   </div>
@@ -47,10 +59,16 @@ export default {
       }
     , methods: {
             ...mapGetters([
-                'getRole'
+                'getUsuario', 'getToken', 'getRole'
             ]),
             isAdministrador(){
               return this.getRole() === 'ROLE_ADMIN';
+            },
+            isLogado(){
+              return this.getToken() !== null;
+            },
+            quemEstaLogado(){
+              return this.getUsuario();
             }
       }
   

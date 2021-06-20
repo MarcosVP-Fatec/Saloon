@@ -9,11 +9,11 @@
             <form @submit.prevent="cadastrar"> 
                 <h2>Proprietário</h2>
                 <p>
-                    <label for="apelido" size=50>Apelido: </label>
+                    <label for="apelido" size=50>Usuário: </label>
                     <input  type="text"
                             id="apelido"
                             size=50
-                            placeholder="Apelido"
+                            placeholder="Usuário"
                             required autofocus v-model="proprietario.apelido"/>
                 </p><p>    
                     <label for="email"   size=50>Email: </label>
@@ -59,7 +59,7 @@
                             v-model="proprietario.id"/>
                 </p>
 
-                <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>
+                <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>&nbsp;&nbsp;
                 <button type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
                 
             </form>
