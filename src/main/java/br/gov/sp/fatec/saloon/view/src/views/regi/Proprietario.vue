@@ -66,12 +66,7 @@
                             required v-model="proprietario.cpf"/>
                 </p><p>
                     <label for="id" size=50>Identificador: </label>
-                    <input  type="text"   
-                            id="id" 
-                            size=50
-                            readonly 
-                            placeholder="Tela em modo de Inclusão"
-                            v-model="proprietario.id"/>
+                    <span>[ <strong>{{ proprietario.id }} </strong>]</span>
                 </p>
 
                 <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>&nbsp;&nbsp;
