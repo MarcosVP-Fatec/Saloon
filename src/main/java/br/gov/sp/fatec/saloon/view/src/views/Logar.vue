@@ -91,9 +91,8 @@
                         //console.log(error);
                         this.log_senha = '';
                         this.log_situacao = "Usuário ou senha inválidos !";
-                        this.limparEstado();
                         setTimeout(() => {
-                            this.log_situacao = "";
+                            this.limparEstado();
                         }, 3000);
 
                     });

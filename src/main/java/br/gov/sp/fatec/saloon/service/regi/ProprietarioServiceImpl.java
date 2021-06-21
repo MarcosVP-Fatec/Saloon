@@ -113,8 +113,18 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 
 	}
 
-	@Override
-    public Proprietario alt( String apelido
+    @Override
+    public Proprietario alt(Proprietario proprietario){
+        return alt( proprietario.getApelido()
+                  , proprietario.getEmail()
+                  , proprietario.getSenha()
+                  , proprietario.getNome()
+                  , proprietario.getDtNascimento()
+                  , proprietario.getCpf());
+    }
+
+    @Override
+    public Proprietario alt(  String apelido
 				            , String email
 				            , String senha
 				            , String nome
@@ -127,12 +137,12 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 		
 		Proprietario proprietario = proprietarioRepo.findByApelido(apelido);
 		
-		if (!cpf.equals(proprietario.getCpf()) && !proprietarioRepo.existsByCpf(cpf)) {
-			throw new RegistroNaoEncontradoException("Novo CPF de usuário já existe: \"" + apelido + "\"");
+		if (!cpf.equals(proprietario.getCpf()) && proprietarioRepo.existsByCpf(cpf)) {
+			throw new RegistroNaoEncontradoException("Novo CPF de usuário já existe: \"" + cpf + "\"");
 		}
 		
 		altIncValidade(proprietario, apelido, email, senha, nome, dtNascimento, cpf);
-		return persist(null,apelido, email, senha, nome, dtNascimento, cpf);
+		return persist(proprietario.getId(),apelido, email, senha, nome, dtNascimento, cpf);
 		
 	}
 	
@@ -174,11 +184,6 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")
     public boolean delete(Long id) {
-        System.out.println("###################################");
-        System.out.println("###################################");
-        System.out.println(">>>>>>>>>>>>>>> " + id);
-        System.out.println("###################################");
-        System.out.println("###################################");
         if (!proprietarioRepo.existsById(id)){
             throw new RegistroNaoEncontradoException("Proprietário não encontrado: usuário \"" + id + "\"");
         }

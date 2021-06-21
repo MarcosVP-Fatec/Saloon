@@ -18,6 +18,8 @@ public interface ProprietarioService extends UserDetailsService{
 				           , Date   dtNascimento
 				           , String cpf);
 
+    public Proprietario alt(Proprietario proprietario);
+    
     public Proprietario alt( String apelido
 				           , String email
 				           , String senha

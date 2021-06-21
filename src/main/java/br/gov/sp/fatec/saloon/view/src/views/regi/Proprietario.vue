@@ -193,7 +193,7 @@ export default {
             // 3º parãmetro = propriedades= autenticação.
             this.mostraErro(null);
             if (this.proprietario.id){ //PUT
-                axios.put('proprietario' ,this.proprietario 
+                axios.put('proprietario' , this.proprietario 
                 ).then( res => {
                     console.log(res);
                     this.proprietario.id = res.data.id;
@@ -217,7 +217,7 @@ export default {
                     console.log(error.response.data);
                     console.log(error.response.status);
                     console.log(error.response.headers);
-                    this.mostraErro(error.response.data.message);
+                    this.mostraErro(error.response.data.message,60);
                 } else if (error.request) { // The request was made but no response was received
                     console.error("### ERROR REQUEST");
                     console.log(error.request);
