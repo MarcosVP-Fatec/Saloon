@@ -174,6 +174,11 @@ public class ProprietarioServiceImpl implements ProprietarioService {
     @Transactional
     @PreAuthorize("hasRole('ADMIN')")
     public boolean delete(Long id) {
+        System.out.println("###################################");
+        System.out.println("###################################");
+        System.out.println(">>>>>>>>>>>>>>> " + id);
+        System.out.println("###################################");
+        System.out.println("###################################");
         if (!proprietarioRepo.existsById(id)){
             throw new RegistroNaoEncontradoException("Proprietário não encontrado: usuário \"" + id + "\"");
         }

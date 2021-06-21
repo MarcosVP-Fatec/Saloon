@@ -5,6 +5,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.saloon.controller.View;
+
 /**
  * @apiNote GeneretorId() --> Classe que faz a geração automática do Id de todas as classes.
  * @version 1.1 (Spring-boot)
@@ -14,6 +18,7 @@ import javax.persistence.MappedSuperclass;
 public class GeneratorId extends GeneratorAudit {
 
     @Id
+    @JsonView(View.ProprietarioApelidoUsuario.class)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

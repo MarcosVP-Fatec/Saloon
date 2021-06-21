@@ -161,29 +161,25 @@ export default {
         editar(proprietario){
             this.mostraErro(null);
             this.proprietario = proprietario;
+            proprietario.senha = "";
             if (proprietario.dtNascimento){
                 this.proprietario.dtNascimento = new Date(proprietario.dtNascimento).toJSON().substring(0,10);
-            // } else {
-            //     proprietario.dtNascimento = null;
             }
             this.focoNoPrimeiroCampo();
             this.mostraMsg("Alteração de cadastro de proprietário",3)
         },
         excluir(proprietario){
             this.mostraErro(null);
-            alert(proprietario.id);
             if (proprietario.id){
                 if (confirm("Deseja mesmo excluir o proprietário " + proprietario.nome + " ?")){
-                    axios.delete('proprietario'
-                                ,{  params: { id: proprietario.id} }
+                    axios.delete('proprietario/'+proprietario.id, proprietario
                     ).then( res => {
                         console.log(res);
                         this.atualizarLista();
-                        //alert("Proprierário excluído!");
+                        this.mostraMsg("Proprietário excluído!",1);
                     })
                 }
                 this.novo()
-                this.mostraMsg("Registro excluído!",1);
             } else {
                 this.mostraErro("Nenhum registro foi excluído!",1);
             }

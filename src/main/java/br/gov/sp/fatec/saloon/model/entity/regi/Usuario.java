@@ -49,7 +49,7 @@ public class Usuario extends GeneratorId{
     @Column(name = "usu_email")             private String       email;
     @Column(name = "usu_senha")             private String       senha;
 
-    @JsonView(View.UsuarioInclusao.class)
+    @JsonView({View.UsuarioInclusao.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_dt_nascimento")     private Date         dtNascimento;
 
     @JsonView({View.UsuarioInclusao.class,View.ProprietarioApelidoUsuario.class})
