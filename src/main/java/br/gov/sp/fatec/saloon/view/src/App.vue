@@ -18,7 +18,7 @@
         |   <router-link v-if="!isLogado()" to="/logar"  title="Faça o seu login">
             Entrar</router-link>
             <router-link v-if="isLogado()"  to="/logar"  title="Desconectar">
-            Logout</router-link>
+            Logout</router-link> {{ this.usuarioAtual() }}
 
     </div>
     <router-view/>
@@ -49,28 +49,32 @@
 </style>
 
 <script>
-import { mapGetters   } from 'vuex'; 
-export default {
-      name: 'app'
-    , data() {
-        return {
-            nome: 'ver depois'
-        }
-      }
-    , methods: {
-            ...mapGetters([
-                'getUsuario', 'getToken', 'getRole'
-            ]),
-            isAdministrador(){
-              return this.getRole() === 'ROLE_ADMIN';
-            },
-            isLogado(){
-              return this.getToken() !== null;
-            },
-            quemEstaLogado(){
-              return this.getUsuario();
-            }
-      }
+
+  import { mapGetters   } from 'vuex'; 
   
-}
+  export default {
+        name: 'app'
+      , data() {
+          return {
+              app_usuario: this.getUsuario()?'('+this.getUsuario()+')':''
+          }
+        }
+      , methods: {
+              ...mapGetters([
+                  'getUsuario', 'getToken', 'getRole'
+              ]),
+              isAdministrador(){
+                return this.getRole() === 'ROLE_ADMIN';
+              },
+              isLogado(){
+                return this.getToken() !== null;
+              },
+              quemEstaLogado(){
+                return this.getUsuario();
+              },
+              usuarioAtual(){
+                return this.getUsuario()?'[ '+this.getUsuario()+' ]':''
+              }
+        }
+  }
 </script>

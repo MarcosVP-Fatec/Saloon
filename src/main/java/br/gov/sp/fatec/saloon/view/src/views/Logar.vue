@@ -19,7 +19,7 @@
         </form>
         <!-- LOGOUT -->
         <form @submit.prevent="sair" v-else>
-            <h2>Você já está conectado neste momento</h2>
+            <h2>Você está conectado como - {{ log_apelido }}</h2>
             <!-- <input type="button" value="Home" style="height:40px; width:150px; border-radius:25px;"> -->
             <button type="submit" style="height:40px; width:150px; border-radius:25px;" title="Clique aqui para desconectar">Sair</button>
             <p><router-link to="/" replace>Voltar</router-link></p>
@@ -35,9 +35,10 @@
 
     export default {
             name: 'Logar'
+        ,   mounted() {}
         ,   data() {
                 return {
-                    log_apelido: ''
+                    log_apelido: this.getUsuario()
                 ,   log_senha: ''
                 ,   log_situacao: ''
                 }
@@ -80,7 +81,7 @@
                         //Redirecionamento e registro de usuário e token
                         setTimeout(() => {
                             this.log_apelido = '';
-                            this.setUsuario(response.data.usuario);
+                            this.setUsuario(response.data.usuario.toUpperCase());
                             this.setToken(response.data.token);
                             this.setRole(response.data.autorizacao);
                             this.$router.push('/');

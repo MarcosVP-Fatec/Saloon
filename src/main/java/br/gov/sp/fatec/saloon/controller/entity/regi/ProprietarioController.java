@@ -64,10 +64,6 @@ public class ProprietarioController {
     public ResponseEntity<Proprietario> alterarProprietario(@RequestBody Proprietario proprietario,
         UriComponentsBuilder uriComponentsBuilder){
 
-        System.out.println("#######################################");
-        System.out.println("CONTROLLER");
-        System.out.println("#######################################");
-
         proprietario = proprietarioService.alt( proprietario );
 
         HttpHeaders responseHeaders = new HttpHeaders();
