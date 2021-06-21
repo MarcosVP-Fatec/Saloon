@@ -52,7 +52,10 @@ public class ProprietarioController {
     public ResponseEntity<Proprietario> incluirProprietario(@RequestBody Proprietario proprietario,
         UriComponentsBuilder uriComponentsBuilder){
 
-        proprietario = proprietarioService.inc( proprietario);
+        System.out.println("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        System.out.println(proprietario.getApelido());
+
+        proprietario = proprietarioService.inc( proprietario );
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.setLocation(uriComponentsBuilder.path("/proprietario/"+proprietario.getId()).build().toUri());
         return new ResponseEntity<Proprietario>(proprietario, responseHeaders, HttpStatus.CREATED);

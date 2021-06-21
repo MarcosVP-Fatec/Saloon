@@ -19,6 +19,7 @@ import br.gov.sp.fatec.saloon.exception.CpfInvalidoException;
 import br.gov.sp.fatec.saloon.exception.EmailInvalidoException;
 import br.gov.sp.fatec.saloon.exception.RegistroJaExisteException;
 import br.gov.sp.fatec.saloon.exception.RegistroNaoEncontradoException;
+import br.gov.sp.fatec.saloon.exception.ValidacaoException;
 import br.gov.sp.fatec.saloon.model.entity.regi.Proprietario;
 import br.gov.sp.fatec.saloon.model.entity.regi.Usuario;
 import br.gov.sp.fatec.saloon.model.repository.regi.ProprietarioRepository;
@@ -91,13 +92,21 @@ public class ProprietarioServiceImpl implements ProprietarioService {
 				           , Date   dtNascimento
 				           , String cpf) {
 		
-		if (proprietarioRepo.existsByApelido(apelido)) {
+        if (apelido==null){ throw new ValidacaoException("Usuário não informado!");}
+        if (email==null)  { throw new ValidacaoException("E-mail não informado!" );}
+        if (nome==null)   { throw new ValidacaoException("Nome completo não informado!" );}
+        if (dtNascimento==null){ throw new ValidacaoException("Data de nascimento não informada!" );}
+        if (cpf==null)    { throw new ValidacaoException("CPF não informado!" );}
+
+        if (proprietarioRepo.existsByApelido(apelido)) {
 			throw new RegistroJaExisteException("Apelido de usuário já existe: \"" + apelido + "\"");
 		}
 		
-		if (proprietarioRepo.existsByCpf(cpf)) {
-			throw new RegistroJaExisteException("CPF de usuário já existe: \"" + cpf + "\" >>>>>>> " + String.valueOf(cpf.length()));
+        if (proprietarioRepo.existsByCpf(cpf)) {
+            System.out.println("É para dar erro!");
+			throw new RegistroJaExisteException("CPF de usuário já existe: \"" + cpf + "\" (" + String.valueOf(cpf.length()) + ")" );
 		}
+        System.out.println(">>> PASSSOU!");
 
 		altIncValidade(null, apelido, email, senha, nome, dtNascimento, cpf);
 		return persist(null, apelido, email, senha, nome, dtNascimento, cpf);

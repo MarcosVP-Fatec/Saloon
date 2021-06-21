@@ -52,7 +52,7 @@ public class Usuario extends GeneratorId{
     @JsonView(View.UsuarioInclusao.class)
     @Column(name = "usu_dt_nascimento")     private Date         dtNascimento;
 
-    @JsonView(View.UsuarioInclusao.class)
+    @JsonView({View.UsuarioInclusao.class,View.ProprietarioApelidoUsuario.class})
     @Column(name = "usu_cpf_cnpj")          private String       cpf;
 
     @ManyToOne(fetch = FetchType.LAZY) 

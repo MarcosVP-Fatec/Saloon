@@ -1,11 +1,26 @@
 <template>
     <div class="proprietario">
         <div id="proprierario_cabec">
-            <ul>
+            <!-- <ul>
                 <li v-for="(erro, index) of erros" :key="index">
                     Campo <b>{{ erro.field }}</b> - {{ erro.defaultMessage }}
                 </li>
-            </ul>
+            </ul> -->
+            <table v-if="this.erro" border="1px" width="500" style="color:white; background-color:red">
+                <tbody>
+                    <tr>
+                        <td><strong>{{ this.erro }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table v-if="this.msg" border="1px" width="500" style="color:white; background-color:green">
+                <tbody>
+                    <tr>
+                        <td><strong>{{ this.msg }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <form @submit.prevent="cadastrar"> 
                 <h2>Proprietário</h2>
                 <p>
@@ -69,16 +84,18 @@
         <!-- <button type="button" style="height:30px; width:120px; border-radius:25px;" click="atualizarLista">Atualizar Lista</button> -->
         <table border="1px">
             <thead>
-                <th width="050">Cód</th>
-                <th width="150">Login</th>
+                <!-- <th width="050">Cód</th> -->
+                <th width="150">Usuário</th>
                 <th width="300">Nome Completo</th>
+                <th width="300">CPF</th>
                 <th>Edição</th>
             </thead>
             <tbody>
                 <tr v-for="prop in proprietarios" :key="prop.id">
-                    <td width="050">{{ prop.id              }}</td>
+                    <!-- <td width="050">{{ prop.id              }}</td> -->
                     <td width="150">{{ prop.apelido         }}</td>
                     <td width="300">{{ prop.nome            }}</td>
+                    <td width="300">{{ maskCPF(prop.cpf)    }}</td>
                     <td>
                         <button @click="editar(prop)"  class="btn_editar"> <i>editar</i> </button>
                         <button @click="excluir(prop)" class="btn_excluir"><i>excluir</i></button>
@@ -91,7 +108,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios        from 'axios';
 import { mapState } from 'vuex';
 
 export default {
@@ -111,7 +128,8 @@ export default {
                             , cpf:          ''
                             }
             , proprietarios: []
-            , erros: []
+            , erro: null
+            , msg: null
         }
     },
     computed: {
@@ -124,38 +142,40 @@ export default {
         atualizarLista(){
                 // 1º parâmetro = rota
                 // 2º parâmetro = json
-                // 3º parãmetro = propriedades= autenticação.
-                axios.get('proprietario',
-                    { auth: { username: this.login_usuario , password: this.login_senha } }
+                this.mostraErro(null);
+                axios.get('proprietario'
                 ).then( res => {
                     console.log(res);
                     this.proprietarios = res.data;
-                }).catch( error => {
-                    this.erros = error.response.data.errors;
-                })
+                }).catch( error => { this.trataErro(error); });
+        },
+        maskCPF(cpf){
+            return cpf[0]+cpf[1]+cpf[2]+"."+cpf[3]+cpf[4]+cpf[5]+"."+cpf[6]+cpf[7]+cpf[8]+"-"+cpf[9]+cpf[10];
         },
         novo(){
             this.proprietario = {};
-            this.erros = [];
+            this.mostraErro(null);
             this.focoNoPrimeiroCampo();
+            this.mostraMsg("Inclua novo proprietário")
         },
         editar(proprietario){
-            this.erros = [];
+            this.mostraErro(null);
             this.proprietario = proprietario;
             if (proprietario.dtNascimento){
                 this.proprietario.dtNascimento = new Date(proprietario.dtNascimento).toJSON().substring(0,10);
-            } else {
-                proprietario.dtNascimento = null;
+            // } else {
+            //     proprietario.dtNascimento = null;
             }
             this.focoNoPrimeiroCampo();
+            this.mostraMsg("Alteração de cadastro de proprietário",3)
         },
         excluir(proprietario){
-            this.erros = [];
+            this.mostraErro(null);
+            alert(proprietario.id);
             if (proprietario.id){
                 if (confirm("Deseja mesmo excluir o proprietário " + proprietario.nome + " ?")){
                     axios.delete('proprietario'
-                                ,{  params: { id: proprietario.id},
-                                    auth: { username: this.login_usuario , password: this.login_senha } }
+                                ,{  params: { id: proprietario.id} }
                     ).then( res => {
                         console.log(res);
                         this.atualizarLista();
@@ -163,8 +183,9 @@ export default {
                     })
                 }
                 this.novo()
+                this.mostraMsg("Registro excluído!",1);
             } else {
-                alert("Nenhum registro foi excluído!");
+                this.mostraErro("Nenhum registro foi excluído!",1);
             }
         },
         focoNoPrimeiroCampo(){
@@ -174,26 +195,62 @@ export default {
             // 1º parâmetro = rota
             // 2º parâmetro = json
             // 3º parãmetro = propriedades= autenticação.
-            this.erros = [];
+            this.mostraErro(null);
             if (this.proprietario.id){ //PUT
-                axios.put('proprietario',this.proprietario,
-                    { auth: { username: this.login_usuario , password: this.login_senha } }
+                axios.put('proprietario' ,this.proprietario 
                 ).then( res => {
                     console.log(res);
                     this.proprietario.id = res.data.id;
                     this.novo;
-                }).catch( error => console.log(error));
+                }).catch( error => { this.trataErro(error); });
+
             } else {   //POST
-                axios.post('proprietario',this.proprietario,
-                    { auth: { username: this.login_usuario , password: this.login_senha } }
+                axios.post('proprietario' , this.proprietario
                 ).then( res => {
                     console.log(res);
                     this.proprietario.id = res.data.id;
                     this.proprietarios.push(res.data);
                     this.novo;
-                }).catch( error => console.log(error));
+                }).catch( error => { this.trataErro(error); });
+            }
+        },
+        trataErro( error ){
+            if (error){
+                if (error.response) { // Request made and server responded
+                    console.error("### ERROR RESPONSE");
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                    this.mostraErro(error.response.data.message);
+                } else if (error.request) { // The request was made but no response was received
+                    console.error("### ERROR REQUEST");
+                    console.log(error.request);
+                    console.log(error.request.message);
+                } else { // Something happened in setting up the request that triggered an Error
+                    console.error("### ERROR MESSAGE");
+                    console.log('Error', error.message);
+                }
+            }
+        },
+        mostraErro( texto , segundos ){
+            this.erro = texto;
+            if (texto){
+                if (!segundos) {segundos = 1}
+                setTimeout(() => {
+                    this.erro = null;
+                }, segundos*1000);
+            }
+        },
+        mostraMsg( texto , segundos ){
+            this.msg = texto;
+            if (texto){
+                if (!segundos) {segundos = 1}
+                setTimeout(() => {
+                    this.msg = null;
+                }, segundos*1000);
             }
         }
+
     }
 }
 
