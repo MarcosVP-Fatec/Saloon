@@ -46,6 +46,10 @@ O sistema servirá para usuários proprietários de salões de festa ou espaços
   * Padrão de Projetos Generics
     * Classe GeneratorAudit
 
+  * Spring-boot
+  * Security with Java Web Token (JWT)
+  * Vue.js
+
 
 > "É preciso amar as pessoas  
 > Como se não houvesse amanhã  
