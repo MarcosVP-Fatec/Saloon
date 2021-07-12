@@ -1,6 +1,6 @@
 image: 
   - gitpod/workspace-mysql
-  file: .gitpod.Dockerfile
+  - file: .gitpod.Dockerfile
 
 tasks:
   - init: mysql < Reset.sql
