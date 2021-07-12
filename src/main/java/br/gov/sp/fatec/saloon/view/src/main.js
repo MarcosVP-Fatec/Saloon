@@ -4,9 +4,8 @@ import router   from './router'
 import store    from './store'
 import axios    from 'axios'
 
-//axios.defaults.baseURL = 'localhost://8080-eab15bbd-6b5d-48c7-834b-9f5f0fe0bb02.ws-us03.gitpod.io/'
-axios.defaults.baseURL = 'http://localhost:8080/saloon/' //Back-end
-//axios.defaults.baseURL = 'https://8080-amethyst-damselfly-zh9narti.ws-us09.gitpod.io/saloon/'
+//axios.defaults.baseURL = 'http://localhost:8080/saloon/' //Back-end
+axios.defaults.baseURL = 'https://8080-blue-otter-wkw3yo67.ws-us11.gitpod.io/saloon/'
 
 axios.interceptors.request.use( config => {
     const token = store.getters.getToken;
