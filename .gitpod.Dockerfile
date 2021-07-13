@@ -1,3 +1,5 @@
+FROM gitpod/workspace-mysql
+
 FROM gitpod/workspace-full-vnc
 
 # Install Cypress dependencies.
