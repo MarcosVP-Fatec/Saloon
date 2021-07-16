@@ -1,7 +1,5 @@
 ports:
 - port: 8080
-- port: 8081
-  onOpen: open-browser
 
 #mysql -e "show databases;"
 tasks:
@@ -14,7 +12,7 @@ tasks:
       mvn clean compile;
       rm /tmp/.compile-lock;
     command: mvn spring-boot:run
-  - init: sleep 1 && while [ -f /tmp/.compile-lock ]; do sleep 1; done;
+  - init: sleep 2 && while [ -f /tmp/.compile-lock ]; do sleep 2; done;
       touch /tmp/.npm-lock;
       npm install;
       rm /tmp/.npm-lock;
