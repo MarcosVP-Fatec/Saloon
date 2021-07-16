@@ -3,11 +3,11 @@ image: gitpod/workspace-mysql
 tasks:
   - init: mysql < Reset.sql
   - init: 
-      command: npm install
+      npm install
   - init: 
-      command: spring-boot:run
+      spring-boot:run
   - init: 
-      command: npm run serve
+      npm run serve
   - init: |
       touch /tmp/.npm-lock
       npm install
