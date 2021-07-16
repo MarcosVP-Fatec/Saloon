@@ -6,7 +6,7 @@ ports:
 tasks:
 
   - init: |
-      touch /tmp/.compile-lock;
+      touch /tmp/.compile-lock
       touch /tmp/.mysql-lock
       mysql < Reset.sql
       rm /tmp/.mysql-lock
