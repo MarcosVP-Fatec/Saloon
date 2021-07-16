@@ -1,5 +1,5 @@
 ports:
 - port: 8080
 tasks:
-  image: gitpod/workspace-mysql
   - init: mysql < Reset.sql
+image: gitpod/workspace-mysql
