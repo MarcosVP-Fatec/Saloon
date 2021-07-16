@@ -4,6 +4,10 @@ tasks:
   - init: |
       touch /tmp/.mysql-lock
       mysql < Reset.sql
-      mvn clean package
       rm touch /tmp/.mysql-lock
+      mysql
+  - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done
+      touch /tmp/.package-lock
+      mvn clean package
+      rm /tmp/.package-lock
 image: gitpod/workspace-mysql
