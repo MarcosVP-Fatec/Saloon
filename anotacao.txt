@@ -1,2 +1,27 @@
 image: 
   file: .gitpod.Dockerfile
+
+image: gitpod/workspace-mysql
+
+tasks:
+  - init: mysql < Reset.sql
+  - init: 
+      mvn spring-boot:run
+  - init: |
+      touch /tmp/.npm-lock
+      npm install
+      rm /tmp/.npm-lock
+    command: npm run dev
+  - init: sleep 1 && while [ -f /tmp/.npm-lock ]; do sleep 1; done
+    command: npm run cy:open
+  - init: sleep 1 && while [ -f /tmp/.npm-lock ]; do sleep 1; done
+    command: npm run serve
+
+ports:
+  - port: 8080
+  - port: 5900
+    onOpen: ignore
+  - port: 6080
+    onOpen: open-browser
+  - port: 10000
+    onOpen: ignore
