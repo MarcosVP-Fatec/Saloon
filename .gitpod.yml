@@ -15,7 +15,8 @@ tasks:
     command: gp await-port 3306 && mysql saloon 
   - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
       gp await-port 3306 && mvn clean compile && mvn spring-boot:run
-  - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
-      gp await-port 8080 && npm install && npm run server 8081
+  #- init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
+  # gp await-port 8080 && npm install && npm run server 8081
+  - init: gp await-port 8080 && npm install && npm run server 8081
   #- command: gp await-port 8081 && gp preview $(gp url 8081)  
 image: gitpod/workspace-mysql
