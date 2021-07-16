@@ -5,7 +5,7 @@ tasks:
   - init: 
       npm install
   - init: 
-      spring-boot:run
+      mvn spring-boot:run
   - init: 
       npm run serve
   - init: |
