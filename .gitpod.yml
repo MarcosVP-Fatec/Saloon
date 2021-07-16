@@ -5,9 +5,10 @@ tasks:
       touch /tmp/.mysql-lock
       mysql < Reset.sql
       rm /tmp/.mysql-lock
-    command: mysql -e "show databases;"
+    command: mysql saloon; 
+    #mysql -e "show databases;"
   - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
       touch /tmp/.package-lock;
-      mvn clean package;
+      mvn clean compile;
       rm /tmp/.package-lock;
 image: gitpod/workspace-mysql
