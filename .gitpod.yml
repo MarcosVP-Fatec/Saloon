@@ -1,10 +1,5 @@
-image: gitpod/workspace-mysql
-
-tasks:
-  - init: 
-      mysql < Reset.sql
-  - init:    
-      mvn spring-boot:run
-
 ports:
-  - port: 8080
+- port: 8080
+tasks:
+  image: gitpod/workspace-mysql
+  - init: mysql < Reset.sql
