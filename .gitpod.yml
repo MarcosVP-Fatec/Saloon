@@ -1,5 +1,10 @@
 ports:
 - port: 8080
 tasks:
-  - init: mysql < Reset.sql
+  - init: |
+      touch /tmp/.mysql-lock
+      mysql < Reset.sql
+      rm touch /tmp/.mysql-lock
+      mvn clean package
+    command: mvn spring-boot:run
 image: gitpod/workspace-mysql
