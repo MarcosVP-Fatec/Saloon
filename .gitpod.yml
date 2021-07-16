@@ -3,8 +3,10 @@ ports:
   onOpen: ignore
 - port: 8080
   onOpen: ignore
+  visibility: public
 - port: 8081
   onOpen: open-browser
+  visibility: public
 
 #mysql -e "show databases;"
 tasks:
