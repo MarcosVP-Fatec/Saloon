@@ -8,7 +8,8 @@ tasks:
     command: mysql saloon; 
     #mysql -e "show databases;"
   - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
-      touch /tmp/.package-lock;
+      touch /tmp/.compile-lock;
       mvn clean compile;
-      rm /tmp/.package-lock;
+      rm /tmp/.compile-lock;
+    command: mvn spring-boot:run
 image: gitpod/workspace-mysql
