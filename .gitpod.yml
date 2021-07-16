@@ -3,11 +3,7 @@ image: gitpod/workspace-mysql
 tasks:
   - init: mysql < Reset.sql
   - init: 
-      npm install
-  - init: 
       mvn spring-boot:run
-  - init: 
-      npm run serve
   - init: |
       touch /tmp/.npm-lock
       npm install
@@ -15,6 +11,8 @@ tasks:
     command: npm run dev
   - init: sleep 1 && while [ -f /tmp/.npm-lock ]; do sleep 1; done
     command: npm run cy:open
+  - init: sleep 1 && while [ -f /tmp/.npm-lock ]; do sleep 1; done
+    command: npm run serve
 
 ports:
   - port: 8080
