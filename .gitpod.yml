@@ -4,7 +4,6 @@ tasks:
   - init: |
       touch /tmp/.mysql-lock
       mysql < Reset.sql
-      rm touch /tmp/.mysql-lock
       mvn clean package
-    command: mvn spring-boot:run
+      rm touch /tmp/.mysql-lock
 image: gitpod/workspace-mysql
