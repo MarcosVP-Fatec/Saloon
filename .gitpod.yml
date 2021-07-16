@@ -4,8 +4,8 @@ tasks:
   - init: |
       touch /tmp/.mysql-lock
       mysql < Reset.sql
-      rm touch /tmp/.mysql-lock
-    command: mysql
+      rm /tmp/.mysql-lock
+    command: mysql -e "show databases;"
   - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
       touch /tmp/.package-lock;
       mvn clean package;
