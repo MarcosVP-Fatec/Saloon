@@ -1,15 +1,26 @@
 ports:
 - port: 8080
+- port: 8081
+  onOpen: open-browser
+
 tasks:
+
   - init: |
       touch /tmp/.mysql-lock
       mysql < Reset.sql
       rm /tmp/.mysql-lock
     command: mysql saloon; 
     #mysql -e "show databases;"
+
   - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
       touch /tmp/.compile-lock;
       mvn clean compile;
       rm /tmp/.compile-lock;
     command: mvn spring-boot:run
+
+  - init: sleep 1 && while [ -f /tmp/.compile-lock ]; do sleep 1; done;
+      touch /tmp/.npm-lock;
+      npm install;
+      rm /tmp/.npm-lock;
+
 image: gitpod/workspace-mysql
