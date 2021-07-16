@@ -6,8 +6,7 @@ ports:
 #mysql -e "show databases;"
 tasks:
   - init: |
-      touch /tmp/.compile-lock
-      touch /tmp/.mysql-lock
+      touch /tmp/.mysql-lock /tmp/.compile-lock
       mysql < Reset.sql
       rm /tmp/.mysql-lock
     command: mysql saloon 
