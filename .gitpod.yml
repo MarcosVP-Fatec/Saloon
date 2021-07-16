@@ -2,10 +2,10 @@ ports:
 - port: 8080
 tasks:
   - init: |
-      touch /tmp/.mysql-lock;
-      mysql < Reset.sql;
-      mysql;  
-      rm touch /tmp/.mysql-lock;
+      touch /tmp/.mysql-lock
+      mysql < Reset.sql
+      rm touch /tmp/.mysql-lock
+    command: mysql
   - init: sleep 1 && while [ -f /tmp/.mysql-lock ]; do sleep 1; done;
       touch /tmp/.package-lock;
       mvn clean package;
