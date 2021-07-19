@@ -22,7 +22,7 @@
             </table>
 
             <form @submit.prevent="cadastrar"> 
-                <h2>Proprietário</h2>
+                <h2 data-cy="titulo">Proprietário</h2>
                 <p>
                     <label for="apelido" size=50>Usuário: </label>
                     <input  type="text"
@@ -70,7 +70,7 @@
                 </p>
 
                 <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>&nbsp;&nbsp;
-                <button type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
+                <button data-cy="?" type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
                 
             </form>
         </div>
