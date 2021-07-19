@@ -69,8 +69,8 @@
                     <span>[ <strong>{{ proprietario.id }} </strong>]</span>
                 </p>
 
-                <button type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>&nbsp;&nbsp;
-                <button data-cy="?" type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
+                <button data-cy="btn_salvar" type="submit" style="height:30px; width:120px; border-radius:25px;">Salvar</button>&nbsp;&nbsp;
+                <button data-cy="btn_novo"   type="button" style="height:30px; width:120px; border-radius:25px;" @click="novo">Novo</button>
                 
             </form>
         </div>
