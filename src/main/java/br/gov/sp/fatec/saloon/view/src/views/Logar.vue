@@ -6,7 +6,7 @@
   <div class="login">
         <!-- LOGIN -->
         <form @submit.prevent="login" v-if="getToken()===null">
-            <h2>Entre com seu usuário e senha</h2>
+            <h2 data-cy="msg1">Entre com seu usuário e senha</h2>
             <p>
                 <input type="text"     id="username"      placeholder="Nome de usuário" size=50 required autofocus v-model="log_apelido"/>
             </p>
