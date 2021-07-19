@@ -13,7 +13,7 @@
             <p>
                 <input type="password" id="inputPassword" placeholder="Senha"           size=50 required           v-model="log_senha"/>
             </p>
-            <button type="submit" style="height:40px; width:300px; border-radius:25px;">Entrar</button>
+            <button data-cy="submit" type="submit" style="height:40px; width:300px; border-radius:25px;">Entrar</button>
             <p><router-link to="usuario" replace>Quero me cadastrar</router-link></p>
             <p>{{ log_situacao }}</p>
         </form>
