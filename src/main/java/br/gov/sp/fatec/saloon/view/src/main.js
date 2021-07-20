@@ -5,7 +5,7 @@ import store    from './store'
 import axios    from 'axios'
 
 //axios.defaults.baseURL = 'http://localhost:8080/saloon/' //Back-end
-axios.defaults.baseURL = 'https://8080-turquoise-cattle-h7umftdh.ws-us11.gitpod.io/saloon/'
+axios.defaults.baseURL = 'https://8080-magenta-deer-iijp7otg.ws-us10.gitpod.io/saloon/'
 
 axios.interceptors.request.use( config => {
     const token = store.getters.getToken;
