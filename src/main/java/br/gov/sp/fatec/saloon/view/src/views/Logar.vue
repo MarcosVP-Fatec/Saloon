@@ -15,7 +15,7 @@
             </p>
             <button data-cy="submit" type="submit" style="height:40px; width:300px; border-radius:25px;">Entrar</button>
             <p><router-link to="usuario" replace>Quero me cadastrar</router-link></p>
-            <p>{{ log_situacao }}</p>
+            <p data-cy="situacao">{{ log_situacao }}</p>
         </form>
         <!-- LOGOUT -->
         <form @submit.prevent="sair" v-else>
