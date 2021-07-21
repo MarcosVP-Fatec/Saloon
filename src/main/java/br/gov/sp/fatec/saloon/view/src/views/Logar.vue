@@ -21,7 +21,7 @@
         <form @submit.prevent="sair" v-else>
             <h2>Você está conectado como - {{ log_apelido }}</h2>
             <!-- <input type="button" value="Home" style="height:40px; width:150px; border-radius:25px;"> -->
-            <button type="submit" style="height:40px; width:150px; border-radius:25px;" title="Clique aqui para desconectar">Sair</button>
+            <button data-cy="submit-sair" type="submit" style="height:40px; width:150px; border-radius:25px;" title="Clique aqui para desconectar">Sair</button>
             <p><router-link to="/" replace>Voltar</router-link></p>
         </form>
   </div>
