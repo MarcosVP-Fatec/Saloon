@@ -15,9 +15,9 @@
         |   <router-link to="/about"          title="Saiba mais sobre o Saloon">
             Sobre o Saloon</router-link>
 
-        |   <router-link v-if="!isLogado()" to="/logar"  title="Faça o seu login">
+        |   <router-link v-if="!isLogado()" to="/logar"  title="Faça o seu login"  data-cy="login">
             Entrar</router-link>
-            <router-link v-if="isLogado()"  to="/logar"  title="Desconectar">
+            <router-link v-if="isLogado()"  to="/logar"  title="Desconectar"       data-cy="logout">
             Logout</router-link> {{ this.usuarioAtual() }}
 
     </div>
